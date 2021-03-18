@@ -1,0 +1,67 @@
+@import "../../styles/config.less";
+
+.myCityModal {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    overflow:hidden;
+    z-index: 9999998;
+    background: @colorBG linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%) 0% 0% no-repeat padding-box;
+    color: #ffffff;
+    .bsBoxSizing();
+
+    &-center{
+        position:absolute;
+        top:@sitePadding;
+        left:@sitePadding;
+        right:@sitePadding;
+        bottom:@sitePadding;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+
+        @media (max-width: @mobileLargeBP){
+            top:@sitePaddingMobile;
+            left:@sitePaddingMobile;
+            right:@sitePaddingMobile;
+            bottom:@sitePaddingMobile;
+        }
+    }
+
+    &-inner{
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+        justify-content: center;
+        max-width: 550px;
+        .bsBoxSizing();
+        z-index:5;
+
+        @media (max-width: @mobileLargeBP){
+            max-width: none;
+            width:100%;
+        }
+    }
+
+    &:after{
+        content:'';
+        display:block;
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        height:300px;
+        .bsRetinaBG('cityscapeFull', 1024px);
+        background-repeat: repeat-x;
+        background-position:bottom center;
+        z-index:3;
+    }
+
+    &.myCityModalType-add{
+        background: rgba(0,0,0,.7);
+        -webkit-backdrop-filter: blur(24px);
+        backdrop-filter: blur(24px);
+    }
+}

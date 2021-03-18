@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.xumo.xumo.tv",
+    "sha256_cert_fingerprints":
+    ["E7:D1:89:60:A4:7A:8F:19:EB:0D:18:76:B8:CE:B4:70:48:80:BC:A5:E8:C4:32:9A:FC:CA:C1:C5:55:D6:23:9A"]
+  }
+}]

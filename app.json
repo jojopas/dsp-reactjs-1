@@ -1,0 +1,15 @@
+{
+    "name": "local-now",
+    "scripts": {
+    },
+    "env": {},
+    "formation": {
+    },
+    "addons": [
+    ],
+    "buildpacks": [
+        {
+            "url": "heroku/nodejs"
+        }
+    ]
+}

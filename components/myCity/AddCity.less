@@ -1,0 +1,288 @@
+@import "../../styles/config.less";
+
+.cityCurrent(){
+    background-color: @colorGreen;
+    color: #ffffff;
+
+    .city-svg {
+        svg {
+            &:first-child{
+                opacity:0;
+            }
+            &:last-child{
+                opacity:1;
+            }
+        }
+    }
+}
+
+.myCityModal {
+    &-inner-add{
+        align-items: stretch;
+        position:relative;
+
+        & > span {
+            display:block;
+            text-align: left;
+        }
+    }
+
+    &-header{
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 1;
+        color: #FFFFFF;
+        text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
+        padding:0 15px;
+        text-align: left !important;
+        width:100%;
+
+        @media (max-width: @mobileLargeBP) {
+            font-size: 20px;
+            padding:0 10px;
+        }
+    }
+
+    &-close{
+        position:absolute;
+        top:0;
+        right:9px;
+        width: 30px;
+        height: 30px;
+        cursor:pointer;
+
+        svg{
+            position:absolute;
+            top:50%;
+            left:50%;
+            .bsTransform(translate(-50%, -50%));
+            width:24px;
+            height:24px;
+            fill:@colorNavGray;
+            .bsTransition(fill);
+        }
+
+        &:hover {
+            svg{
+                fill:#ffffff;
+            }
+        }
+
+        @media (max-width: @mobileLargeBP) {
+            width: 20px;
+            height: 20px;
+
+            svg{
+                width:18px;
+                height:18px;
+            }
+        }
+    }
+
+    &-searchField{
+        position:relative;
+        margin:15px 0 0;
+        width:550px;
+
+        &-input {
+            .bsNoAppearance();
+            width:100%;
+            border:solid 1px #263446;
+            .bsBorderRadius(4px);
+            background-color:#132336;
+            color: #fff;
+            font-size: 20px;
+            height: 60px;
+            padding: 0 15px 0 60px;
+            .bsBoxSizing();
+            overflow:hidden;
+            text-overflow:ellipsis;
+
+            &::placeholder{
+                color: @colorNavGray;
+            }
+        }
+
+        svg {
+            position:absolute;
+            top:15px;
+            left:15px;
+            width:30px;
+            height:30px;
+            fill: @colorNavGray;
+            .bsTransition(fill);
+        }
+
+        @media (max-width: @mobileLargeBP) {
+            width:100%;
+
+            &-input {
+                font-size: 16px;
+                height: 50px;
+                padding: 0 10px 0 44px;
+            }
+
+            svg {
+                top:13px;
+                left:10px;
+                width:24px;
+                height:24px;
+            }
+        }
+    }
+
+    &-loading, &-noResults {
+        display:block;
+        margin:40px 0;
+        text-align:center !important;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 1.25;
+        color: @colorCurrent;
+
+        @media (max-width: @mobileLargeBP) {
+            margin-top: 30px;
+        }
+    }
+
+    &-addInstruction {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #F2F2F2;
+        padding: 15px 15px 0;
+
+        @media (max-width: @mobileLargeBP){
+            font-size: 13px;
+            padding: 15px 10px 0;
+        }
+    }
+
+    &-citiesFound{
+        width:100%;
+        margin-top:10px;
+        max-height: 225px;
+        overflow-y:auto;
+        -webkit-overflow-scrolling:touch;
+
+        -webkit-mask-image: -webkit-gradient(linear, left 1%, left 11%, from(rgba(0,0,0,0)), to(rgba(0,0,0,1)));
+        mask-image: linear-gradient(180deg, rgba(0,0,0,0) 1%, rgba(0,0,0,1) 11%);
+        .bsTransition(height);
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        ul{
+            .bsNavReset();
+            display: block;
+            padding-top: 10px;
+            width:100%;
+
+            li{
+                display:block;
+                & > span{
+                    position: relative;
+                    color:@colorNavGray;
+                    font-size:18px;
+                    font-weight: 400;
+                    line-height:50px;
+                    display:block;
+                    .bsBoxSizing();
+                    padding:0 15px;
+                    background:transparent;
+                    border-radius: 4px;
+                    margin:10px 0 0;
+                    cursor: pointer;
+                    text-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
+                    .bsTransition(all);
+                    transition-property: background-color, color;
+
+                    .city-svg{
+                        position:absolute;
+                        top:50%;
+                        right: 15px;
+                        width:20px;
+                        height:20px;
+                        .bsTransform(translateY(-50%));
+
+                        svg{
+                            position:absolute;
+                            top:0;
+                            left:0;
+                            width:100%;
+                            height:100%;
+                            fill: rgba(180, 183, 187, 0.5);
+                            .bsTransition(opacity);
+
+                            &:last-child{
+                                opacity:0;
+                                fill: #FFFFFF;
+                            }
+                        }
+                    }
+
+
+                    &.city-current{
+                        .cityCurrent();
+                    }
+
+                    @media (min-width: (@mobileLargeBP + 1)) and (hover: hover) and (pointer: fine) {
+                        &:hover {
+                            .cityCurrent();
+                        }
+
+                        &.city-current:hover{
+                            background-color:#3D994B;
+                        }
+                    }
+
+                    @media (max-width: @mobileLargeBP){
+                        font-size:15px;
+                        line-height:40px;
+                        padding:0 10px;
+                        margin:5px 0 0;
+                    }
+                }
+            }
+        }
+
+        @media (max-width: @mobileLargeBP){
+            max-height:170px;
+        }
+    }
+
+    &-addButton {
+        position:relative;
+        padding-top: 30px;
+        width:100%;
+
+        &:after{
+            content:'';
+            position:absolute;
+            top:0;
+            left:0;
+            width:100%;
+            height:1px;
+            background: transparent linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 1) 42%, rgba(255, 255, 255, 1) 58%, rgba(0, 0, 0, 0) 100%) 0% 0% no-repeat padding-box;
+            opacity: 0.2;
+
+        }
+
+        .button{
+            white-space:nowrap;
+            width:100%;
+            text-align: center;
+            transition-property: background-color, color, opacity;
+
+            &.disabled{
+                pointer-events:none;
+                opacity:.3;
+            }
+        }
+
+        @media (max-width: @mobileLargeBP){
+            padding-top: 15px;
+        }
+    }
+}

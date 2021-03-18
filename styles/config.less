@@ -1,0 +1,83 @@
+@import "mixins.less";
+
+/* -- SITE SPECIFIC VARIABLES -- */
+@spriteCache: 1;
+@colorDkBlue: #003846;
+@colorBlue: #00b8e4;
+
+
+@colorBG: #132336;
+@colorGreen: #52CD65;
+@colorHover: #F2F2F2;
+@colorCurrent: #F2F2F2;
+@colorNavGray: #B4B7BB;
+
+@fontMain: "Roboto", sans-serif;
+
+@headerHeight: 90px;
+@headerHeightMob: 56px;
+
+@customEase: cubic-bezier(0, 1, .75, 1);
+@easeBack: cubic-bezier(0.175, 0.885, 0.375, 1.570);
+
+@sitePadding: 50px;
+@sitePaddingMobile: 20px;
+@sectionSpacer: 40px;
+@contentSpacer: 30px;
+
+@maxSiteWidth: 1366px;
+@tabletBP: 1023px;
+@mobileLargeBP: 767px;
+@mobileMediumBP: 479px;
+@mobileSmallBP: 359px;
+
+@cardHoverMin: 940px;
+@videoMaxWidth: 864px;
+
+
+.defaultHover() {
+    color: @colorHover;
+}
+
+.defaultFieldOutline {
+    outline: solid 1px #000;
+}
+
+.contentResponsive() {
+    box-sizing: border-box;
+    padding-left: @sitePadding;
+    padding-right: @sitePadding;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (max-width: @mobileLargeBP) {
+        padding-left: (@sitePadding * .5);
+        padding-right: (@sitePadding * .5);
+    }
+}
+
+.contentResponsiveRev() {
+    .bsBoxSizing();
+    margin-left: (@sitePadding * -1);
+    margin-right: (@sitePadding * -1);
+    padding-left: @sitePadding;
+    padding-right: @sitePadding;
+
+    @media (max-width: @mobileLargeBP) {
+        margin-left: (@sitePadding * -.5);
+        margin-right: (@sitePadding * -.5);
+        padding-left: (@sitePadding * .5);
+        padding-right: (@sitePadding * .5);
+    }
+}
+
+.flag(){
+    display:block;
+    border-radius: 2px 2px 2px 0;
+    background:@colorBlue;
+    padding:0 4px;
+    color:#fff;
+    font-size:9px;
+    line-height:16px;
+    text-transform: uppercase;
+}

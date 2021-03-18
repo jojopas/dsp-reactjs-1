@@ -1,0 +1,96 @@
+@import "../../styles/config.less";
+
+.myCityModal {
+
+    &-loader{
+        svg {
+            width: 100px;
+            fill: @colorGreen;
+        }
+    }
+    &-inner-onboarding{
+        & > svg {
+            width:128px;
+            height:128px;
+            fill: @colorGreen;
+
+            @media (max-width: @mobileLargeBP){
+                width: 96px;
+                height:96px;
+            }
+        }
+
+        & > span {
+            display:block;
+            text-align: center;
+        }
+    }
+
+    &-isThis{
+        padding-top: 30px;
+        font-size:17px;
+        font-weight: 700;
+        line-height: 1;
+        color: @colorNavGray;
+        text-transform: uppercase;
+
+        @media (max-width: @mobileLargeBP){
+            padding-top:22px;
+            font-size: 13px;
+        }
+    }
+
+    &-city{
+        padding-top: 10px;
+        font-size: 36px;
+        font-weight: 500;
+        color: #F2F2F2;
+        line-height: 1.25;
+
+        @media (max-width: @mobileLargeBP){
+            padding-top: 5px;
+            font-size: 20px;
+        }
+    }
+
+    &-instruction {
+        padding-top: 30px;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 1.5;
+        color: @colorNavGray;
+
+        @media (max-width: @mobileLargeBP){
+            padding-top: 20px;
+            font-size: 15px;
+        }
+    }
+
+    &-buttons {
+        padding-top: 20px;
+
+        .button{
+            white-space:nowrap;
+            margin-left: 20px;
+
+            &:first-child{
+                margin-left:0;
+            }
+        }
+
+        @media (max-width: @mobileLargeBP){
+            padding-top: 15px;
+
+            .button{
+                width:100%;
+                text-align: center;
+                margin-left:0;
+                margin-top: 10px;
+
+                &:first-child{
+                    margin-top:0;
+                }
+            }
+        }
+    }
+}

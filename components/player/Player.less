@@ -1,0 +1,169 @@
+@import "../../styles/config.less";
+
+.player-container {
+    position: relative;
+
+    &.player-inline {
+        width: 100%;
+        height: 0;
+        padding-top: 56.25%;
+        position: relative;
+
+        & > div {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #dsp-player {
+            .video-js {
+                cursor: none;
+
+                &.vjs-user-active {
+                    cursor: default;
+                }
+            }
+            .vjs-control-bar{
+                pointer-events:none;
+
+                & > * {
+                    pointer-events:auto;
+                }
+                .vjs-play-control,
+                .vjs-seek-button,
+                .vjs-time-control,
+                .vjs-progress-control,
+                .vjs-live-control,
+                .vjs-seek-to-live-control,
+                .vjs-playback-rate,
+                .vjs-chapters-button,
+                .vjs-descriptions-button,
+                .vjs-audio-button,
+                .vjs-quality-selector,
+                .vjs-picture-in-picture-control{
+                    display:none;
+                }
+
+                & > .vjs-volume-panel{
+                    transform: none;
+                    left:auto !important;
+                }
+
+                .vjs-custom-control-spacer{
+                    display:block;
+                    flex:1;
+                    order:2;
+                }
+            }
+
+            .vjs-layout-large{
+                .vjs-control-bar{
+                    & > .vjs-volume-panel{
+                        transform: scale(0.7);
+                    }
+                }
+            }
+
+            @media (min-width: (@mobileLargeBP + 1px)) {
+                .vjs-tech {
+                    pointer-events:none;
+                }
+            }
+        }
+    }
+
+    &.player-lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000000;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        background-color: #000;
+
+        .player-close {
+            .bsNoAppearance();
+            border:none;
+            position: absolute;
+            z-index: 10;
+            top: 20px;
+            left: 20px;
+            display:block;
+            background-color:rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+            margin:0;
+            cursor: pointer;
+
+            width: 36px;
+            height:36px;
+            .bsTransition(background-color);
+
+            svg{
+                position:absolute;
+                top:50%;
+                left:50%;
+                .bsTransform(translate(-50%, -50%));
+                width:24px;
+                height:24px;
+                fill: #fff;
+
+            }
+
+            &:hover {
+                background-color: @colorGreen;
+            }
+        }
+
+        /*@media screen and (max-width: 767px) and (orientation: portrait) {
+            transform: rotate(90deg) translateY(-100%);
+            transform-origin: top left;
+            width:100vh;
+            height:100vw;
+        }*/
+    }
+
+    .player-halfHeight{
+        height:50% !important;
+        pointer-events:none;
+
+        @media (min-width: 1199px){
+            height:45% !important;
+        }
+        @media (max-height: 630px){
+            height:35% !important;
+        }
+        @media (max-height: 630px) and (min-width: @maxSiteWidth){
+            height:30% !important;
+        }
+        @media (max-width: @mobileLargeBP){
+            height:100% !important;
+        }
+    }
+
+    #dsp-player {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+
+        & > div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            object-fit:contain;
+
+            .video-js{
+                padding-top:0;
+                object-fit:contain;
+            }
+        }
+    }
+}

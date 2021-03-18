@@ -1,0 +1,29 @@
+@import "../../styles/config.less";
+
+//TODO Refactor?
+@fieldHeight: 40px;
+@colorRed: #E02828;
+
+div.contact-form {
+    form {
+        .hide-form {
+            display: none;
+        }
+
+        ul {
+            padding-bottom: 20px;
+
+            li {
+                span.required-mark {
+                    top:@fieldHeight+15px;
+                    font-size: 10px;
+                    font-weight: 500;
+                    color: @colorRed;
+                    position: unset;
+                    padding: 0 0 0 0;
+                    display: unset;
+                }
+            }
+        }
+    }
+}
