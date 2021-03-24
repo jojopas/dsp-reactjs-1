@@ -17,7 +17,6 @@ let fetchDspToken;
 function initializeData(initialData = store || {}) {
     const {
         user,
-        lnConfig,
         isBreakpoint,
         currentChannel,
         isPlayerSetup,
@@ -58,15 +57,7 @@ function initializeData(initialData = store || {}) {
 
             })
 
-        },
-
-        lnConfig,
-        updateLnConfig: (c) => {
-            store.lnConfig = c;
-        },
-        get getLnConfig() {
-            return store.lnConfig;
-        },
+        }, 
 
         isBreakpoint,
         setBreakPoint: (bp) => {
@@ -125,12 +116,6 @@ function initializeData(initialData = store || {}) {
         setSiteWrapperRef: (ref) => {
             store.siteWrapperRef = ref;
         },
-
-        showMyCityModal: !cookies[`_${constants.COOKIE_PREFIX}_myCity`],
-        setShowMyCityModal: (showMyCityModal) => {
-            store.showMyCityModal = showMyCityModal;
-        },
-
         springServeId,
         setSpringServeId: (ssid) => {
             store.springServeId = ssid;

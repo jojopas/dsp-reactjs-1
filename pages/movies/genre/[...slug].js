@@ -15,7 +15,6 @@ import GenreSelector from '../../../components/nav/GenreSelector';
 export default function MovieGenre({session, config, page, error, slug, pageType, seoObj}) {
 
     const store = React.useContext(StoreContext);
-    const lnConfig = store.getLnConfig;
 
     const genreNav = page.genres.map((genre) => {
         return  {id: genre, inner: genre, url: `/movies/genre/[...slug]`, as: `/movies/genre/${slugify(genre)}`}

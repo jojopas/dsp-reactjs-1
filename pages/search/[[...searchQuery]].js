@@ -22,7 +22,6 @@ import {fetchData} from '../../helpers/utils/fetch-data';
 export default function Search({session, config, query, pageError, pageType, seoObj}) {
 
     const store = React.useContext(StoreContext);
-    const lnConfig = store.getLnConfig;
 
     const [searchQuery, setSearchQuery] = React.useState((query.searchQuery) ? query.searchQuery[0].replace(/-/g,' ').replace(/[^0-9a-zA-Z ]+/, '') : '');
     //const { data, error, isValidating } = useSWR(searchQuery ? `${publicRuntimeConfig.BASE_URL}/api/dsp/search/${searchQuery.replace(/[^0-9a-zA-Z ]+/, '')}` : null, async (url) => await fetchData(url));

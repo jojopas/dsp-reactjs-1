@@ -15,7 +15,6 @@ import ContactForm from '../../components/contact/ContactForm';
 
 export default function About({session, config, page, error, slug}) {
     const store = React.useContext(StoreContext);
-    const lnConfig = store.getLnConfig;
 
     //We can make this more flexible when we add more components to the about section
     const renderContactForm = () => {

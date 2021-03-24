@@ -1,7 +1,8 @@
 const axios = require('axios');
 const fs = require('fs');
+const { constants } = require("../config");
 
-var DSP_API_KEY_DEFAULT = "2c4262e3dc004e2f22c6d03de10ff0c06596edd3";
+var DSP_API_KEY_DEFAULT = constants.ENV_DSP_API_KEY;
 var DSP_API_KEY_ENV = DSP_API_KEY;
 var DSP_API_KEY = DSP_API_KEY || DSP_API_KEY_DEFAULT;
 console.log(`Running from ${__dirname}`);

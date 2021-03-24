@@ -6,7 +6,6 @@ import {StoreContext} from "../../store";
 
 import Logo from './Logo';
 import Nav from '../nav/Nav';
-import MyCity from './MyCity';
 import NavLink from '../nav/NavLink';
 import InlineSVG from '../InlineSVG';
 
@@ -71,7 +70,6 @@ export default function Header({}) {
             ) : (
                 <Nav className="header-nav" links={main} activeBar={true}></Nav>
             )}
-            <MyCity/>
             { store.isBreakpoint ? (
                 <>
                     <span className={ open ? 'header-mobileBurger header-mobileBurger-open' : 'header-mobileBurger'} onClick={() => setOpen(!open)}><span></span></span>
