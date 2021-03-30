@@ -29,16 +29,6 @@ export default function Home({session, config, page, error, pageType, seoObj}) {
                         <CardList key={rail.category.id} type="title" data={rail}/>
                     ))}
                 </div>
-                {/*
-                <hr/>
-                <div>Proto: {config.xForwardedProto}</div>
-                <h2>LN Config</h2>
-                <pre>{JSON.stringify(store.lnConfig, null, 2)}</pre>
-                <br/>
-                <br/>
-                <h2>Page Data</h2>
-                <pre>{JSON.stringify(page, null, 2)}</pre>
-                */}
             </>
         ) : (
             <Error404/>
