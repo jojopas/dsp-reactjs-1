@@ -80,9 +80,9 @@ export default function EPGList({
 
         return (
             <form>
-                <select name="epgDate" id="epgDate">
+                <select name="epgDate" id="epgDate" >
                     {Object.keys(dateSlots).map((key) => (
-                        <option value={dateSlots[key]}>{key}</option>
+                        <option value={dateSlots[key]} key={key}>{key}</option>
                     ))}
                 </select>
             </form>

@@ -27,7 +27,10 @@
     justify-content: center;
     align-items: center;
 }
-
+.timeslot-row--date form {
+text-align: left;
+    position: relative;
+}
 .timeslot-row--date select {
     background-color: #202834;
     color: white;
