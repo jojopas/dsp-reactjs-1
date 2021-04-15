@@ -28,8 +28,9 @@
     align-items: center;
 }
 .timeslot-row--date form {
-text-align: left;
+    text-align: left;
     position: relative;
+    margin: 0px;
 }
 .timeslot-row--date select {
     background-color: #202834;
@@ -169,10 +170,10 @@ text-align: left;
     font-weight: bold;
 }
 
-.channel-row--program:first-child:hover{
+.channel-row--program:first-child:hover {
     display: block;
     font-size: smaller;
-    background-color: #f5da39;;
+    background-color: #f5da39;
 }
 
 .channel-row--program---description {
