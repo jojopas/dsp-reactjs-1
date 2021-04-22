@@ -23,7 +23,7 @@ export default function Home({session, config, page, error, pageType, seoObj}) {
         !error ? (
             <>
                 <h1 className="noShow">Home</h1>
-                <MyMix config={config} session={session} pageType={pageType} />
+                {/* <MyMix config={config} session={session} pageType={pageType} /> */}
                 <div className="overflowWrapper">
                     { page.promos.length > 0 ?
                         (
