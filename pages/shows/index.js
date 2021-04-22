@@ -19,7 +19,7 @@ export default function Shows({session, config, page, error, pageType, seoObj}) 
     const store = React.useContext(StoreContext);
     const lnConfig = store.getLnConfig;
 
-    const genreNav = page.genres.map((genre) => {
+    const genreNav = page.genres?.map((genre) => {
         return  {id: genre, inner: genre, url: `/shows/genre/[...slug]`, as: `/shows/genre/${slugify(genre)}`}
     });
 
