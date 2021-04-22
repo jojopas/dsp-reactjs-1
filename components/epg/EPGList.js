@@ -71,6 +71,7 @@ export default function EPGList({
 
     const nextEPGDates = () => {
         const now = new Date();
+        now.setHours(0,0);
         let dateSlots = {};
         dateSlots[now.toDateString().substring(0, 10)] = now.getTime();
         for (let index = 0; index < 6; index++) {
