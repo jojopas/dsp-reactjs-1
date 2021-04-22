@@ -1,8 +1,6 @@
 const constants = {
     ENV_DSP_API_URL: 'api.myspotlight.tv',
     ENV_DSP_API_KEY: '2c4262e3dc004e2f22c6d03de10ff0c06596edd3', // prod:'2c4262e3dc004e2f22c6d03de10ff0c06596edd3' staging:'f36c883f5037af539572f2d1a362573bb683c727'
-    ENV_LN_API_URL: 'qa.localnowapi.com', // qa: qa.localnowapi.com, prod: prod.localnowapi.com
-    ENV_LN_API_KEY: 'urwF64ogf84Ol9W0GDBSx2ezVlCgEjwf5ytgu8hr',  // staging: urwF64ogf84Ol9W0GDBSx2ezVlCgEjwf5ytgu8hr prod: AQKFCPy1Fz3cZLPgiIeaF424KRSRpqjw1XCCfcJU
     ENV_GA_ID: 'UA-84268486-6', // For debugging 'UA-3115785-11',
     ENV_DSP_PLAYER_KEY: '5ef4a47fc27512184b7d2b62', // staging: 5ef5185b8949063e3a66d133 prod: 5ef4a47fc27512184b7d2b62
     ENV_DSP_PLAYER_URL: 'https://www.dplayer.pro/dotplayer.js',
@@ -11,8 +9,6 @@ const constants = {
     DSP_COUNTRY: 'US',
     DSP_PLATFORM: 'website',
     DSP_IMG_PREFIX: 'https://images.dotstudiopro.com/',
-    LN_CLIENT_ID: 'desktop_web', //'BabySteps',
-    LN_API_PREFIX: '/vod/api/v2',
     MOBILE_BREAKPOINT: 767,
     TWITTER_HANDLE: 'LocalNow',
     NOT_FOUND_SRC: '/images/noImage.svg',
@@ -35,18 +31,6 @@ const constants = {
     MSG_404: 'We\'re currently working on improving your experience. Please wait a few minutes and try again.',
     HOME_404: 'Take Me Home',
     AXIOS_RETRY_CNT: 3,
-    CITY_IS_THIS_YOURS: 'Welcome to Local Now',
-    CITY_INSTRUCTIONS: 'Based on your location this looks like the stream for you.',
-    CITY_YES: 'Yes, Make this my city!',
-    CITY_NO: 'No. Switch my city.',
-    CITY_WAIT: 'Please Wait',
-    CITY_FIND: 'Find Your City',
-    CITY_ADD_NEW: 'Switch Your City',
-    CITY_ADD_SEARCH: 'Search by city to find local streams',
-    CITY_ADD_LOADING: 'Loading Results',
-    CITY_NO_RESULTS: 'Your search returned no results. Please change your search to find more cities.',
-    CITY_ADD_FOUND: 'These are the closest streams available for "{city}". Please select one or change your search to find more cities.',
-    CITY_ADD_CONTINUE: 'Select and Continue',
     GDPR_TEXT: 'This website stores cookies on your computer. These cookies are used to collect information about how you interact with our website and allow us to remember you. We use this information in order to improve and customize your browsing experience and for analytics and metrics about our visitors both on the website and other media. To find out more about the cookies we use, see our Privacy Policy.',
     GDPR_BUTTON: 'Got it!',
     GDPR_EXPIRATION: 90,
@@ -54,10 +38,6 @@ const constants = {
     EPG_TIME_LEFT: 10,
     EPG_PROMO_CNT: 10,
     EPG_UI_TIMEOUT: 4,
-    MY_MIX_PERCENTAGE: 30,
-    MY_MIX_NO_OF_ITEMS: 3,
-    MY_MIX_DEFAULT_MARKET: 'Default',
-    MY_MIX_AD_SEGMENT_SECS: 6,
     COOKIE_NO_EXPIRE: new Date("2100/10/10"),
     CORS_WHITELIST: ['http://localhost:3000', '/localnow\.com$/', /\.localnow\.com$/, /\.herokuapp\.com$/],
     CONTACTUS_FORM_SUBMIT: 'Submit',

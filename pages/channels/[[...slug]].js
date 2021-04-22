@@ -142,9 +142,8 @@ export default function Channel({session, config, slug, page, pageError, seoObj,
     let hidden, visibilityChange;
     const visibilityUpdate = () => {
         if (!document[hidden] && store.playerInstance && store.playerInstance.vjs && store.playerInstance.vjs.paused() && !store.isAdRunning) {
-            if (!store.showMyCityModal) {
                 store.playerInstance.vjs.play();
-            }
+            
         }
     };
 
@@ -412,7 +411,7 @@ Channel.getLayout = getLayout;
 export const getServerSideProps = async ({req, res, query}) => {
     const slug = (!isEmpty(query)) ? query.slug[0] : '';
     const {session, config} = await getSession(req, res);
-    const routes = ['/api/ln/promotion/live', '/api/dsp/live/epg', '/api/dsp/company/available/genres/live'];
+    const routes = [ '/api/dsp/live/epg', '/api/dsp/company/available/genres/live'];
     const pageOptions = {req, routes, session, config};
     const page = await pageBuilder(pageOptions);
     let error = pageError([session, config, page]);
