@@ -142,9 +142,8 @@ export default function Channel({session, config, slug, page, pageError, seoObj,
     let hidden, visibilityChange;
     const visibilityUpdate = () => {
         if (!document[hidden] && store.playerInstance && store.playerInstance.vjs && store.playerInstance.vjs.paused() && !store.isAdRunning) {
-            if (!store.showMyCityModal) {
                 store.playerInstance.vjs.play();
-            }
+            
         }
     };
 
@@ -382,37 +381,47 @@ export default function Channel({session, config, slug, page, pageError, seoObj,
         }
     }, []);
 
-    return useObserver(() => (
+    return useObserver(() =>
         !pageError ? (
-            <div ref={epgPageRef} className={!userIsActive ? ' epgInactive' : ''}>
-                <LocalSEOTags pageType={pageType} seoObj={currentSEO}/>
+            <div
+                ref={epgPageRef}
+                className={!userIsActive ? " epgInactive" : ""}
+            >
+                <LocalSEOTags pageType={pageType} seoObj={currentSEO} />
                 <h1 className="noShow">Channels</h1>
-                <div className="epgPlayer" ref={playerContainer}>
-                    <Player pageType={pageType} video={firstVideo} showPlayer={store.showPlayer} />
-                </div>
+                {/* <div className="epgPlayer" ref={playerContainer}>
+                    <Player
+                        pageType={pageType}
+                        video={firstVideo}
+                        showPlayer={store.showPlayer}
+                    />
+                </div> */}
                 <EPGList
-                    className={!userIsActive ? 'epgInactive' : ''}
+                    className={!userIsActive ? "epgInactive" : ""}
                     data={result}
                     changeCurrentSlug={changeCurrentSlug}
                     currentSlug={epgListCurrentSlug}
                     activatePlayerUI={activatePlayerUI}
                     genres={genres}
                     promos={promos}
-                    genreHoveredListener={(isHovered) => genreHoveredListener(isHovered)}
+                    genreHoveredListener={(isHovered) =>
+                        genreHoveredListener(isHovered)
+                    }
+                    pageType={pageType}
                 />
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </div>
         ) : (
-            <Error404/>
+            <Error404 />
         )
-    ));
+    );
 }
 Channel.getLayout = getLayout;
 
 export const getServerSideProps = async ({req, res, query}) => {
     const slug = (!isEmpty(query)) ? query.slug[0] : '';
     const {session, config} = await getSession(req, res);
-    const routes = ['/api/ln/promotion/live', '/api/dsp/live/epg', '/api/dsp/company/available/genres/live'];
+    const routes = [ '/api/dsp/live/epg', '/api/dsp/company/available/genres/live'];
     const pageOptions = {req, routes, session, config};
     const page = await pageBuilder(pageOptions);
     let error = pageError([session, config, page]);

@@ -1,8 +1,6 @@
 import axios from "axios";
-import axiosRetry from "axios-retry";
-import jwt_decode from 'jwt-decode';
 import absoluteUrl from "next-absolute-url";
-import { parseCookies, setCookie, destroyCookie } from 'nookies';
+import { parseCookies, setCookie } from 'nookies';
 import getConfig from 'next/config';
 
 const { serverRuntimeConfig } = getConfig();
@@ -47,14 +45,13 @@ export default async function getSession(req, res) {
             config = {}
         }
         // ============= LN CONFIG END =====================
-
+        console.log('config', config);
         return {
             session: {
                 guid: guidCookie
             },
             config: {
                 ...config,
-                xApiKey: serverRuntimeConfig.LN_API_KEY
             }
         }
     }

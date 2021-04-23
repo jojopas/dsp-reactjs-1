@@ -14,7 +14,6 @@ import './index.less';
 
 export default function Account({session, config, page, error}) {
     const store = React.useContext(StoreContext);
-    const lnConfig = store.getLnConfig;
 
     return useObserver(() => (
         !error ? (

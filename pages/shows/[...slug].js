@@ -22,7 +22,6 @@ import Player from '../../components/player/Player';
 export default function Show({session, config, page, slug, error, pageType, seoObj}) {
 
     const store = React.useContext(StoreContext);
-    const lnConfig = store.getLnConfig;
     const {pdp} = page;
 
     const [firstVideo, _setFirstVideo] = React.useState(null);

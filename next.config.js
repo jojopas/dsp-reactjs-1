@@ -92,8 +92,6 @@ const nextConfig = {
         // will only be available on the serverside
         DSP_API_URL: process.env.DSP_API_URL || constants.ENV_DSP_API_URL,
         DSP_API_KEY: process.env.DSP_API_KEY || constants.ENV_DSP_API_KEY,
-        LN_API_URL: process.env.LN_API_URL || constants.ENV_LN_API_URL,
-        LN_API_KEY: process.env.LN_API_KEY || constants.ENV_LN_API_KEY,
         DSP_TOKEN: process.env.DSP_TOKEN
     },
     publicRuntimeConfig: {

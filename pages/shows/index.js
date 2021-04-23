@@ -17,7 +17,6 @@ import GenreSelector from '../../components/nav/GenreSelector';
 export default function Shows({session, config, page, error, pageType, seoObj}) {
 
     const store = React.useContext(StoreContext);
-    const lnConfig = store.getLnConfig;
 
     const genreNav = page.genres?.map((genre) => {
         return  {id: genre, inner: genre, url: `/shows/genre/[...slug]`, as: `/shows/genre/${slugify(genre)}`}
@@ -27,10 +26,10 @@ export default function Shows({session, config, page, error, pageType, seoObj}) 
         !error ? (
             <>
                 <h1 className="noShow">Shows</h1>
-                { page.promos.length > 0 ?
+                { page.promos?.length > 0 ?
                     (
                         <CardList className="showsPromo" type="promo" useHeader={false} data={{cards: page.promos}}/>
-                    ) : null
+                     ) : null
                 }
                 <GenreSelector type="shows" links={genreNav}></GenreSelector>
                 {page.rails.map((rail) => (
@@ -47,7 +46,7 @@ Shows.getLayout = getLayout;
 
 export const getServerSideProps = async ({req, res, query}) => {
     const {session, config} = await getSession(req, res);
-    const routes = ['/api/dsp/company/available/genres/series', '/api/ln/promotion/tv', '/api/dsp/series'];
+    const routes = ['/api/dsp/company/available/genres/series', '/api/dsp/series'];
     const pageOptions = {req, routes, session, config};
     const page = await pageBuilder(pageOptions);
 

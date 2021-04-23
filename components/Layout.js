@@ -14,7 +14,6 @@ import {constants} from "../config";
 
 import './Layout.less';
 import './CookieConsent.less';
-import MyCityModal from './myCity/MyCityModal';
 
 import {fadeOut} from '../helpers/utils/fade';
 import {sendToSegment} from '../analytics';
@@ -26,9 +25,6 @@ function Layout({config, session, pageType, seoObj, children}) {
     const siteWrapperRef = React.useRef(null);
 
     React.useEffect(() => {
-        if (!store.getLnConfig) {
-            store.updateLnConfig(config);
-        }
         store.setBreakPoint(isBreakPoint);
     }, [config, isBreakPoint]);
 
@@ -39,28 +35,10 @@ function Layout({config, session, pageType, seoObj, children}) {
     }, [siteWrapperRef]);
 
     // Poll for if someone deletes their city cookie.  We need a city cookie to locate them.
-    const cityCookieCheck = () => {
-        const cookies = parseCookies();
-        if (!cookies[`_${constants.COOKIE_PREFIX}_myCity`]) {
-            if (!store.showMyCityModal) {
-                store.setShowMyCityModal(true);
-            }
-        }
-    }
+  
 
     // Fix for people that had visited the site before we implemented the market cookie for cache strategy
-    const addMarketCookie = () => {
-        const cookies = parseCookies();
-        if (cookies[`_${constants.COOKIE_PREFIX}_myCity`] && !cookies[`_${constants.COOKIE_PREFIX}_myMarket`]) {
-            const market = JSON.parse(cookies[`_${constants.COOKIE_PREFIX}_myCity`]).market;
-            setCookie(null, `_${constants.COOKIE_PREFIX}_myMarket`, market, {
-                expires: constants.COOKIE_NO_EXPIRE,
-                sameSite: 'Lax',
-                secure: config && config.xForwardedProto === 'https',
-                path: '/'
-            });
-        }
-    }
+    
 
     // Destroy the experience cookie on unload
     const destroyExpCookie = () => {
@@ -68,11 +46,9 @@ function Layout({config, session, pageType, seoObj, children}) {
         destroyCookie(null, `_${constants.COOKIE_PREFIX}_experienceId`);
     }
 
-    let interval;
+    
     React.useEffect(() => {
-        addMarketCookie();
-        cityCookieCheck();
-        interval = setInterval(cityCookieCheck, 10000);
+        // interval = setInterval(cityCookieCheck, 10000);
 
         if(window) {
             window.addEventListener('beforeunload', destroyExpCookie);
@@ -81,7 +57,7 @@ function Layout({config, session, pageType, seoObj, children}) {
 
 
         return () => {
-            clearInterval(interval);
+            // clearInterval(interval);
         }
     }, []);
 
@@ -92,7 +68,6 @@ function Layout({config, session, pageType, seoObj, children}) {
                 <Header/>
                 <main className={`pageType-${pageType}`}>{children}</main>
                 <Footer/>
-                <MyCityModal config={config} session={session} showMyCityModal={store.showMyCityModal}/>
                 <CookieConsent
                     location="bottom"
                     buttonText={constants.GDPR_BUTTON}
