@@ -1,57 +1,127 @@
-import React from 'react';
-import {useObserver} from 'mobx-react-lite';
+import React from "react";
+import { useObserver } from "mobx-react-lite";
 
-import getSession from '../../helpers/session/get-session';
-import pageError from '../../helpers/page/error';
-import {getLayout} from '../../components/Layout';
-import {StoreContext} from '../../store';
-import {pageBuilder} from '../../helpers/page/builder';
-import Error404 from '../../components/404';
+import getSession from "../../helpers/session/get-session";
+import pageError from "../../helpers/page/error";
+import { getLayout } from "../../components/Layout";
+import { StoreContext } from "../../store";
+import { pageBuilder } from "../../helpers/page/builder";
+import Error404 from "../../components/404";
 
-import './index.less';
-import CardList from '../../components/cardList/CardList';
-import Nav from '../../components/nav/Nav';
-import {slugify} from '../../helpers/utils/strings';
-import GenreSelector from '../../components/nav/GenreSelector';
-
-export default function Movies({session, config, page, error, pageType, seoObj}) {
-
+import "./index.less";
+import CardList from "../../components/cardList/CardList";
+import Carousel from "../../components/carousel/Carousel";
+import Nav from "../../components/nav/Nav";
+import { slugify } from "../../helpers/utils/strings";
+import GenreSelector from "../../components/nav/GenreSelector";
+import Button from "../../components/button/Button";
+import { constants } from "../../config";
+export default function Movies({
+    session,
+    config,
+    page,
+    error,
+    pageType,
+    seoObj,
+}) {
+    console.log('On-demand', page);
     const store = React.useContext(StoreContext);
-
-    const genreNav = page.genres.map((genre) => {
-        return  {id: genre, inner: genre, url: `/movies/genre/[...slug]`, as: `/movies/genre/${slugify(genre)}`}
+    const [width, setWidth] = React.useState();
+    const genreNav = page.genres?.map((genre) => {
+        return {
+            id: genre,
+            inner: genre,
+            url: `/movies/genre/[...slug]`,
+            as: `/on-demand/genre/${slugify(genre)}`,
+        };
     });
-
-    return useObserver(() => (
+    React.useEffect(() => {
+        if (!width && typeof window !== "undefined") {
+            setWidth(window.innerWidth);
+        }
+    }, [width]);
+    const views = page.rails[0].cards.map((el) =>
+        width ? (
+            // <PromoCard {...el} />
+            <div key={el.title}>
+                <div
+                    className="carousel"
+                    style={{
+                        background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 1) 100%),url("${el.image}/${width}/500"), no-repeat`,
+                    }}
+                >
+                    <div className="carousel-title">{el.title}</div>
+                    <div className="carousel-description">{el.title}</div>
+                    <Button
+                        className="pdp-top-watchNowButton button-current"
+                        inner={constants.WATCH_NOW}
+                        onClick={() =>
+                            launchPlayer(
+                                pdp.videoId
+                                    ? pdp.videoId
+                                    : pdp.seasons[0].cards[0].id,
+                                currVideo
+                            )
+                        }
+                    />
+                </div>
+            </div>
+        ) : (
+            <></>
+        )
+    );
+    const slickSetting = {
+        dots: true,
+        dotsClass: "carousel-dots",
+        infinite: false,
+        initialSlide: 0,
+        speed: 400,
+        touchThreshold: 20,
+        draggable: true,
+        customPaging: (dots) => <div className='carousel-dot'></div>,
+    };
+    console.log("page", page.rails[0], width);
+    return useObserver(() =>
         !error ? (
             <>
                 <h1 className="noShow">Movies</h1>
-                { page.promos?.length > 0 ?
-                    (
-                        <CardList className="moviesPromo" type="promo" useHeader={false} data={{cards: page.promos}}/>
-                    ) : null
-                }
+                {page.promos?.length > 0 ? (
+                    <CardList
+                        className="moviesPromo"
+                        type="promo"
+                        useHeader={false}
+                        data={{ cards: page.promos }}
+                    />
+                ) : null}
+                <Carousel
+                    views={views}
+                    slickSettings={slickSetting}
+                    className="carousel-container"
+                />
                 <GenreSelector type="movies" links={genreNav}></GenreSelector>
                 {page.rails.map((rail) => (
-                    <CardList key={rail.category.id} type="title" data={rail}/>
+                    <CardList key={rail.category.id} type="title" data={rail} />
                 ))}
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </>
         ) : (
-            <Error404/>
+            <Error404 />
         )
-    ));
+    );
 }
 Movies.getLayout = getLayout;
 
-export const getServerSideProps = async ({req, res}) => {
-    const {session, config} = await getSession(req, res);
-    const routes = ['/api/dsp/company/available/genres/movies', '/api/dsp/movies'];
-    const pageOptions = {req, routes, session, config};
+export const getServerSideProps = async ({ req, res }) => {
+    const { session, config } = await getSession(req, res);
+    const routes = [
+        "/api/dsp/company/available/genres/movies",
+        "/api/dsp/movies",
+    ];
+    const pageOptions = { req, routes, session, config };
     const page = await pageBuilder(pageOptions);
-
+    console.log('page', page);
     let error = pageError([session, config, page]);
-    if(error){
+    if (error) {
         res.statusCode = 404;
     }
 
@@ -61,10 +131,10 @@ export const getServerSideProps = async ({req, res}) => {
             config: config || null,
             page: page || null,
             error: error || false,
-            pageType: 'general',
+            pageType: "general",
             seoObj: {
-                title: 'Movies'
-            }
+                title: "Movies",
+            },
         },
-    }
-}
+    };
+};

@@ -22,35 +22,67 @@ export default function Header({}) {
     })
 
     const main = [
-        {id: 'home', inner: 'Home', url: '/', exact: true},
-        {id: 'channels', inner: 'Channels', url: '/channels/[[...slug]]', as: '/channels'},
-        {id: 'movies', inner: 'Movies', url: '/movies', as: '/movies'},
-        {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
         {
-            id: 'search',
-            class: 'search',
-            type: 'svg',
-            inner: 'Search',
-            svg: 'search',
-            url: '/search/[[...searchQuery]]',
-            as: '/search',
+            id: "search",
+            class: "search",
+            type: "svg",
+            inner: "Search",
+            svg: "search",
+            url: "/search/[[...searchQuery]]",
+            as: "/search",
         },
-        /*{
-            id: 'account',
-            class: 'account',
-            type: 'svg',
-            inner: 'Account',
-            svg: 'myAccount',
-            url: '/account/[[...slug]]',
-            as: '/account',
-        },*/
+        { id: "home", inner: "Featured", url: "/", exact: true },
+        {
+            id: "channels",
+            inner: "Channels",
+            url: "/channels/[[...slug]]",
+            as: "/channels",
+        },
+        {
+            id: "ondemand",
+            inner: "On Demand",
+            url: "/on-demand",
+            as: "/on-demand",
+        },
+        // {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
+
+        {
+            id: "account",
+            class: "account",
+            type: "svg",
+            inner: "Account",
+            svg: "myAccount",
+            url: "/account/[[...slug]]",
+            as: "/account",
+        },
     ];
 
     const mainMobile = [
-        {id: 'home', type:'svg', svg:'home', inner: 'Home', url: '/', exact: true},
-        {id: 'channels', type:'svg', svg:'channels', inner: 'Channels', url: '/channels/[[...slug]]', as: '/channels'},
-        {id: 'movies', type:'svg', svg:'movies', inner: 'Movies', url: '/movies', as: '/movies'},
-        {id: 'shows', type:'svg', svg:'shows', inner: 'Shows', url: '/shows', as: '/shows'}
+        {
+            id: "home",
+            type: "svg",
+            svg: "home",
+            inner: "Featured",
+            url: "/",
+            exact: true,
+        },
+        {
+            id: "channels",
+            type: "svg",
+            svg: "channels",
+            inner: "Channels",
+            url: "/channels/[[...slug]]",
+            as: "/channels",
+        },
+        {
+            id: "on-demand",
+            type: "svg",
+            svg: "movies",
+            inner: "On Demand",
+            url: "/on-demand",
+            as: "/on-demand",
+        },
+        // {id: 'shows', type:'svg', svg:'shows', inner: 'Shows', url: '/shows', as: '/shows'}
     ];
 
     const mainMobile2 = [
@@ -77,8 +109,7 @@ export default function Header({}) {
                         <span className="header-navMobile-mask">
                             <span className="header-navMobile-inner">
                                 <span className="header-navMobile-topLine"></span>
-                                <Nav className="header-navMobile-main" links={mainMobile}></Nav>
-                                {/*<ButtonList className="header-navMobile-other" type="grid" data={mainMobile2}></ButtonList>*/}
+                                <Nav className="header-navMobile-main" links={mainMobile}/>
                             </span>
                         </span>
                     </span>

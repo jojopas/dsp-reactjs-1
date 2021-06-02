@@ -7,76 +7,83 @@
 
 header {
     position: fixed;
-    top:0;
-    left:50%;
-    width:100%;
+    top: 0;
+    left: 50%;
+    width: 100%;
     max-width: @maxSiteWidth;
-    height:@headerHeight;
-    z-index:10001;
+    height: @headerHeight;
+    z-index: 10001;
     .bsTransform(translateX(-50%));
 
-    &:before{
-        content:'';
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background: #040E19;
-        opacity: .85;
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #040e19;
+        opacity: 0.85;
     }
 
-    &:after{
-        content:'';
-        position:absolute;
-        bottom:0;
-        left:0;
-        width:100%;
-        height:1px;
-        background: transparent linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 1) 42%, rgba(255, 255, 255, 1) 58%, rgba(0, 0, 0, 0) 100%) 0% 0% no-repeat padding-box;
+    &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: transparent
+            linear-gradient(
+                90deg,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(255, 255, 255, 1) 42%,
+                rgba(255, 255, 255, 1) 58%,
+                rgba(0, 0, 0, 0) 100%
+            )
+            0% 0% no-repeat padding-box;
         opacity: 0.2;
-
     }
 
     @media (max-width: @mobileLargeBP) {
         height: @headerHeightMob;
     }
 
-    .logo{
+    .logo {
         position: absolute;
-        top:30px;
+        top: 30px;
         left: @headerHPad;
-        width:40px;
-        height:40px;
+        width: 100px;
+        height: 40px;
 
-        a, a:active, a:visited{
-            display:block;
-            position:absolute;
-            width:100%;
-            height:100%;
+        a,
+        a:active,
+        a:visited {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 100%;
 
-            &.active{
-                pointer-events:none;
+            &.active {
+                pointer-events: none;
             }
 
-            &:hover:not(.active){
-                svg{
+            &:hover:not(.active) {
+                svg {
                     .bsScale(1.15);
                 }
             }
         }
 
-        svg{
-            position:absolute;
-            width:100%;
-            height:100%;
+        svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             fill: @colorGreen;
             .bsTransformOrigin(50%, 50%);
             .bsTransition(all);
             transition-property: opacity, transform;
         }
-
-
 
         @media (max-width: @mobileLargeBP) {
             top: 16px;
@@ -86,98 +93,99 @@ header {
         }
     }
 
-    & > nav{
-        position:absolute;
-        top:30px;
-        left:50%;
-        bottom:0;
+    & > nav {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        bottom: 0;
         .bsTransform(translateX(-50%));
-        white-space:nowrap;
+        white-space: nowrap;
 
-        ul{
+        ul {
             .bsNavReset();
-            padding-left:20px;
+            padding-left: 20px;
 
-            li{
-                display:inline-block;
-                margin-left:14px;
-                height:38px;
+            li {
+                display: inline-block;
+                margin-left: 14px;
+                height: 38px;
                 line-height: 38px;
 
-                a{
-                    position:relative;
-                    padding:10px 8px;
-                    font-size:15px;
-                    font-weight:400;
-                    color:@colorHeaderNav;
+                a {
+                    position: relative;
+                    padding: 10px 8px;
+                    font-size: 15px;
+                    font-weight: 400;
+                    color: @colorHeaderNav;
                     .bsTransition(color);
 
-                    .svgPlaceholder{
+                    .svgPlaceholder {
                         position: relative;
-                        display:inline-block;
-                        width:24px;
-                        height:24px;
-                        top:7px;
+                        display: inline-block;
+                        width: 24px;
+                        height: 24px;
+                        top: 7px;
 
-                        svg{
-                            position:absolute;
-                            top:0;
-                            left:0;
-                            width:24px;
-                            height:24px;
-                            fill:@colorHeaderNav;
+                        svg {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 24px;
+                            height: 24px;
+                            fill: @colorHeaderNav;
                             .bsTransition(all);
                             transition-property: fill, opacity;
                         }
 
-                        svg:last-child{
-                            opacity:0;
-                            fill:@colorGreen;
+                        svg:last-child {
+                            opacity: 0;
+                            fill: @colorGreen;
                         }
                     }
 
-                    &:hover{
-                        color:@colorHeaderNavActive;
+                    &:hover {
+                        color: @colorHeaderNavActive;
 
                         .svgPlaceholder {
-                            svg{
-                                opacity:0;
+                            svg {
+                                opacity: 0;
                             }
                             svg:last-child {
-                                opacity:1 !important;
+                                opacity: 1 !important;
                             }
                         }
                     }
-                    &.active{
-                        color:@colorHeaderNavActive;
+                    &.active {
+                        color: @colorHeaderNavActive;
 
                         .svgPlaceholder {
-                            svg{
-                                opacity:0;
+                            svg {
+                                opacity: 0;
                             }
                             svg:last-child {
-                                opacity:1 !important;
+                                opacity: 1 !important;
                             }
                         }
 
-                        &[href='/'], &[href='/channels']{
-                            pointer-events:none;
+                        &[href="/"],
+                        &[href="/channels"] {
+                            pointer-events: none;
                         }
                     }
                 }
 
-                &:first-child{
-                    margin-left:0;
+                &:first-child {
+                    margin-left: 0;
                 }
             }
         }
 
-        .activeBar{
-            position:absolute;
+        .activeBar {
+            position: absolute;
             bottom: 0;
             display: block;
-            width:0;
-            max-width:100px;
+            width: 0;
+            max-width: 100px;
             height: 2px;
             background-color: @colorGreen;
             .bsBorderRadius(1px 1px 0 0);
@@ -190,121 +198,121 @@ header {
         }
 
         @media (max-width: @mobileLargeBP) {
-            display:none;
+            display: none;
         }
     }
 
-    .myCity{
-        position:absolute;
-        top:37px;
+    .myCity {
+        position: absolute;
+        top: 37px;
         right: @headerHPad;
         padding-right: 30px;
-        padding-top:2px;
-        cursor:pointer;
-        display:block;
-        text-align:right;
+        padding-top: 2px;
+        cursor: pointer;
+        display: block;
+        text-align: right;
 
-        span{
-            display:block;
-            color:@colorHeaderNav;
+        span {
+            display: block;
+            color: @colorHeaderNav;
             .bsTransition(color);
-            line-height:1;
+            line-height: 1;
         }
 
-        .myCity-header{
-            font-size:10px;
+        .myCity-header {
+            font-size: 10px;
             font-weight: 700;
-            text-transform:uppercase;
+            text-transform: uppercase;
         }
 
-        .myCity-location{
+        .myCity-location {
             color: #fff;
-            font-size:11px;
-            font-weight:400;
+            font-size: 11px;
+            font-weight: 400;
         }
 
         svg {
-            position:absolute;
-            right:0;
-            top:0;
-            width:24px;
-            height:24px;
-            fill:@colorHeaderNav;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            fill: @colorHeaderNav;
             .bsTransition(all);
             transition-property: fill, opacity;
 
-            &:last-child{
-                opacity:0;
-                fill:@colorGreen;
+            &:last-child {
+                opacity: 0;
+                fill: @colorGreen;
             }
         }
 
-        &:hover{
-            span{
-                color:@colorHeaderNavActive;
+        &:hover {
+            span {
+                color: @colorHeaderNavActive;
             }
-            svg{
-                opacity:0;
+            svg {
+                opacity: 0;
             }
             svg:last-child {
-                opacity:1 !important;
+                opacity: 1 !important;
             }
         }
 
         @media (max-width: @mobileLargeBP) {
-            top:15px;
+            top: 15px;
             right: 56px;
             padding-right: 0;
 
-            svg{
-                display:none;
+            svg {
+                display: none;
             }
         }
     }
 
-    .header-mobileSearch{
-        position:absolute;
-        display:inline-block;
-        width:24px;
-        height:24px;
-        top:16px;
-        left:61px;
+    .header-mobileSearch {
+        position: absolute;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        top: 16px;
+        left: 61px;
 
-        svg{
-            position:absolute;
-            top:0;
-            left:0;
-            width:24px;
-            height:24px;
-            fill:@colorHeaderNav;
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            fill: @colorHeaderNav;
             .bsTransition(all);
             transition-property: fill, opacity;
         }
 
-        svg:last-child{
-            opacity:0;
-            fill:@colorGreen;
+        svg:last-child {
+            opacity: 0;
+            fill: @colorGreen;
         }
 
-        &:hover{
-            svg{
-                opacity:0;
+        &:hover {
+            svg {
+                opacity: 0;
             }
             svg:last-child {
-                opacity:1 !important;
+                opacity: 1 !important;
             }
         }
-        &.active{
-            svg{
-                opacity:0;
+        &.active {
+            svg {
+                opacity: 0;
             }
             svg:last-child {
-                opacity:1 !important;
+                opacity: 1 !important;
             }
         }
     }
 
-    .header-mobileBurger{
+    .header-mobileBurger {
         position: absolute;
         top: 50%;
         .bsTransform(translateY(-50%));
@@ -313,16 +321,18 @@ header {
         height: 24px;
         cursor: pointer;
         z-index: 500;
-        display:none;
+        display: none;
         -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
-        span, span:before, span:after {
+        span,
+        span:before,
+        span:after {
             height: 1px;
             width: 18px;
             background-color: @colorNavGray;
             position: absolute;
             display: block;
-            content: '';
+            content: "";
             .bsTransition(all);
             .bsTransformOrigin(50%, 50%);
             .bsRotate(0);
@@ -331,13 +341,13 @@ header {
         }
 
         span {
-            left:3px;
-            top:11px;
+            left: 3px;
+            top: 11px;
             &:before {
                 top: -6px;
             }
             &:after {
-                top:6px;
+                top: 6px;
             }
         }
 
@@ -345,7 +355,8 @@ header {
             span {
                 background: transparent !important;
 
-                &:before, &:after {
+                &:before,
+                &:after {
                     top: 0 !important;
                     background-color: @colorGreen;
                 }
@@ -366,47 +377,53 @@ header {
     }
 
     .header-navMobile {
-        display:block;
-        position:absolute;
-        top:100%;
-        left:0;
-        width:100%;
-        pointer-events:none;
-        height:0;
-        display:none;
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        pointer-events: none;
+        height: 0;
+        display: none;
 
         .header-navMobile-mask {
-            display:flex;
-            flex-direction:column;
-            overflow:hidden;
-            position:relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
 
             .header-navMobile-inner {
-                position:relative;
-                display:block;
-                background: rgba(4, 14, 25, .98);
-                width:100%;
+                position: relative;
+                display: block;
+                background: rgba(4, 14, 25, 0.98);
+                width: 100%;
                 .bsTransform(translateY(-100%));
                 .bsTransition(transform);
 
-                .header-navMobile-topLine{
-                    position:absolute;
-                    display:block;
-                    top:0;
-                    left:0;
-                    width:100%;
-                    height:1px;
-                    background: #040E19;
+                .header-navMobile-topLine {
+                    position: absolute;
+                    display: block;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 1px;
+                    background: #040e19;
                 }
 
-                &:before{
-                    content:'';
-                    position:absolute;
-                    top:-57px;
-                    left:0;
-                    width:100%;
-                    height:105px;
-                    background: transparent radial-gradient(closest-side at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(0, 0, 0, 0) 100%) 0% 0% no-repeat padding-box;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    top: -57px;
+                    left: 0;
+                    width: 100%;
+                    height: 105px;
+                    background: transparent
+                        radial-gradient(
+                            closest-side at 50% 50%,
+                            rgba(255, 255, 255, 1) 0%,
+                            rgba(0, 0, 0, 0) 100%
+                        )
+                        0% 0% no-repeat padding-box;
                     opacity: 0.15;
                 }
 
@@ -417,18 +434,18 @@ header {
 
                     ul {
                         .bsNavReset();
-                        display:flex;
+                        display: flex;
                         flex-wrap: wrap;
-                        position:relative;
+                        position: relative;
 
                         li {
                             display: block;
-                            width:50%;
-                            position:relative;
+                            width: 50%;
+                            position: relative;
 
                             &:before {
-                                position:relative;
-                                content: '';
+                                position: relative;
+                                content: "";
                                 display: block;
                                 height: 0;
                                 width: 100%;
@@ -436,63 +453,62 @@ header {
                             }
 
                             a {
-                                display:flex;
-                                flex-direction:column;
-                                justify-content:center;
-                                align-items:center;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
                                 position: absolute;
-                                top:50%;
-                                left:50%;
+                                top: 50%;
+                                left: 50%;
                                 .bsTransform(translate(-50%, -50%));
                                 .bsBoxSizing();
-                                width:100%;
-                                height:100%;
+                                width: 100%;
+                                height: 100%;
                                 padding: 5px @headerHPadMob;
                                 font-size: 18px;
                                 font-weight: 400;
                                 color: @colorHeaderNav;
                                 .bsTransition(color);
 
-                                .svgPlaceholder{
+                                .svgPlaceholder {
                                     position: relative;
-                                    display:block;
-                                    width:36px;
-                                    height:36px;
+                                    display: block;
+                                    width: 36px;
+                                    height: 36px;
 
-                                    svg{
-                                        position:absolute;
-                                        top:0;
-                                        left:0;
-                                        width:36px;
-                                        height:36px;
-                                        fill:@colorHeaderNav;
+                                    svg {
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        width: 36px;
+                                        height: 36px;
+                                        fill: @colorHeaderNav;
                                         .bsTransition(all);
                                         transition-property: fill, opacity;
                                     }
 
-                                    svg:last-child{
-                                        opacity:0;
-                                        fill:@colorGreen;
+                                    svg:last-child {
+                                        opacity: 0;
+                                        fill: @colorGreen;
                                     }
                                 }
 
-                                &:after{
-                                    content:attr(title);
-                                    position:relative;
-                                    display:block;
+                                &:after {
+                                    content: attr(title);
+                                    position: relative;
+                                    display: block;
                                     text-align: center;
-
                                 }
 
-                                &.active{
-                                    color:@colorHeaderNavActive;
+                                &.active {
+                                    color: @colorHeaderNavActive;
 
                                     .svgPlaceholder {
-                                        svg{
-                                            opacity:0;
+                                        svg {
+                                            opacity: 0;
                                         }
                                         svg:last-child {
-                                            opacity:1 !important;
+                                            opacity: 1 !important;
                                         }
                                     }
                                 }
@@ -503,22 +519,39 @@ header {
                             }
                         }
 
-                        &:before, &:after{
-                            content:'';
-                            position:absolute;
-                            top:50%;
-                            left:50%;
+                        &:before,
+                        &:after {
+                            content: "";
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
                             .bsTransform(translate(-50%, -50%));
-                            width:100%;
-                            height:1px;
-                            background: transparent linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 1) 42%, rgba(255, 255, 255, 1) 58%, rgba(0, 0, 0, 0) 100%) 0% 0% no-repeat padding-box;
+                            width: 100%;
+                            height: 1px;
+                            background: transparent
+                                linear-gradient(
+                                    90deg,
+                                    rgba(0, 0, 0, 0) 0%,
+                                    rgba(255, 255, 255, 1) 42%,
+                                    rgba(255, 255, 255, 1) 58%,
+                                    rgba(0, 0, 0, 0) 100%
+                                )
+                                0% 0% no-repeat padding-box;
                             opacity: 0.4;
                         }
 
                         &:after {
-                            width:1px;
-                            height:100%;
-                            background: transparent linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 1) 42%, rgba(255, 255, 255, 1) 58%, rgba(0, 0, 0, 0) 100%) 0% 0% no-repeat padding-box;
+                            width: 1px;
+                            height: 100%;
+                            background: transparent
+                                linear-gradient(
+                                    0deg,
+                                    rgba(0, 0, 0, 0) 0%,
+                                    rgba(255, 255, 255, 1) 42%,
+                                    rgba(255, 255, 255, 1) 58%,
+                                    rgba(0, 0, 0, 0) 100%
+                                )
+                                0% 0% no-repeat padding-box;
                         }
                     }
                 }
@@ -532,39 +565,47 @@ header {
                     .buttonGrid {
                         .bsBoxSizing();
                         padding: 0 20px;
-                        width:100%;
-                        margin:0;
+                        width: 100%;
+                        margin: 0;
 
                         & > div {
                             .bsBoxSizing();
-                            padding:10px 0 0;
-                            width:100%;
+                            padding: 10px 0 0;
+                            width: 100%;
 
                             a {
                                 .bsBoxSizing();
                                 display: block;
                                 width: 100%;
-                                text-align:center;
+                                text-align: center;
                             }
                         }
                     }
                 }
 
-                &:after{
-                    content:'';
-                    position:absolute;
-                    bottom:0;
-                    left:0;
-                    width:100%;
-                    height:1px;
-                    background: transparent linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 1) 42%, rgba(255, 255, 255, 1) 58%, rgba(0, 0, 0, 0) 100%) 0% 0% no-repeat padding-box;
+                &:after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 1px;
+                    background: transparent
+                        linear-gradient(
+                            90deg,
+                            rgba(0, 0, 0, 0) 0%,
+                            rgba(255, 255, 255, 1) 42%,
+                            rgba(255, 255, 255, 1) 58%,
+                            rgba(0, 0, 0, 0) 100%
+                        )
+                        0% 0% no-repeat padding-box;
                     opacity: 0.2;
                 }
             }
         }
 
-        &.header-navMobile-open{
-            height:auto;
+        &.header-navMobile-open {
+            height: auto;
             .header-navMobile-mask {
                 .header-navMobile-inner {
                     .bsTransform(translateY(0));
@@ -578,9 +619,9 @@ header {
     }
 }
 
-&.pageType-home, &.pageType-channel{
+&.pageType-home,
+&.pageType-channel {
     header {
         position: relative;
     }
 }
-

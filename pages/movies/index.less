@@ -1,15 +1,73 @@
 @import "../../styles/config.less";
 
-.moviesPromo{
+.moviesPromo {
     padding-top: 30px;
 
-    @media (max-width: @mobileLargeBP){
-        padding-top:20px;
+    @media (max-width: @mobileLargeBP) {
+        padding-top: 20px;
+    }
+}
+.carousel-container {
+    height: 500px;
+}
+
+.carousel-container .carousel {
+    width: 100%;
+    height: 500;
+    padding: 200px 50px 150px 50px;
+
+    @media (max-width: @mobileLargeBP) {
+        padding: 100px 10px;
     }
 }
 
-.genreSelector{
-    @media (max-width: @mobileLargeBP){
-        margin-bottom:-10px !important;
+// .carousel-container .slick-list {
+//     position: relative;
+//     display: inline-flex;
+//     overflow: hidden;
+//     margin: 0;
+//     padding: 0;
+// }
+
+.carousel-container .carousel-dots {
+    display: flex;
+    list-style-type: none;
+}
+
+.carousel-container .carousel-dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.carousel-container button .slick-active {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: @colorGreen;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.carousel-title {
+    font-size: xx-large;
+    color: white;
+}
+
+.carousel-description {
+    font-size: medium;
+    color: #edd8cd;
+}
+
+.genreSelector {
+    @media (max-width: @mobileLargeBP) {
+        margin-bottom: -10px !important;
     }
 }

@@ -3,9 +3,9 @@ import "./Cards.less";
 const ProgressBar = ({ value }) => {
     const valueInPercentage = Number.parseInt(value * 100);
     return (
-        <div class="progress">
+        <div className="progress">
             <div
-                testID="progressid"
+                testid="progressid"
                 class="progressValue"
                 style={{ width: `${valueInPercentage}%` }}
             ></div>

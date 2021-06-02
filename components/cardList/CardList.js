@@ -27,7 +27,7 @@ export default function CardList({className, type, useHeader, data, ...props}) {
         touchThreshold: 20,
         prevArrow: <SlickArrow />,
         nextArrow: <SlickArrow />,
-        draggable: false,
+        draggable: true,
         responsive: [
             {
                 breakpoint: 1024,
