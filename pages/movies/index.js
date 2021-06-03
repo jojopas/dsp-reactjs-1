@@ -40,7 +40,7 @@ export default function Movies({
             setWidth(window.innerWidth);
         }
     }, [width]);
-    const views = page.rails[0].cards.map((el) =>
+    const views = page?.rails? page?.rails[0].cards.map((el) =>
         width ? (
             // <PromoCard {...el} />
             <div key={el.title}>
@@ -69,18 +69,20 @@ export default function Movies({
         ) : (
             <></>
         )
-    );
+    ): null;
     const slickSetting = {
         dots: true,
         dotsClass: "carousel-dots",
         infinite: false,
         initialSlide: 0,
         speed: 400,
-        touchThreshold: 20,
         draggable: true,
-        customPaging: (dots) => <div className='carousel-dot'></div>,
+        useCSS: true,
+        customPaging: (dots) => {
+         return <div className='carousel-dot'></div>
+        },
     };
-    console.log("page", page.rails[0], width);
+    console.log("page", page.rails, width);
     return useObserver(() =>
         !error ? (
             <>
@@ -95,7 +97,6 @@ export default function Movies({
                 ) : null}
                 <Carousel
                     views={views}
-                    slickSettings={slickSetting}
                     className="carousel-container"
                 />
                 <GenreSelector type="movies" links={genreNav}></GenreSelector>
