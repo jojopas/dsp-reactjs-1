@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./epg.css";
+import "./epg.less";
 import { constants } from "../../config";
 import EPGProgram from "./EPGProgram";
 export default function EPGRow({channel, favorite, nowShowing}) {

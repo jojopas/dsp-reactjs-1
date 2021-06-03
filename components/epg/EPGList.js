@@ -1,7 +1,7 @@
 import React from "react";
 
 import { StoreContext } from "../../store";
-import "./epg.css";
+import "./epg.less";
 import { constants } from "../../config";
 import EPGRow from "./EPGRow";
 export default function EPGList({
@@ -140,7 +140,8 @@ export default function EPGList({
             <div
                 className="timeElapsed"
                 style={{
-                    left: `${150 + currrentTimeElapsed()}px`,
+                   
+                    width: `${currrentTimeElapsed()}px`,
                 }}
             ></div>
             <div className="timeslot-row">{todaysTimeSlots()}</div>

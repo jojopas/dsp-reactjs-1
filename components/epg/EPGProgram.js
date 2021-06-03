@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./epg.css";
+import "./epg.less";
 export default function EPGProgram({ program, nowShowing, key }) {
       const timeDuration = (seconds) => {
           const date = new Date(0);

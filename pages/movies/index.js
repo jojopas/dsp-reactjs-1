@@ -24,7 +24,6 @@ export default function Movies({
     pageType,
     seoObj,
 }) {
-    console.log('On-demand', page);
     const store = React.useContext(StoreContext);
     const [width, setWidth] = React.useState();
     const genreNav = page.genres?.map((genre) => {
@@ -70,19 +69,6 @@ export default function Movies({
             <></>
         )
     ): null;
-    const slickSetting = {
-        dots: true,
-        dotsClass: "carousel-dots",
-        infinite: false,
-        initialSlide: 0,
-        speed: 400,
-        draggable: true,
-        useCSS: true,
-        customPaging: (dots) => {
-         return <div className='carousel-dot'></div>
-        },
-    };
-    console.log("page", page.rails, width);
     return useObserver(() =>
         !error ? (
             <>
@@ -120,7 +106,6 @@ export const getServerSideProps = async ({ req, res }) => {
     ];
     const pageOptions = { req, routes, session, config };
     const page = await pageBuilder(pageOptions);
-    console.log('page', page);
     let error = pageError([session, config, page]);
     if (error) {
         res.statusCode = 404;

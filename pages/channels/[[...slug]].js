@@ -389,26 +389,30 @@ export default function Channel({session, config, slug, page, pageError, seoObj,
             >
                 <LocalSEOTags pageType={pageType} seoObj={currentSEO} />
                 <h1 className="noShow">Channels</h1>
-                {/* <div className="epgPlayer" ref={playerContainer}>
-                    <Player
-                        pageType={pageType}
-                        video={firstVideo}
-                        showPlayer={store.showPlayer}
-                    />
-                </div> */}
-                <EPGList
-                    className={!userIsActive ? "epgInactive" : ""}
-                    data={result}
-                    changeCurrentSlug={changeCurrentSlug}
-                    currentSlug={epgListCurrentSlug}
-                    activatePlayerUI={activatePlayerUI}
-                    genres={genres}
-                    promos={promos}
-                    genreHoveredListener={(isHovered) =>
-                        genreHoveredListener(isHovered)
-                    }
-                    pageType={pageType}
-                />
+                <div className='container'>
+                    <div className="epgPlayer" ref={playerContainer}>
+                        <Player
+                            pageType={pageType}
+                            video={firstVideo}
+                            showPlayer={store.showPlayer}
+                        />
+                    </div>
+                    <div className='epg-container'>                        
+                        <EPGList
+                            className={!userIsActive ? "epgInactive" : ""}
+                            data={result}
+                            changeCurrentSlug={changeCurrentSlug}
+                            currentSlug={epgListCurrentSlug}
+                            activatePlayerUI={activatePlayerUI}
+                            genres={genres}
+                            promos={promos}
+                            genreHoveredListener={(isHovered) =>
+                                genreHoveredListener(isHovered)
+                            }
+                            pageType={pageType}
+                        />
+                    </div>
+                </div>
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </div>
         ) : (

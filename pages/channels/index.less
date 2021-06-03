@@ -1,9 +1,18 @@
 @import "../../styles/config.less";
 
+.container {
+    display: flex;
+}
+.epg-container {
+    position: relative;
+    left: 350px;
+}
 .epgPlayer{
     position:-webkit-sticky;
     position:sticky;
     top:0;
+    margin: 10px;
+    width: 300px;
 
     @media (max-width: @mobileLargeBP){
         z-index: 10;

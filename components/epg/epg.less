@@ -1,8 +1,9 @@
+@import url("../../styles/config.less");
+
 .epg {
     scroll-behavior: smooth;
     overflow: auto;
-
-    background-color: #5f707e;
+    background-color: @colorBG;
     display: contents;
 }
 
@@ -16,7 +17,7 @@
     position: -webkit-sticky;
     top: 0;
     z-index: 30;
-    background-color: #202834;
+    background-color: @colorBG;
 }
 
 .timeslot-row--date {
@@ -50,17 +51,19 @@
 }
 
 .timeElapsed {
-    border-left: 2px solid #f5da39;
+    /* border-left: 2px solid #f5da39; */
     position: absolute;
     z-index: 50;
     height: 90%;
+    left: 150px;
+    background-color: #00486950;
 }
 
 .timeslot-row--timeElapse {
     height: 5px;
     border-radius: 5px;
     margin: 15px -10px;
-    background-color: #f5da39;
+    background-color: @colorGreen;
 }
 
 .channel {
@@ -107,11 +110,11 @@
 }
 
 .channel-info--favorite:hover {
-    fill: #f5da39;
+    fill: @colorGreen;
 }
 
 .channel-info--favorited {
-    fill: #f5da39;
+    fill: @colorGreen;
 }
 
 .channel-info--image {
@@ -150,7 +153,7 @@
 
 .channel-active {
     display: block;
-    background-color: #f5da39;
+    background-color: @colorGreen;
     color: black;
 }
 
@@ -173,16 +176,16 @@
 .channel-row--program:first-child:hover {
     display: block;
     font-size: smaller;
-    background-color: #f5da39;
+    background-color: @colorGreen;
 }
 
 .channel-row--program---description {
     font-size: small;
-    color: rgba(128, 98, 98, 0.658);
+    color: #8062627a;
 }
 
 .channel-row--program---duration {
     font-size: smaller;
-    color: rgba(128, 128, 128);
+    color: #808080;
     text-overflow: ellipsis;
 }
