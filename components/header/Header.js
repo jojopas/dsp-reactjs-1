@@ -1,25 +1,25 @@
-import React from 'react';
-import Router from 'next/router';
-import {useObserver} from "mobx-react-lite";
+import React from "react";
+import Router from "next/router";
+import { useObserver } from "mobx-react-lite";
 
-import {StoreContext} from "../../store";
+import { StoreContext } from "../../store";
 
-import Logo from './Logo';
-import Nav from '../nav/Nav';
-import NavLink from '../nav/NavLink';
-import InlineSVG from '../InlineSVG';
+import Logo from "./Logo";
+import Nav from "../nav/Nav";
+import NavLink from "../nav/NavLink";
+import InlineSVG from "../InlineSVG";
 
-import './Header.less';
-import ButtonList from '../buttonList/ButtonList';
+import "./Header.less";
+import ButtonList from "../buttonList/ButtonList";
 
 export default function Header({}) {
     const store = React.useContext(StoreContext);
 
     const [open, setOpen] = React.useState(false);
 
-    Router.events.on('routeChangeStart', () => {
+    Router.events.on("routeChangeStart", () => {
         setOpen(false);
-    })
+    });
 
     const main = [
         {
@@ -41,8 +41,8 @@ export default function Header({}) {
         {
             id: "ondemand",
             inner: "On Demand",
-            url: "/on-demand",
-            as: "/on-demand",
+            url: "/movies",
+            as: "/movies",
         },
         // {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
 
@@ -79,44 +79,65 @@ export default function Header({}) {
             type: "svg",
             svg: "movies",
             inner: "On Demand",
-            url: "/on-demand",
-            as: "/on-demand",
+            url: "/movies",
+            as: "/movies",
         },
         // {id: 'shows', type:'svg', svg:'shows', inner: 'Shows', url: '/shows', as: '/shows'}
     ];
 
     const mainMobile2 = [
-        {id: 'account', inner: 'My Account', url: '/account/[[...slug]]', as: '/account'}
+        {
+            id: "account",
+            inner: "My Account",
+            url: "/account/[[...slug]]",
+            as: "/account",
+        },
     ];
 
     return useObserver(() => (
         <header>
-            <Logo/>
-            { store.isBreakpoint ? (
-                <NavLink href='/search/[[...searchQuery]]' as='/search'>
+            <Logo />
+            {store.isBreakpoint ? (
+                <NavLink href="/search/[[...searchQuery]]" as="/search">
                     <a title="Search" className="header-mobileSearch">
-                        <InlineSVG type="search"/>
-                        <InlineSVG type="searchActive"/>
+                        <InlineSVG type="search" />
+                        <InlineSVG type="searchActive" />
                     </a>
                 </NavLink>
             ) : (
                 <Nav className="header-nav" links={main} activeBar={true}></Nav>
             )}
-            { store.isBreakpoint ? (
+            {store.isBreakpoint ? (
                 <>
-                    <span className={ open ? 'header-mobileBurger header-mobileBurger-open' : 'header-mobileBurger'} onClick={() => setOpen(!open)}><span></span></span>
-                    <span className={ open ? 'header-navMobile header-navMobile-open' : 'header-navMobile'}>
+                    <span
+                        className={
+                            open
+                                ? "header-mobileBurger header-mobileBurger-open"
+                                : "header-mobileBurger"
+                        }
+                        onClick={() => setOpen(!open)}
+                    >
+                        <span></span>
+                    </span>
+                    <span
+                        className={
+                            open
+                                ? "header-navMobile header-navMobile-open"
+                                : "header-navMobile"
+                        }
+                    >
                         <span className="header-navMobile-mask">
                             <span className="header-navMobile-inner">
                                 <span className="header-navMobile-topLine"></span>
-                                <Nav className="header-navMobile-main" links={mainMobile}/>
+                                <Nav
+                                    className="header-navMobile-main"
+                                    links={mainMobile}
+                                />
                             </span>
                         </span>
                     </span>
                 </>
-            ) : (
-                null
-            )}
+            ) : null}
         </header>
-    ))
+    ));
 }
