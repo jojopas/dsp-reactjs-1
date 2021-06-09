@@ -5,20 +5,19 @@
 @colorDkBlue: #003846;
 @colorBlue: #00b8e4;
 
-
 @colorBG: #151d25;
-@colorGreen: #fbcc35;
-@colorHover: #F2F2F2;
-@colorCurrent: #F2F2F2;
-@colorNavGray: #B4B7BB;
+@colorYellow: #fbcc35;
+@colorHover: #f2f2f2;
+@colorCurrent: #f2f2f2;
+@colorNavGray: #b4b7bb;
 
 @fontMain: "Roboto", sans-serif;
 
-@headerHeight: 90px;
+@headerHeight: 60px;
 @headerHeightMob: 56px;
 
-@customEase: cubic-bezier(0, 1, .75, 1);
-@easeBack: cubic-bezier(0.175, 0.885, 0.375, 1.570);
+@customEase: cubic-bezier(0, 1, 0.75, 1);
+@easeBack: cubic-bezier(0.175, 0.885, 0.375, 1.57);
 
 @sitePadding: 50px;
 @sitePaddingMobile: 20px;
@@ -33,7 +32,6 @@
 
 @cardHoverMin: 940px;
 @videoMaxWidth: 864px;
-
 
 .defaultHover() {
     color: @colorHover;
@@ -51,8 +49,8 @@
     margin-right: auto;
 
     @media (max-width: @mobileLargeBP) {
-        padding-left: (@sitePadding * .5);
-        padding-right: (@sitePadding * .5);
+        padding-left: (@sitePadding * 0.5);
+        padding-right: (@sitePadding * 0.5);
     }
 }
 
@@ -64,20 +62,20 @@
     padding-right: @sitePadding;
 
     @media (max-width: @mobileLargeBP) {
-        margin-left: (@sitePadding * -.5);
-        margin-right: (@sitePadding * -.5);
-        padding-left: (@sitePadding * .5);
-        padding-right: (@sitePadding * .5);
+        margin-left: (@sitePadding * -0.5);
+        margin-right: (@sitePadding * -0.5);
+        padding-left: (@sitePadding * 0.5);
+        padding-right: (@sitePadding * 0.5);
     }
 }
 
-.flag(){
-    display:block;
+.flag() {
+    display: block;
     border-radius: 2px 2px 2px 0;
-    background:@colorBlue;
-    padding:0 4px;
-    color:#fff;
-    font-size:9px;
-    line-height:16px;
+    background: @colorBlue;
+    padding: 0 4px;
+    color: #fff;
+    font-size: 9px;
+    line-height: 16px;
     text-transform: uppercase;
 }

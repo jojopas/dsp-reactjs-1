@@ -44,8 +44,11 @@ export default function Header({}) {
             url: "/movies",
             as: "/movies",
         },
+      
         // {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
+    ];
 
+    const navAccount = [
         {
             id: "account",
             class: "account",
@@ -82,6 +85,14 @@ export default function Header({}) {
             url: "/movies",
             as: "/movies",
         },
+        {
+            id: "account",
+            type: "svg",
+            inner: "Account",
+            svg: "myAccount",
+            url: "/account/[[...slug]]",
+            as: "/account",
+        },
         // {id: 'shows', type:'svg', svg:'shows', inner: 'Shows', url: '/shows', as: '/shows'}
     ];
 
@@ -105,7 +116,23 @@ export default function Header({}) {
                     </a>
                 </NavLink>
             ) : (
-                <Nav className="header-nav" links={main} activeBar={true}></Nav>
+                <>
+                    <Nav
+                        className="header-nav"
+                        links={main}
+                        activeBar={true}
+                    ></Nav>
+                    <NavLink
+                        href="/account/[[...slug]]"
+                        as="/account"
+                        className="account"
+                    >
+                        <a title="Account" className="account" >
+                            <InlineSVG type="myAccount" />
+                            <InlineSVG type="myAccountActive" />
+                        </a>
+                    </NavLink>
+                </>
             )}
             {store.isBreakpoint ? (
                 <>

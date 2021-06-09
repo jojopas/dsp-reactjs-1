@@ -51,7 +51,7 @@ header {
 
     .logo {
         position: absolute;
-        top: 30px;
+        top: 5px;
         left: @headerHPad;
         width: 150px;
         height: 40px;
@@ -95,7 +95,7 @@ header {
 
     & > nav {
         position: absolute;
-        top: 30px;
+        top: 10px;
         left: 50%;
         bottom: 0;
         .bsTransform(translateX(-50%));
@@ -182,7 +182,7 @@ header {
 
         .activeBar {
             position: absolute;
-            bottom: 0;
+            bottom: 15px;
             display: block;
             width: 0;
             max-width: 100px;
@@ -277,6 +277,48 @@ header {
         height: 24px;
         top: 16px;
         left: 171px;
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            fill: @colorHeaderNav;
+            .bsTransition(all);
+            transition-property: fill, opacity;
+        }
+
+        svg:last-child {
+            opacity: 0;
+            fill: @colorGreen;
+        }
+
+        &:hover {
+            svg {
+                opacity: 0;
+            }
+            svg:last-child {
+                opacity: 1 !important;
+            }
+        }
+        &.active {
+            svg {
+                opacity: 0;
+            }
+            svg:last-child {
+                opacity: 1 !important;
+            }
+        }
+    }
+
+    .account {
+        position: absolute;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        top: 16px;
+        right: 10px;
 
         svg {
             position: absolute;

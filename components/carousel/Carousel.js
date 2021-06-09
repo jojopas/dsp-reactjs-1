@@ -17,7 +17,7 @@ const Carousel = ({ views, slickSettings, className }) => {
     return (
         <div className={className}>
             <Slider {...slickSetting}>{views}</Slider>
-            <div className="carousel-dots-container">
+            {views && <div className="carousel-dots-container">
                 <div className="carousel-dots">
                     {views.map((_, index) =>
                         currentIndex === index ? (
@@ -27,7 +27,7 @@ const Carousel = ({ views, slickSettings, className }) => {
                         )
                     )}
                 </div>
-            </div>
+            </div> }
         </div>
     );
 };

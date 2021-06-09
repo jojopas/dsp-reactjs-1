@@ -6,7 +6,7 @@ const ProgressBar = ({ value }) => {
         <div className="progress">
             <div
                 testid="progressid"
-                class="progressValue"
+                className="progressValue"
                 style={{ width: `${valueInPercentage}%` }}
             ></div>
         </div>
