@@ -1,6 +1,6 @@
 @import "../styles/config";
 
-.cookieConsent{
+.cookieConsent {
     position: fixed;
     left: 0px;
     bottom: 0px;
@@ -8,51 +8,51 @@
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
     color: @colorNavGray;
     font-size: 12px;
-    font-weight:400;
-    line-height:1.5;
+    font-weight: 400;
+    line-height: 1.5;
     display: flex;
     width: 100%;
     z-index: 9999999;
-    padding:25px;
+    padding: 25px;
     .bsBoxSizing();
     .bsTransition(transform);
 
-    &.cookieConsent-close{
+    &.cookieConsent-close {
         .bsTransform(translateY(100%));
     }
 
-    &-button{
+    &-button {
         .bsNoAppearance();
         position: relative;
-        font-size:16px;
+        font-size: 16px;
         font-weight: 400;
-        line-height:40px;
-        display:inline-block;
+        line-height: 40px;
+        display: inline-block;
         .bsBoxSizing();
-        padding:0 25px;
+        padding: 0 25px;
         border-radius: 4px;
-        border:none;
-        margin:0 0 0 25px;
+        border: none;
+        margin: 0 0 0 25px;
         cursor: pointer;
         text-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
         .bsTransition(all);
         transition-property: background-color;
-        background-color: @colorGreen;
+        background-color: @colorYellow;
         color: #ffffff;
-        white-space:nowrap;
+        white-space: nowrap;
 
         &:hover {
-            background-color:#3D994B;
+            background-color: #3d994b;
         }
     }
 
-    @media (max-width: @mobileLargeBP){
-        flex-direction:column;
+    @media (max-width: @mobileLargeBP) {
+        flex-direction: column;
 
-        &-button{
-            margin-left:0;
-            margin-top:20px;
-            width:100%;
+        &-button {
+            margin-left: 0;
+            margin-top: 20px;
+            width: 100%;
         }
     }
 }

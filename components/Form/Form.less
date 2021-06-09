@@ -5,70 +5,70 @@
 @textAreaHeight: 120px;
 @colorFormText: #fff;
 @fieldSpacing: 30px;
-@colorRed: #E02828;
+@colorRed: #e02828;
 
 @header_formLabelSize: 11px;
 .header_formLabel() {
     font-size: @header_formLabelSize;
     font-weight: 700;
     line-height: 1;
-    color: #B4B7BB;
+    color: #b4b7bb;
     text-transform: uppercase;
     padding-left: 7px;
 
-    @media (max-width: @mobileLargeBP){
+    @media (max-width: @mobileLargeBP) {
         //font-size: (@header_formLabelSize * @header_mobileFontRatio);
     }
 }
 
-form{
-    text-align:left;
-    position:relative;
-    margin:30px @sitePadding;
+form {
+    text-align: left;
+    position: relative;
+    margin: 30px @sitePadding;
 
-    @media (max-width: @mobileLargeBP){
-        margin:20px @sitePaddingMobile;
+    @media (max-width: @mobileLargeBP) {
+        margin: 20px @sitePaddingMobile;
     }
 
-    ul{
+    ul {
         .bsNavReset();
         margin: 0 -20px;
-        display:flex;
+        display: flex;
         flex-wrap: wrap;
 
-        li{
-            position:relative;
+        li {
+            position: relative;
             .bsBoxSizing();
-            padding:0 20px @fieldSpacing;
-            min-height:(@fieldHeight + @fieldSpacing);
-            width:50%;
+            padding: 0 20px @fieldSpacing;
+            min-height: (@fieldHeight + @fieldSpacing);
+            width: 50%;
 
-            @media (max-width: @mobileLargeBP){
-                width:100%;
+            @media (max-width: @mobileLargeBP) {
+                width: 100%;
 
-                &:empty{
-                    display:none;
+                &:empty {
+                    display: none;
                 }
             }
 
-            &:last-child{
-                padding-bottom:0;
+            &:last-child {
+                padding-bottom: 0;
                 min-height: @fieldHeight;
-                width:100%;
+                width: 100%;
             }
 
-            label{
+            label {
                 .bsBoxSizing();
-                padding-bottom:5px;
-                width:auto;
-                display:block;
+                padding-bottom: 5px;
+                width: auto;
+                display: block;
                 .header_formLabel();
             }
 
-            span{
+            span {
                 .baseSpanStyle() {
-                    position:absolute;
-                    display:block;
+                    position: absolute;
+                    display: block;
                     font-size: 10px;
                     font-weight: 500;
                     color: @colorRed;
@@ -77,104 +77,107 @@ form{
                 }
 
                 .baseSpanStyle();
-                top:@fieldHeight+15px;
-
+                top: @fieldHeight+15px;
 
                 &.textArea {
                     .baseSpanStyle();
-                    top:@textAreaHeight+15px;
+                    top: @textAreaHeight+15px;
                 }
 
-                &:empty{
-                    display:none;
+                &:empty {
+                    display: none;
                 }
             }
 
-            input, textarea, select{
+            input,
+            textarea,
+            select {
                 .bsNoAppearance();
                 .bsBoxSizing();
-                height:@fieldHeight;
-                padding:0 12px;
-                width:100%;
-                max-width:100%;
-                color:#fff;
+                height: @fieldHeight;
+                padding: 0 12px;
+                width: 100%;
+                max-width: 100%;
+                color: #fff;
                 .bsBorderRadius(4px);
-                border:solid 1px #263446;
-                background-color:#122032;
-                outline:none;
+                border: solid 1px #263446;
+                background-color: #122032;
+                outline: none;
                 vertical-align: top;
-                .bsPlaceholder(#6E7C8E);
+                .bsPlaceholder(#6e7c8e);
                 font-family: @fontMain;
 
-                &:focus{
-                    border-color:@colorGreen;
+                &:focus {
+                    border-color: @colorYellow;
                 }
             }
 
-            input[type=number]{
-                -moz-appearance:textfield;
+            input[type="number"] {
+                -moz-appearance: textfield;
             }
 
-            input[type=number]::-webkit-inner-spin-button,
-            input[type=number]::-webkit-outer-spin-button {
+            input[type="number"]::-webkit-inner-spin-button,
+            input[type="number"]::-webkit-outer-spin-button {
                 .bsNoAppearance();
                 margin: 0;
             }
 
-            input[type=checkbox]{
-                position:relative;
-                top:4px;
-                width:20px;
-                height:20px;
-                padding:0;
-                cursor:pointer;
+            input[type="checkbox"] {
+                position: relative;
+                top: 4px;
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                cursor: pointer;
 
-                &:checked{
+                &:checked {
                     background-color: @colorRed;
                 }
             }
-            textarea{
-                height:@textAreaHeight;
-                resize:none;
-                padding-top:10px;
-                padding-bottom:10px;
-                line-height:1.5;
+            textarea {
+                height: @textAreaHeight;
+                resize: none;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                line-height: 1.5;
             }
 
             select {
                 padding-right: 40px;
-                background-image:url('/brix/images/comboArrow.svg');
+                background-image: url("/brix/images/comboArrow.svg");
                 background-position: right 50%;
                 background-repeat: no-repeat;
                 cursor: pointer;
-                width:auto;
+                width: auto;
 
                 &::-ms-expand {
                     display: none;
                 }
             }
 
-            &.invalid{
-                label{
-                   color: @colorRed;
+            &.invalid {
+                label {
+                    color: @colorRed;
                 }
 
-                input, textarea, select{
+                input,
+                textarea,
+                select {
                     border-color: @colorRed;
                 }
             }
 
-            button{
+            button {
                 .bsNoAppearance();
                 .bsBorderRadius(4px);
-                background-color: rgba(255,255,255,.08);
-                color: #B4B7BB;
+                background-color: rgba(255, 255, 255, 0.08);
+                color: #b4b7bb;
                 text-shadow: 0px 3px 9px rgba(0, 0, 0, 0.4);
                 padding: 0 25px;
                 font-size: 16px;
-                line-height:40px;
+                line-height: 40px;
                 border: none;
-                outline:none;
+                outline: none;
                 cursor: pointer;
                 .bsTransition(all);
                 transition-property: background-color, color;
@@ -185,17 +188,17 @@ form{
 
                     &:hover {
                         color: rgb(179, 179, 179);
-                        background-color: rgba(255,255,255,.08);
+                        background-color: rgba(255, 255, 255, 0.08);
                         cursor: not-allowed;
                     }
                 }
-                
-                &:hover{
-                    background-color: @colorGreen;
+
+                &:hover {
+                    background-color: @colorYellow;
                     color: #fff;
                 }
 
-                @media (max-width: @mobileLargeBP){
+                @media (max-width: @mobileLargeBP) {
                     width: 100%;
                 }
             }
