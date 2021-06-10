@@ -2,19 +2,31 @@
 
 .container {
     display: flex;
+    overflow: hidden;
 }
+
 .epg-container {
     position: relative;
-    left: 350px;
+    left: 50px;
+    top: 40px;
+    overflow-x: auto;
+    width: calc(~"100% - 250px - 1.5em");
 }
-.epgPlayer{
-    position:-webkit-sticky;
-    position:sticky;
-    top:0;
-    margin: 10px;
+
+.epgPlayer {
+    display: block;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    margin: 60px 10px;
     width: 300px;
 
-    @media (max-width: @mobileLargeBP){
+    .live-watching {
+        color: @colorYellow;
+        font-size: large;
+    }
+
+    @media (max-width: @mobileLargeBP) {
         z-index: 10;
     }
 
@@ -31,28 +43,28 @@
 
             background: none !important;
 
-            &:before{
-                content:'';
-                position:absolute;
-                top:-2px;
-                left:0;
-                width:100%;
-                height:100%;
-                pointer-events:none;
+            &:before {
+                content: "";
+                position: absolute;
+                top: -2px;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
                 //background: linear-gradient(180deg, rgba(19, 35, 54, 1) 0%, rgba(19, 35, 54, 0.2) 10%) !important;
-                z-index:0;
+                z-index: 0;
             }
 
             & > * {
                 align-self: flex-start !important;
             }
 
-            & > .vjs-menu{
+            & > .vjs-menu {
                 bottom: auto !important;
                 top: ~"calc(200% + 20px)" !important;
             }
 
-            .vjs-subs-caps-button{
+            .vjs-subs-caps-button {
                 .vjs-menu {
                     bottom: auto !important;
                     top: ~"calc(200%)" !important;
@@ -60,79 +72,102 @@
             }
         }
 
-        .video-js{
+        .video-js {
             & > * {
                 z-index: 10;
             }
 
-            .vjs-tech{
-                z-index:1;
+            .vjs-tech {
+                z-index: 1;
             }
 
-            .vjs-poster{
-                z-index:2;
+            .vjs-poster {
+                z-index: 2;
             }
 
-            .vjs-text-track-display{
-                z-index:3;
+            .vjs-text-track-display {
+                z-index: 3;
             }
 
             &:not(.vjs-fullscreen) {
                 &:after {
-                    content: '';
+                    content: "";
                     position: absolute;
                     top: 0;
                     left: 0;
                     right: -1px;
                     bottom: -1px;
-                    background: transparent linear-gradient(180deg, rgba(19, 35, 54, 0.4) 40%, rgba(19, 35, 54, 1) 95%) 0% 0% no-repeat padding-box;
+                    background: transparent
+                        linear-gradient(
+                            180deg,
+                            rgba(19, 35, 54, 0.4) 40%,
+                            rgba(19, 35, 54, 1) 95%
+                        )
+                        0% 0% no-repeat padding-box;
                     pointer-events: none;
                     z-index: 5;
                     opacity: 1;
-                    .bsTransition(opacity, .5s);
+                    .bsTransition(opacity, 0.5s);
 
-                    @media (max-height: 630px){
-                        background: transparent linear-gradient(180deg, rgba(19, 35, 54, 0.6) 40%, rgba(19, 35, 54, 1) 90%) 0% 0% no-repeat padding-box;
+                    @media (max-height: 630px) {
+                        background: transparent
+                            linear-gradient(
+                                180deg,
+                                rgba(19, 35, 54, 0.6) 40%,
+                                rgba(19, 35, 54, 1) 90%
+                            )
+                            0% 0% no-repeat padding-box;
                     }
 
-                    @media (max-height: 630px) and (min-width: @maxSiteWidth){
-                        background: transparent linear-gradient(180deg, rgba(19, 35, 54, 0.65) 40%, rgba(19, 35, 54, 1) 90%) 0% 0% no-repeat padding-box;
+                    @media (max-height: 630px) and (min-width: @maxSiteWidth) {
+                        background: transparent
+                            linear-gradient(
+                                180deg,
+                                rgba(19, 35, 54, 0.65) 40%,
+                                rgba(19, 35, 54, 1) 90%
+                            )
+                            0% 0% no-repeat padding-box;
                     }
                 }
             }
         }
 
-        &:after{
-            content:'';
-            position:absolute;
-            top:~"calc(100% - 1px)";
-            left:0;
-            width:100%;
-            height:400px;
-            background: transparent linear-gradient(0deg, rgba(2, 9, 15, 0) 0%,  rgba(2, 9, 15, 0.7) 50%,  rgba(2, 9, 15, 1) 80%) 0% 0% no-repeat padding-box;
+        &:after {
+            content: "";
+            position: absolute;
+            top: ~"calc(100% - 1px)";
+            left: 0;
+            width: 100%;
+            height: 400px;
+            background: transparent
+                linear-gradient(
+                    0deg,
+                    rgba(2, 9, 15, 0) 0%,
+                    rgba(2, 9, 15, 0.7) 50%,
+                    rgba(2, 9, 15, 1) 80%
+                )
+                0% 0% no-repeat padding-box;
             opacity: 0;
-            .bsTransition(opacity, .3s);
-            pointer-events:none;
+            .bsTransition(opacity, 0.3s);
+            pointer-events: none;
 
             @media (min-width: (@maxSiteWidth + 12px)) {
-                width:~"calc(100% + 1px)";
+                width: ~"calc(100% + 1px)";
             }
-
         }
     }
 }
 
 @media (min-width: (@mobileLargeBP + 1px)) {
-    .epgInactive{
-        .epgPlayer{
-
+    .epgInactive {
+        .epgPlayer {
             .video-js {
                 &:after {
-                    opacity:0;
+                    opacity: 0;
                 }
             }
             &:after {
-                opacity:1;
+                opacity: 1;
             }
         }
     }

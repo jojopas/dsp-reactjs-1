@@ -13,7 +13,9 @@ export default function EPGList({
     genreHoveredListener,
     promos,
     pageType,
+    onClick,
 }) {
+    const channelCellWidth = 80;
     const store = React.useContext(StoreContext);
     const [rowList, setRowList] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(null);
@@ -23,7 +25,7 @@ export default function EPGList({
         const filteredResult = data.filter((row, index) => {
             if (row.slug === currentSlug) {
                 setCurrentIndex(index);
-                return false;
+                // return false;
             }
             return (
                 !currentGenre ||
@@ -71,22 +73,26 @@ export default function EPGList({
 
     const nextEPGDates = () => {
         const now = new Date();
-        now.setHours(0,0);
+        now.setHours(0, 0);
         let dateSlots = {};
-        dateSlots[now.toDateString().substring(0, 10)] = now.getTime();
+        const getDateString = (date) =>
+            `${date.getDate()} ${date.toDateString().substring(0, 4)}`;
+        dateSlots[getDateString(now)] = now.getTime();
         for (let index = 0; index < 6; index++) {
             now.setDate(now.getDate() + 1);
-            dateSlots[now.toDateString().substring(0, 10)] = now.getTime();
+            dateSlots[getDateString(now)] = now.getTime();
         }
 
         return (
-            <form>
-                <select name="epgDate" id="epgDate" >
+            <div className="custom-select">
+                <select name="epgDate" id="epgDate">
                     {Object.keys(dateSlots).map((key) => (
-                        <option value={dateSlots[key]} key={key}>{key}</option>
+                        <option value={dateSlots[key]} key={key}>
+                            {key}
+                        </option>
                     ))}
                 </select>
-            </form>
+            </div>
         );
     };
 
@@ -120,12 +126,13 @@ export default function EPGList({
                 className={`${
                     index == 0 ? "timeslot-row--date" : "timeslot-row--time"
                 }`}
+                style={index == 0 ? { width: channelCellWidth } : null}
                 key={time}
             >
                 {index == 0 ? nextEPGDates() : time}
                 {index === 1 ? (
                     <div
-                        className="timeslot-row--timeElapse"
+                        className="timeslot-row--underline"
                         style={{
                             width: `${currrentTimeElapsed()}px`,
                         }}
@@ -140,7 +147,7 @@ export default function EPGList({
             <div
                 className="timeElapsed"
                 style={{
-                   
+                    left: channelCellWidth + 12,
                     width: `${currrentTimeElapsed()}px`,
                 }}
             ></div>
@@ -150,8 +157,11 @@ export default function EPGList({
                 {rowList.map((channel, channelIndex) => (
                     <EPGRow
                         channel={channel}
+                        onClick={onClick}
+                        currrentTimeElapsed={currrentTimeElapsed()}
                         favorite={channelIndex < 5}
-                        nowShowing={channelIndex === 2}
+                        width={channelCellWidth}
+                        nowShowing={channelIndex === currentIndex}
                     />
                 ))}
             </div>

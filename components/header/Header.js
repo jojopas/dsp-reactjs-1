@@ -44,7 +44,7 @@ export default function Header({}) {
             url: "/movies",
             as: "/movies",
         },
-      
+
         // {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
     ];
 
@@ -73,7 +73,7 @@ export default function Header({}) {
             id: "channels",
             type: "svg",
             svg: "channels",
-            inner: "Channels",
+            inner: "Live Channels",
             url: "/channels/[[...slug]]",
             as: "/channels",
         },
@@ -127,7 +127,7 @@ export default function Header({}) {
                         as="/account"
                         className="account"
                     >
-                        <a title="Account" className="account" >
+                        <a title="Account" className="account">
                             <InlineSVG type="myAccount" />
                             <InlineSVG type="myAccountActive" />
                         </a>

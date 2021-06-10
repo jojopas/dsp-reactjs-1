@@ -15,6 +15,7 @@ const constants = {
     NOT_FOUND_SRC_DATA: 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
     SEASON: 'Season',
     WATCH_NOW: 'Watch Now',
+    WATCHING: 'Watching',
     START_OVER: 'Start Over',
     TRAILER: 'Trailer',
     MORE: 'More',
