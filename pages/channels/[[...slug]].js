@@ -454,7 +454,7 @@ export default function Channel({
             removeHoverHandler();
         };
     }, []);
-    console.log("Channel data", result);
+    console.log("Channel data", result[0]);
     return useObserver(() =>
         !pageError ? (
             <div

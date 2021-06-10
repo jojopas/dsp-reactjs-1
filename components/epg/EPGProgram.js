@@ -7,6 +7,7 @@ export default function EPGProgram({
     key,
     currrentTimeElapsed,
     index,
+    nowTime,
 }) {
     const timeDuration = (seconds) => {
         const date = new Date(0);
@@ -14,50 +15,66 @@ export default function EPGProgram({
         const timeDuration = date.toISOString().substr(11, 5);
         return timeDuration;
     };
+    const timeLeftDuration = (seconds) => {
+        const date = new Date(0);
+        date.setUTCSeconds(seconds);
+        const hours = date.getUTCHours();
+        const minutes = date.getUTCMinutes();
+        const timeDuration = date.toISOString().substr(11, 5);
+        return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+    };
+    const duration = nowTime>0? (program.ends - nowTime): program.duration;
+    if (nowTime>0) {
+        console.log('Duration', program.duration, duration, currrentTimeElapsed);
+    }
     const separator = "\t . \t";
-    return  (
+    return (
         <div
             className={`channel-row--program ${
                 nowShowing ? "channel-active" : ""
             }`}
             style={{
-                width: `${(program.duration / 1800) * 200 - (index * 2) }px`,
+                width: `${(duration / 1800) * 200 - index * 2}px`,
             }}
             title={program.title}
             id={program.duration}
             key={key}
         >
-            {program.duration> 250 && <div
+            {program.duration > 250 && (
+                <div
                 // style={{
                 //     width: `${(program.duration / 1800) * 200 - 62}px`,
                 // }}
-            >
-                <div className="channel-row--program---description">
-                    {nowShowing && (
-                        <>
-                            {" "}
-                            <div className="channel-row--program---watching">
-                                {constants.WATCHING}
-                            </div>{" "}
-                            {separator}{" "}
-                        </>
-                    )}
-                    {`${timeDuration(program.starts)} - ${timeDuration(
-                        program.ends
-                    )}`}
-                    
-                    {currrentTimeElapsed &&
-                        ` ${separator} ${timeDuration(program.duration - currrentTimeElapsed)}
+                >
+                    <div className="channel-row--program---description">
+                        {nowShowing && (
+                            <>
+                                {" "}
+                                <div className="channel-row--program---watching">
+                                    {constants.WATCHING}
+                                </div>{" "}
+                                {separator}{" "}
+                            </>
+                        )}
+                        {`${timeDuration(program.starts)} - ${timeDuration(
+                            program.ends
+                        )}`}
+
+                        {currrentTimeElapsed &&
+                            ` ${separator} ${timeLeftDuration(
+                                program.ends - nowTime - currrentTimeElapsed
+                            )}
                     left`}
-                </div>
-                <div className="channel-row--program---title">
-                    {/* <div className="channel-row--program---duration">
+                    </div>
+                    <div className="channel-row--program---title">
+                        {/* <div className="channel-row--program---duration">
                                         {durationToString(program.duration)}
                                     </div> */}
 
-                    {program.title}
+                        {program.title}
+                    </div>
                 </div>
-            </div>}
+            )}
         </div>
     );
 }

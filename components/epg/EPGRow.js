@@ -10,12 +10,14 @@ export default function EPGRow({
     onClick,
     currrentTimeElapsed,
     width,
+    nowTime
 }) {
     const setProgram = () =>
         channel.program.map((program, index) => (
             <EPGProgram
                 currrentTimeElapsed={index == 0 ? currrentTimeElapsed : null}
                 program={program}
+                nowTime={index==0? nowTime: -1}
                 nowShowing={nowShowing && index === 0}
                 index={index}
                 key={`${channel.id} ${index}`}

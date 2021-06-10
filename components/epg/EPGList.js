@@ -20,7 +20,8 @@ export default function EPGList({
     const [rowList, setRowList] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
-
+    let nowTime = 0;
+    
     function filterList() {
         const filteredResult = data.filter((row, index) => {
             if (row.slug === currentSlug) {
@@ -108,6 +109,10 @@ export default function EPGList({
         const now = new Date();
         const hours = now.getHours();
         let minutes = now.getMinutes() > 29 ? 30 : 0;
+        now.setMinutes(minutes, 0, 0);
+        nowTime = now.getTime()/1000;
+         console.log("nowTime1", nowTime, new Date().setUTCSeconds(nowTime));
+   
         let timeSlots = [now.toDateString().substring(0, 10)];
         let initialTime = hours * 60 + minutes;
         for (let time = initialTime; time < Total_Minutes_A_Day; time += 30) {
@@ -141,7 +146,6 @@ export default function EPGList({
             </div>
         ));
     };
-
     return (
         <div className="epg">
             <div
@@ -158,8 +162,9 @@ export default function EPGList({
                     <EPGRow
                         channel={channel}
                         onClick={onClick}
-                        currrentTimeElapsed={currrentTimeElapsed()}
+                        currrentTimeElapsed={currrentTimeElapsed()/200*30*60}
                         favorite={channelIndex < 5}
+                        nowTime={nowTime}
                         width={channelCellWidth}
                         nowShowing={channelIndex === currentIndex}
                     />
