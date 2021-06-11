@@ -12,8 +12,15 @@ const setupPlayer = async (el, video= null, {autostart = true, ssid = null, vodP
             target: `#${el.current.id}`,
             company_id: publicRuntimeConfig.DSP_PLAYER_KEY,
             // which video to load first
-            video_id: (video && video.id) ? video.id : null ,
-            video: (video && video.url) ? {m3u8_url: video.url, vmap_url: video.vmap, meta: video.meta} : null,
+            video_id: video && video.id ? video.id : null,
+            video:
+                video && video.url
+                    ? {
+                          m3u8_url: video.url,
+                          vmap_url: video.vmap,
+                          meta: video.meta,
+                      }
+                    : null,
             // player specifics
             autostart: autostart,
             muted: false,
@@ -23,7 +30,7 @@ const setupPlayer = async (el, video= null, {autostart = true, ssid = null, vodP
             pip: false,
             theme: {
                 fontColor: "#f2f2f2", // main icon color
-                fontColorHover: "#52CD65", // icon color when hovered over
+                fontColorHover: "#fbcc35", // icon color when hovered over
                 progressSliderMain: "#52CD65", // progress slider color
                 progressSliderBackground: "#B4B7BB", // progress slider background color
                 controlBar: "#000000", // control bar gradient background color

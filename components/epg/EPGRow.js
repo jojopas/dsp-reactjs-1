@@ -17,10 +17,11 @@ export default function EPGRow({
     const setProgram = () =>
         channel.program.map((program, index) => (
             <EPGProgram
-                currrentTimeElapsed={index == 0 ? currrentTimeElapsed : null}
+                tabIndex={1}
+                currrentTimeElapsed={currrentTimeElapsed}
                 program={program}
-                nowTime={index == 0 ? nowTime : -1}
-                nowShowing={nowShowing && index === 0}
+                nowTime={ nowTime }
+                nowShowing={nowShowing}
                 index={index}
                 key={`${channel.id} ${index}`}
             />
@@ -50,8 +51,8 @@ export default function EPGRow({
                         className="channel-info--image"
                         src={constants.NOT_FOUND_SRC}
                         data-sizes="auto"
-                        data-srcset={`${channel.logo}/${width - 10}`}
-                        data-src={`${channel.logo}/${width - 10}`}
+                        data-srcset={`${channel.logo}/${width - 30}`}
+                        data-src={`${channel.logo}/${width - 30}`}
                         alt={channel.name}
                         className="lazyload"
                     />
@@ -63,11 +64,11 @@ export default function EPGRow({
                         className="lazyloaded"
                     />
                 )}
-                {locked &&
+                {locked && (
                     <div className="channel-info--locked">
                         <InlineSVG type="lock" />
                     </div>
-                }
+                )}
                 {/* </div> */}
             </div>
             <div className="channel-row--programs">

@@ -6,13 +6,14 @@ export default function EPGProgram({
     nowShowing,
     key,
     currrentTimeElapsed,
-    index,
     nowTime,
+    index,
 }) {
     const timeDuration = (seconds) => {
         const date = new Date(0);
         date.setSeconds(seconds);
-        const timeDuration = date.toISOString().substr(11, 5);
+        // console.log(date.toTimeString());
+        const timeDuration = date.toTimeString().substr(0, 5);
         return timeDuration;
     };
     const timeLeftDuration = (seconds) => {
@@ -23,54 +24,59 @@ export default function EPGProgram({
         const timeDuration = date.toISOString().substr(11, 5);
         return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
     };
-    const duration = nowTime>0? (program.ends - nowTime): program.duration;
-    if (nowTime>0) {
-        console.log('Duration', program.duration, duration, currrentTimeElapsed);
-    }
+    const duration = nowTime > 0 ? program.ends - nowTime : program.duration;
     const separator = "\t . \t";
+    const totalTime = Number(nowTime) + Number(currrentTimeElapsed);
+    const playingNow = totalTime >= program.starts && totalTime <= program.ends;
+    const style = {
+        width: (duration / 1800) * constants.EPG_30_MINUTE_WIDTH - index * 2,
+    };
+    if (playingNow) {
+        style.backgroundColor = "#273d4e";
+        style.fontWeight = "bold";
+    }
+    // if (nowTime > 0) {
+    //     console.log(
+    //         "Duration",
+    //         program.duration,
+    //         duration,
+    //         currrentTimeElapsed,
+    //         playingNow
+    //     );
+    // }
     return (
         <div
-            className={`channel-row--program ${
-                nowShowing ? "channel-active" : ""
-            }`}
-            style={{
-                width: `${(duration / 1800) * 200 - index * 2}px`,
-            }}
+            className={`${
+                playingNow ? "channel-now" : ""
+            } channel-row--program ${nowShowing ? "channel-active" : ""} `}
+            style={style}
             title={program.title}
             id={program.duration}
-            key={key}
+            key={program.toString()}
         >
             {program.duration > 250 && (
-                <div
-                // style={{
-                //     width: `${(program.duration / 1800) * 200 - 62}px`,
-                // }}
-                >
+                <div        >
                     <div className="channel-row--program---description">
-                        {nowShowing && (
+                        {nowShowing && playingNow && (
                             <>
-                                {" "}
                                 <div className="channel-row--program---watching">
                                     {constants.WATCHING}
-                                </div>{" "}
-                                {separator}{" "}
+                                </div>
+                                {separator}
                             </>
                         )}
                         {`${timeDuration(program.starts)} - ${timeDuration(
                             program.ends
                         )}`}
 
-                        {currrentTimeElapsed &&
-                            ` ${separator} ${timeLeftDuration(
-                                program.ends - nowTime - currrentTimeElapsed
-                            )}
-                    left`}
+                        {playingNow
+                            ? ` ${separator} ${timeLeftDuration(
+                                  program.ends - nowTime - currrentTimeElapsed
+                              )}
+                    left`
+                            : null}
                     </div>
                     <div className="channel-row--program---title">
-                        {/* <div className="channel-row--program---duration">
-                                        {durationToString(program.duration)}
-                                    </div> */}
-
                         {program.title}
                     </div>
                 </div>

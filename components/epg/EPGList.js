@@ -21,7 +21,7 @@ export default function EPGList({
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
     let nowTime = 0;
-    
+
     function filterList() {
         const filteredResult = data.filter((row, index) => {
             if (row.slug === currentSlug) {
@@ -100,7 +100,7 @@ export default function EPGList({
     const currrentTimeElapsed = () => {
         const now = new Date();
         const minutes = now.getMinutes() > 29 ? 30 : 0;
-        const resultantWidth = ((now.getMinutes() - minutes) / 30) * 200;
+        const resultantWidth = ((now.getMinutes() - minutes) / 30) * constants.EPG_30_MINUTE_WIDTH;
         return Math.abs(resultantWidth);
     };
 
@@ -110,9 +110,9 @@ export default function EPGList({
         const hours = now.getHours();
         let minutes = now.getMinutes() > 29 ? 30 : 0;
         now.setMinutes(minutes, 0, 0);
-        nowTime = now.getTime()/1000;
-         console.log("nowTime1", nowTime, new Date().setUTCSeconds(nowTime));
-   
+        nowTime = now.getTime() / 1000;
+        console.log("nowTime1", nowTime, new Date().setUTCSeconds(nowTime));
+
         let timeSlots = [now.toDateString().substring(0, 10)];
         let initialTime = hours * 60 + minutes;
         for (let time = initialTime; time < Total_Minutes_A_Day; time += 30) {
@@ -131,7 +131,11 @@ export default function EPGList({
                 className={`${
                     index == 0 ? "timeslot-row--date" : "timeslot-row--time"
                 }`}
-                style={index == 0 ? { width: channelCellWidth } : null}
+                style={
+                    index == 0
+                        ? { width: channelCellWidth +20 }
+                        : { width: (constants.EPG_30_MINUTE_WIDTH-22) }
+                }
                 key={time}
             >
                 {index == 0 ? nextEPGDates() : time}
@@ -151,7 +155,7 @@ export default function EPGList({
             <div
                 className="timeElapsed"
                 style={{
-                    left: channelCellWidth + 12,
+                    left: channelCellWidth + 32,
                     width: `${currrentTimeElapsed()}px`,
                 }}
             ></div>
@@ -163,7 +167,7 @@ export default function EPGList({
                         channel={channel}
                         onClick={onClick}
                         currrentTimeElapsed={
-                            (currrentTimeElapsed() / 200) * 30 * 60
+                            (currrentTimeElapsed() / constants.EPG_30_MINUTE_WIDTH) * 30 * 60
                         }
                         favorite={channelIndex < 5}
                         nowTime={nowTime}

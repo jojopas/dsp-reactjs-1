@@ -34,7 +34,7 @@ export default function Header({}) {
         { id: "home", inner: "Featured", url: "/", exact: true },
         {
             id: "channels",
-            inner: "Channels",
+            inner: "Live Channels",
             url: "/channels/[[...slug]]",
             as: "/channels",
         },

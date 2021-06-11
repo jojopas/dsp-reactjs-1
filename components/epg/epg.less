@@ -11,7 +11,7 @@
         z-index: 50;
         height: 90%;
         top: 40px;
-        background-color: #40525491;
+        background-color: #405254ab;
     }
 }
 
@@ -52,9 +52,8 @@
         align-items: center;
 
         .timeslot-row--underline {
-            height: 5px;
-            border-radius: 5px;
-            margin: 5px 2px;
+            height: 4px;
+            margin: 3px 2px;
             background-color: @colorYellow;
         }
     }
@@ -79,7 +78,7 @@
             justify-content: center;
             border-top: 2px solid @colorBorder;
             border-right: 2px solid @colorBorder;
-            padding: 10px;
+            padding: 10px 30px;
 
             &:active {
                 background-color: @colorYellow;
@@ -106,10 +105,12 @@
                 border-radius: 8px;
                 padding: 1px;
                 display: flex;
+                justify-content: center;
+                align-items: center;
                 background-color: @colorYellow;
                 position: absolute;
-                right: 0;
-                top: 10px;
+                right: 5px;
+                top: 5px;
             }
         }
     }
@@ -134,19 +135,18 @@
     z-index: 20;
     font-weight: lighter;
 
-    .channel-active {
-        display: block;
-        background-color: @colorYellow;
-        color: black;
-    }
+    // .channel-active {
+    //     display: block;
+    //     background-color: @colorYellow;
+    //     color: black;
+    // }
 
-    &:first-child {
+    .channel-now {
         background-color: #273d4e;
         font-weight: bold;
     }
 
     .channel-row--program---title {
-        max-width: 80%;
         max-height: 2.5em;
         display: block;
         font-size: 1.1em;
