@@ -4,6 +4,7 @@ import Head from "next/head";
 import config from './config';
 
 export default function LocalSEOTags({pageType, seoObj}) {
+    console.log('seoObj', seoObj,'pageTYpe', pageType  );
     const title = (seoObj && seoObj.title) || config.title;
     const suffix = (seoObj && seoObj.suffix) || config.suffix;
     let jsonLD;

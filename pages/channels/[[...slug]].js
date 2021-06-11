@@ -473,6 +473,12 @@ export default function Channel({
                             video={firstVideo}
                             showPlayer={store.showPlayer}
                         />
+                        <div className="ads">
+                            <img
+                                src="https://images.dotstudiopro.com/60b5b1e72c75020f1a1b8883/250/400"
+                                alt="Adds"
+                            />
+                        </div>
                     </div>
                     <div className="epg-container">
                         <div>

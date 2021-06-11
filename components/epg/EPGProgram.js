@@ -54,7 +54,7 @@ export default function EPGProgram({
             id={program.duration}
             key={program.toString()}
         >
-            {program.duration > 250 && (
+            {program.duration > 50 && (
                 <div        >
                     <div className="channel-row--program---description">
                         {nowShowing && playingNow && (
