@@ -162,11 +162,14 @@ export default function EPGList({
                     <EPGRow
                         channel={channel}
                         onClick={onClick}
-                        currrentTimeElapsed={currrentTimeElapsed()/200*30*60}
+                        currrentTimeElapsed={
+                            (currrentTimeElapsed() / 200) * 30 * 60
+                        }
                         favorite={channelIndex < 5}
                         nowTime={nowTime}
                         width={channelCellWidth}
                         nowShowing={channelIndex === currentIndex}
+                        locked={channelIndex % 2 === 1}
                     />
                 ))}
             </div>

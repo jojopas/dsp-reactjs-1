@@ -82,7 +82,7 @@
             padding: 10px;
 
             &:active {
-                    background-color: @colorYellow;
+                background-color: @colorYellow;
             }
             .channel-info--favorite {
                 width: 20px;
@@ -98,6 +98,18 @@
                 .channel-info--favorited {
                     fill: @colorYellow;
                 }
+            }
+
+            .channel-info--locked {
+                width: 16px;
+                height: 16px;
+                border-radius: 8px;
+                padding: 1px;
+                display: flex;
+                background-color: @colorYellow;
+                position: absolute;
+                right: 0;
+                top: 10px;
             }
         }
     }

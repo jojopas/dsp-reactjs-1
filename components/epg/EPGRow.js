@@ -3,6 +3,7 @@ import React from "react";
 import "./epg.less";
 import { constants } from "../../config";
 import EPGProgram from "./EPGProgram";
+import InlineSVG from "../InlineSVG";
 export default function EPGRow({
     channel,
     favorite,
@@ -10,23 +11,27 @@ export default function EPGRow({
     onClick,
     currrentTimeElapsed,
     width,
-    nowTime
+    nowTime,
+    locked,
 }) {
     const setProgram = () =>
         channel.program.map((program, index) => (
             <EPGProgram
                 currrentTimeElapsed={index == 0 ? currrentTimeElapsed : null}
                 program={program}
-                nowTime={index==0? nowTime: -1}
+                nowTime={index == 0 ? nowTime : -1}
                 nowShowing={nowShowing && index === 0}
                 index={index}
                 key={`${channel.id} ${index}`}
             />
         ));
 
-    const channelStyle ={width: width};
+    const channelStyle = {
+        width: width,
+        // background: `url(${channel.logo}/${width - 10})`,
+    };
     if (nowShowing) {
-        channelStyle.backgroundColor= "#fbcc35";
+        channelStyle.backgroundColor = "#fbcc35";
     }
     return (
         <div
@@ -58,6 +63,11 @@ export default function EPGRow({
                         className="lazyloaded"
                     />
                 )}
+                {locked &&
+                    <div className="channel-info--locked">
+                        <InlineSVG type="lock" />
+                    </div>
+                }
                 {/* </div> */}
             </div>
             <div className="channel-row--programs">
@@ -69,17 +79,13 @@ export default function EPGRow({
     );
 }
 
+
 const FavoriteIcon = (favorite) => (
     <div
         className={`channel-info--favorite ${
             favorite ? "channel-info--favorited" : ""
         }`}
     >
-        <svg viewBox="0 0 40 40">
-            <path
-                d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2
-	c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"
-            />
-        </svg>
+        <InlineSVG type="favorite" />
     </div>
 );
