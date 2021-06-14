@@ -4,6 +4,7 @@ import { StoreContext } from "../../store";
 import "./epg.less";
 import { constants } from "../../config";
 import EPGRow from "./EPGRow";
+import ChannelLogo from "./EPGChannel";
 export default function EPGList({
     data,
     changeCurrentSlug,
@@ -15,13 +16,17 @@ export default function EPGList({
     pageType,
     onClick,
 }) {
-    const channelCellWidth = 80;
+    const channelCellWidth = 100;
     const store = React.useContext(StoreContext);
     const [rowList, setRowList] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
     let nowTime = 0;
-
+    const now = new Date();
+    const currentTime = now.getTime()/1000;
+    now.setMinutes(now.getMinutes() > 29 ? 30 : 0);
+    nowTime = now.getTime() / 1000;
+    const currrentTimeElapsed = currentTime - nowTime;
     function filterList() {
         const filteredResult = data.filter((row, index) => {
             if (row.slug === currentSlug) {
@@ -73,37 +78,49 @@ export default function EPGList({
     }, [currentGenre]);
 
     const nextEPGDates = () => {
-        const now = new Date();
-        now.setHours(0, 0);
+        const date = new Date();
+        date.setHours(0, 0);
         let dateSlots = {};
         const getDateString = (date) =>
             `${date.getDate()} ${date.toDateString().substring(0, 4)}`;
-        dateSlots[getDateString(now)] = now.getTime();
+        dateSlots["Today"] = date.getTime();
         for (let index = 0; index < 6; index++) {
-            now.setDate(now.getDate() + 1);
-            dateSlots[getDateString(now)] = now.getTime();
+            date.setDate(date.getDate() + 1);
+            if (index == 0) {
+                dateSlots["Tomorrow"] = date.getTime();
+            } else {
+                dateSlots[getDateString(date)] = date.getTime();
+            }
         }
 
         return (
-            <div className="custom-select">
-                <select name="epgDate" id="epgDate">
-                    {Object.keys(dateSlots).map((key) => (
-                        <option value={dateSlots[key]} key={key}>
-                            {key}
-                        </option>
-                    ))}
-                </select>
+            <div className="timeslot-row">
+                <div
+                    className={`${"timeslot-row--date"}`}
+                    style={{ width: channelCellWidth + 20 }}
+                    key={"Date"}
+                >
+                    <div className="custom-select">
+                        <select name="epgDate" id="epgDate">
+                            {Object.keys(dateSlots).map((key) => (
+                                <option value={dateSlots[key]} key={key}>
+                                    {key}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
             </div>
         );
     };
 
-    const currrentTimeElapsed = () => {
-        const now = new Date();
-        const minutes = now.getMinutes() > 29 ? 30 : 0;
+    const currrentTimeWidth = () => {
         const resultantWidth =
-            ((now.getMinutes() - minutes) / 30) * constants.EPG_30_MINUTE_WIDTH;
+            (currrentTimeElapsed / 30/60) * constants.EPG_30_MINUTE_WIDTH;
         return Math.abs(resultantWidth);
     };
+
+    console.log('nowtime', nowTime, currrentTimeElapsed)
 
     const todaysTimeSlots = () => {
         const Total_Minutes_A_Day = 24 * 60;
@@ -111,10 +128,9 @@ export default function EPGList({
         const hours = now.getHours();
         let minutes = now.getMinutes() > 29 ? 30 : 0;
         now.setMinutes(minutes, 0, 0);
-        nowTime = now.getTime() / 1000;
         console.log("nowTime1", nowTime, new Date().setUTCSeconds(nowTime));
 
-        let timeSlots = [now.toDateString().substring(0, 10)];
+        let timeSlots = [];
         let initialTime = hours * 60 + minutes;
         for (let time = initialTime; time < Total_Minutes_A_Day; time += 30) {
             const hour = Math.floor(time / 60);
@@ -127,30 +143,75 @@ export default function EPGList({
             );
         }
 
-        return timeSlots.map((time, index) => (
-            <div
-                className={`${
-                    index == 0 ? "timeslot-row--date" : "timeslot-row--time"
-                }`}
-                style={
-                    index == 0
-                        ? { width: channelCellWidth + 20 }
-                        : { width: constants.EPG_30_MINUTE_WIDTH - 22 }
-                }
-                key={time}
-            >
-                {index == 0 ? nextEPGDates() : time}
-                {index === 1 ? (
+        return (
+            <div className="timeslot-row">
+                {timeSlots.map((time, index) => (
                     <div
-                        className="timeslot-row--underline"
-                        style={{
-                            width: `${currrentTimeElapsed()}px`,
-                        }}
-                    ></div>
-                ) : null}
+                        className={`${"timeslot-row--time"}`}
+                        style={{ width: constants.EPG_30_MINUTE_WIDTH - 22 }}
+                        key={time}
+                    >
+                        {time}
+                        {index === 0 ? (
+                            <>
+                                {" "}
+                                <div
+                                    className="timeslot-row--underline"
+                                    style={{
+                                        width: `${currrentTimeWidth()}px`,
+                                    }}
+                                ></div>
+                                
+                            </>
+                        ) : null}
+                    </div>
+                ))}
             </div>
-        ));
+        );
     };
+    const leftContainer = [nextEPGDates()];
+    const rightContainer = [];
+    rowList.forEach((channel, channelIndex) => {
+        leftContainer.push(
+            <ChannelLogo
+                channel={channel}
+                width={channelCellWidth}
+                isShowing={channelIndex === currentIndex}
+                isLocked={channelIndex % 2 === 1}
+            />
+        );
+        rightContainer.push(
+            <EPGRow
+                channel={channel}
+                onClick={onClick}
+                currrentTimeElapsed={currrentTimeElapsed}
+                favorite={channelIndex < 5}
+                nowTime={nowTime}
+                width={channelCellWidth}
+                isShowing={channelIndex === currentIndex}
+                isLocked={channelIndex % 2 === 1}
+            />
+        );
+    });
+    return (
+        <div style={{ display: "flex", overflowX: "auto" }}>
+            <div className="left-row" style={{ width: channelCellWidth }}>
+                {leftContainer}
+            </div>
+            <div className="right-row">
+                {todaysTimeSlots()}
+
+                <div className="channel">{rightContainer}</div>
+                <div
+                    className="timeElapsed"
+                    style={{
+                        left: 250+ channelCellWidth + +100+2,
+                        width: `${currrentTimeWidth()}px`,
+                    }}
+                ></div>
+            </div>
+        </div>
+    );
     return (
         <div className="epg">
             <div
@@ -160,27 +221,6 @@ export default function EPGList({
                     width: `${currrentTimeElapsed()}px`,
                 }}
             ></div>
-            <div className="timeslot-row">{todaysTimeSlots()}</div>
-
-            <div className="channel">
-                {rowList.map((channel, channelIndex) => (
-                    <EPGRow
-                        channel={channel}
-                        onClick={onClick}
-                        currrentTimeElapsed={
-                            (currrentTimeElapsed() /
-                                constants.EPG_30_MINUTE_WIDTH) *
-                            30 *
-                            60
-                        }
-                        favorite={channelIndex < 5}
-                        nowTime={nowTime}
-                        width={channelCellWidth}
-                        isShowing={channelIndex === currentIndex}
-                        isLocked={channelIndex % 2 === 1}
-                    />
-                ))}
-            </div>
         </div>
     );
 }

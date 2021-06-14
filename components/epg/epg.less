@@ -1,18 +1,16 @@
 @import url("../../styles/config.less");
 @colorBorder: #0f293d;
-.epg {
-    scroll-behavior: smooth;
-    overflow: auto;
-    background-color: @colorBGMain;
-    display: contents;
 
-    .timeElapsed {
+ .timeElapsed {
         position: absolute;
         z-index: 50;
         height: 90%;
         top: 40px;
         background-color: #405254ab;
     }
+.right-row {
+    overflow-x: auto;
+    margin-left: 10px;
 }
 
 .timeslot-row {
@@ -20,11 +18,14 @@
     white-space: nowrap;
     display: inline-flex;
     color: @colorNavGray;
-    // position: sticky;
-    // position: -webkit-sticky;
-    top: 30px;
+    // position: fixed;
+    // top: 250px;
     z-index: 30;
     background-color: @colorBG;
+
+        @media (min-width: (@mobileLargeBP + 1px)) {
+            top: 50px;
+        }
 
     .timeslot-row--date {
         padding: 10px 0px;
@@ -58,6 +59,49 @@
         }
     }
 }
+.channel-info {
+    background-color: #122d42;
+    z-index: 10;
+    position: sticky;
+    display: inline-flex;
+    justify-content: center;
+    border-top: 2px solid @colorBorder;
+    border-right: 2px solid @colorBorder;
+    padding: 10px 5px;
+
+    &:active {
+        background-color: @colorYellow;
+    }
+    .channel-info--favorite {
+        width: 20px;
+        height: 20px;
+        fill: #6b737b;
+        cursor: pointer;
+        user-select: none;
+        padding: 10px;
+        .channel-info--favorite:hover {
+            fill: @colorYellow;
+        }
+
+        .channel-info--favorited {
+            fill: @colorYellow;
+        }
+    }
+
+    .channel-info--locked {
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        padding: 1px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: @colorYellow;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+    }
+}
 .channel {
     -webkit-overflow-scrolling: touch;
     position: relative;
@@ -69,50 +113,6 @@
         display: -webkit-flex;
         display: flex;
         white-space: nowrap;
-
-        .channel-info {
-            background-color: #122d42;
-            z-index: 10;
-            position: sticky;
-            display: inline-flex;
-            justify-content: center;
-            border-top: 2px solid @colorBorder;
-            border-right: 2px solid @colorBorder;
-            padding: 10px 30px;
-
-            &:active {
-                background-color: @colorYellow;
-            }
-            .channel-info--favorite {
-                width: 20px;
-                height: 20px;
-                fill: #6b737b;
-                cursor: pointer;
-                user-select: none;
-                padding: 10px;
-                .channel-info--favorite:hover {
-                    fill: @colorYellow;
-                }
-
-                .channel-info--favorited {
-                    fill: @colorYellow;
-                }
-            }
-
-            .channel-info--locked {
-                width: 16px;
-                height: 16px;
-                border-radius: 8px;
-                padding: 1px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: @colorYellow;
-                position: absolute;
-                right: 5px;
-                top: 5px;
-            }
-        }
     }
 }
 
@@ -123,6 +123,8 @@
 .channel-row--programs {
     display: -webkit-flex;
     display: flex;
+    height: 92px;
+
     white-space: nowrap;
 }
 
@@ -150,7 +152,7 @@
         max-height: 2.5em;
         display: block;
         font-size: 1.1em;
-        font-family: 'Roboto';
+        font-family: "Roboto";
         margin-left: 10px;
         -webkit-line-clamp: 3;
         overflow: hidden;

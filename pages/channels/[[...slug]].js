@@ -480,8 +480,6 @@ export default function Channel({
                             />
                         </div>
                     </div>
-                    <div className="epg-container">
-                        <div>
                             <EPGList
                                 className={!userIsActive ? "epgInactive" : ""}
                                 data={result}
@@ -497,8 +495,7 @@ export default function Channel({
                                 pageType={pageType}
                             />
                         </div>
-                    </div>
-                </div>
+                 
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </div>
         ) : (

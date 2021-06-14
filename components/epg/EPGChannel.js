@@ -40,7 +40,6 @@ const ChannelLogo = ({ channel, isLocked, isShowing, width }) => {
                     <InlineSVG type="lock" />
                 </div>
             )}
-            {/* </div> */}
         </div>
     );
 };

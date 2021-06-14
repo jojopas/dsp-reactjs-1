@@ -24,7 +24,8 @@ export default function EPGProgram({
         const timeDuration = date.toISOString().substr(11, 5);
         return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
     };
-    const duration = nowTime > 0 ? program.ends - nowTime : program.duration;
+
+    const duration = nowTime > 0 ? program.ends>nowTime? program.ends - nowTime:program.duration : program.duration;
     const separator = "\t . \t";
     const totalTime = Number(nowTime) + Number(currrentTimeElapsed);
     const isPlaying = totalTime >= program.starts && totalTime <= program.ends;
@@ -44,6 +45,7 @@ export default function EPGProgram({
     //         isPlaying
     //     );
     // }
+    // console.log('Width', style.width, nowTime);
     return (
         <div
             className={`${
@@ -52,7 +54,7 @@ export default function EPGProgram({
             style={style}
             title={program.title}
             id={program.duration}
-            key={program.toString()}
+            key={key}
         >
             {program.duration > 50 && (
                 <div>

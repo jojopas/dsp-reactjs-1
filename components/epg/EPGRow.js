@@ -34,11 +34,7 @@ export default function EPGRow({
             key={channel.id}
             onClick={() => onClick(channel)}
         >
-            <ChannelLogo
-                isShowing={isShowing}
-                width={width}
-                channel={channel}
-            />
+            
             <div className="channel-row--programs">
                 {setProgram()}
                 {setProgram()}
