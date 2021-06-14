@@ -3,7 +3,7 @@ import { constants } from "../../config";
 import "./epg.less";
 export default function EPGProgram({
     program,
-    nowShowing,
+    isShowing,
     key,
     currrentTimeElapsed,
     nowTime,
@@ -27,11 +27,11 @@ export default function EPGProgram({
     const duration = nowTime > 0 ? program.ends - nowTime : program.duration;
     const separator = "\t . \t";
     const totalTime = Number(nowTime) + Number(currrentTimeElapsed);
-    const playingNow = totalTime >= program.starts && totalTime <= program.ends;
+    const isPlaying = totalTime >= program.starts && totalTime <= program.ends;
     const style = {
         width: (duration / 1800) * constants.EPG_30_MINUTE_WIDTH - index * 2,
     };
-    if (playingNow) {
+    if (isPlaying) {
         style.backgroundColor = "#273d4e";
         style.fontWeight = "bold";
     }
@@ -41,23 +41,23 @@ export default function EPGProgram({
     //         program.duration,
     //         duration,
     //         currrentTimeElapsed,
-    //         playingNow
+    //         isPlaying
     //     );
     // }
     return (
         <div
             className={`${
-                playingNow ? "channel-now" : ""
-            } channel-row--program ${nowShowing ? "channel-active" : ""} `}
+                isPlaying ? "channel-now" : ""
+            } channel-row--program ${isShowing ? "channel-active" : ""} `}
             style={style}
             title={program.title}
             id={program.duration}
             key={program.toString()}
         >
             {program.duration > 50 && (
-                <div        >
+                <div>
                     <div className="channel-row--program---description">
-                        {nowShowing && playingNow && (
+                        {isShowing && isPlaying && (
                             <>
                                 <div className="channel-row--program---watching">
                                     {constants.WATCHING}
@@ -69,7 +69,7 @@ export default function EPGProgram({
                             program.ends
                         )}`}
 
-                        {playingNow
+                        {isPlaying
                             ? ` ${separator} ${timeLeftDuration(
                                   program.ends - nowTime - currrentTimeElapsed
                               )}

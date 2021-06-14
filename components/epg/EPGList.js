@@ -100,7 +100,8 @@ export default function EPGList({
     const currrentTimeElapsed = () => {
         const now = new Date();
         const minutes = now.getMinutes() > 29 ? 30 : 0;
-        const resultantWidth = ((now.getMinutes() - minutes) / 30) * constants.EPG_30_MINUTE_WIDTH;
+        const resultantWidth =
+            ((now.getMinutes() - minutes) / 30) * constants.EPG_30_MINUTE_WIDTH;
         return Math.abs(resultantWidth);
     };
 
@@ -133,8 +134,8 @@ export default function EPGList({
                 }`}
                 style={
                     index == 0
-                        ? { width: channelCellWidth +20 }
-                        : { width: (constants.EPG_30_MINUTE_WIDTH-22) }
+                        ? { width: channelCellWidth + 20 }
+                        : { width: constants.EPG_30_MINUTE_WIDTH - 22 }
                 }
                 key={time}
             >
@@ -167,13 +168,16 @@ export default function EPGList({
                         channel={channel}
                         onClick={onClick}
                         currrentTimeElapsed={
-                            (currrentTimeElapsed() / constants.EPG_30_MINUTE_WIDTH) * 30 * 60
+                            (currrentTimeElapsed() /
+                                constants.EPG_30_MINUTE_WIDTH) *
+                            30 *
+                            60
                         }
                         favorite={channelIndex < 5}
                         nowTime={nowTime}
                         width={channelCellWidth}
-                        nowShowing={channelIndex === currentIndex}
-                        locked={channelIndex % 2 === 1}
+                        isShowing={channelIndex === currentIndex}
+                        isLocked={channelIndex % 2 === 1}
                     />
                 ))}
             </div>
