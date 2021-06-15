@@ -31,12 +31,12 @@ export default function Header({}) {
             url: "/search/[[...searchQuery]]",
             as: "/search",
         },
-        { id: "home", inner: "Featured", url: "/", exact: true },
+        // { id: "home", inner: "Featured", url: "/", exact: true },
         {
             id: "channels",
             inner: "Live Channels",
-            url: "/channels/[[...slug]]",
-            as: "/channels",
+            url: "/[[...slug]]",
+            as: "/",
         },
         {
             id: "ondemand",
@@ -50,32 +50,24 @@ export default function Header({}) {
 
     const navAccount = [
         {
-            id: "account",
-            class: "account",
+            id: "settings",
+            class: "settings",
             type: "svg",
-            inner: "Account",
-            svg: "myAccount",
-            url: "/account/[[...slug]]",
-            as: "/account",
+            inner: "Settings",
+            svg: "settings",
+            url: "/settings/[[...slug]]",
+            as: "/settings",
         },
     ];
 
     const mainMobile = [
         {
-            id: "home",
-            type: "svg",
-            svg: "home",
-            inner: "Featured",
-            url: "/",
-            exact: true,
-        },
-        {
             id: "channels",
             type: "svg",
             svg: "channels",
             inner: "Live Channels",
-            url: "/channels/[[...slug]]",
-            as: "/channels",
+            url: "/[[...slug]]",
+            as: "/",
         },
         {
             id: "on-demand",
@@ -86,12 +78,12 @@ export default function Header({}) {
             as: "/movies",
         },
         {
-            id: "account",
+            id: "settings",
             type: "svg",
-            inner: "Account",
-            svg: "myAccount",
-            url: "/account/[[...slug]]",
-            as: "/account",
+            inner: "Settings",
+            svg: "settings",
+            url: "/settings/[[...slug]]",
+            as: "/settings",
         },
         // {id: 'shows', type:'svg', svg:'shows', inner: 'Shows', url: '/shows', as: '/shows'}
     ];
@@ -123,13 +115,13 @@ export default function Header({}) {
                         activeBar={true}
                     ></Nav>
                     <NavLink
-                        href="/account/[[...slug]]"
-                        as="/account"
+                        href="/settings/[[...slug]]"
+                        as="/settings"
                         className="account"
                     >
-                        <a title="Account" className="account">
-                            <InlineSVG type="myAccount" />
-                            <InlineSVG type="myAccountActive" />
+                        <a title="Settings" className="account">
+                            <InlineSVG type="settings" />
+                            <InlineSVG type="settingsActive" />
                         </a>
                     </NavLink>
                 </>

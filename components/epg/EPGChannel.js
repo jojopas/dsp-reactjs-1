@@ -22,8 +22,8 @@ const ChannelLogo = ({ channel, isLocked, isShowing, width }) => {
                     className="channel-info--image"
                     src={constants.NOT_FOUND_SRC}
                     data-sizes="auto"
-                    data-srcset={`${channel.logo}/${width - 30}`}
-                    data-src={`${channel.logo}/${width - 30}`}
+                    data-srcset={`${channel.logo}/${width - 30}/${width - 30}`}
+                    data-src={`${channel.logo}/${width - 30}/${width - 30}`}
                     alt={channel.name}
                     className="lazyload"
                 />

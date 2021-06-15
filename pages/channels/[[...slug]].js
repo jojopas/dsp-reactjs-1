@@ -251,7 +251,8 @@ export default function Channel({
         }
     };
 
-    const epgScroll = () => {
+    const epgScroll = (eve) => {
+        console.log("eve", eve);
         requestScrollUpdate();
     };
 
@@ -454,7 +455,7 @@ export default function Channel({
             removeHoverHandler();
         };
     }, []);
-    console.log("Channel data", result[0]);
+    // console.log("Channel data", result[0]);
     return useObserver(() =>
         !pageError ? (
             <div
@@ -464,6 +465,19 @@ export default function Channel({
                 <LocalSEOTags pageType={pageType} seoObj={currentSEO} />
                 <h1 className="noShow">Channels</h1>
                 <div className="container">
+                    <EPGList
+                        data={result}
+                        onClick={setFirstVideo}
+                        changeCurrentSlug={changeCurrentSlug}
+                        currentSlug={epgListCurrentSlug}
+                        activatePlayerUI={activatePlayerUI}
+                        genres={genres}
+                        promos={promos}
+                        genreHoveredListener={(isHovered) =>
+                            genreHoveredListener(isHovered)
+                        }
+                        pageType={pageType}
+                    />
                     <div className="epgPlayer" ref={playerContainer}>
                         <div className="live-watching">
                             {constants.WATCHING}
@@ -480,22 +494,8 @@ export default function Channel({
                             />
                         </div>
                     </div>
-                            <EPGList
-                                className={!userIsActive ? "epgInactive" : ""}
-                                data={result}
-                                onClick={setFirstVideo}
-                                changeCurrentSlug={changeCurrentSlug}
-                                currentSlug={epgListCurrentSlug}
-                                activatePlayerUI={activatePlayerUI}
-                                genres={genres}
-                                promos={promos}
-                                genreHoveredListener={(isHovered) =>
-                                    genreHoveredListener(isHovered)
-                                }
-                                pageType={pageType}
-                            />
-                        </div>
-                 
+                </div>
+
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </div>
         ) : (

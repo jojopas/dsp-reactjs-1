@@ -1,26 +1,40 @@
 @import url("../../styles/config.less");
 @colorBorder: #0f293d;
 .epg {
-     display: flex; 
-     overflow-x: auto ;
-      @media (min-width: (@mobileLargeBP + 1px)) {
-            margin-left: 310px;
-        }
-}
- .timeElapsed {
-        position: absolute;
-        z-index: 50;
-        height: 90%;
-        top: 40px;
-        background-color: #405254ab;
+    display: flex;
+    overflow-x: auto;
+    margin-top: 320px;
+    @media (min-width: (@mobileLargeBP + 1px)) {
+        margin-left: 290px;
+        margin-top: 50px;
     }
+}
+.timeElapsed {
+    position: absolute;
+    left: 2px;
+    z-index: 50;
+    height: 100vh;
+    /* top: 40px; */
+    background-color: #405254ab;
+}
 .right-row {
     overflow-x: auto;
     margin-left: 10px;
 }
 
+.left-row {
+    margin-left: 50px;
+    @media (max-width: (@mobileLargeBP + 1px)) {
+        margin-left: 0px;
+    }
+}
+
 .channel-logos {
-    margin-top: 90px;
+    margin-top: 50px;
+
+    @media (max-width: (@mobileLargeBP + 1px)) {
+        margin-top: 0px;
+    }
 }
 
 .timeslot-row {
@@ -30,13 +44,15 @@
     color: @colorNavGray;
     position: fixed;
     // top: 250px;
-    top: 250px;
+    top: 290px;
     z-index: 30;
     background-color: #0e212f;
+    behavior: smooth;
+    block: start;
 
-        @media (min-width: (@mobileLargeBP + 1px)) {
-            top: 60px;
-        }
+    @media (min-width: (@mobileLargeBP + 1px)) {
+        top: 60px;
+    }
 
     .timeslot-row--date {
         padding: 10px 0px;
@@ -119,12 +135,15 @@
     content: "";
     scroll-behavior: smooth;
     white-space: nowrap;
-    margin-top: 90px;
+    margin-top: 50px;
 
     .channel-row {
         display: -webkit-flex;
         display: flex;
         white-space: nowrap;
+    }
+    @media (max-width: (@mobileLargeBP + 1px)) {
+        margin-top: 0px;
     }
 }
 
@@ -136,8 +155,13 @@
     display: -webkit-flex;
     display: flex;
     height: 92px;
+    background-color: #1b3447;
 
     white-space: nowrap;
+}
+.channel-now {
+    background-color: #273d4e;
+    font-weight: bold;
 }
 
 .channel-row--program {
@@ -145,7 +169,6 @@
     align-items: center;
     border-top: 2px solid @colorBorder;
     border-right: 2px solid @colorBorder;
-    background-color: #1b3447;
     z-index: 20;
     font-weight: lighter;
 
@@ -155,16 +178,12 @@
     //     color: black;
     // }
 
-    .channel-now {
-        background-color: #273d4e;
-        font-weight: bold;
-    }
-
     .channel-row--program---title {
         max-height: 2.5em;
         display: block;
         font-size: 1.1em;
-        font-family: "Roboto";
+        font-family: Roboto;
+        font-weight: 600;
         margin-left: 10px;
         -webkit-line-clamp: 3;
         overflow: hidden;
@@ -172,6 +191,14 @@
     }
 
     .channel-row--program---description {
+        font-size: medium;
+        font-weight: 100;
+        color: @colorNavGray;
+        margin-left: 10px;
+        display: none;
+    }
+
+    .channel-row--program---timing {
         display: flex;
         font-size: small;
         font-weight: 100;
@@ -183,6 +210,17 @@
         font-size: small;
         color: @colorYellow;
         text-overflow: ellipsis;
+    }
+
+    &:hover {
+        background-color: @colorYellow;
+        color: #1b3447;
+        .channel-row--program---description {
+            display: block;
+        }
+        .channel-row--program---watching {
+            color: #1b3447;
+        }
     }
 }
 

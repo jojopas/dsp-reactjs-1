@@ -21,6 +21,7 @@ export default function EPGList({
     const [rowList, setRowList] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
+    let channelRef, timeRowRef;
     let nowTime = 0;
     const now = new Date();
     const currentTime = now.getTime() / 1000;
@@ -120,7 +121,7 @@ export default function EPGList({
         return Math.abs(resultantWidth);
     };
 
-    console.log("nowtime", nowTime, currrentTimeElapsed);
+    // console.log("nowtime", nowTime, currrentTimeElapsed);
 
     const todaysTimeSlots = () => {
         const Total_Minutes_A_Day = 24 * 60;
@@ -128,7 +129,7 @@ export default function EPGList({
         const hours = now.getHours();
         let minutes = now.getMinutes() > 29 ? 30 : 0;
         now.setMinutes(minutes, 0, 0);
-        console.log("nowTime1", nowTime, new Date().setUTCSeconds(nowTime));
+        // console.log("nowTime1", nowTime, new Date().setUTCSeconds(nowTime));
 
         let timeSlots = [];
         let initialTime = hours * 60 + minutes;
@@ -144,7 +145,15 @@ export default function EPGList({
         }
 
         return (
-            <div className="timeslot-row">
+            <div
+                className="timeslot-row"
+                stay='top'
+                stay-revert-to-fixed='0'
+                ref={(ref) => {
+                    console.log("timeslot ref", ref);
+                    timeRowRef = ref;
+                }}
+            >
                 {timeSlots.map((time, index) => (
                     <div
                         className={`${"timeslot-row--time"}`}
@@ -157,6 +166,12 @@ export default function EPGList({
                                 {" "}
                                 <div
                                     className="timeslot-row--underline"
+                                    style={{
+                                        width: `${currrentTimeWidth()}px`,
+                                    }}
+                                ></div>
+                                <div
+                                    className="timeElapsed"
                                     style={{
                                         width: `${currrentTimeWidth()}px`,
                                     }}
@@ -193,7 +208,7 @@ export default function EPGList({
         );
     });
     return (
-        <div className='epg' >
+        <div className="epg">
             <div className="left-row" style={{ width: channelCellWidth }}>
                 {nextEPGDates()}
                 <div className="channel-logos">{leftContainer}</div>
@@ -201,14 +216,12 @@ export default function EPGList({
             <div className="right-row">
                 {todaysTimeSlots()}
 
-                <div className="channel">{rightContainer}</div>
                 <div
-                    className="timeElapsed"
-                    style={{
-                        left: 250 + channelCellWidth + +100 + 2,
-                        width: `${currrentTimeWidth()}px`,
-                    }}
-                ></div>
+                    className="channel"
+                    id="channel"
+                >
+                    {rightContainer}
+                </div>
             </div>
         </div>
     );

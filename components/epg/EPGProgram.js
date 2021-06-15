@@ -28,14 +28,14 @@ export default function EPGProgram({
     const duration = nowTime > 0 ? program.ends>nowTime? program.ends - nowTime:program.duration : program.duration;
     const separator = "\t . \t";
     const totalTime = Number(nowTime) + Number(currrentTimeElapsed);
-    const isPlaying = totalTime >= program.starts && totalTime <= program.ends;
+    const isBroadcasting = totalTime >= program.starts && totalTime <= program.ends;
     const style = {
         width: (duration / 1800) * constants.EPG_30_MINUTE_WIDTH - index * 2,
     };
-    if (isPlaying) {
-        style.backgroundColor = "#273d4e";
-        style.fontWeight = "bold";
-    }
+    // if (isBroadcasting) {
+        
+    //     style.fontWeight = "bold";
+    // }
     // if (nowTime > 0) {
     //     console.log(
     //         "Duration",
@@ -49,17 +49,18 @@ export default function EPGProgram({
     return (
         <div
             className={`${
-                isPlaying ? "channel-now" : ""
-            } channel-row--program ${isShowing ? "channel-active" : ""} `}
+                isBroadcasting ? "channel-now" : ""
+            } channel-row--program `}
             style={style}
             title={program.title}
             id={program.duration}
             key={key}
+            tabIndex={1}
         >
             {program.duration > 50 && (
                 <div>
-                    <div className="channel-row--program---description">
-                        {isShowing && isPlaying && (
+                    <div className="channel-row--program---timing">
+                        {isShowing && isBroadcasting && (
                             <>
                                 <div className="channel-row--program---watching">
                                     {constants.WATCHING}
@@ -71,7 +72,7 @@ export default function EPGProgram({
                             program.ends
                         )}`}
 
-                        {isPlaying
+                        {isBroadcasting
                             ? ` ${separator} ${timeLeftDuration(
                                   program.ends - nowTime - currrentTimeElapsed
                               )}
@@ -80,6 +81,9 @@ export default function EPGProgram({
                     </div>
                     <div className="channel-row--program---title">
                         {program.title}
+                    </div>
+                    <div className="channel-row--program---description" title={program.description}>
+                        {program.description}
                     </div>
                 </div>
             )}
