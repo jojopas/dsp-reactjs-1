@@ -1,6 +1,12 @@
 @import url("../../styles/config.less");
 @colorBorder: #0f293d;
-
+.epg {
+     display: flex; 
+     overflow-x: auto ;
+      @media (min-width: (@mobileLargeBP + 1px)) {
+            margin-left: 310px;
+        }
+}
  .timeElapsed {
         position: absolute;
         z-index: 50;
@@ -13,18 +19,23 @@
     margin-left: 10px;
 }
 
+.channel-logos {
+    margin-top: 90px;
+}
+
 .timeslot-row {
     height: 40px;
     white-space: nowrap;
     display: inline-flex;
     color: @colorNavGray;
-    // position: fixed;
+    position: fixed;
     // top: 250px;
+    top: 250px;
     z-index: 30;
-    background-color: @colorBG;
+    background-color: #0e212f;
 
         @media (min-width: (@mobileLargeBP + 1px)) {
-            top: 50px;
+            top: 60px;
         }
 
     .timeslot-row--date {
@@ -54,7 +65,7 @@
 
         .timeslot-row--underline {
             height: 4px;
-            margin: 3px 2px;
+            margin: 3px -8px;
             background-color: @colorYellow;
         }
     }
@@ -108,6 +119,7 @@
     content: "";
     scroll-behavior: smooth;
     white-space: nowrap;
+    margin-top: 90px;
 
     .channel-row {
         display: -webkit-flex;

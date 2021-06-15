@@ -16,17 +16,19 @@ export default function EPGRow({
     isLocked,
 }) {
     const setProgram = () =>
-        channel.program.map((program, index) => (
-            <EPGProgram
-                tabIndex={1}
-                currrentTimeElapsed={currrentTimeElapsed}
-                program={program}
-                nowTime={nowTime}
-                isShowing={isShowing}
-                index={index}
-                key={`${channel.id} ${index}`}
-            />
-        ));
+        channel.program.map((program, index) =>
+            nowTime <= program.ends ? (
+                <EPGProgram
+                    tabIndex={1}
+                    currrentTimeElapsed={currrentTimeElapsed}
+                    program={program}
+                    nowTime={nowTime}
+                    isShowing={isShowing}
+                    index={index}
+                    key={`${channel.id} ${index}`}
+                />
+            ) : null
+        );
 
     return (
         <div
@@ -34,7 +36,12 @@ export default function EPGRow({
             key={channel.id}
             onClick={() => onClick(channel)}
         >
-            
+            {/* <ChannelLogo
+                channel={channel}
+                width={width}
+                isShowing={isShowing}
+                isLocked={isLocked}
+            /> */}
             <div className="channel-row--programs">
                 {setProgram()}
                 {setProgram()}

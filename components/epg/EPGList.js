@@ -23,7 +23,7 @@ export default function EPGList({
     const [currentGenre, setCurrentGenre] = React.useState(null);
     let nowTime = 0;
     const now = new Date();
-    const currentTime = now.getTime()/1000;
+    const currentTime = now.getTime() / 1000;
     now.setMinutes(now.getMinutes() > 29 ? 30 : 0);
     nowTime = now.getTime() / 1000;
     const currrentTimeElapsed = currentTime - nowTime;
@@ -116,11 +116,11 @@ export default function EPGList({
 
     const currrentTimeWidth = () => {
         const resultantWidth =
-            (currrentTimeElapsed / 30/60) * constants.EPG_30_MINUTE_WIDTH;
+            (currrentTimeElapsed / 30 / 60) * constants.EPG_30_MINUTE_WIDTH;
         return Math.abs(resultantWidth);
     };
 
-    console.log('nowtime', nowTime, currrentTimeElapsed)
+    console.log("nowtime", nowTime, currrentTimeElapsed);
 
     const todaysTimeSlots = () => {
         const Total_Minutes_A_Day = 24 * 60;
@@ -161,7 +161,6 @@ export default function EPGList({
                                         width: `${currrentTimeWidth()}px`,
                                     }}
                                 ></div>
-                                
                             </>
                         ) : null}
                     </div>
@@ -169,7 +168,7 @@ export default function EPGList({
             </div>
         );
     };
-    const leftContainer = [nextEPGDates()];
+    const leftContainer = [];
     const rightContainer = [];
     rowList.forEach((channel, channelIndex) => {
         leftContainer.push(
@@ -194,9 +193,10 @@ export default function EPGList({
         );
     });
     return (
-        <div style={{ display: "flex", overflowX: "auto" }}>
+        <div className='epg' >
             <div className="left-row" style={{ width: channelCellWidth }}>
-                {leftContainer}
+                {nextEPGDates()}
+                <div className="channel-logos">{leftContainer}</div>
             </div>
             <div className="right-row">
                 {todaysTimeSlots()}
@@ -205,7 +205,7 @@ export default function EPGList({
                 <div
                     className="timeElapsed"
                     style={{
-                        left: 250+ channelCellWidth + +100+2,
+                        left: 250 + channelCellWidth + +100 + 2,
                         width: `${currrentTimeWidth()}px`,
                     }}
                 ></div>
