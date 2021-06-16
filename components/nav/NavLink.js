@@ -9,7 +9,11 @@ export default function NavLink({ href, as, exact, children, passActive, navInde
 
     React.useEffect(() => {
         if(!href.includes('http')) {
-            const active = pathToRegexp(as || href, [], {sensitive: true, end: !!exact}).test(asPath);
+            let active = pathToRegexp(as || href, [], {sensitive: true, end: !!exact}).test(asPath);
+            
+            // if (as == "/" && !asPath.includes("/movies")) {
+            //     active = false;
+            // }
             setIsActive(active);
             if (passActive && active) {
                 passActive(navIndex);

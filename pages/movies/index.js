@@ -24,6 +24,7 @@ export default function Movies({
     pageType,
     seoObj,
 }) {
+    console.log("Moview", page);
     const store = React.useContext(StoreContext);
     const [width, setWidth] = React.useState();
     const genreNav = page.genres?.map((genre) => {
@@ -41,39 +42,48 @@ export default function Movies({
     }, [width]);
     console.log("rails", page);
     const views = width
-        ? page?.rails
-            ? page?.rails[0].cards.map((el, index) => (
-                  // <PromoCard {...el} />
-                  index>5? null:<div key={el.title}>
-                      <div
-                          className="carousel"
-                          style={{
-                              background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 1) 100%),url("${el.image}/${width}/500"), no-repeat`,
-                              //   background: `url("${el.image}/${width}/500"), no-repeat`,
-                          }}
-                      >
-                          <div className="carousel-title">{el.title}</div>
-                          <div className="carousel-description">{el.title}</div>
-                          <Button
-                              inner={constants.WATCH_NOW}
-                              onClick={() =>
-                                  launchPlayer(
-                                      pdp.videoId
-                                          ? pdp.videoId
-                                          : pdp.seasons[0].cards[0].id,
-                                      currVideo
-                                  )
-                              }
-                          />
-                      </div>
-                  </div>
-              )).filter((view) => view) 
+        ? page?.movies
+            ? page?.movies[0].channels
+                  .map((el, index) =>
+                      // <PromoCard {...el} />
+                      index > 5 ? null : (
+                          <div key={el.title}>
+                              <div
+                                  className="carousel"
+                                  style={{
+                                      background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 1) 100%),url("${el.wallpaper}/${width}/500"), no-repeat`,
+                                      //   background: `url("${el.image}/${width}/500"), no-repeat`,
+                                  }}
+                              >
+                                  <div className="carousel-title">
+                                      {el.title}
+                                  </div>
+                                  <div className="carousel-description" style={{maxWidth:width-30}}>
+                                      {el.description}
+                                  </div>
+                                  <Button
+                                      inner={constants.WATCH_NOW}
+                                      onClick={() =>
+                                          launchPlayer(
+                                              pdp.videoId
+                                                  ? pdp.videoId
+                                                  : pdp.seasons[0].cards[0].id,
+                                              currVideo
+                                          )
+                                      }
+                                  />
+                              </div>
+                          </div>
+                      )
+                  )
+                  .filter((view) => view)
             : null
         : null;
-    
-    const onHeaderClick =(data) => {
-        console.log('Data got', data);
-    }    ;
+
+    const onHeaderClick = (data) => {
+        console.log("Data got", data);
+    };
+
     return useObserver(() =>
         !error ? (
             <>
@@ -89,7 +99,12 @@ export default function Movies({
                 <Carousel views={views} className="carousel-container" />
                 <GenreSelector type="movies" links={genreNav}></GenreSelector>
                 {page.rails.map((rail) => (
-                    <CardList key={rail.category.id} type="title" data={rail} onHeaderClick={onHeaderClick} />
+                    <CardList
+                        key={rail.category.id}
+                        type="title"
+                        data={rail}
+                        onHeaderClick={onHeaderClick}
+                    />
                 ))}
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </>
@@ -105,6 +120,7 @@ export const getServerSideProps = async ({ req, res }) => {
     const routes = [
         "/api/dsp/company/available/genres/movies",
         "/api/dsp/movies",
+        "/api/dsp/movies/US/ios",
     ];
     const pageOptions = { req, routes, session, config };
     const page = await pageBuilder(pageOptions);
