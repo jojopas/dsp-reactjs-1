@@ -1,4 +1,4 @@
-@import "../../styles/config.less";
+@import "../styles/config.less";
 
 .container {
     display: flex;
@@ -20,8 +20,9 @@
         display: block;
         position: fixed;
         top: 40px;
-        margin: 60px 10px;
+        margin: 60px 15px;
         width: 300px;
+        z-index: 90;
 
         .live-watching {
             color: @colorYellow;
@@ -31,18 +32,20 @@
         .ads {
             display: flex;
             justify-content: center;
-            width: 250px;
-            margin: 40px 20px 10px 20px;
+            width: 100%;
+            margin: 40px 10px;
             @media (max-width: @mobileLargeBP) {
-                  display: none;
+                display: none;
             }
         }
 
         @media (max-width: @mobileLargeBP) {
-            z-index: 10;
-            width: 90%;
-            margin: 10px;
+            z-index: 90;
+            width: 100%;
+            margin: 10px 0px;
+            padding: 10px;
             align-items: center;
+            background-color: #0e212f;
         }
 
         @media (min-width: (@mobileLargeBP + 1px)) {
@@ -67,7 +70,7 @@
                     height: 100%;
                     pointer-events: none;
                     //background: linear-gradient(180deg, rgba(19, 35, 54, 1) 0%, rgba(19, 35, 54, 0.2) 10%) !important;
-                    z-index: 0;
+                    z-index: 90;
                 }
 
                 & > * {
@@ -170,13 +173,6 @@
                     width: ~"calc(100% + 1px)";
                 }
             }
-        }
-    }
-
-    .left-row{
-        margin-left: 50px;
-        @media (max-width: (@mobileLargeBP + 1px)) {
-            margin-left: 0px;
         }
     }
 

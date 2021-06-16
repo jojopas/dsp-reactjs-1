@@ -415,7 +415,7 @@ export default function InlineSVG({ type }) {
                             transform="translate(-572.459)"
                             fill="none"
                             stroke="#EBEBEB"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                         />
                     </g>
                 </svg>
@@ -440,7 +440,7 @@ export default function InlineSVG({ type }) {
                             transform="translate(-572.459)"
                             fill="#fbcc35"
                             stroke="#EBEBEB"
-                            stroke-width="1.5"
+                            strokeWidth="1.5"
                         />
                     </g>
                 </svg>

@@ -226,22 +226,22 @@ export default function CardList({className, type, useHeader, data, ...props}) {
     ));
 
     return (
-        <div className={className ? className : ''}>
-            {
-                type !== 'grid' ?
-                    (
-                        <>
-                            { useHeader ? (<ListHeader label={data.category.name} />) : null}
-                            <div className="listRow">
-                                <Slider {...slickSettings}>
-                                    {cards}
-                                </Slider>
-                            </div>
-                        </>
-                    ) : (
-                        <div className="listGrid">{cards}</div>
-                    )
-            }
+        <div className={className ? className : ""}>
+            {type !== "grid" ? (
+                <>
+                    {useHeader ? (
+                        <ListHeader
+                            label={data.category.name}
+                            onClick={() => props?.onHeaderClick(data)}
+                        />
+                    ) : null}
+                    <div className="listRow">
+                        <Slider {...slickSettings}>{cards}</Slider>
+                    </div>
+                </>
+            ) : (
+                <div className="listGrid">{cards}</div>
+            )}
         </div>
     );
 }

@@ -27,63 +27,63 @@ export default function Footer() {
 
     const apps = [
         {
-            id: 'ios',
-            class: 'ios',
-            inner: 'iTunes App Download',
-            url: 'https://itunes.apple.com/us/app/local-now-stream-your-city/id1117556939?mt=8',
+            id: "ios",
+            class: "ios",
+            inner: "iTunes App Download",
+            url: "https://itunes.apple.com/us/app/local-now-stream-your-city/id1117556939?mt=8",
             newWin: true,
             tracking: {
-                event: 'Click to Apple Store'
-            }
+                event: "Click to Apple Store",
+            },
         },
         {
-            id: 'android',
-            class: 'android',
-            inner: 'Google Play App Download',
-            url: 'https://play.google.com/store/apps/details?id=com.weathergroup.localnow&hl=en_US',
+            id: "android",
+            class: "android",
+            inner: "Google Play App Download",
+            url: "https://play.google.com/store/apps/details?id=com.weathergroup.sportstv&hl=en_US",
             newWin: true,
             tracking: {
-                event: 'Click to Google Play'
-            }
+                event: "Click to Google Play",
+            },
         },
     ];
 
     const social = [
         {
-            id: 'instagram',
-            class: 'instagram',
-            type: 'svg',
-            inner: 'Instagram',
-            svg: 'instagram',
-            url: 'https://www.instagram.com/localnow',
+            id: "instagram",
+            class: "instagram",
+            type: "svg",
+            inner: "Instagram",
+            svg: "instagram",
+            url: "https://www.instagram.com/sportstv",
             newWin: true,
             tracking: {
-                event: 'Click to Instagram'
-            }
+                event: "Click to Instagram",
+            },
         },
         {
-            id: 'twitter',
-            class: 'twitter',
-            type: 'svg',
-            inner: 'Twitter',
-            svg: 'twitter',
-            url: 'https://twitter.com/localnow',
+            id: "twitter",
+            class: "twitter",
+            type: "svg",
+            inner: "Twitter",
+            svg: "twitter",
+            url: "https://twitter.com/sportstv",
             newWin: true,
             tracking: {
-                event: 'Click to Twitter'
-            }
+                event: "Click to Twitter",
+            },
         },
         {
-            id: 'facebook',
-            class: 'facebook',
-            type: 'svg',
-            inner: 'Facebook',
-            svg: 'facebook',
-            url: 'https://www.facebook.com/localnow',
+            id: "facebook",
+            class: "facebook",
+            type: "svg",
+            inner: "Facebook",
+            svg: "facebook",
+            url: "https://www.facebook.com/sportstv",
             newWin: true,
             tracking: {
-                event: 'Click to Facebook'
-            }
+                event: "Click to Facebook",
+            },
         },
     ];
 

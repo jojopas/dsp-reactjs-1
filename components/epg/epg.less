@@ -3,9 +3,9 @@
 .epg {
     display: flex;
     overflow-x: auto;
-    margin-top: 320px;
+    margin-top: 300px;
     @media (min-width: (@mobileLargeBP + 1px)) {
-        margin-left: 290px;
+        margin-left: 305px;
         margin-top: 50px;
     }
 }
@@ -13,9 +13,10 @@
     position: absolute;
     left: 2px;
     z-index: 50;
-    height: 100vh;
+    height: 999999;
+    overflow: hidden;
     /* top: 40px; */
-    background-color: #405254ab;
+    background-color: #fbcc353b;
 }
 .right-row {
     overflow-x: auto;
@@ -30,7 +31,7 @@
 }
 
 .channel-logos {
-    margin-top: 50px;
+    margin-top: 0px;
 
     @media (max-width: (@mobileLargeBP + 1px)) {
         margin-top: 0px;
@@ -42,7 +43,7 @@
     white-space: nowrap;
     display: inline-flex;
     color: @colorNavGray;
-    position: fixed;
+    position: relative;
     // top: 250px;
     top: 290px;
     z-index: 30;
@@ -51,7 +52,7 @@
     block: start;
 
     @media (min-width: (@mobileLargeBP + 1px)) {
-        top: 60px;
+        top: 0px;
     }
 
     .timeslot-row--date {
@@ -95,6 +96,7 @@
     border-top: 2px solid @colorBorder;
     border-right: 2px solid @colorBorder;
     padding: 10px 5px;
+    cursor: pointer;
 
     &:active {
         background-color: @colorYellow;
@@ -135,7 +137,6 @@
     content: "";
     scroll-behavior: smooth;
     white-space: nowrap;
-    margin-top: 50px;
 
     .channel-row {
         display: -webkit-flex;
@@ -165,6 +166,7 @@
 }
 
 .channel-row--program {
+    cursor: pointer;
     display: flex;
     align-items: center;
     border-top: 2px solid @colorBorder;
@@ -176,7 +178,7 @@
     //     display: block;
     //     background-color: @colorYellow;
     //     color: black;
-    // }
+    // }z
 
     .channel-row--program---title {
         max-height: 2.5em;
@@ -212,16 +214,16 @@
         text-overflow: ellipsis;
     }
 
-    &:hover {
-        background-color: @colorYellow;
-        color: #1b3447;
-        .channel-row--program---description {
-            display: block;
-        }
-        .channel-row--program---watching {
-            color: #1b3447;
-        }
-    }
+    // &:hover {
+    //     background-color: @colorYellow;
+    //     color: #1b3447;
+    //     .channel-row--program---description {
+    //         display: block;
+    //     }
+    //     .channel-row--program---watching {
+    //         color: #1b3447;
+    //     }
+    // }
 }
 
 // .channel-row--program:hover {

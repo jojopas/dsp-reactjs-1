@@ -1,7 +1,7 @@
 import { constants } from "../../config";
 import InlineSVG from "../InlineSVG";
 
-const ChannelLogo = ({ channel, isLocked, isShowing, width }) => {
+const ChannelLogo = ({ channel, isLocked, isShowing, width, onClick }) => {
     const channelStyle = {
         width: width,
         // background: `url(${channel.logo}/${width - 10})`,
@@ -15,6 +15,7 @@ const ChannelLogo = ({ channel, isLocked, isShowing, width }) => {
             className={"channel-info"}
             style={channelStyle}
             title={channel.name}
+            onClick={onClick}
         >
             {/* <div className="channel-info--image" title={channel.name}> */}
             {channel.logo ? (

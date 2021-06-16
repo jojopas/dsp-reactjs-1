@@ -1,37 +1,37 @@
 {
-	"name": "Local Now",
-	"short_name": "Local Now",
-	"description": "Stream local news, movies and TV shows with headlines that won’t ruin your day and an eclectic collection of comedies, dramas and documentaries.",
-	"lang": "en",
-	"start_url": "./",
-	"icons": [
-		{
-			"src": "\/favicons\/android-chrome-512x512.png",
-			"sizes": "512x512",
-			"type": "image\/png"
-		},
-		{
-			"src": "\/favicons\/android-chrome-192x192.png",
-			"sizes": "192x192",
-			"type": "image\/png"
-		},
-		{
-			"src": "\/favicons\/apple-touch-icon-180x180.png",
-			"sizes": "180x180",
-			"type": "image\/png"
-		},
-		{
-			"src": "\/favicons\/favicon-32x32.png",
-			"sizes": "32x32",
-			"type": "image\/png"
-		},
-		{
-			"src": "\/favicons\/favicon-16x16.png",
-			"sizes": "16x16",
-			"type": "image\/png"
-		}
-	],
-	"theme_color": "#52CD65",
-	"background_color": "#132336",
-	"display": "standalone"
+    "name": "Sports TV",
+    "short_name": "Sports TV",
+    "description": "Stream local news, movies and TV shows with headlines that won’t ruin your day and an eclectic collection of comedies, dramas and documentaries.",
+    "lang": "en",
+    "start_url": "./",
+    "icons": [
+        {
+            "src": "/favicons/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/apple-touch-icon-192x192.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicons/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#52CD65",
+    "background_color": "#132336",
+    "display": "standalone"
 }

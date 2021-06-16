@@ -39,11 +39,12 @@ export default function Movies({
             setWidth(window.innerWidth);
         }
     }, [width]);
+    console.log("rails", page);
     const views = width
         ? page?.rails
-            ? page?.rails[0].cards.map((el) => (
+            ? page?.rails[0].cards.map((el, index) => (
                   // <PromoCard {...el} />
-                  <div key={el.title}>
+                  index>5? null:<div key={el.title}>
                       <div
                           className="carousel"
                           style={{
@@ -66,9 +67,13 @@ export default function Movies({
                           />
                       </div>
                   </div>
-              ))
+              )).filter((view) => view) 
             : null
         : null;
+    
+    const onHeaderClick =(data) => {
+        console.log('Data got', data);
+    }    ;
     return useObserver(() =>
         !error ? (
             <>
@@ -84,7 +89,7 @@ export default function Movies({
                 <Carousel views={views} className="carousel-container" />
                 <GenreSelector type="movies" links={genreNav}></GenreSelector>
                 {page.rails.map((rail) => (
-                    <CardList key={rail.category.id} type="title" data={rail} />
+                    <CardList key={rail.category.id} type="title" data={rail} onHeaderClick={onHeaderClick} />
                 ))}
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </>

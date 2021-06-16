@@ -12,7 +12,7 @@ const sendToSegment = (type, data= {}) => {
             case 'page':
                 analytics.page({
                     source_version: publicRuntimeConfig.APP_VERSION,
-                    source_name: "LocalNowApp",
+                    source_name: "SportsTVApp",
                     channel_id: cookies[`_${constants.COOKIE_PREFIX}_myMarket`],
                     session_id: `${cookies[`_${constants.COOKIE_PREFIX}_guid`]}${timestamp}`
                 });

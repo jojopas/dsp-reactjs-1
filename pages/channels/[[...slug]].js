@@ -231,7 +231,7 @@ export default function Channel({
     let isScrollingTimer;
     let isScrollUpdating = false;
     let scrollingAnimationFrame;
-    const epgScrollUpdate = () => {
+    const epgScrollUpdate = (event) => {
         clearTimeout(isScrollingTimer);
         if (!isScrollingRef.current) {
             activatePlayerUI(true);
@@ -252,7 +252,7 @@ export default function Channel({
     };
 
     const epgScroll = (eve) => {
-        console.log("eve", eve);
+        console.log("scolling", eve, eve.target.scrollingElement.scrollTop);
         requestScrollUpdate();
     };
 
@@ -437,7 +437,7 @@ export default function Channel({
             if (store.playerInstance && store.playerInstance.vjs) {
                 clearInterval(interval);
                 store.playerInstance.vjs.on("useractive", userActive);
-                window.addEventListener("scroll", epgScroll, false);
+                // window.addEventListener("scroll", epgScroll);
                 hoverHandler();
                 startupTimer = setTimeout(() => {
                     activatePlayerUI(false);
@@ -489,7 +489,7 @@ export default function Channel({
                         />
                         <div className="ads">
                             <img
-                                src="https://images.dotstudiopro.com/60b5b1e72c75020f1a1b8883/250/400"
+                                src="https://images.dotstudiopro.com/60b5b1e72c75020f1a1b8883/320/400"
                                 alt="Adds"
                             />
                         </div>

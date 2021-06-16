@@ -1,11 +1,20 @@
-import React from 'react';
+import React from "react";
+import InlineSVG from "../InlineSVG";
 
-import './ListHeader.less';
+import "./ListHeader.less";
 
-export default function ListHeader({className, style, label}) {
-   return(
-        <h2 className={`listHeader${(className) ? ` ${className}` : ''}`} style={style}>{label}</h2>
-   )
+export default function ListHeader({ className, style, label, onClick }) {
+    return (
+        <div className="listHeaders" onClick={onClick}>
+            <h2
+                className={`listHeader${className ? ` ${className}` : ""}`}
+                style={style}
+            >
+                {label}
+            </h2>
+            <div className="listHeaderIcon">
+                <InlineSVG type="arrow" />
+            </div>
+        </div>
+    );
 }
-
-

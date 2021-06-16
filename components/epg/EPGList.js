@@ -21,6 +21,7 @@ export default function EPGList({
     const [rowList, setRowList] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
+    const [marginTop, setMarginTop] = React.useState(0);
     let channelRef, timeRowRef;
     let nowTime = 0;
     const now = new Date();
@@ -73,10 +74,35 @@ export default function EPGList({
     }, [data, currentSlug]);
 
     React.useEffect(() => {
+        window.addEventListener("scroll", epgScroll);
         if (data) {
             setRowList(filterList());
         }
     }, [currentGenre]);
+
+    const epgScroll = (eve) => {
+        if (eve.target?.scrollingElement?.scrollTop) {
+            debounce(
+                Number(
+                    eve.target?.scrollingElement?.scrollTop ??
+                        eve.target?.scrollTop
+                )
+            );
+            console.log("marginTop", eve.target?.scrollingElement?.scrollTop);
+        }
+    };
+
+    const stMargin = () => {
+        let fn;
+        return (number) => {
+            if (fn) {
+                clearTimeout(fn);
+            }
+            fn = setTimeout(() => setMarginTop(number), 50);
+        };
+    };
+
+    const debounce = stMargin();
 
     const nextEPGDates = () => {
         const date = new Date();
@@ -95,7 +121,7 @@ export default function EPGList({
         }
 
         return (
-            <div className="timeslot-row">
+            <div className="timeslot-row" style={{ top: marginTop }}>
                 <div
                     className={`${"timeslot-row--date"}`}
                     style={{ width: channelCellWidth + 20 }}
@@ -147,8 +173,9 @@ export default function EPGList({
         return (
             <div
                 className="timeslot-row"
-                stay='top'
-                stay-revert-to-fixed='0'
+                stay="top"
+                style={{ top: marginTop }}
+                stay-revert-to-fixed="0"
                 ref={(ref) => {
                     console.log("timeslot ref", ref);
                     timeRowRef = ref;
@@ -189,6 +216,7 @@ export default function EPGList({
         leftContainer.push(
             <ChannelLogo
                 channel={channel}
+                onClick={() => onClick(channel)}
                 width={channelCellWidth}
                 isShowing={channelIndex === currentIndex}
                 isLocked={channelIndex % 2 === 1}
@@ -216,10 +244,7 @@ export default function EPGList({
             <div className="right-row">
                 {todaysTimeSlots()}
 
-                <div
-                    className="channel"
-                    id="channel"
-                >
+                <div className="channel" id="channel">
                     {rightContainer}
                 </div>
             </div>
