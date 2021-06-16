@@ -11,7 +11,7 @@ async function pageBuilder(opt) {
         const {protocol, host} = absoluteUrl(req);
         try {
             axiosRetry(axios, { retries: constants.AXIOS_RETRY_CNT });
-            console.log('url', host);
+            // console.log('url', host);
             const allPageRequests = routes.map((r) => {
                     let method = 'GET';
                     let payload;

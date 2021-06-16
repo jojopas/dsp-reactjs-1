@@ -88,7 +88,7 @@ export default function EPGList({
                         eve.target?.scrollTop
                 )
             );
-            console.log("marginTop", eve.target?.scrollingElement?.scrollTop);
+            // console.log("marginTop", eve.target?.scrollingElement?.scrollTop);
         }
     };
 
@@ -176,10 +176,6 @@ export default function EPGList({
                 stay="top"
                 style={{ top: marginTop }}
                 stay-revert-to-fixed="0"
-                ref={(ref) => {
-                    console.log("timeslot ref", ref);
-                    timeRowRef = ref;
-                }}
             >
                 {timeSlots.map((time, index) => (
                     <div
@@ -193,12 +189,6 @@ export default function EPGList({
                                 {" "}
                                 <div
                                     className="timeslot-row--underline"
-                                    style={{
-                                        width: `${currrentTimeWidth()}px`,
-                                    }}
-                                ></div>
-                                <div
-                                    className="timeElapsed"
                                     style={{
                                         width: `${currrentTimeWidth()}px`,
                                     }}
@@ -243,7 +233,12 @@ export default function EPGList({
             </div>
             <div className="right-row">
                 {todaysTimeSlots()}
-
+                <div
+                    className="timeElapsed"
+                    style={{
+                        width: `${currrentTimeWidth()}px`,
+                    }}
+                ></div>
                 <div className="channel" id="channel">
                     {rightContainer}
                 </div>

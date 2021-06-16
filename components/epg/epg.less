@@ -11,11 +11,12 @@
 }
 .timeElapsed {
     position: absolute;
-    left: 2px;
-    z-index: 50;
-    height: 999999;
+    left: 466px;
+    z-index: 25;
+    height: 999999px;
     overflow: hidden;
-    /* top: 40px; */
+    margin-top: 2px;
+
     background-color: #fbcc353b;
 }
 .right-row {
@@ -42,7 +43,7 @@
     height: 40px;
     white-space: nowrap;
     display: inline-flex;
-    align-items: flex-end;
+    align-items: baseline;
     color: @colorNavGray;
     position: relative;
     // top: 250px;
@@ -55,6 +56,7 @@
     @media (min-width: (@mobileLargeBP + 1px)) {
         top: 0px;
         height: 70px;
+        align-items: flex-end;
     }
 
     .timeslot-row--date {

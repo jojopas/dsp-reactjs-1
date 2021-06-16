@@ -60,7 +60,7 @@ export default function Form({user}) {
 
     React.useEffect(() => {
         if (Object.keys(errors).length !== 0 && errors.constructor === Object) {
-            console.log('Validation errors: ', errors);
+            // console.log('Validation errors: ', errors);
         }
     }, [errors]);
 

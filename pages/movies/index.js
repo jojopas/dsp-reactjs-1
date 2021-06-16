@@ -24,7 +24,7 @@ export default function Movies({
     pageType,
     seoObj,
 }) {
-    console.log("Moview", page);
+    // console.log("Moview", page);
     const store = React.useContext(StoreContext);
     const [width, setWidth] = React.useState();
     const genreNav = page.genres?.map((genre) => {
@@ -40,7 +40,7 @@ export default function Movies({
             setWidth(window.innerWidth);
         }
     }, [width]);
-    console.log("rails", page);
+    // console.log("rails", page);
     const views = width
         ? page?.movies
             ? page?.movies[0].channels
@@ -81,7 +81,7 @@ export default function Movies({
         : null;
 
     const onHeaderClick = (data) => {
-        console.log("Data got", data);
+        // console.log("Data got", data);
     };
 
     return useObserver(() =>
