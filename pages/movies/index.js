@@ -58,7 +58,7 @@ export default function Movies({
                                   <div className="carousel-title">
                                       {el.title}
                                   </div>
-                                  <div className="carousel-description" style={{maxWidth:width-30}}>
+                                  <div className="carousel-description" style={{maxWidth:width-60}}>
                                       {el.description}
                                   </div>
                                   <Button
