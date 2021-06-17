@@ -5,6 +5,8 @@ import "./epg.less";
 import { constants } from "../../config";
 import EPGRow from "./EPGRow";
 import ChannelLogo from "./EPGChannel";
+import $ from "jquery";
+
 export default function EPGList({
     data,
     changeCurrentSlug,
@@ -81,15 +83,18 @@ export default function EPGList({
     }, [currentGenre]);
 
     const epgScroll = (eve) => {
-        if (eve.target?.scrollingElement?.scrollTop) {
-            debounce(
-                Number(
-                    eve.target?.scrollingElement?.scrollTop ??
-                        eve.target?.scrollTop
-                )
-            );
-            // console.log("marginTop", eve.target?.scrollingElement?.scrollTop);
-        }
+        $(".timeslot-row").css({
+            top: eve.target?.scrollingElement?.scrollTop,
+        });
+        // if (eve.target?.scrollingElement?.scrollTop) {
+        //     debounce(
+        //         Number(
+        //             eve.target?.scrollingElement?.scrollTop ??
+        //                 eve.target?.scrollTop
+        //         )
+        //     );
+        //     // console.log("marginTop", eve.target?.scrollingElement?.scrollTop);
+        // }
     };
 
     const stMargin = () => {

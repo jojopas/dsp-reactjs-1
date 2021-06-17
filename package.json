@@ -19,6 +19,7 @@
         "cookie": "^0.4.1",
         "cors": "^2.8.5",
         "cross-env": "^7.0.2",
+        "jquery": "^3.6.0",
         "jwt-decode": "^3.0.0-beta.2",
         "lazysizes": "^5.2.2",
         "less": "^2.7.3",
