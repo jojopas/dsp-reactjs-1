@@ -1,23 +1,30 @@
-import React from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
+import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
 
-import TitleCard from '../cards/TitleCard';
-import PromoCard from '../cards/PromoCard';
-import VideoCard from '../cards/VideoCard';
-import ListHeader from './ListHeader';
-import SlickArrow from './SlickArrow';
-import './CardList.less';
+import TitleCard from "../cards/TitleCard";
+import PromoCard from "../cards/PromoCard";
+import VideoCard from "../cards/VideoCard";
+import ListHeader from "./ListHeader";
+import SlickArrow from "./SlickArrow";
+import "./CardList.less";
 
-export default function CardList({className, type, useHeader, data, ...props}) {
+export default function CardList({
+    className,
+    type,
+    useHeader,
+    data,
+    ...props
+}) {
     let curIndex = 0;
-    useHeader = (typeof useHeader !== 'undefined') ? useHeader : true;
+    useHeader = typeof useHeader !== "undefined" ? useHeader : true;
 
-    const displayType = ('category' in data) ? data.category.displayType : 'default';
+    const displayType =
+        "category" in data ? data.category.displayType : "default";
 
     // Inital Slick Settings
     let slickSettings = {
-        className: 'cardList cardList-titleDefault',
+        className: "cardList cardList-titleDefault",
         dots: false,
         infinite: false,
         initialSlide: 0,
@@ -63,9 +70,9 @@ export default function CardList({className, type, useHeader, data, ...props}) {
     let settingsOverrides = {};
 
     // Slick Overrides for featured display type
-    if (type === 'title' && displayType === 'featured') {
+    if (type === "title" && displayType === "featured") {
         settingsOverrides = {
-            className: 'cardList cardList-titleFeatured',
+            className: "cardList cardList-titleFeatured",
             slidesToShow: 5.5,
             slidesToScroll: 5,
             touchThreshold: 17,
@@ -102,9 +109,9 @@ export default function CardList({className, type, useHeader, data, ...props}) {
         };
     }
 
-    if (type === 'promo') {
+    if (type === "promo") {
         settingsOverrides = {
-            className: 'cardList cardList-promo',
+            className: "cardList cardList-promo",
             slidesToShow: 3.1,
             slidesToScroll: 3,
             touchThreshold: 9,
@@ -132,9 +139,9 @@ export default function CardList({className, type, useHeader, data, ...props}) {
         };
     }
 
-    if (type === 'promoSmall') {
+    if (type === "promoSmall") {
         settingsOverrides = {
-            className: 'cardList cardList-promoSmall',
+            className: "cardList cardList-promoSmall",
             slidesToShow: 4.5,
             slidesToScroll: 4,
             touchThreshold: 14,
@@ -171,9 +178,9 @@ export default function CardList({className, type, useHeader, data, ...props}) {
         };
     }
 
-    if (type === 'video') {
+    if (type === "video") {
         settingsOverrides = {
-            className: 'cardList cardList-video',
+            className: "cardList cardList-video",
             slidesToShow: 4.3,
             slidesToScroll: 4,
             touchThreshold: 13,
@@ -212,16 +219,20 @@ export default function CardList({className, type, useHeader, data, ...props}) {
 
     Object.assign(slickSettings, settingsOverrides);
 
-    const cards = data.cards.map((card) => (
+    const cards = data.cards.map((card, index) => (
         <div key={card.id}>
-            {type === 'video' ?
-                <VideoCard {...card} onClick={props.onClick ? () => props.onClick(card.id) : null}  />
-            :
-                (type === 'promo' || type === 'promoSmall') ?
-                    <PromoCard {...card} />
-                    :
-                    <TitleCard {...card} />
-            }
+            {type === "video" ? (
+                <VideoCard
+                    {...card}
+                    onClick={
+                        props.onClick ? () => props.onClick(card.id) : null
+                    }
+                />
+            ) : type === "promo" || type === "promoSmall" ? (
+                <PromoCard {...card} />
+            ) : (
+                <TitleCard  {...{...{locked: (index % 2 === 1)}, ...card}}  />
+            )}
         </div>
     ));
 

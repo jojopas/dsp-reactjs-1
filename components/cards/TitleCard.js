@@ -5,6 +5,7 @@ import { constants } from "../../config";
 
 import "./Cards.less";
 import ProgressBar from "./ProgressBar";
+import Locked from "./Locked";
 
 export default function TitleCard(data) {
     return (
@@ -40,6 +41,7 @@ export default function TitleCard(data) {
                                     className="lazyloaded"
                                 />
                             )}
+                            {data.locked ? <Locked /> : null}
                             <ProgressBar value={Math.random()} />
                         </>
                     </a>
