@@ -16,6 +16,8 @@ import { slugify } from "../../helpers/utils/strings";
 import GenreSelector from "../../components/nav/GenreSelector";
 import Button from "../../components/button/Button";
 import { constants } from "../../config";
+import { data } from "jquery";
+import InlineSVG from "../../components/InlineSVG";
 export default function Movies({
     session,
     config,
@@ -27,6 +29,7 @@ export default function Movies({
     // console.log("Moview", page);
     const store = React.useContext(StoreContext);
     const [width, setWidth] = React.useState();
+    const [clickedCardTitle, setClickedCardTitle] = React.useState();
     const genreNav = page.genres?.map((genre) => {
         return {
             id: genre,
@@ -40,38 +43,51 @@ export default function Movies({
             setWidth(window.innerWidth);
         }
     }, [width]);
+
+    React.useEffect(()=> {
+        if (clickedCardTitle) {
+            history?.replaceState(
+                null,
+                "",
+                `/category/${clickedCardTitle?.category?.name}`
+            );
+        } else {
+            history?.replaceState(null, "", `/movies`);
+        }
+    }, [clickedCardTitle])
     // console.log("rails", page);
     const views = width
         ? page?.movies
             ? page?.movies[0].channels
                   .map((el, index) =>
-                      // <PromoCard {...el} />
                       index > 5 ? null : (
                           <div key={el.title}>
                               <div
                                   className="carousel"
                                   style={{
                                       background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 1) 100%),url("${el.wallpaper}/${width}/500"), no-repeat`,
-                                      //   background: `url("${el.image}/${width}/500"), no-repeat`,
                                   }}
                               >
-                                  <div className="carousel-title">
-                                      {el.title}
+                                  <div className="carousel-about">
+                                      <div className="carousel-title">
+                                          {el.title}
+                                      </div>
+                                      <div className="carousel-description">
+                                          {el.description}
+                                      </div>
+                                      <Button
+                                          inner={constants.WATCH_NOW}
+                                          onClick={() =>
+                                              launchPlayer(
+                                                  pdp.videoId
+                                                      ? pdp.videoId
+                                                      : pdp.seasons[0].cards[0]
+                                                            .id,
+                                                  currVideo
+                                              )
+                                          }
+                                      />
                                   </div>
-                                  <div className="carousel-description" style={{maxWidth:width-60}}>
-                                      {el.description}
-                                  </div>
-                                  <Button
-                                      inner={constants.WATCH_NOW}
-                                      onClick={() =>
-                                          launchPlayer(
-                                              pdp.videoId
-                                                  ? pdp.videoId
-                                                  : pdp.seasons[0].cards[0].id,
-                                              currVideo
-                                          )
-                                      }
-                                  />
                               </div>
                           </div>
                       )
@@ -80,34 +96,58 @@ export default function Movies({
             : null
         : null;
 
-    const onHeaderClick = (data) => {
-        // console.log("Data got", data);
-    };
-
+    
     return useObserver(() =>
         !error ? (
-            <>
-                <h1 className="noShow">Movies</h1>
-                {page.promos?.length > 0 ? (
+            clickedCardTitle ? (
+                <>
+                    <h1 className="noShow">
+                        {clickedCardTitle?.category?.name}
+                    </h1>
+                    <div className="clickedTitle">
+                        <div
+                            className="backButton"
+                            onClick={() => setClickedCardTitle(null)}
+                        >
+                            <InlineSVG type="backArrow" />
+                        </div>
+                        <span className="clickedHeader">
+                            {clickedCardTitle?.category?.name}
+                        </span>
+                    </div>
                     <CardList
-                        className="moviesPromo"
-                        type="promo"
-                        useHeader={false}
-                        data={{ cards: page.promos }}
+                        key={clickedCardTitle.category.id}
+                        type="grid"
+                        data={clickedCardTitle}
                     />
-                ) : null}
-                <Carousel views={views} className="carousel-container" />
-                <GenreSelector type="movies" links={genreNav}></GenreSelector>
-                {page.rails.map((rail) => (
-                    <CardList
-                        key={rail.category.id}
-                        type="title"
-                        data={rail}
-                        onHeaderClick={onHeaderClick}
-                    />
-                ))}
-                {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
-            </>
+                </>
+            ) : (
+                <>
+                    <h1 className="noShow">Movies</h1>
+                    {page.promos?.length > 0 ? (
+                        <CardList
+                            className="moviesPromo"
+                            type="promo"
+                            useHeader={false}
+                            data={{ cards: page.promos }}
+                        />
+                    ) : null}
+                    <Carousel views={views} className="carousel-container" />
+                    <GenreSelector
+                        type="movies"
+                        links={genreNav}
+                    ></GenreSelector>
+                    {page.rails.map((rail) => (
+                        <CardList
+                            key={rail.category.id}
+                            type="title"
+                            data={rail}
+                            onHeaderClick={setClickedCardTitle}
+                        />
+                    ))}
+                    {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
+                </>
+            )
         ) : (
             <Error404 />
         )

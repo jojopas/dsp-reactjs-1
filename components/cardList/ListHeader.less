@@ -3,7 +3,8 @@
 h2.listHeader {
     color: #b4b7bb;
     font-weight: 400;
-    font-size: 18px;
+    cursor: pointer;
+	font-size: 18px;
     line-height: 1.333;
     text-overflow: ellipsis;
     padding-left: 50px;
@@ -13,24 +14,24 @@ h2.listHeader {
     }
     @media (max-width: @mobileLargeBP) {
         font-size: 15px;
-		padding-left: 20px;
+        padding-left: 20px;
         // padding: 30px (@sitePaddingMobile + 4) 12px;
     }
 }
 
 .listHeaders {
     display: flex;
-    cursor: pointer;
-	align-items: center;
-	padding-top: 40px;
+    align-items: center;
+    padding-top: 40px;
 
     .listHeaderIcon {
+        cursor: pointer;
         fill: @colorYellow;
         width: 24px;
         height: 24px;
     }
 
-	@media (max-width: @mobileLargeBP) {
+    @media (max-width: @mobileLargeBP) {
         padding-top: 10px;
     }
 }

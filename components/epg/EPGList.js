@@ -77,15 +77,41 @@ export default function EPGList({
 
     React.useEffect(() => {
         window.addEventListener("scroll", epgScroll);
-        if (data) {
-            setRowList(filterList());
-        }
-    }, [currentGenre]);
+        // if (store?.playerInstance?.vjs) {
+
+        //     if (store.breakPoint) {
+        //         const epgWidth = $(".epgPlayer").height();
+        //         $(".epg").css({
+        //             marginTop: epgWidth,
+        //         });
+        //         console.log("epgHeight", epgWidth);
+        //     } else {
+        //         const epgWidth = $(".epgPlayer").width();
+        //         $(".epg").css({
+        //             marginLeft: epgWidth,
+        //         });
+        //         console.log("epgWidth", epgWidth);
+        //     }
+        // }
+        return () => window.removeEventListener("scroll", epgScroll);
+    }, [currentGenre, store.isVideoLoading]);
+
+    const TimeElapsed = () => (
+        <div
+            className="timeElapsed"
+            style={{
+                width: `${currrentTimeWidth()}px`,
+            }}
+        ></div>
+    );
 
     const epgScroll = (eve) => {
         $(".timeslot-row").css({
             top: eve.target?.scrollingElement?.scrollTop,
         });
+        // $(".timeElapsed").css({
+        //     'margin-top': eve.target?.scrollingElement?.scrollTop+2,
+        // });
         // if (eve.target?.scrollingElement?.scrollTop) {
         //     debounce(
         //         Number(
@@ -96,18 +122,6 @@ export default function EPGList({
         //     // console.log("marginTop", eve.target?.scrollingElement?.scrollTop);
         // }
     };
-
-    const stMargin = () => {
-        let fn;
-        return (number) => {
-            if (fn) {
-                clearTimeout(fn);
-            }
-            fn = setTimeout(() => setMarginTop(number), 50);
-        };
-    };
-
-    const debounce = stMargin();
 
     const nextEPGDates = () => {
         const date = new Date();
@@ -198,6 +212,7 @@ export default function EPGList({
                                         width: `${currrentTimeWidth()}px`,
                                     }}
                                 ></div>
+                                {TimeElapsed()}
                             </>
                         ) : null}
                     </div>
@@ -215,6 +230,7 @@ export default function EPGList({
                 width={channelCellWidth}
                 isShowing={channelIndex === currentIndex}
                 isLocked={channelIndex % 2 === 1}
+                index={channelIndex}
             />
         );
         rightContainer.push(
@@ -238,27 +254,11 @@ export default function EPGList({
             </div>
             <div className="right-row">
                 {todaysTimeSlots()}
-                <div
-                    className="timeElapsed"
-                    style={{
-                        width: `${currrentTimeWidth()}px`,
-                    }}
-                ></div>
+
                 <div className="channel" id="channel">
                     {rightContainer}
                 </div>
             </div>
-        </div>
-    );
-    return (
-        <div className="epg">
-            <div
-                className="timeElapsed"
-                style={{
-                    left: channelCellWidth + 32,
-                    width: `${currrentTimeElapsed()}px`,
-                }}
-            ></div>
         </div>
     );
 }

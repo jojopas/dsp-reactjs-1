@@ -22,7 +22,7 @@ export default function NavLink({ href, as, exact, children, passActive, navInde
     }, [isActive, asPath]);
 
     const child = React.Children.only(children);
-    const className = ((child.props?.className || '') + ' ' + (isActive ? 'active' : '')).trim();
+    const className = ((child?.props?.className || '') + ' ' + (isActive ? 'active' : '')).trim();
 
     return (
         <Link href={href} as={as} {...props} shallow={typeof shallow === 'boolean' ? shallow : false} scroll={typeof scroll === 'boolean' ? scroll : true}>
