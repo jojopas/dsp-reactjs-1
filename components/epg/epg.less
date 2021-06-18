@@ -19,7 +19,7 @@
 
     background-color: #fbcc353b;
     @media (max-width: (@mobileLargeBP + 1px)) {
-        margin-top: 3px;
+        margin-top: 2px;
     }
 }
 .right-row {
@@ -46,10 +46,11 @@
     height: 40px;
     white-space: nowrap;
     display: inline-flex;
-    align-items: baseline;
     color: @colorNavGray;
     position: relative;
     // top: 250px;
+    align-items: flex-end;
+    font: 15px Roboto;
     top: 290px;
     z-index: 30;
     background-color: #0e212f;
@@ -59,7 +60,6 @@
     @media (min-width: (@mobileLargeBP + 1px)) {
         top: 0px;
         height: 70px;
-        align-items: flex-end;
     }
 
     .timeslot-row--date {
@@ -73,7 +73,6 @@
             color: @colorNavGray;
             background-color: transparent;
             border: none;
-            font-size: medium;
             padding-left: 5px;
 
             option {
@@ -195,9 +194,7 @@
     .channel-row--program---title {
         max-height: 2.5em;
         display: block;
-        font-size: 1.1em;
-        font-family: Roboto;
-        font-weight: 600;
+        font: 15px Roboto;
         margin-left: 10px;
         -webkit-line-clamp: 3;
         overflow: hidden;
@@ -205,8 +202,7 @@
     }
 
     .channel-row--program---description {
-        font-size: medium;
-        font-weight: 100;
+        font: 12px Roboto;
         color: @colorNavGray;
         margin-left: 10px;
         display: none;
@@ -214,14 +210,13 @@
 
     .channel-row--program---timing {
         display: flex;
-        font-size: small;
-        font-weight: 100;
+        font: 12px Roboto;
         color: @colorNavGray;
         margin-left: 10px;
     }
 
     .channel-row--program---watching {
-        font-size: small;
+        font: 12px Roboto;
         color: @colorYellow;
         text-overflow: ellipsis;
     }
