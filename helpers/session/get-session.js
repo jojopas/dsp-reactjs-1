@@ -45,7 +45,7 @@ export default async function getSession(req, res) {
             config = {}
         }
         // ============= LN CONFIG END =====================
-        console.log('config', config);
+        // console.log('config', config);
         return {
             session: {
                 guid: guidCookie

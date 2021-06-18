@@ -35,7 +35,7 @@ export default function GenreSelector({
 
             if (router.asPath !== `/${type}`) {
                 const currLink = links.find((el) => el.as === router.asPath);
-                setCurrentName(`${currLink.inner} ${titleCase(type)}`);
+                setCurrentName(`${currLink?.inner} ${titleCase(type)}`);
             }
         }
     }, [currentGenre, router.asPath]);

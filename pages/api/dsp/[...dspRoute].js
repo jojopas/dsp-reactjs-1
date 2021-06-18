@@ -77,7 +77,6 @@ export default async (req, res) => {
         dspRoute = "channels";
         //https://api.myspotlight.tv/channels/US?genre=<genre>&programming_type=<movie || series>
     }
-
     let apiUrl = `https://${serverRuntimeConfig.DSP_API_URL}/${dspRoute}`;
 
     if (countryRoutes.includes(dspRoute)) {
@@ -92,7 +91,7 @@ export default async (req, res) => {
     if (genre !== "") {
         apiUrl = `${apiUrl}?genre=${genre}&programming_type=${genreType}`;
     }
-
+    console.log("url", apiUrl, dspRoute, ogRoute);
     const axiosOptions = {
         url: apiUrl,
         method: req.method,

@@ -11,11 +11,11 @@ async function pageBuilder(opt) {
         const {protocol, host} = absoluteUrl(req);
         try {
             axiosRetry(axios, { retries: constants.AXIOS_RETRY_CNT });
-            console.log('url', host);
             const allPageRequests = routes.map((r) => {
+                // console.log("url", `${protocol}//${host}${r}`);
                     let method = 'GET';
                     let payload;
-                    console.log('confif builder', config);
+                    // console.log('confif builder', config);
                
                 return axios({
                     method: method,

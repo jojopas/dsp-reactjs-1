@@ -252,7 +252,7 @@ export default function Channel({
     };
 
     const epgScroll = (...eve) => {
-        console.log("eve",eve, eve?.target?.scrollTop);
+        // console.log("eve",eve, eve?.target?.scrollTop);
         // requestScrollUpdate();
     };
 
@@ -456,10 +456,6 @@ export default function Channel({
         };
     }, []);
 
-    const handleScroll = (event) => {
-        console.log("Scolling", event);
-    };
-    // console.log("Channel data", result[0]);
     return useObserver(() =>
         !pageError ? (
             <div

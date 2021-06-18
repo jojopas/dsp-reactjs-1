@@ -162,6 +162,7 @@ export const getServerSideProps = async ({ req, res }) => {
         "/api/dsp/movies",
         "/api/dsp/movies/US/ios",
     ];
+    // console.log('req', req, res);
     const pageOptions = { req, routes, session, config };
     const page = await pageBuilder(pageOptions);
     let error = pageError([session, config, page]);
@@ -177,7 +178,7 @@ export const getServerSideProps = async ({ req, res }) => {
             error: error || false,
             pageType: "general",
             seoObj: {
-                title: "Movies",
+                title: "On Demand",
             },
         },
     };

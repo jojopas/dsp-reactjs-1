@@ -28,10 +28,10 @@ export default function Home({
     const [width, setWidth] = React.useState();
     const [clickedCardTitle, setClickedCardTitle] = React.useState();
     const genreNav = page.genres?.map((genre) => ({
-            id: genre,
-            inner: genre,
-            url: `/movies/genre/[...slug]`,
-            as: `/movies/genre/${slugify(genre)}`,        
+        id: genre,
+        inner: genre,
+        url: `/movies/genre/[...slug]`,
+        as: `/movies/genre/${slugify(genre)}`,
     }));
 
     React.useEffect(() => {
@@ -51,6 +51,8 @@ export default function Home({
             history?.replaceState(null, "", `/on-demand`);
         }
     }, [clickedCardTitle]);
+
+    
     const views = width
         ? page?.movies
             ? page?.movies[0].channels
@@ -120,7 +122,9 @@ export default function Home({
                 <>
                     <h1 className="noShow">On Demand</h1>
                     <Carousel views={views} className="carousel-container" />
-                    {genreNav && <GenreSelector type="movies" links={genreNav} />}
+                    {genreNav && (
+                        <GenreSelector type="movies" links={genreNav} />
+                    )}
                     <div className="overflowWrapper">
                         {page.promos?.length > 0 ? (
                             <CardList
@@ -155,7 +159,7 @@ export const getServerSideProps = async ({ req, res }) => {
     const routes = [
         "/api/dsp/homepage",
         "/api/dsp/movies/US/ios",
-        "/api/dsp/company/available/genres/movies",
+        "/api/dsp/company/available/genres/",
     ];
     const pageOptions = { req, res, routes, session, config };
     const page = await pageBuilder(pageOptions);

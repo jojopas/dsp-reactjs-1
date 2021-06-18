@@ -55,7 +55,7 @@ export default function Channel({
     const [firstVideo, _setFirstVideo] = React.useState(null);
     const firstVideoRef = React.useRef(firstVideo);
     const setFirstVideo = (data) => {
-        console.log("setFirstVideo", data);
+        // console.log("setFirstVideo", data);
         if (data.slug) {
             changeCurrentSlug(data.slug);
         }
@@ -252,7 +252,7 @@ export default function Channel({
     };
 
     const epgScroll = (eve) => {
-        console.log("scolling", eve, eve.target.scrollingElement.scrollTop);
+        // console.log("scolling", eve, eve.target.scrollingElement.scrollTop);
         requestScrollUpdate();
     };
 
