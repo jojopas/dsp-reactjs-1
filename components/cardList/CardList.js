@@ -243,7 +243,7 @@ export default function CardList({
                     {useHeader ? (
                         <ListHeader
                             label={data.category.name}
-                            onClick={() => props?.onHeaderClick(data)}
+                            onClick={() => props?.onHeaderClick? props?.onHeaderClick(data):null}
                         />
                     ) : null}
                     <div className="listRow">

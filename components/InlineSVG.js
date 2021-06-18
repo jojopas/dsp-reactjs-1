@@ -308,7 +308,7 @@ export default function InlineSVG({ type }) {
             );
         case "play":
             return (
-                <svg viewBox="0 0 24 24">
+                <svg width='24px' height='24px' viewBox="0 0 24 24">
                     <path d="M6.87,20.608l14.834-8.1a.583.583,0,0,0,0-1.024L6.87,3.392a.583.583,0,0,0-.863.512V20.096a.583.583,0,0,0,.863.512Z" />
                 </svg>
             );

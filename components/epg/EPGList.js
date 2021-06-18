@@ -77,22 +77,6 @@ export default function EPGList({
 
     React.useEffect(() => {
         window.addEventListener("scroll", epgScroll);
-        // if (store?.playerInstance?.vjs) {
-
-        //     if (store.breakPoint) {
-        //         const epgWidth = $(".epgPlayer").height();
-        //         $(".epg").css({
-        //             marginTop: epgWidth,
-        //         });
-        //         console.log("epgHeight", epgWidth);
-        //     } else {
-        //         const epgWidth = $(".epgPlayer").width();
-        //         $(".epg").css({
-        //             marginLeft: epgWidth,
-        //         });
-        //         console.log("epgWidth", epgWidth);
-        //     }
-        // }
         return () => window.removeEventListener("scroll", epgScroll);
     }, [currentGenre, store.isVideoLoading]);
 
@@ -109,18 +93,6 @@ export default function EPGList({
         $(".timeslot-row").css({
             top: eve.target?.scrollingElement?.scrollTop,
         });
-        // $(".timeElapsed").css({
-        //     'margin-top': eve.target?.scrollingElement?.scrollTop+2,
-        // });
-        // if (eve.target?.scrollingElement?.scrollTop) {
-        //     debounce(
-        //         Number(
-        //             eve.target?.scrollingElement?.scrollTop ??
-        //                 eve.target?.scrollTop
-        //         )
-        //     );
-        //     // console.log("marginTop", eve.target?.scrollingElement?.scrollTop);
-        // }
     };
 
     const nextEPGDates = () => {
