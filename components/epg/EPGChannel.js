@@ -16,6 +16,7 @@ const ChannelLogo = ({
     if (isShowing) {
         channelStyle.backgroundColor = "#fbcc35";
         channelStyle.fill = "#122d42";
+        channelStyle.height = 100;
     }
 
     return (
@@ -53,7 +54,7 @@ const ChannelLogo = ({
 };
 
 const DemoList = [
-    (<svg
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         width="54"
         height="38"
@@ -75,9 +76,8 @@ const DemoList = [
             </pattern>
         </defs>
         <rect id="ESPN" width="54" height="38" fill="url(#pattern)" />
-    </svg>),
-    
-    (<svg
+    </svg>,
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         width="54"
         height="38"
@@ -105,9 +105,8 @@ const DemoList = [
             height="38"
             fill="url(#pattern)"
         />
-    </svg>),
-
-    (<svg
+    </svg>,
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="54"
@@ -130,9 +129,8 @@ const DemoList = [
             </pattern>
         </defs>
         <rect id="WFN" width="54" height="38" fill="url(#pattern)" />
-    </svg>),
-
-    (<svg
+    </svg>,
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="54"
@@ -155,9 +153,8 @@ const DemoList = [
             </pattern>
         </defs>
         <rect id="FS1" width="54" height="38" fill="url(#pattern)" />
-    </svg>),
-
-    (<svg
+    </svg>,
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="54"
@@ -180,9 +177,8 @@ const DemoList = [
             </pattern>
         </defs>
         <rect id="FS2" width="54" height="38" fill="url(#pattern)" />
-    </svg>),
-
-    (<svg
+    </svg>,
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="54"
@@ -205,9 +201,8 @@ const DemoList = [
             </pattern>
         </defs>
         <rect id="OutdoorChannel" width="54" height="38" fill="url(#pattern)" />
-    </svg>),
-
-    (<svg
+    </svg>,
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="54"
@@ -230,9 +225,8 @@ const DemoList = [
             </pattern>
         </defs>
         <rect id="SEC" width="54" height="38" fill="url(#pattern)" />
-    </svg>),
-
-    (<svg
+    </svg>,
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="54"
@@ -255,9 +249,8 @@ const DemoList = [
             </pattern>
         </defs>
         <rect id="BigTen" width="54" height="38" fill="url(#pattern)" />
-    </svg>),
-
-    (<svg
+    </svg>,
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="54"
@@ -286,9 +279,8 @@ const DemoList = [
             height="38"
             fill="url(#pattern)"
         />
-    </svg>),
-
-    (<svg
+    </svg>,
+    <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         width="54"
@@ -311,6 +303,6 @@ const DemoList = [
             </pattern>
         </defs>
         <rect id="BallySports" width="54" height="38" fill="url(#pattern)" />
-    </svg>),
+    </svg>,
 ];
 export default ChannelLogo;

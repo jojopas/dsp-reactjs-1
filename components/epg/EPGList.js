@@ -90,9 +90,16 @@ export default function EPGList({
     );
 
     const epgScroll = (eve) => {
-        $(".timeslot-row").css({
-            top: eve.target?.scrollingElement?.scrollTop,
-        });
+        $(".timeslot-row").css(
+            eve.target?.scrollingElement?.scrollTop > 0
+                ? {
+                      backgroundcolor: "#0e212f",
+                      top: eve.target?.scrollingElement?.scrollTop,
+                  }
+                : {
+                      top: eve.target?.scrollingElement?.scrollTop,
+                  }
+        );
     };
 
     const nextEPGDates = () => {
@@ -156,7 +163,7 @@ export default function EPGList({
             const hourPast = hour > 12;
             timeSlots.push(
                 `${hourPast ? hour - 12 : hour}:${minute > 29 ? "30" : "00"}${
-                    hourPast ? "p" : "a"
+                    hourPast || hour === 12 ? "p" : "a"
                 }`
             );
         }

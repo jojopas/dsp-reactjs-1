@@ -5,7 +5,7 @@
     overflow-x: auto;
     margin-top: 360px;
     @media (min-width: (@mobileLargeBP + 1px)) {
-        margin-left: 305px;
+        // margin-left: 305px;
         margin-top: 50px;
     }
 }
@@ -94,6 +94,7 @@
         }
     }
 }
+
 .channel-info {
     fill: white;
     background-color: #122d42;
@@ -108,6 +109,7 @@
     cursor: pointer;
 
     &:active {
+        height: 100px;
         background-color: @colorYellow;
     }
     .channel-info--favorite {
@@ -159,6 +161,7 @@
 }
 
 .channel-active {
+    height: 100px;
     background-color: @colorYellow;
     fill: #122d42;
 }
@@ -172,8 +175,23 @@
     white-space: nowrap;
 }
 .channel-now {
-    background-color: #273d4e;
+    background-color: #fdfdfd27;
     font-weight: bold;
+    z-index: 50;
+    color: @colorNavGray;
+
+    &:hover {
+        background-color: #fdfffd80;
+        color: white;
+
+        .channel-row--program---timing {
+            color: white;
+        }
+
+        .channel-row--program-icon {
+            display: block;
+        }
+    }
 }
 
 .channel-row--program {
@@ -199,6 +217,17 @@
         -webkit-line-clamp: 3;
         overflow: hidden;
         white-space: break-spaces;
+    }
+
+    &-icon {
+        // display: none;
+        width: 30px;
+        height: 64px;
+        fill: white;
+        align-self: center;
+        cursor: pointer;
+        position: absolute;
+        right: 0;   
     }
 
     .channel-row--program---description {

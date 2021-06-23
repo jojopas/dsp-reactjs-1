@@ -1,5 +1,6 @@
 import React from "react";
 import { constants } from "../../config";
+import InlineSVG from "../InlineSVG";
 import "./epg.less";
 export default function EPGProgram({
     program,
@@ -25,17 +26,22 @@ export default function EPGProgram({
         return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
     };
 
-    const duration = nowTime > 0 ? program.ends>nowTime? program.ends - nowTime:program.duration : program.duration;
+    const duration =
+        nowTime > 0
+            ? program.ends > nowTime
+                ? program.ends - nowTime
+                : program.duration
+            : program.duration;
     const separator = "\t . \t";
     const totalTime = Number(nowTime) + Number(currrentTimeElapsed);
-    const isBroadcasting = totalTime >= program.starts && totalTime <= program.ends;
+    const isBroadcasting =
+        totalTime >= program.starts && totalTime <= program.ends;
     const style = {
         width: (duration / 1800) * constants.EPG_30_MINUTE_WIDTH - index * 2,
     };
-    // if (isBroadcasting) {
-        
-    //     style.fontWeight = "bold";
-    // }
+    if (isShowing) {
+        style.height = 122;
+    }
     // if (nowTime > 0) {
     //     console.log(
     //         "Duration",
@@ -58,34 +64,46 @@ export default function EPGProgram({
             tabIndex={1}
         >
             {program.duration > 50 && (
-                <div>
-                    <div className="channel-row--program---timing">
-                        {isShowing && isBroadcasting && (
-                            <>
-                                <div className="channel-row--program---watching">
-                                    {constants.WATCHING}
-                                </div>
-                                {separator}
-                            </>
-                        )}
-                        {`${timeDuration(program.starts)} - ${timeDuration(
-                            program.ends
-                        )}`}
+                <>
+                    <div>
+                        <div className="channel-row--program---timing">
+                            {isShowing && isBroadcasting && (
+                                <>
+                                    <div className="channel-row--program---watching">
+                                        {constants.WATCHING}
+                                    </div>
+                                    {separator}
+                                </>
+                            )}
+                            {`${timeDuration(program.starts)} - ${timeDuration(
+                                program.ends
+                            )}`}
 
-                        {isBroadcasting
-                            ? ` ${separator} ${timeLeftDuration(
-                                  program.ends - nowTime - currrentTimeElapsed
-                              )}
+                            {isBroadcasting
+                                ? ` ${separator} ${timeLeftDuration(
+                                      program.ends -
+                                          nowTime -
+                                          currrentTimeElapsed
+                                  )}
                     left`
-                            : null}
+                                : null}
+                        </div>
+                        <div className="channel-row--program---title">
+                            {program.title}
+                        </div>
+                        <div
+                            className="channel-row--program---description"
+                            title={program.description}
+                        >
+                            {program.description}
+                        </div>
                     </div>
-                    <div className="channel-row--program---title">
-                        {program.title}
-                    </div>
-                    <div className="channel-row--program---description" title={program.description}>
-                        {program.description}
-                    </div>
-                </div>
+                    { isBroadcasting && (
+                        <div className="channel-row--program-icon">
+                            <InlineSVG type="more" />
+                        </div>
+                    )}
+                </>
             )}
         </div>
     );

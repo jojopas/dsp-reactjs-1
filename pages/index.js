@@ -465,15 +465,17 @@ export default function Channel({
                 <LocalSEOTags pageType={pageType} seoObj={currentSEO} />
                 <h1 className="noShow">Channels</h1>
                 <div className="container">
-                    <div className="epgPlayer" ref={playerContainer}>
-                        <div className="live-watching">
-                            {constants.WATCHING}
+                    <div className="playerContainer">
+                        <div className="fixed-player">
+                            <div className="live-watching">
+                                {constants.WATCHING}
+                            </div>
+                            <Player
+                                pageType={pageType}
+                                video={firstVideo}
+                                showPlayer={store.showPlayer}
+                            />
                         </div>
-                        <Player
-                            pageType={pageType}
-                            video={firstVideo}
-                            showPlayer={store.showPlayer}
-                        />
                         <div className="ads">
                             <img
                                 src="https://images.dotstudiopro.com/60b5b1e72c75020f1a1b8883/320/400"

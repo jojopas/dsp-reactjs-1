@@ -29,9 +29,11 @@ export default async (req, res) => {
     const ogRoute = dspRoute;
     dspRoute = dspRoute.join("/");
 
-    /*console.log('=====================================');
+    /*
+    console.log('=====================================');
     console.log(serverRuntimeConfig.DSP_TOKEN);
-    console.log('=====================================');*/
+    console.log('=====================================');
+    */
 
     const platformRoutes = ["homepage", "movies", "series"];
     const countryRoutes = [

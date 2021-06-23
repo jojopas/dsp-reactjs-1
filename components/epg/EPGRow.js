@@ -30,10 +30,17 @@ export default function EPGRow({
             ) : null
         );
 
+    const style = {};    
+
+    if(isShowing) {
+        style.height = 122;
+    }
+
     return (
         <div
             className="channel-row"
             key={channel.id}
+            style={style}
             onClick={() => onClick(channel)}
         >
             {/* <ChannelLogo

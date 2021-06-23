@@ -37,6 +37,7 @@ export default function Header({}) {
             inner: "Live Channels",
             url: "/[[...slug]]",
             as: "/",
+            exact: true,
         },
         {
             id: "ondemand",
@@ -68,6 +69,7 @@ export default function Header({}) {
             inner: "Live Channels",
             url: "/[[...slug]]",
             as: "/",
+            exact: true,
         },
         {
             id: "on-demand",
