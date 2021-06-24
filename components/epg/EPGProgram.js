@@ -62,6 +62,7 @@ export default function EPGProgram({
             title={program.title}
             id={program.duration}
             key={key}
+            onClick={iconClicked}
             tabIndex={1}
         >
             {program.duration > 50 && (
