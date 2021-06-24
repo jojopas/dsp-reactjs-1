@@ -42,7 +42,7 @@ const constants = {
     EPG_TIME_LEFT: 10,
     EPG_PROMO_CNT: 10,
     EPG_UI_TIMEOUT: 4,
-    EPG_30_MINUTE_WIDTH: 500,
+    EPG_30_MINUTE_WIDTH: 300,
     COOKIE_NO_EXPIRE: new Date("2100/10/10"),
     CORS_WHITELIST: [
         "http://localhost:3000",

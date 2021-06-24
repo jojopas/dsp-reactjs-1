@@ -1,5 +1,6 @@
 @import url("../../styles/config.less");
 @colorBorder: #0f293d;
+
 .epg {
     display: flex;
     overflow-x: auto;
@@ -9,19 +10,21 @@
         margin-top: 50px;
     }
 }
+
 .timeElapsed {
     position: absolute;
     left: 1px;
-    z-index: 25;
+    z-index: 5;
     height: 100vh;
     overflow: hidden;
-    margin-top: 10px;
-
+    margin-top: 0px;
     background-color: #fbcc353b;
+
     @media (max-width: (@mobileLargeBP + 1px)) {
         margin-top: 2px;
     }
 }
+
 .right-row {
     overflow-x: auto;
     margin-left: 10px;
@@ -48,14 +51,12 @@
     display: inline-flex;
     color: @colorNavGray;
     position: relative;
-    // top: 250px;
     align-items: flex-end;
     font: 15px Roboto;
     top: 290px;
     z-index: 30;
     background-color: #0e212f;
     behavior: smooth;
-    block: start;
 
     @media (min-width: (@mobileLargeBP + 1px)) {
         top: 0px;
@@ -86,6 +87,13 @@
         justify-content: center;
         align-items: center;
 
+        h2 {
+            padding: 0px;
+            font: 15px Roboto;
+            margin: 0px;
+            margin-left: 10px;
+        }
+
         .timeslot-row--underline {
             height: 4px;
             position: absolute;
@@ -112,6 +120,7 @@
         height: 100px;
         background-color: @colorYellow;
     }
+
     .channel-info--favorite {
         width: 20px;
         height: 20px;
@@ -119,6 +128,7 @@
         cursor: pointer;
         user-select: none;
         padding: 10px;
+
         .channel-info--favorite:hover {
             fill: @colorYellow;
         }
@@ -143,6 +153,7 @@
         top: 5px;
     }
 }
+
 .channel {
     -webkit-overflow-scrolling: touch;
     position: relative;
@@ -155,13 +166,13 @@
         display: flex;
         white-space: nowrap;
     }
+
     @media (max-width: (@mobileLargeBP + 1px)) {
         margin-top: 0px;
     }
 }
 
 .channel-active {
-    height: 100px;
     background-color: @colorYellow;
     fill: #122d42;
 }
@@ -171,9 +182,9 @@
     display: flex;
     height: 92px;
     background-color: #1b3447;
-
     white-space: nowrap;
 }
+
 .channel-now {
     background-color: #fdfdfd27;
     font-weight: bold;
@@ -203,12 +214,6 @@
     z-index: 20;
     font-weight: lighter;
 
-    // .channel-active {
-    //     display: block;
-    //     background-color: @colorYellow;
-    //     color: black;
-    // }z
-
     .channel-row--program---title {
         max-height: 2.5em;
         display: block;
@@ -220,14 +225,20 @@
     }
 
     &-icon {
-        // display: none;
+        display: none;
         width: 30px;
         height: 64px;
-        fill: white;
+        fill: @colorNavGray;
         align-self: center;
-        cursor: pointer;
+
         position: absolute;
-        right: 0;   
+        right: 0;
+
+        &:hover {
+            cursor: pointer;
+            color: white;
+        }
+        
     }
 
     .channel-row--program---description {
@@ -240,6 +251,7 @@
     .channel-row--program---timing {
         display: flex;
         font: 12px Roboto;
+        overflow: hidden;
         color: @colorNavGray;
         margin-left: 10px;
     }
@@ -249,28 +261,4 @@
         color: @colorYellow;
         text-overflow: ellipsis;
     }
-
-    // &:hover {
-    //     background-color: @colorYellow;
-    //     color: #1b3447;
-    //     .channel-row--program---description {
-    //         display: block;
-    //     }
-    //     .channel-row--program---watching {
-    //         color: #1b3447;
-    //     }
-    // }
 }
-
-// .channel-row--program:hover {
-//     background-color: white;
-//     color: black;
-//     font-size: smaller;
-//     word-wrap: break-word;
-// }
-
-// .channel-row--program:first-child:hover {
-//     display: block;
-//     font-size: smaller;
-//     background-color: @colorYellow;
-// }

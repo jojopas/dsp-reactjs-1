@@ -15,6 +15,8 @@ import { pageBuilder } from "../helpers/page/builder";
 import Error404 from "../components/404";
 import EPGList from "../components/epg/EPGList";
 import { fetchData } from "../helpers/utils/fetch-data";
+import Modal from "../components/modal/modal";
+
 const { publicRuntimeConfig } = getConfig();
 
 import "./index.less";
@@ -39,7 +41,7 @@ export default function Channel({
     const epgPageRef = React.useRef(null);
     const router = useRouter();
     const { genres, promos, channels } = page;
-
+    const [currentChannel, setCurrentChannel] = React.useState();
     const [currentSlug, setCurrentSlug] = React.useState(slug);
     const [epgListCurrentSlug, setEpgListCurrentSlug] = React.useState(slug);
 
@@ -55,8 +57,9 @@ export default function Channel({
     const [firstVideo, _setFirstVideo] = React.useState(null);
     const firstVideoRef = React.useRef(firstVideo);
     const setFirstVideo = (data) => {
-        // console.log("setFirstVideo", data);
+        console.log("setFirstVideo", data);
         if (data.slug) {
+            setCurrentChannel(data);
             changeCurrentSlug(data.slug);
         }
         firstVideoRef.current = data;
@@ -135,6 +138,7 @@ export default function Channel({
                 const firstChannelId = result && result[0] && result[0].videoId;
                 if (firstChannelId) {
                     currentChannelSlug = result[0].slug;
+                    setCurrentChannel(result[0]);
                     //console.log(currentChannelSlug);
                     currentChannelId = firstChannelId;
                     isFirstVideoRef.current
@@ -260,6 +264,13 @@ export default function Channel({
     const genreIsHoveredRef = React.useRef(genreIsHovered);
     const [genreDelay, _setGenreDelay] = React.useState(false);
     const genreDelayRef = React.useRef(genreDelay);
+    const [modalData, setIconClicked] = React.useState(false);
+
+    const iconClicked = (data) => {
+        console.log("Kabook Clicked", data);
+        setIconClicked(data);
+    };
+
     let genreDelayTimeout;
     const setGenreIsHovered = (data) => {
         clearTimeout(genreDelayTimeout);
@@ -456,6 +467,7 @@ export default function Channel({
         };
     }, []);
 
+    console.log("currentChannel", currentChannel);
     return useObserver(() =>
         !pageError ? (
             <div
@@ -465,7 +477,7 @@ export default function Channel({
                 <LocalSEOTags pageType={pageType} seoObj={currentSEO} />
                 <h1 className="noShow">Channels</h1>
                 <div className="container">
-                    <div className="playerContainer">
+                    <div className="epgPlayer">
                         <div className="fixed-player">
                             <div className="live-watching">
                                 {constants.WATCHING}
@@ -475,6 +487,34 @@ export default function Channel({
                                 video={firstVideo}
                                 showPlayer={store.showPlayer}
                             />
+                            {currentChannel && (
+                                <div className="current-channel-information">
+                                    <img
+                                        className="current-channel-information-img"
+                                        src={constants.NOT_FOUND_SRC}
+                                        data-sizes="auto"
+                                        data-srcset={`${currentChannel.logo}/30`}
+                                        data-src={`${channel.logo}/30`}
+                                        alt={currentChannel.name}
+                                        className="lazyload"
+                                    />
+                                    <div>
+                                        <div class="now-playing">
+                                            Now Playing
+                                        </div>
+                                        <h1>
+                                            {currentChannel?.name}
+                                            {" : "}
+                                            <span className="channelName">
+                                                {
+                                                    currentChannel?.program[0]
+                                                        ?.title
+                                                }
+                                            </span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                         <div className="ads">
                             <img
@@ -492,13 +532,14 @@ export default function Channel({
                         activatePlayerUI={activatePlayerUI}
                         genres={genres}
                         promos={promos}
+                        iconClicked={iconClicked}
                         genreHoveredListener={(isHovered) =>
                             genreHoveredListener(isHovered)
                         }
                         pageType={pageType}
                     />
                 </div>
-
+                <Modal data={modalData} resetFn={iconClicked} />
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </div>
         ) : (

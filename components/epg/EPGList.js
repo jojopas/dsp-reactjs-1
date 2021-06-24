@@ -5,6 +5,7 @@ import "./epg.less";
 import { constants } from "../../config";
 import EPGRow from "./EPGRow";
 import ChannelLogo from "./EPGChannel";
+
 import $ from "jquery";
 
 export default function EPGList({
@@ -15,6 +16,7 @@ export default function EPGList({
     genres,
     genreHoveredListener,
     promos,
+    iconClicked,
     pageType,
     onClick,
 }) {
@@ -100,6 +102,9 @@ export default function EPGList({
                       top: eve.target?.scrollingElement?.scrollTop,
                   }
         );
+        $(".timeElapsed").css({
+            marginTop: eve.target?.scrollingElement?.scrollTop,
+        });
     };
 
     const nextEPGDates = () => {
@@ -181,7 +186,7 @@ export default function EPGList({
                         style={{ width: constants.EPG_30_MINUTE_WIDTH - 22 }}
                         key={time}
                     >
-                        {time}
+                        <h2>{time}</h2>
                         {index === 0 ? (
                             <>
                                 {" "}
@@ -191,7 +196,6 @@ export default function EPGList({
                                         width: `${currrentTimeWidth()}px`,
                                     }}
                                 ></div>
-                                {TimeElapsed()}
                             </>
                         ) : null}
                     </div>
@@ -200,7 +204,7 @@ export default function EPGList({
         );
     };
     const leftContainer = [];
-    const rightContainer = [];
+    const rightContainer = [<TimeElapsed />];
     rowList.forEach((channel, channelIndex) => {
         leftContainer.push(
             <ChannelLogo
@@ -219,6 +223,7 @@ export default function EPGList({
                 currrentTimeElapsed={currrentTimeElapsed}
                 favorite={channelIndex < 5}
                 nowTime={nowTime}
+                iconClicked={iconClicked}
                 width={channelCellWidth}
                 isShowing={channelIndex === currentIndex}
                 isLocked={channelIndex % 2 === 1}

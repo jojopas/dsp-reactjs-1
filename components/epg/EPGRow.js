@@ -13,6 +13,8 @@ export default function EPGRow({
     currrentTimeElapsed,
     width,
     nowTime,
+    iconClicked,
+
     isLocked,
 }) {
     const setProgram = () =>
@@ -23,6 +25,9 @@ export default function EPGRow({
                     currrentTimeElapsed={currrentTimeElapsed}
                     program={program}
                     nowTime={nowTime}
+                    iconClicked={() =>
+                        iconClicked({ ...channel, nowprogram: program })
+                    }
                     isShowing={isShowing}
                     index={index}
                     key={`${channel.id} ${index}`}
@@ -30,17 +35,10 @@ export default function EPGRow({
             ) : null
         );
 
-    const style = {};    
-
-    if(isShowing) {
-        style.height = 122;
-    }
-
     return (
         <div
             className="channel-row"
             key={channel.id}
-            style={style}
             onClick={() => onClick(channel)}
         >
             {/* <ChannelLogo

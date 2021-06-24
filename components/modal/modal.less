@@ -1,0 +1,126 @@
+@import "../../styles/config.less";
+
+.modal {
+    position: fixed;
+    z-index: 100;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000000;
+    background-color: #00000066;
+
+    .modal-content {
+        position: relative;
+        background-color: #32424e;
+        margin: auto;
+        padding: 0;
+        width: 500px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+            0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s;
+        .close {
+            padding: 20px;
+            color: rgb(184, 183, 183);
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+
+            &:hover {
+                color: #fff;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+        .modal-header {
+            width: 90%;
+            padding: 0px 16px 20px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .modal-time {
+                font: 12px Roboto;
+                color: @colorNavGray;
+
+                &-left {
+                    color: @colorYellow;
+                }
+            }
+
+            img {
+                width: 30px;
+                border-radius: 50%;
+                border: 1px solid @colorYellow;
+                padding: 4px;
+            }
+
+            h1 {
+                margin: 0px;
+                font: 15px Roboto;
+            }
+        }
+
+        .modal-body {
+            padding: 2px 16px;
+            font: 12px Roboto;
+
+            h1 {
+                margin: 0px;
+                padding: 0px;
+                font: 13px Roboto;
+            }
+
+            p {
+                margin: 5px 0px;
+            }
+        }
+
+        .modal-footer {
+            padding: 2px 16px;
+
+            .watch {
+                padding: 5px;
+                background-color: @colorYellow;
+                border-radius: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: black;
+                margin: 20px 0px;
+            }
+        }
+    }
+}
+
+/* Modal Content */
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+/* The Close Button */

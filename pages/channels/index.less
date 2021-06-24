@@ -21,7 +21,7 @@
         // position: fixed;
         top: 40px;
         height: 300px;
-        margin: 60px 15px;
+        margin-top: 60px;
         width: 300px;
         z-index: 90;
 
@@ -35,8 +35,35 @@
             }
         }
 
+        .current-channel-information {
+            margin-left: 10px;
+            display: flex;
+            margin-top: 80px;
+            color: white;
+            align-items: center;
+
+            img {
+                width: 30px;
+                height: 30px;
+                margin-right: 20px;
+            }
+
+            .now-playing {
+                font: 12px Roboto;
+                color: #fbcc35;
+                text-overflow: ellipsis;
+            }
+
+            h1 {
+                align-self: center;
+                margin: 0px;
+                font: 15px Roboto;
+            }
+        }
+
         .fixed-player {
             position: fixed;
+
             .live-watching {
                 color: @colorYellow;
                 font-size: large;
@@ -178,6 +205,10 @@
                 }
             }
         }
+
+        @media (max-width: (@mobileLargeBP )) {
+            margin: 60px 15px;
+        }
     }
 
     @media (max-width: (@mobileLargeBP + 1px)) {
@@ -187,7 +218,6 @@
 
 @media (min-width: (@mobileLargeBP + 1px)) {
     .epgInactive {
-        
         .epgPlayer {
             .video-js {
                 &:after {

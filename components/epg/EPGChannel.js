@@ -16,7 +16,6 @@ const ChannelLogo = ({
     if (isShowing) {
         channelStyle.backgroundColor = "#fbcc35";
         channelStyle.fill = "#122d42";
-        channelStyle.height = 100;
     }
 
     return (

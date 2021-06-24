@@ -8,6 +8,8 @@ export default function EPGProgram({
     key,
     currrentTimeElapsed,
     nowTime,
+    iconClicked,
+
     index,
 }) {
     const timeDuration = (seconds) => {
@@ -17,6 +19,7 @@ export default function EPGProgram({
         const timeDuration = date.toTimeString().substr(0, 5);
         return timeDuration;
     };
+
     const timeLeftDuration = (seconds) => {
         const date = new Date(0);
         date.setUTCSeconds(seconds);
@@ -39,9 +42,7 @@ export default function EPGProgram({
     const style = {
         width: (duration / 1800) * constants.EPG_30_MINUTE_WIDTH - index * 2,
     };
-    if (isShowing) {
-        style.height = 122;
-    }
+
     // if (nowTime > 0) {
     //     console.log(
     //         "Duration",
@@ -65,7 +66,7 @@ export default function EPGProgram({
         >
             {program.duration > 50 && (
                 <>
-                    <div>
+                    <div style={{ width: style.width - 20 }}>
                         <div className="channel-row--program---timing">
                             {isShowing && isBroadcasting && (
                                 <>
@@ -98,8 +99,11 @@ export default function EPGProgram({
                             {program.description}
                         </div>
                     </div>
-                    { isBroadcasting && (
-                        <div className="channel-row--program-icon">
+                    {isBroadcasting && (
+                        <div
+                            className="channel-row--program-icon"
+                            onClick={iconClicked}
+                        >
                             <InlineSVG type="more" />
                         </div>
                     )}
