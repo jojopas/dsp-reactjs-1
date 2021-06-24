@@ -38,7 +38,9 @@ const Modal = ({ data, resetFn }) => {
                             {" . "}
                             <span className="modal-time-left">
                                 {timeLeftDuration(
-                                    data.nowprogram.ends - nowTime
+                                    isBroadcasting
+                                        ? data.nowprogram.ends - nowTime
+                                        : data.nowprogram.starts - nowTime
                                 )}
                                 left
                             </span>
@@ -62,7 +64,7 @@ const Modal = ({ data, resetFn }) => {
                 </div>
                 <div class="modal-footer">
                     <div
-                        className={`watch ${isBroadcasting ?'': "inActive" }`}
+                        className={`watch ${isBroadcasting ? "" : "inActive"}`}
                     >
                         <InliveSVG type="play" />
                         {isBroadcasting
