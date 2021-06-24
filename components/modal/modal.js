@@ -22,6 +22,9 @@ const Modal = ({ data, resetFn }) => {
     };
     const now = new Date();
     const nowTime = now.getTime() / 1000;
+    const isBroadcasting =
+        nowTime >= data?.nowprogram?.starts && nowTime <= data?.nowprogram?.ends;
+
     return data ? (
         <div id="myModal" className="modal" onClick={() => resetFn()}>
             <div className="modal-content">
@@ -58,9 +61,15 @@ const Modal = ({ data, resetFn }) => {
                     <p>{data.nowprogram.description}</p>
                 </div>
                 <div class="modal-footer">
-                    <div className="watch">
-                        <InliveSVG type='lock'/>
-                        Watch Now
+                    <div
+                        className={`watch ${isBroadcasting ?'': "inActive" }`}
+                    >
+                        <InliveSVG type="play" />
+                        {isBroadcasting
+                            ? "Watch Now"
+                            : `Watch after ${timeLeftDuration(
+                                  data.nowprogram.starts - nowTime
+                              )}`}
                     </div>
                 </div>
             </div>
