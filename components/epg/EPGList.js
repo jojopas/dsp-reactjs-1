@@ -6,8 +6,6 @@ import { constants } from "../../config";
 import EPGRow from "./EPGRow";
 import ChannelLogo from "./EPGChannel";
 
-import $ from "jquery";
-
 export default function EPGList({
     data,
     changeCurrentSlug,
@@ -92,18 +90,15 @@ export default function EPGList({
     );
 
     const epgScroll = (eve) => {
-        $(".timeslot-row").css(
-            eve.target?.scrollingElement?.scrollTop > 0
-                ? {
-                      backgroundcolor: "#0e212f",
-                      top: eve.target?.scrollingElement?.scrollTop,
-                  }
-                : {
-                      top: eve.target?.scrollingElement?.scrollTop,
-                  }
-        );
-        $(".timeElapsed").css({
-            marginTop: eve.target?.scrollingElement?.scrollTop,
+        const scrollTop = eve.target.scrollingElement.scrollTop;
+        const isTop = scrollTop > 0;
+        const rows = document.querySelectorAll('.timeslot-row');
+        rows.forEach((row) => {
+            row.style.cssText = (isTop) ? `background-color: #0e212f; top:${scrollTop}px` : `top:${scrollTop}px`;
+        });
+        const elapsed = document.querySelectorAll('.timeElapsed');
+        elapsed.forEach((row) => {
+            row.style.marginTop = `${scrollTop}px`;
         });
     };
 
