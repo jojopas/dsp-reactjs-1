@@ -467,7 +467,7 @@ export default function Channel({
             >
                 <LocalSEOTags pageType={pageType} seoObj={currentSEO} />
                 <h1 className="noShow">Channels</h1>
-                <div className="container">
+                <div className="epg-container">
                     <div className="epgPlayer">
                         <div className="fixed-player">
                             <div className="live-watching">

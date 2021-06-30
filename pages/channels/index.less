@@ -1,41 +1,33 @@
 @import "../../styles/config.less";
 
-.container {
+
+.epg-container {
     display: flex;
-    overflow: hidden;
-    .epg-container {
-        position: relative;
-        left: 50px;
-        top: 40px;
-        overflow-x: auto;
-        width: calc(~"100% - 250px - 1.5em");
-        @media (max-width: (@mobileLargeBP + 1px)) {
-            width: 100%;
-            top: 10px;
-            left: 0;
-        }
-    }
+    padding-top: @headerHeight;
 
     .epgPlayer {
-        display: block;
-        // position: fixed;
-        top: 40px;
-        height: 300px;
-        margin-top: 60px;
-        width: 300px;
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        align-self: flex-start;
+        top: @headerHeight;
+        width: 400px;
         z-index: 90;
+        padding: 0 20px;
+        .bsBoxSizing();
 
         .ads {
             display: flex;
             justify-content: center;
             width: 100%;
-            margin: 280px 10px 0px 10px;
+            margin-top: 30px;
+
             @media (max-width: @mobileLargeBP) {
                 display: none;
             }
         }
 
-        .current-channel-information {
+        /*.current-channel-information {
             margin-left: 10px;
             display: flex;
             margin-top: 80px;
@@ -59,26 +51,23 @@
                 margin: 0px;
                 font: 15px Roboto;
             }
-        }
+        }*/
 
         .fixed-player {
-            position: fixed;
-
             .live-watching {
                 color: @colorYellow;
                 font-size: large;
+
+                @media (max-width: @mobileLargeBP) {
+                    display: none;
+                }
             }
 
             @media (max-width: @mobileLargeBP) {
-                z-index: 90;
-                width: 100%;
-                margin: 10px 0px;
-                padding: 10px;
-                align-items: center;
                 background-color: #0e212f;
             }
 
-            @media (min-width: (@mobileLargeBP + 1px)) {
+            /*@media (min-width: (@mobileLargeBP + 1px)) {
                 box-shadow: 0px 3px 10px rgba(0, 0, 0, 0);
                 .bsTransition(box-shadow);
 
@@ -203,16 +192,20 @@
                         width: ~"calc(100% + 1px)";
                     }
                 }
-            }
+            }*/
         }
 
-        @media (max-width: (@mobileLargeBP )) {
-            margin: 60px 15px;
+        @media (max-width: @mobileLargeBP) {
+            padding:0;
+            top:@headerHeightMob;
+            display:block;
+            width:100%;
         }
     }
 
-    @media (max-width: (@mobileLargeBP + 1px)) {
-        display: block;
+    @media (max-width: @mobileLargeBP) {
+        flex-direction:column;
+        padding-top: @headerHeightMob;
     }
 }
 
