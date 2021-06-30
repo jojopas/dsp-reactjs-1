@@ -84,6 +84,7 @@ export default function EPGList({
 
     const TimeElapsed = () => (
         <div
+            key='timeElapsed'
             className="timeElapsed"
             style={{
                 width: `${currrentTimeWidth()}px`,
