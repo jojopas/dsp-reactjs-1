@@ -94,11 +94,7 @@ export default function EPGList({
         const isTop = scrollTop > 0;
         const rows = document.querySelectorAll('.timeslot-row');
         rows.forEach((row) => {
-            row.style.cssText = (isTop) ? `background-color: #0e212f; top:${scrollTop}px` : `top:${scrollTop}px`;
-        });
-        const elapsed = document.querySelectorAll('.timeElapsed');
-        elapsed.forEach((row) => {
-            row.style.marginTop = `${scrollTop}px`;
+            row.style.cssText = (isTop) ? `background-color: #0e212f; transform:translateY(${scrollTop}px)` : `transform:translateY(${scrollTop}px)`;
         });
     };
 
