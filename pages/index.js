@@ -19,7 +19,7 @@ import Modal from "../components/modal/modal";
 
 const { publicRuntimeConfig } = getConfig();
 
-import "./index.less";
+//import "./index.less";
 
 import LocalSEOTags from "../head/local";
 import { visibilityCheck } from "../helpers/utils/browser";
