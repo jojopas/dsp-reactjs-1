@@ -16,43 +16,6 @@
         padding: 0 20px;
         .bsBoxSizing();
 
-        .ads {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            margin-top: 30px;
-
-            @media (max-width: @mobileLargeBP) {
-                display: none;
-            }
-        }
-
-        /*.current-channel-information {
-            margin-left: 10px;
-            display: flex;
-            margin-top: 80px;
-            color: white;
-            align-items: center;
-
-            img {
-                width: 30px;
-                height: 30px;
-                margin-right: 20px;
-            }
-
-            .now-playing {
-                font: 12px Roboto;
-                color: #fbcc35;
-                text-overflow: ellipsis;
-            }
-
-            h1 {
-                align-self: center;
-                margin: 0px;
-                font: 15px Roboto;
-            }
-        }*/
-
         .fixed-player {
             padding-top: 70px;
             position:relative;
@@ -197,6 +160,42 @@
                     }
                 }
             }*/
+        }
+
+        .current-channel-information {
+            display: flex;
+            margin-top: 30px;
+            color: white;
+            align-items: center;
+
+            img {
+                width: 30px;
+                height: 30px;
+                margin-right: 20px;
+            }
+
+            .now-playing {
+                font: 12px Roboto;
+                color: #fbcc35;
+                text-overflow: ellipsis;
+            }
+
+            h1 {
+                align-self: center;
+                margin: 0px;
+                font: 15px Roboto;
+            }
+        }
+
+        .ads {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 30px;
+
+            @media (max-width: @mobileLargeBP) {
+                display: none;
+            }
         }
 
         @media (max-width: @mobileLargeBP) {
