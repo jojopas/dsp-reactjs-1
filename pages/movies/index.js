@@ -16,7 +16,6 @@ import { slugify } from "../../helpers/utils/strings";
 import GenreSelector from "../../components/nav/GenreSelector";
 import Button from "../../components/button/Button";
 import { constants } from "../../config";
-import { data } from "jquery";
 import InlineSVG from "../../components/InlineSVG";
 export default function Movies({
     session,
@@ -44,7 +43,7 @@ export default function Movies({
         }
     }, [width]);
 
-    React.useEffect(()=> {
+    React.useEffect(() => {
         if (clickedCardTitle) {
             history?.replaceState(
                 null,
@@ -54,7 +53,7 @@ export default function Movies({
         } else {
             history?.replaceState(null, "", `/movies`);
         }
-    }, [clickedCardTitle])
+    }, [clickedCardTitle]);
     // console.log("rails", page);
     const views = width
         ? page?.movies
@@ -96,7 +95,6 @@ export default function Movies({
             : null
         : null;
 
-    
     return useObserver(() =>
         !error ? (
             clickedCardTitle ? (

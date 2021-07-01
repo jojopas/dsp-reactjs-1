@@ -8,7 +8,6 @@ import { constants } from "../../config";
 import Button from "../button/Button";
 import InlineSVG from "../InlineSVG";
 import Share from "./Share";
-import $ from "jquery";
 import "./PDPTop.less";
 
 export default function PDPTop({ type, pdp, currVideo = null }) {
@@ -25,10 +24,10 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
     };
 
     React.useEffect(() => {
-        const height = $(".pdp-top").height();
-        $(".pdp-bg").css({
-            paddingTop: height + 100,
-        });
+        const pdpTop = document.querySelectorAll(".pdp-top");
+        const pdpBG = document.querySelectorAll(".pdp-bg");
+        const pdpHeight = pdpTop[0].clientHeight;
+        pdpBG[0].style.cssText = `padding-Top: ${pdpHeight + 100}px`;
     }, []);
 
     const measureDescRef = React.useCallback(
