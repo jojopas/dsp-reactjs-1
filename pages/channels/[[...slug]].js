@@ -24,7 +24,7 @@ import { visibilityCheck } from "../../helpers/utils/browser";
 import Player from "../../components/player/Player";
 import getConfig from "next/config";
 import { sendToSegment } from "../../analytics";
-
+import Modal from "../../components/modal/modal";
 export default function Channel({
     session,
     config,
@@ -37,6 +37,7 @@ export default function Channel({
     const store = React.useContext(StoreContext);
     const playerContainer = React.useRef(null);
     const epgPageRef = React.useRef(null);
+    const epgContainer = React.useRef(null);
     const router = useRouter();
     const { genres, promos, channels } = page;
     const [currentChannel, setCurrentChannel] = React.useState();
@@ -62,6 +63,12 @@ export default function Channel({
         }
         firstVideoRef.current = data;
         _setFirstVideo(data);
+    };
+
+    const [modalData, setIconClicked] = React.useState(false);
+    const iconClicked = (data) => {
+        console.log("Kabook Clicked", data);
+        setIconClicked(data);
     };
 
     const [isFirstVideo, _setIsFirstVideo] = React.useState(true);
@@ -189,6 +196,8 @@ export default function Channel({
         hidden = visibility.hidden;
         visibilityChange = visibility.visibilityChange;
     }, []);
+
+    
 
     React.useEffect(() => {
         if (document) {
@@ -467,8 +476,8 @@ export default function Channel({
             >
                 <LocalSEOTags pageType={pageType} seoObj={currentSEO} />
                 <h1 className="noShow">Channels</h1>
-                <div className="container">
-                    <div className="epgPlayer">
+                <div className="epg-container">
+                    <div className="epgPlayer" ref={playerContainer}>
                         <div className="fixed-player">
                             <div className="live-watching">
                                 {constants.WATCHING}
@@ -516,6 +525,7 @@ export default function Channel({
                     </div>
 
                     <EPGList
+                        ref={epgContainer}
                         data={result}
                         onClick={setFirstVideo}
                         changeCurrentSlug={changeCurrentSlug}
@@ -529,7 +539,11 @@ export default function Channel({
                         pageType={pageType}
                     />
                 </div>
-
+                <Modal
+                    data={modalData}
+                    resetFn={iconClicked}
+                    onClick={setFirstVideo}
+                />
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </div>
         ) : (

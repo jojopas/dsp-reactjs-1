@@ -4,10 +4,9 @@
 .epg {
     display: flex;
     overflow-x: auto;
-    margin-top: 360px;
-    @media (min-width: (@mobileLargeBP + 1px)) {
-        // margin-left: 305px;
-        margin-top: 50px;
+    // margin-top: 360px;
+    @media (max-width: (@mobileLargeBP + 1px)) {
+         margin-top: 274px;
     }
 }
 
@@ -15,7 +14,7 @@
     position: absolute;
     left: 1px;
     z-index: 5;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     margin-top: 0px;
     background-color: #fbcc353b;
@@ -53,7 +52,6 @@
     position: relative;
     align-items: flex-end;
     font: 15px Roboto;
-    top: 290px;
     z-index: 30;
     background-color: #0e212f;
     behavior: smooth;
@@ -213,6 +211,11 @@
     border-right: 2px solid @colorBorder;
     z-index: 20;
     font-weight: lighter;
+    position:relative;
+
+    & > div{
+        width:100%;
+    }
 
     .channel-row--program---title {
         max-height: 2.5em;
@@ -226,7 +229,7 @@
 
     &-icon {
         display: none;
-        width: 30px;
+        width: 30px !important;
         height: 64px;
         fill: @colorNavGray;
         align-self: center;

@@ -39,7 +39,7 @@ export default function EPGRow({
         <div
             className="channel-row"
             key={channel.id}
-            onClick={() => onClick(channel)}
+            // onClick={() => onClick(channel)}
         >
             {/* <ChannelLogo
                 channel={channel}

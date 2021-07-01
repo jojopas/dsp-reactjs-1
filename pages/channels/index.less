@@ -1,218 +1,91 @@
 @import "../../styles/config.less";
 
-.container {
+.epg-container {
     display: flex;
     overflow: hidden;
-    .epg-container {
-        position: relative;
-        left: 50px;
-        top: 40px;
-        overflow-x: auto;
-        width: calc(~"100% - 250px - 1.5em");
-        @media (max-width: (@mobileLargeBP + 1px)) {
-            width: 100%;
-            top: 10px;
-            left: 0;
-        }
-    }
+    padding-top: @headerHeight;
 
     .epgPlayer {
-        display: block;
-        // position: fixed;
-        top: 40px;
-        height: 300px;
-        margin-top: 60px;
-        width: 300px;
+        display: flex;
+        flex-direction: column;
+        position: sticky;
+        align-self: flex-start;
+        top: @headerHeight;
+        width: 400px;
         z-index: 90;
+        padding: 0 20px;
+        .bsBoxSizing();
+
+        .fixed-player {
+            position: relative;
+
+            .live-watching {
+                // position: absolute;
+                // top: 40px;
+                color: @colorYellow;
+                font-size: large;
+
+                @media (max-width: @mobileLargeBP) {
+                    display: none;
+                }
+            }
+
+            @media (max-width: @mobileLargeBP) {
+                padding-top: 0;
+                background-color: #0e212f;
+            }
+            .current-channel-information {
+                display: flex;
+                margin-top: 10px;
+                color: white;
+                align-items: center;
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 20px;
+                }
+
+                .now-playing {
+                    font: 12px Roboto;
+                    color: #fbcc35;
+                    text-overflow: ellipsis;
+                }
+
+                h1 {
+                    align-self: center;
+                    margin: 0px;
+                    font: 15px Roboto;
+                }
+
+                .channelName {
+                    font: 12px Roboto;
+                }
+            }
+        }
 
         .ads {
             display: flex;
             justify-content: center;
             width: 100%;
-            margin: 280px 10px 0px 10px;
+            margin-top: 30px;
+
             @media (max-width: @mobileLargeBP) {
                 display: none;
             }
         }
-
-        .current-channel-information {
-            margin-left: 10px;
-            display: flex;
-            margin-top: 80px;
-            color: white;
-            align-items: center;
-
-            img {
-                width: 30px;
-                height: 30px;
-                margin-right: 20px;
-            }
-
-            .now-playing {
-                font: 12px Roboto;
-                color: #fbcc35;
-                text-overflow: ellipsis;
-            }
-
-            h1 {
-                align-self: center;
-                margin: 0px;
-                font: 15px Roboto;
-            }
-        }
-
-        .fixed-player {
+        @media (max-width: @mobileLargeBP) {
+            padding: 0;
+            top: @headerHeightMob;
+            display: block;
+            width: 100%;
             position: fixed;
-
-            .live-watching {
-                color: @colorYellow;
-                font-size: large;
-            }
-
-            @media (max-width: @mobileLargeBP) {
-                z-index: 90;
-                width: 100%;
-                margin: 10px 0px;
-                padding: 10px;
-                align-items: center;
-                background-color: #0e212f;
-            }
-
-            @media (min-width: (@mobileLargeBP + 1px)) {
-                box-shadow: 0px 3px 10px rgba(0, 0, 0, 0);
-                .bsTransition(box-shadow);
-
-                .vjs-control-bar {
-                    top: 0;
-                    bottom: auto;
-                    height: 100%;
-                    align-items: flex-start;
-                    padding: 20px 30px !important;
-
-                    background: none !important;
-
-                    &:before {
-                        content: "";
-                        position: absolute;
-                        top: -2px;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        pointer-events: none;
-                        //background: linear-gradient(180deg, rgba(19, 35, 54, 1) 0%, rgba(19, 35, 54, 0.2) 10%) !important;
-                        z-index: 90;
-                    }
-
-                    & > * {
-                        align-self: flex-start !important;
-                    }
-
-                    & > .vjs-menu {
-                        bottom: auto !important;
-                        top: ~"calc(200% + 20px)" !important;
-                    }
-
-                    .vjs-subs-caps-button {
-                        .vjs-menu {
-                            bottom: auto !important;
-                            top: ~"calc(200%)" !important;
-                        }
-                    }
-                }
-
-                .video-js {
-                    & > * {
-                        z-index: 10;
-                    }
-
-                    .vjs-tech {
-                        z-index: 1;
-                    }
-
-                    .vjs-poster {
-                        z-index: 2;
-                    }
-
-                    .vjs-text-track-display {
-                        z-index: 3;
-                    }
-
-                    &:not(.vjs-fullscreen) {
-                        &:after {
-                            content: "";
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            right: -1px;
-                            bottom: -1px;
-                            background: transparent
-                                linear-gradient(
-                                    180deg,
-                                    rgba(19, 35, 54, 0.4) 40%,
-                                    rgba(19, 35, 54, 1) 95%
-                                )
-                                0% 0% no-repeat padding-box;
-                            pointer-events: none;
-                            z-index: 5;
-                            opacity: 1;
-                            .bsTransition(opacity, 0.5s);
-
-                            @media (max-height: 630px) {
-                                background: transparent
-                                    linear-gradient(
-                                        180deg,
-                                        rgba(19, 35, 54, 0.6) 40%,
-                                        rgba(19, 35, 54, 1) 90%
-                                    )
-                                    0% 0% no-repeat padding-box;
-                            }
-
-                            @media (max-height: 630px) and (min-width: @maxSiteWidth) {
-                                background: transparent
-                                    linear-gradient(
-                                        180deg,
-                                        rgba(19, 35, 54, 0.65) 40%,
-                                        rgba(19, 35, 54, 1) 90%
-                                    )
-                                    0% 0% no-repeat padding-box;
-                            }
-                        }
-                    }
-                }
-
-                &:after {
-                    content: "";
-                    position: absolute;
-                    top: ~"calc(100% - 1px)";
-                    left: 0;
-                    width: 100%;
-                    height: 400px;
-                    background: transparent
-                        linear-gradient(
-                            0deg,
-                            rgba(2, 9, 15, 0) 0%,
-                            rgba(2, 9, 15, 0.7) 50%,
-                            rgba(2, 9, 15, 1) 80%
-                        )
-                        0% 0% no-repeat padding-box;
-                    opacity: 0;
-                    .bsTransition(opacity, 0.3s);
-                    pointer-events: none;
-
-                    @media (min-width: (@maxSiteWidth + 12px)) {
-                        width: ~"calc(100% + 1px)";
-                    }
-                }
-            }
-        }
-
-        @media (max-width: (@mobileLargeBP )) {
-            margin: 60px 15px;
         }
     }
 
-    @media (max-width: (@mobileLargeBP + 1px)) {
-        display: block;
+    @media (max-width: @mobileLargeBP) {
+        flex-direction: column;
+        padding-top: @headerHeightMob;
     }
 }
 

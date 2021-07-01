@@ -2,8 +2,7 @@ import "./modal.less";
 import { constants } from "../../config";
 import InliveSVG from "../InlineSVG";
 
-const Modal = ({ data, resetFn }) => {
-    console.log("IsShow", data);
+const Modal = ({ data, resetFn, onClick }) => {
     const timeDuration = (seconds) => {
         const date = new Date(0);
         date.setSeconds(seconds);
@@ -62,7 +61,8 @@ const Modal = ({ data, resetFn }) => {
                     <h1>{`${data.nowprogram.title} Presented by ${data.name}`}</h1>
                     <p>{data.nowprogram.description}</p>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" onClick={()=>isBroadcasting
+                            ? onClick(data):null}>
                     <div
                         className={`watch ${isBroadcasting ? "" : "inActive"}`}
                     >

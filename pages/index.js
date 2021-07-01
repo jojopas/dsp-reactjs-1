@@ -16,7 +16,7 @@ import EPGList from "../components/epg/EPGList";
 import { fetchData } from "../helpers/utils/fetch-data";
 import Modal from "../components/modal/modal";
 const { publicRuntimeConfig } = getConfig();
-import "./index.less";
+// import "./index.less";
 import LocalSEOTags from "../head/local";
 import { visibilityCheck } from "../helpers/utils/browser";
 import Player from "../components/player/Player";
@@ -35,6 +35,7 @@ export default function Channel({
     const store = React.useContext(StoreContext);
     const playerContainer = React.useRef(null);
     const epgPageRef = React.useRef(null);
+    const epgContainer = React.useRef(null);
     const router = useRouter();
     const { genres, promos, channels } = page;
     const [currentChannel, setCurrentChannel] = React.useState();
@@ -53,8 +54,7 @@ export default function Channel({
     const [firstVideo, _setFirstVideo] = React.useState(null);
     const firstVideoRef = React.useRef(firstVideo);
     const setFirstVideo = (data) => {
-        console.log("setFirstVideo", data);
-        if (data.slug) {
+       if (data.slug) {
             setCurrentChannel(data);
             changeCurrentSlug(data.slug);
         }
@@ -186,6 +186,10 @@ export default function Channel({
         hidden = visibility.hidden;
         visibilityChange = visibility.visibilityChange;
     }, []);
+
+    React.useEffect(() => {}, []);
+
+    
 
     React.useEffect(() => {
         if (document) {
@@ -443,6 +447,7 @@ export default function Channel({
         interval = setInterval(() => {
             if (store.playerInstance && store.playerInstance.vjs) {
                 clearInterval(interval);
+                
                 store.playerInstance.vjs.on("useractive", userActive);
                 // window.addEventListener("scroll", epgScroll, false);
                 hoverHandler();
@@ -463,7 +468,7 @@ export default function Channel({
         };
     }, []);
 
-    console.log("currentChannel", currentChannel);
+    // console.log("currentChannel", currentChannel);
     return useObserver(() =>
         !pageError ? (
             <div
@@ -472,8 +477,8 @@ export default function Channel({
             >
                 <LocalSEOTags pageType={pageType} seoObj={currentSEO} />
                 <h1 className="noShow">Channels</h1>
-                <div className="container">
-                    <div className="epgPlayer">
+                <div className="epg-container">
+                    <div className="epgPlayer" ref={playerContainer}>
                         <div className="fixed-player">
                             <div className="live-watching">
                                 {constants.WATCHING}
@@ -495,7 +500,7 @@ export default function Channel({
                                         className="lazyload"
                                     />
                                     <div>
-                                        <div class="now-playing">
+                                        <div className="now-playing">
                                             Now Playing
                                         </div>
                                         <h1>
@@ -520,6 +525,7 @@ export default function Channel({
                         </div>
                     </div>
                     <EPGList
+                        ref={epgContainer}
                         className={!userIsActive ? "epgInactive" : ""}
                         data={result}
                         onClick={setFirstVideo}
@@ -535,7 +541,11 @@ export default function Channel({
                         pageType={pageType}
                     />
                 </div>
-                <Modal data={modalData} resetFn={iconClicked} />
+                <Modal
+                    data={modalData}
+                    resetFn={iconClicked}
+                    onClick={setFirstVideo}
+                />
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </div>
         ) : (

@@ -6,8 +6,6 @@ import { constants } from "../../config";
 import EPGRow from "./EPGRow";
 import ChannelLogo from "./EPGChannel";
 
-import $ from "jquery";
-
 export default function EPGList({
     data,
     changeCurrentSlug,
@@ -26,6 +24,7 @@ export default function EPGList({
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
     const [marginTop, setMarginTop] = React.useState(0);
+    const [isMobileEPG, setIsMobileEPG] = React.useState(false);
     let channelRef, timeRowRef;
     let nowTime = 0;
     const now = new Date();
@@ -76,15 +75,27 @@ export default function EPGList({
             setRowList(filterList());
         }
     }, [data, currentSlug]);
-
+    const changeMobileView = () => {
+        if (store.isBreakpoint) {
+            const rows = document.querySelectorAll(".epgPlayer");
+            const playerHeight = rows[0].clientHeight;
+            const epg = document.querySelectorAll(".epg");
+            epg[0].style.cssText = `margin-Top:${playerHeight}px`;
+            setIsMobileEPG(true);
+        } else {
+            const epg = document.querySelectorAll(".epg");
+            epg[0].style.cssText = `margin-Top:0px`;
+        }
+    };
     React.useEffect(() => {
         window.addEventListener("scroll", epgScroll);
+        changeMobileView();
         return () => window.removeEventListener("scroll", epgScroll);
     }, [currentGenre, store.isVideoLoading]);
 
     const TimeElapsed = () => (
         <div
-            key='timeElapsed'
+            key="timeElapsed"
             className="timeElapsed"
             style={{
                 width: `${currrentTimeWidth()}px`,
@@ -93,18 +104,17 @@ export default function EPGList({
     );
 
     const epgScroll = (eve) => {
-        $(".timeslot-row").css(
-            eve.target?.scrollingElement?.scrollTop > 0
-                ? {
-                      backgroundcolor: "#0e212f",
-                      top: eve.target?.scrollingElement?.scrollTop,
-                  }
-                : {
-                      top: eve.target?.scrollingElement?.scrollTop,
-                  }
-        );
-        $(".timeElapsed").css({
-            marginTop: eve.target?.scrollingElement?.scrollTop,
+        if (!isMobileEPG) {
+            changeMobileView();
+            setIsMobileEPG(true);
+        }
+        const scrollTop = eve.target.scrollingElement.scrollTop;
+        const isTop = scrollTop > 0;
+        const rows = document.querySelectorAll(".timeslot-row");
+        rows.forEach((row) => {
+            row.style.cssText = isTop
+                ? `background-color: #0e212f; transform:translateY(${scrollTop}px)`
+                : `transform:translateY(${scrollTop}px)`;
         });
     };
 

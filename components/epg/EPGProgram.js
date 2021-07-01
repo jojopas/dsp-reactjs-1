@@ -9,7 +9,6 @@ export default function EPGProgram({
     currrentTimeElapsed,
     nowTime,
     iconClicked,
-
     index,
 }) {
     const timeDuration = (seconds) => {
@@ -40,7 +39,9 @@ export default function EPGProgram({
     const isBroadcasting =
         totalTime >= program.starts && totalTime <= program.ends;
     const style = {
-        width: (duration / 1800) * constants.EPG_30_MINUTE_WIDTH - index * 2,
+        width: Math.floor(
+            (duration / 1800) * constants.EPG_30_MINUTE_WIDTH - index * 2
+        ),
     };
 
     // if (nowTime > 0) {
@@ -67,7 +68,7 @@ export default function EPGProgram({
         >
             {program.duration > 50 && (
                 <>
-                    <div style={{ width: style.width - 20 }}>
+                    <div>
                         <div className="channel-row--program---timing">
                             {isShowing && isBroadcasting && (
                                 <>
