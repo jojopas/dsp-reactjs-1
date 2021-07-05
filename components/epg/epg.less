@@ -4,10 +4,6 @@
 .epg {
     display: flex;
     overflow-x: auto;
-    // margin-top: 360px;
-    @media (max-width: (@mobileLargeBP + 1px)) {
-         margin-top: 274px;
-    }
 }
 
 .timeElapsed {
@@ -27,13 +23,6 @@
 .right-row {
     overflow-x: auto;
     margin-left: 10px;
-}
-
-.left-row {
-    margin-left: 50px;
-    @media (max-width: (@mobileLargeBP + 1px)) {
-        margin-left: 0px;
-    }
 }
 
 .channel-logos {
@@ -64,15 +53,18 @@
     .timeslot-row--date {
         padding: 10px 0px;
         top: 0;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
         // background: @colorBG;
 
         select {
             color: @colorNavGray;
-            background-color: transparent;
+            background-color: #ebebeb;
+            opacity: 0.7;
+            border-radius: 20px;
             border: none;
-            padding-left: 5px;
+            margin-left: 15px;
+            padding: 2px;
 
             option {
                 background-color: @colorBGMain;
@@ -102,11 +94,9 @@
 }
 
 .channel-info {
-    fill: white;
     background-color: #122d42;
     z-index: 10;
     height: 70px;
-    position: sticky;
     display: inline-flex;
     justify-content: center;
     border-top: 2px solid @colorBorder;
@@ -115,7 +105,7 @@
     cursor: pointer;
 
     &:active {
-        height: 100px;
+        height: 70px;
         background-color: @colorYellow;
     }
 
@@ -181,6 +171,67 @@
     height: 92px;
     background-color: #1b3447;
     white-space: nowrap;
+
+    .channel-row--program {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        border-top: 2px solid @colorBorder;
+        border-right: 2px solid @colorBorder;
+        z-index: 20;
+        font-weight: lighter;
+        position: relative;
+
+        &-about {
+            width: calc(100% - 10px);
+        }
+
+        .channel-row--program---title {
+            max-height: 2.5em;
+            display: block;
+            font: 15px Roboto;
+            color: white;
+            margin-left: 10px;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            white-space: break-spaces;
+        }
+
+        &-icon {
+            width: 30px !important;
+            height: 64px;
+            display: flex;
+            fill: @colorNavGray;
+            align-self: center;
+            float: right;
+
+            &:hover {
+                cursor: pointer;
+                color: white;
+            }
+        }
+
+        .channel-row--program---description {
+            font: 12px Roboto;
+            color: @colorNavGray;
+            margin-left: 10px;
+            display: none;
+        }
+
+        .channel-row--program---timing {
+            display: flex;
+            font: 12px Roboto;
+            overflow: hidden;
+            color: @colorNavGray;
+            margin-left: 10px;
+        }
+
+        .channel-row--program---watching {
+            font: 12px Roboto;
+            color: @colorYellow;
+            text-overflow: ellipsis;
+        }
+    }
 }
 
 .channel-now {
@@ -196,70 +247,5 @@
         .channel-row--program---timing {
             color: white;
         }
-
-        .channel-row--program-icon {
-            display: block;
-        }
-    }
-}
-
-.channel-row--program {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    border-top: 2px solid @colorBorder;
-    border-right: 2px solid @colorBorder;
-    z-index: 20;
-    font-weight: lighter;
-    position:relative;
-
-    & > div{
-        width:100%;
-    }
-
-    .channel-row--program---title {
-        max-height: 2.5em;
-        display: block;
-        font: 15px Roboto;
-        margin-left: 10px;
-        -webkit-line-clamp: 3;
-        overflow: hidden;
-        white-space: break-spaces;
-    }
-
-    &-icon {
-        display: none;
-        width: 30px !important;
-        height: 64px;
-        fill: @colorNavGray;
-        align-self: center;
-        float: right;
-
-        &:hover {
-            cursor: pointer;
-            color: white;
-        }
-        
-    }
-
-    .channel-row--program---description {
-        font: 12px Roboto;
-        color: @colorNavGray;
-        margin-left: 10px;
-        display: none;
-    }
-
-    .channel-row--program---timing {
-        display: flex;
-        font: 12px Roboto;
-        overflow: hidden;
-        color: @colorNavGray;
-        margin-left: 10px;
-    }
-
-    .channel-row--program---watching {
-        font: 12px Roboto;
-        color: @colorYellow;
-        text-overflow: ellipsis;
     }
 }

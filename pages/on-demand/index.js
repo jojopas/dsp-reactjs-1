@@ -52,7 +52,6 @@ export default function Home({
         }
     }, [clickedCardTitle]);
 
-    
     const views = width
         ? page?.movies
             ? page?.movies[0].channels
@@ -74,15 +73,8 @@ export default function Home({
                                       </div>
                                       <Button
                                           inner={constants.WATCH_NOW}
-                                          onClick={() =>
-                                              launchPlayer(
-                                                  pdp.videoId
-                                                      ? pdp.videoId
-                                                      : pdp.seasons[0].cards[0]
-                                                            .id,
-                                                  currVideo
-                                              )
-                                          }
+                                          url={`/movies/${el.slug}`}
+                                          as={`/movies/${el.slug}`}
                                       />
                                   </div>
                               </div>
@@ -157,9 +149,9 @@ Home.getLayout = getLayout;
 export const getServerSideProps = async ({ req, res }) => {
     let { session, config } = await getSession(req, res);
     const routes = [
+        "/api/dsp/company/available/genres/movies",
         "/api/dsp/homepage",
         "/api/dsp/movies/US/ios",
-        "/api/dsp/company/available/genres/",
     ];
     const pageOptions = { req, res, routes, session, config };
     const page = await pageBuilder(pageOptions);

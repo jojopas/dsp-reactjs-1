@@ -1,0 +1,24 @@
+@import url("../../styles/config.less");
+@iconWidth: 20px;
+
+.scroll {
+    display: flex;
+    width: 50px;
+    position: fixed;
+    top: 65px;
+    right: 30px;
+    justify-content: space-between;
+    fill: #0f293d;
+
+    .scrollLeftRight {
+        width: @iconWidth;
+        height: @iconWidth;
+        border-radius: @iconWidth;
+        background-color: @colorYellow;
+        
+        &:hover {
+            background-color: #ffffff1c;
+            cursor: pointer;
+        }
+    }
+}

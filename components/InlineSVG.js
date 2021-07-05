@@ -228,14 +228,11 @@ export default function InlineSVG({ type }) {
             );
         case "more":
             return (
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M0 0h24v24H0z" fill="none" />
                     <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
                 </svg>
-            );    
+            );
         case "myAccount":
             return (
                 <svg
@@ -318,7 +315,7 @@ export default function InlineSVG({ type }) {
             );
         case "play":
             return (
-                <svg width='24px' height='24px' viewBox="0 0 24 24">
+                <svg width="24px" height="24px" viewBox="0 0 24 24">
                     <path d="M6.87,20.608l14.834-8.1a.583.583,0,0,0,0-1.024L6.87,3.392a.583.583,0,0,0-.863.512V20.096a.583.583,0,0,0,.863.512Z" />
                 </svg>
             );
@@ -334,23 +331,23 @@ export default function InlineSVG({ type }) {
                     <path d="M8.053,3.462l8.538,8.531L8.053,20.524,6.992,19.463l7.476-7.469L6.992,4.525Z" />
                 </svg>
             );
-        case "backArrow" : 
-        return (
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12.931"
-                height="23.819"
-                viewBox="0 0 12.931 23.819"
-            >
-                <path
-                    id="Path_13189"
-                    data-name="Path 13189"
-                    d="M148.086,473.079a.744.744,0,0,1-.53-.22l-11.431-11.43a.75.75,0,1,1,1.061-1.061l10.9,10.9,7.848-7.848,2.51-2.51a.75.75,0,0,1,1.06,1.06l-10.888,10.888A.744.744,0,0,1,148.086,473.079Z"
-                    transform="translate(473.079 -135.905) rotate(90)"
-                    fill="rgba(235,235,235,0.7)"
-                />
-            </svg>
-        );    
+        case "backArrow":
+            return (
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12.931"
+                    height="23.819"
+                    viewBox="0 0 12.931 23.819"
+                >
+                    <path
+                        id="Path_13189"
+                        data-name="Path 13189"
+                        d="M148.086,473.079a.744.744,0,0,1-.53-.22l-11.431-11.43a.75.75,0,1,1,1.061-1.061l10.9,10.9,7.848-7.848,2.51-2.51a.75.75,0,0,1,1.06,1.06l-10.888,10.888A.744.744,0,0,1,148.086,473.079Z"
+                        transform="translate(473.079 -135.905) rotate(90)"
+                        fill="rgba(235,235,235,0.7)"
+                    />
+                </svg>
+            );
         case "streamMy":
             return (
                 <svg viewBox="0 0 24 24">
@@ -490,6 +487,21 @@ export default function InlineSVG({ type }) {
 		V196.563z"
                         />
                     </g>
+                </svg>
+            );
+
+        case "left":
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z" />
+                </svg>
+            );
+        case "right":
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M0 0h24v24H0V0z" fill="none" />
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z" />
                 </svg>
             );
         default:

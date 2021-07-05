@@ -124,12 +124,12 @@ export default function Show({session, config, page, slug, error, pageType, seoO
                     ) : <span className="pdp-seasons-empty"/>}
                     { pdp.seasons ? <CardList key={`episodes-${currSeason}`} type="video" useHeader={false} onClick={playEpisode} current={currEpisode} data={pdp.seasons[currSeason-1]}/> : null}
                     { moreLikeThis ? <CardList key={`more-${pdp.id}`} type="title" data={moreLikeThis}/> : null}
-                    { genres.length > 0 ? (
+                    {/* { genres.length > 0 ? (
                         <ButtonList className="pdp-genres" type="grid" header={constants.GENRES} data={genres} />
                     ) : null}
                     { tags.length > 0 ? (
                         <ButtonList className="pdp-tags" type="grid" header={constants.TAGS} data={tags} />
-                    ) : null}
+                    ) : null} */}
                 </div>
                 <Player pageType={pageType} video={firstVideo} autostart={false} showPlayer={store.showPlayer} />
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}

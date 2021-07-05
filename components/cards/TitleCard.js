@@ -41,8 +41,8 @@ export default function TitleCard(data) {
                                     className="lazyloaded"
                                 />
                             )}
-                            {data.locked ? <Locked /> : null}
-                            <ProgressBar value={Math.random()} />
+                            {/* {data.locked ? <Locked /> : null} */}
+                            {/* <ProgressBar value={Math.random()} /> */}
                         </>
                     </a>
                 </Link>

@@ -18,6 +18,7 @@ const ChannelLogo = ({
         channelStyle.fill = "#122d42";
     }
 
+    const imageDiff = 70;
     return (
         <div
             className={"channel-info"}
@@ -30,8 +31,11 @@ const ChannelLogo = ({
                     className="channel-info--image"
                     src={constants.NOT_FOUND_SRC}
                     data-sizes="auto"
-                    data-srcset={`${channel.logo}/${width - 30}/${width - 30}`}
-                    data-src={`${channel.logo}/${width - 30}/${width - 30}`}
+                    sizes={`${width - imageDiff}px`}
+                    data-srcset={`${channel.logo}/${imageDiff}/${imageDiff}`}
+                    data-src={`${channel.logo}/${width - imageDiff}/${
+                        width - imageDiff
+                    }`}
                     alt={channel.name}
                     className="lazyload"
                 />
@@ -43,11 +47,11 @@ const ChannelLogo = ({
                     className="lazyloaded"
                 />
             )}
-            {isLocked && (
+            {/* {isLocked && (
                 <div className="channel-info--locked">
                     <InlineSVG type="lock" />
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

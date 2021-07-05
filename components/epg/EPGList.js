@@ -5,6 +5,7 @@ import "./epg.less";
 import { constants } from "../../config";
 import EPGRow from "./EPGRow";
 import ChannelLogo from "./EPGChannel";
+import ScrollLeftRight from "./ScrollLeftRight";
 
 export default function EPGList({
     data,
@@ -18,7 +19,8 @@ export default function EPGList({
     pageType,
     onClick,
 }) {
-    const channelCellWidth = 100;
+    const channelCellWidth = 120;
+    const epgRef = React.useRef(null);
     const store = React.useContext(StoreContext);
     const [rowList, setRowList] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(null);
@@ -75,21 +77,10 @@ export default function EPGList({
             setRowList(filterList());
         }
     }, [data, currentSlug]);
-    const changeMobileView = () => {
-        if (store.isBreakpoint) {
-            const rows = document.querySelectorAll(".epgPlayer");
-            const playerHeight = rows[0].clientHeight;
-            const epg = document.querySelectorAll(".epg");
-            epg[0].style.cssText = `margin-Top:${playerHeight}px`;
-            setIsMobileEPG(true);
-        } else {
-            const epg = document.querySelectorAll(".epg");
-            epg[0].style.cssText = `margin-Top:0px`;
-        }
-    };
+
     React.useEffect(() => {
         window.addEventListener("scroll", epgScroll);
-        changeMobileView();
+
         return () => window.removeEventListener("scroll", epgScroll);
     }, [currentGenre, store.isVideoLoading]);
 
@@ -105,7 +96,6 @@ export default function EPGList({
 
     const epgScroll = (eve) => {
         if (!isMobileEPG) {
-            changeMobileView();
             setIsMobileEPG(true);
         }
         const scrollTop = eve.target.scrollingElement.scrollTop;
@@ -120,18 +110,27 @@ export default function EPGList({
 
     const nextEPGDates = () => {
         const date = new Date();
+        const month = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ];
         date.setHours(0, 0);
         let dateSlots = {};
         const getDateString = (date) =>
-            `${date.getDate()} ${date.toDateString().substring(0, 4)}`;
-        dateSlots["Today"] = date.getTime();
-        for (let index = 0; index < 6; index++) {
+            `${month[date.getMonth()]} ${date.getDate()}`;
+        for (let index = 0; index < 7; index++) {
+            dateSlots[getDateString(date)] = date.getTime();
             date.setDate(date.getDate() + 1);
-            if (index == 0) {
-                dateSlots["Tomorrow"] = date.getTime();
-            } else {
-                dateSlots[getDateString(date)] = date.getTime();
-            }
         }
 
         return (
@@ -141,27 +140,29 @@ export default function EPGList({
                     style={{ width: channelCellWidth + 20 }}
                     key={"Date"}
                 >
-                    <div className="custom-select">
-                        <select name="epgDate" id="epgDate">
-                            {Object.keys(dateSlots).map((key) => (
-                                <option value={dateSlots[key]} key={key}>
-                                    {key}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                    <select name="epgDate" id="epgDate">
+                        {Object.keys(dateSlots).map((key) => (
+                            <option value={dateSlots[key]} key={key}>
+                                {key}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
         );
     };
 
     const currrentTimeWidth = () => {
-        const resultantWidth =
-            (currrentTimeElapsed / 30 / 60) * constants.EPG_30_MINUTE_WIDTH;
+        const resultantWidth = Math.floor(
+            (currrentTimeElapsed / 30 / 60) * constants.EPG_30_MINUTE_WIDTH
+        );
         return Math.abs(resultantWidth);
     };
 
-    // console.log("nowtime", nowTime, currrentTimeElapsed);
+    const onScrollLeft = (left) => {
+        const flag = left ? -1 : 1;
+        epgRef.current.scrollLeft += flag * 0.9 * constants.EPG_30_MINUTE_WIDTH;
+    };
 
     const todaysTimeSlots = () => {
         const Total_Minutes_A_Day = 24 * 60;
@@ -169,8 +170,6 @@ export default function EPGList({
         const hours = now.getHours();
         let minutes = now.getMinutes() > 29 ? 30 : 0;
         now.setMinutes(minutes, 0, 0);
-        // console.log("nowTime1", nowTime, new Date().setUTCSeconds(nowTime));
-
         let timeSlots = [];
         let initialTime = hours * 60 + minutes;
         for (let time = initialTime; time < Total_Minutes_A_Day; time += 30) {
@@ -191,6 +190,9 @@ export default function EPGList({
                 style={{ top: marginTop }}
                 stay-revert-to-fixed="0"
             >
+                {!store.isBreakpoint && (
+                    <ScrollLeftRight onScrollLeft={onScrollLeft} />
+                )}
                 {timeSlots.map((time, index) => (
                     <div
                         className={`${"timeslot-row--time"}`}
@@ -214,8 +216,11 @@ export default function EPGList({
             </div>
         );
     };
+
     const leftContainer = [];
+
     const rightContainer = [<TimeElapsed />];
+
     rowList.forEach((channel, channelIndex) => {
         leftContainer.push(
             <ChannelLogo
@@ -241,15 +246,15 @@ export default function EPGList({
             />
         );
     });
+
     return (
         <div className="epg">
             <div className="left-row" style={{ width: channelCellWidth }}>
                 {nextEPGDates()}
                 <div className="channel-logos">{leftContainer}</div>
             </div>
-            <div className="right-row">
+            <div className="right-row" ref={epgRef}>
                 {todaysTimeSlots()}
-
                 <div className="channel" id="channel">
                     {rightContainer}
                 </div>

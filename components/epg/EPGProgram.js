@@ -63,12 +63,11 @@ export default function EPGProgram({
             title={program.title}
             id={program.duration}
             key={key}
-            onClick={iconClicked}
             tabIndex={1}
         >
             {program.duration > 50 && (
                 <>
-                    <div>
+                    <div className="channel-row--program-about">
                         <div className="channel-row--program---timing">
                             {isShowing && isBroadcasting && (
                                 <>

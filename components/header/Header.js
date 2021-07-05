@@ -42,8 +42,8 @@ export default function Header({}) {
         {
             id: "ondemand",
             inner: "On Demand",
-            url: "/movies",
-            as: "/movies",
+            url: "/on-demand",
+            as: "/on-demand",
         },
 
         // {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
@@ -76,8 +76,8 @@ export default function Header({}) {
             type: "svg",
             svg: "movies",
             inner: "On Demand",
-            url: "/movies",
-            as: "/movies",
+            url: "/on-demand",
+            as: "/on-demand",
         },
         {
             id: "settings",
