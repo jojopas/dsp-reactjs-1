@@ -104,6 +104,12 @@
                 background-color: @colorNavGray;
             }
         }
+
+        @media (max-width: @mobileLargeBP) {
+            width: 100%;
+            -webkit-animation-name: animatebottom;
+            animation-name: animatebottom;
+        }
     }
 }
 
@@ -132,4 +138,25 @@
     }
 }
 
+@-webkit-keyframes animatebottom {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes animatebottom {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+    to {
+        bottom: 0;
+        opacity: 1;
+    }
+}
 /* The Close Button */
