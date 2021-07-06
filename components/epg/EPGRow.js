@@ -47,11 +47,7 @@ export default function EPGRow({
                 isShowing={isShowing}
                 isLocked={isLocked}
             /> */}
-            <div className="channel-row--programs">
-                {setProgram()}
-                {setProgram()}
-                {setProgram()}
-            </div>
+            <div className="channel-row--programs">{setProgram()}</div>
         </div>
     );
 }

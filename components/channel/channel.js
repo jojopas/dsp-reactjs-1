@@ -34,6 +34,7 @@ export default function Channels({
     const epgContainer = React.useRef(null);
     const router = useRouter();
     const { genres, promos, channels } = page;
+    const [currentGenre, setCurrentGenre] = React.useState();
     const [currentChannel, setCurrentChannel] = React.useState();
     const [currentSlug, setCurrentSlug] = React.useState(slug);
     const [epgListCurrentSlug, setEpgListCurrentSlug] = React.useState(slug);
@@ -95,6 +96,24 @@ export default function Channels({
     const getSlugFromVideoId = (id) => {
         const channel = result.find((c) => c.videoId === id);
         return channel ? channel.slug : null;
+    };
+
+    const onGenreSelect = (event) => {
+        const selected = event.target.value;
+        console.log("OnSelect", event.target.value);
+        setCurrentGenre(selected);
+        const { channels } = data.data.data;
+
+        if (selected == 'Category') {
+            setResult(channels);
+        }else {
+
+            setResult(
+                channels.filter((channel) =>
+                    channel.genres.includes(event.target.value)
+                )
+            );
+        }
     };
 
     const getVideoIdFromSlug = (s) => {
@@ -462,8 +481,7 @@ export default function Channels({
             removeHoverHandler();
         };
     }, []);
-
-     
+    console.log('Channel', page);
     return useObserver(() =>
         !pageError ? (
             <div
@@ -512,9 +530,20 @@ export default function Channels({
                             )}
                         </div>
                         <div className="fixed-player-categories">
-                            <select name="category" id="dategory">
-                                {result.map((channel) => <option value={channel.name} key={channel.id}>{channel.name}</option>)}
-                                
+                            <select
+                                name="category"
+                                id="category"
+                                onChange={onGenreSelect}
+                                value={currentGenre}
+                            >
+                                <option value="Category" key="categoryId">
+                                    Category
+                                </option>
+                                {genres.map((genre) => (
+                                    <option value={genre} key={genre}>
+                                        {genre}
+                                    </option>
+                                ))}
                             </select>
                         </div>
                         <div className="ads">

@@ -244,7 +244,7 @@ export default function EPGList({
             />
         );
     });
-
+    
     return (
         <div className="epg">
             {!store.isBreakpoint && (

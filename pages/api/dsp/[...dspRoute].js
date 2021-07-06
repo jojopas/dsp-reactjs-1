@@ -85,6 +85,12 @@ export default async (req, res) => {
         apiUrl = `${apiUrl}/${constants.DSP_COUNTRY}`;
     }
 
+    if (dspRoute === "live/epg") {
+        const date = new Date();
+        console.log("dspRoute", dspRoute, date);
+        apiUrl = `https://api.staging.myspotlight.tv/live/epg/us?programme_size=15`;
+    }
+
     if (platformRoutes.includes(dspRoute)) {
         apiUrl = `${apiUrl}/${constants.DSP_PLATFORM}`;
     }
