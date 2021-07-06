@@ -190,9 +190,7 @@ export default function EPGList({
                 style={{ top: marginTop }}
                 stay-revert-to-fixed="0"
             >
-                {!store.isBreakpoint && (
-                    <ScrollLeftRight onScrollLeft={onScrollLeft} />
-                )}
+                
                 {timeSlots.map((time, index) => (
                     <div
                         className={`${"timeslot-row--time"}`}
@@ -249,6 +247,9 @@ export default function EPGList({
 
     return (
         <div className="epg">
+            {!store.isBreakpoint && (
+                <ScrollLeftRight onScrollLeft={onScrollLeft} />
+            )}
             <div className="left-row" style={{ width: channelCellWidth }}>
                 {nextEPGDates()}
                 <div className="channel-logos">{leftContainer}</div>
