@@ -30,9 +30,11 @@ export default function EPGList({
     let channelRef, timeRowRef;
     let nowTime = 0;
     const now = new Date();
-    const currentTime = now.getTime() / 1000;
+    const elapseTime = now.getTime() / 1000;
     now.setMinutes(now.getMinutes() > 29 ? 30 : 0);
     nowTime = now.getTime() / 1000;
+    const dateSlots = {};
+    const [currentTime, setCurrentTime] = React.useState(elapseTime);
     const currrentTimeElapsed = currentTime - nowTime;
     function filterList() {
         const filteredResult = data.filter((row, index) => {
@@ -84,15 +86,16 @@ export default function EPGList({
         return () => window.removeEventListener("scroll", epgScroll);
     }, [currentGenre, store.isVideoLoading]);
 
-    const TimeElapsed = () => (
-        <div
-            key="timeElapsed"
-            className="timeElapsed"
-            style={{
-                width: `${currrentTimeWidth()}px`,
-            }}
-        ></div>
-    );
+    const TimeElapsed = () =>
+        currentTime > elapseTime ? null:(
+            <div
+                key="timeElapsed"
+                className="timeElapsed"
+                style={{
+                    width: `${currrentTimeWidth()}px`,
+                }}
+            ></div>
+        ) ;
 
     const epgScroll = (eve) => {
         if (!isMobileEPG) {
@@ -112,6 +115,12 @@ export default function EPGList({
         });
     };
 
+    const setDate = (event) => {
+        const setDate = event.target.value;
+        console.log("DateSelected", elapseTime, setDate, setDate - elapseTime);
+        setCurrentTime(Number(setDate));
+    };
+
     const nextEPGDates = () => {
         const date = new Date();
         const month = [
@@ -128,12 +137,13 @@ export default function EPGList({
             "Nov",
             "Dec",
         ];
+
         date.setHours(0, 0);
-        let dateSlots = {};
         const getDateString = (date) =>
             `${month[date.getMonth()]} ${date.getDate()}`;
         for (let index = 0; index < 7; index++) {
-            dateSlots[getDateString(date)] = date.getTime();
+            dateSlots[getDateString(date)] =
+                index == 0 ? elapseTime : date.getTime() / 1000;
             date.setDate(date.getDate() + 1);
         }
 
@@ -145,7 +155,7 @@ export default function EPGList({
                     key={"Date"}
                 >
                     <div className="timeslot-row--date-select">
-                        <select name="epgDate" id="epgDate">
+                        <select name="epgDate" id="epgDate" onChange={setDate}>
                             {Object.keys(dateSlots).map((key) => (
                                 <option value={dateSlots[key]} key={key}>
                                     {key}
@@ -162,7 +172,7 @@ export default function EPGList({
         const resultantWidth = Math.floor(
             (currrentTimeElapsed / 30 / 60) * constants.EPG_30_MINUTE_WIDTH
         );
-        return Math.abs(resultantWidth);
+        return currentTime > elapseTime ? 0 : Math.abs(resultantWidth);
     };
 
     const onScrollLeft = (left) => {
@@ -178,6 +188,10 @@ export default function EPGList({
         now.setMinutes(minutes, 0, 0);
         let timeSlots = [];
         let initialTime = hours * 60 + minutes;
+        if (currentTime > elapseTime) {
+            initialTime = 0;
+        }
+
         for (let time = initialTime; time < Total_Minutes_A_Day; time += 30) {
             const hour = Math.floor(time / 60);
             const minute = time % 60;
@@ -241,7 +255,7 @@ export default function EPGList({
                 onClick={onClick}
                 currrentTimeElapsed={currrentTimeElapsed}
                 favorite={channelIndex < 5}
-                nowTime={nowTime}
+                nowTime={currentTime}
                 iconClicked={iconClicked}
                 width={channelCellWidth}
                 isShowing={channelIndex === currentIndex}

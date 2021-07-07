@@ -14,7 +14,7 @@ export default function EPGRow({
     width,
     nowTime,
     iconClicked,
-
+    currentDate,
     isLocked,
 }) {
     const setProgram = () =>
