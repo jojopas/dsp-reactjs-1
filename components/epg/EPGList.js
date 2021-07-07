@@ -106,6 +106,10 @@ export default function EPGList({
                 ? `background-color: #0e212f; transform:translateY(${scrollTop}px)`
                 : `transform:translateY(${scrollTop}px)`;
         });
+        const arrows = document.querySelectorAll(".scroll");
+        arrows.forEach((arrow) => {
+            arrow.style.cssText = `transform:translateY(${scrollTop}px)`;
+        });
     };
 
     const nextEPGDates = () => {
@@ -136,17 +140,19 @@ export default function EPGList({
         return (
             <div className="timeslot-row" style={{ top: marginTop }}>
                 <div
-                    className={`${"timeslot-row--date"}`}
+                    className="timeslot-row--date"
                     style={{ width: channelCellWidth + 20 }}
                     key={"Date"}
                 >
-                    <select name="epgDate" id="epgDate">
-                        {Object.keys(dateSlots).map((key) => (
-                            <option value={dateSlots[key]} key={key}>
-                                {key}
-                            </option>
-                        ))}
-                    </select>
+                    <div className="timeslot-row--date-select">
+                        <select name="epgDate" id="epgDate">
+                            {Object.keys(dateSlots).map((key) => (
+                                <option value={dateSlots[key]} key={key}>
+                                    {key}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
             </div>
         );
@@ -190,7 +196,6 @@ export default function EPGList({
                 style={{ top: marginTop }}
                 stay-revert-to-fixed="0"
             >
-                
                 {timeSlots.map((time, index) => (
                     <div
                         className={`${"timeslot-row--time"}`}
@@ -244,7 +249,7 @@ export default function EPGList({
             />
         );
     });
-    
+
     return (
         <div className="epg">
             {!store.isBreakpoint && (
