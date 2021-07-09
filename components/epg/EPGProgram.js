@@ -7,7 +7,8 @@ export default function EPGProgram({
     isShowing,
     key,
     currrentTimeElapsed,
-    nowTime,
+    startTime,
+    endTime,
     iconClicked,
     index,
 }) {
@@ -23,37 +24,28 @@ export default function EPGProgram({
         const date = new Date(0);
         date.setUTCSeconds(seconds);
         const hours = date.getUTCHours();
-        const minutes = date.getUTCMinutes();
+        const minutes = date.getUTCMinutes() + 1;
         const timeDuration = date.toISOString().substr(11, 5);
         return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
     };
 
     const duration =
-        nowTime > 0
-            ? program.ends > nowTime
-                ? program.ends - nowTime
-                : program.duration
+        program.ends > endTime
+            ? endTime - program.starts
+            : program.ends > startTime && startTime > program.starts
+            ? program.ends - startTime
             : program.duration;
+
     const separator = "\t . \t";
-    const totalTime = Number(nowTime) + Number(currrentTimeElapsed);
+    const totalTime = Number(startTime) + Number(currrentTimeElapsed);
     const isBroadcasting =
         totalTime >= program.starts && totalTime <= program.ends;
     const style = {
         width: Math.floor(
-            (duration / 1800) * constants.EPG_30_MINUTE_WIDTH - index * 2
+            (duration * constants.EPG_30_MINUTE_WIDTH / 1800)  - 2
         ),
     };
 
-    // if (nowTime > 0) {
-    //     console.log(
-    //         "Duration",
-    //         program.duration,
-    //         duration,
-    //         currrentTimeElapsed,
-    //         isPlaying
-    //     );
-    // }
-    // console.log('Width', style.width, nowTime);
     return (
         <div
             className={`${
@@ -84,7 +76,7 @@ export default function EPGProgram({
                             {isBroadcasting
                                 ? ` ${separator} ${timeLeftDuration(
                                       program.ends -
-                                          nowTime -
+                                          startTime -
                                           currrentTimeElapsed
                                   )}
                     left`
@@ -99,7 +91,9 @@ export default function EPGProgram({
                         >
                             {program.description}
                         </div>
+                        {/* {`Duration:${duration}(${program.duration-duration}) ${style.width} ${startTime - program.starts} `} */}
                     </div>
+
                     {isBroadcasting && (
                         <div
                             className="channel-row--program-icon"

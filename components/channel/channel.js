@@ -481,6 +481,17 @@ export default function Channels({
             removeHoverHandler();
         };
     }, []);
+    const getCurrentChannelTitle = () => {
+        const now = new Date();
+        const nowTime = now.getTime()/1000;
+        return currentChannel.program.reduce((title, program) => {
+            if (nowTime>program.starts && nowTime<program.ends) {
+                title = program.title;
+            }
+            return title;
+        }, '');
+    }
+    
     console.log('Channel', page);
     return useObserver(() =>
         !pageError ? (
@@ -508,10 +519,7 @@ export default function Channels({
                                             {currentChannel?.name}
                                             {" : "}
                                             <span className="channelName">
-                                                {
-                                                    currentChannel?.program[0]
-                                                        ?.title
-                                                }
+                                                {getCurrentChannelTitle()}
                                             </span>
                                         </h1>
                                     </div>

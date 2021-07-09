@@ -1,6 +1,7 @@
 import "./modal.less";
 import { constants } from "../../config";
 import InliveSVG from "../InlineSVG";
+import InlineSVG from "../InlineSVG";
 
 const Modal = ({ data, resetFn, onClick }) => {
     const timeDuration = (seconds) => {
@@ -22,12 +23,15 @@ const Modal = ({ data, resetFn, onClick }) => {
     const now = new Date();
     const nowTime = now.getTime() / 1000;
     const isBroadcasting =
-        nowTime >= data?.nowprogram?.starts && nowTime <= data?.nowprogram?.ends;
+        nowTime >= data?.nowprogram?.starts &&
+        nowTime <= data?.nowprogram?.ends;
 
     return data ? (
-        <div id="myModal" className="modal" onClick={() => resetFn()}>
+        <div id="myModal" className="modal">
             <div className="modal-content">
-                <span className="close">&times;</span>
+                <div className="close" onClick={() => resetFn()}>
+                    <InlineSVG type="close" />
+                </div>
                 <div className="modal-header">
                     <div>
                         <div className="modal-time">
@@ -61,8 +65,10 @@ const Modal = ({ data, resetFn, onClick }) => {
                     <h1>{`${data.nowprogram.title} Presented by ${data.name}`}</h1>
                     <p>{data.nowprogram.description}</p>
                 </div>
-                <div class="modal-footer" onClick={()=>isBroadcasting
-                            ? onClick(data):null}>
+                <div
+                    class="modal-footer"
+                    onClick={() => (isBroadcasting ? onClick(data) : null)}
+                >
                     <div
                         className={`watch ${isBroadcasting ? "" : "inActive"}`}
                     >

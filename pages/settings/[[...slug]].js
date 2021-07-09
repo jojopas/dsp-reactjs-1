@@ -56,6 +56,7 @@ export default function Settings({
                     </p>
 
                     <ContactForm />
+                    <div className="build">Release 1.0 build 3306</div>
                 </div>
             </>
         ) : (

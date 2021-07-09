@@ -59,9 +59,9 @@
         &-select {
             border-radius: 20px;
             background-color: #254056;
-            width: 70px;
+            width: 80px;
             margin-left: 15px;
-            padding: 0 10px;
+            padding: 0 5px;
 
             // background: @colorBG;
             select {
@@ -73,7 +73,16 @@
 
                 option {
                     background-color: #254056;
-            
+                }
+
+                & :after {
+                    content: "▼";
+                    font-size: 0.5em;
+                    font-family: arial;
+                    position: absolute;
+                    top: 50%;
+                    right: 5px;
+                    transform: translate(0, -50%);
                 }
             }
         }
