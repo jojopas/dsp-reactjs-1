@@ -117,7 +117,7 @@ export default function EPGList({
 
     const setDate = (event) => {
         const setDate = event.target.value;
-        console.log("DateSelected", elapseTime, setDate, setDate - elapseTime);
+        // console.log("DateSelected", elapseTime, setDate, setDate - elapseTime);
         setCurrentTime(Number(setDate));
     };
 

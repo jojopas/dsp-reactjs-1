@@ -88,7 +88,7 @@ export default async (req, res) => {
     if (dspRoute === "live/epg") {
         const date = new Date();
         console.log("dspRoute", dspRoute, date);
-        apiUrl = `https://api.staging.myspotlight.tv/live/epg/us?programme_size=100`;
+        apiUrl = `https://api.staging.myspotlight.tv/live/epg/us?programme_size=999`;
     }
 
     if (platformRoutes.includes(dspRoute)) {

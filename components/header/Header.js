@@ -11,6 +11,7 @@ import InlineSVG from "../InlineSVG";
 
 import "./Header.less";
 import ButtonList from "../buttonList/ButtonList";
+import MobileHeader from "./MobileHeader.";
 
 export default function Header({}) {
     const store = React.useContext(StoreContext);
@@ -35,8 +36,8 @@ export default function Header({}) {
         {
             id: "channels",
             inner: "Live Channels",
-            url: "/[[...slug]]",
-            as: "/",
+            url: "/channels/[[...slug]]",
+            as: "/channels",
             exact: true,
         },
         {
@@ -67,14 +68,14 @@ export default function Header({}) {
             type: "svg",
             svg: "channels",
             inner: "Live Channels",
-            url: "/[[...slug]]",
-            as: "/",
+            url: "/channels/[[...slug]]",
+            as: "/channels",
             exact: true,
         },
         {
             id: "on-demand",
             type: "svg",
-            svg: "movies",
+            svg: "on-demand",
             inner: "On Demand",
             url: "/on-demand",
             as: "/on-demand",
@@ -100,65 +101,68 @@ export default function Header({}) {
     ];
 
     return useObserver(() => (
-        <header>
-            <Logo />
-            {store.isBreakpoint ? (
-                <NavLink href="/search/[[...searchQuery]]" as="/search">
-                    <a title="Search" className="header-mobileSearch">
-                        <InlineSVG type="search" />
-                        <InlineSVG type="searchActive" />
-                    </a>
-                </NavLink>
-            ) : (
-                <>
-                    <Nav
-                        className="header-nav"
-                        links={main}
-                        activeBar={true}
-                    ></Nav>
-                    <NavLink
-                        href="/settings/[[...slug]]"
-                        as="/settings"
-                        className="account"
-                    >
-                        <a title="Settings" className="account">
-                            <InlineSVG type="settings" />
-                            <InlineSVG type="settingsActive" />
+        <>
+            <header>
+                <Logo />
+                {store.isBreakpoint ? (
+                    <NavLink href="/search/[[...searchQuery]]" as="/search">
+                        <a title="Search" className="header-mobileSearch">
+                            <InlineSVG type="search" />
+                            <InlineSVG type="searchActive" />
                         </a>
                     </NavLink>
-                </>
-            )}
-            {store.isBreakpoint ? (
-                <>
-                    <span
-                        className={
-                            open
-                                ? "header-mobileBurger header-mobileBurger-open"
-                                : "header-mobileBurger"
-                        }
-                        onClick={() => setOpen(!open)}
-                    >
-                        <span></span>
-                    </span>
-                    <span
-                        className={
-                            open
-                                ? "header-navMobile header-navMobile-open"
-                                : "header-navMobile"
-                        }
-                    >
-                        <span className="header-navMobile-mask">
-                            <span className="header-navMobile-inner">
-                                <span className="header-navMobile-topLine"></span>
-                                <Nav
-                                    className="header-navMobile-main"
-                                    links={mainMobile}
-                                />
+                ) : (
+                    <>
+                        <Nav
+                            className="header-nav"
+                            links={main}
+                            activeBar={true}
+                        ></Nav>
+                        <NavLink
+                            href="/settings/[[...slug]]"
+                            as="/settings"
+                            className="account"
+                        >
+                            <a title="Settings" className="account">
+                                <InlineSVG type="settings" />
+                                <InlineSVG type="settingsActive" />
+                            </a>
+                        </NavLink>
+                    </>
+                )}
+                {store.isBreakpoint ? (
+                    <>
+                        <span
+                            className={
+                                open
+                                    ? "header-mobileBurger header-mobileBurger-open"
+                                    : "header-mobileBurger"
+                            }
+                            onClick={() => setOpen(!open)}
+                        >
+                            <span></span>
+                        </span>
+                        <span
+                            className={
+                                open
+                                    ? "header-navMobile header-navMobile-open"
+                                    : "header-navMobile"
+                            }
+                        >
+                            <span className="header-navMobile-mask">
+                                <span className="header-navMobile-inner">
+                                    <span className="header-navMobile-topLine"></span>
+                                    <Nav
+                                        className="header-navMobile-main"
+                                        links={mainMobile}
+                                    />
+                                </span>
                             </span>
                         </span>
-                    </span>
-                </>
-            ) : null}
-        </header>
+                    </>
+                ) : null}
+            </header>
+            <MobileHeader />{" "}
+        </>
     ));
 }
