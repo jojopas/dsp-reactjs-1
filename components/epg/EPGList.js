@@ -51,26 +51,16 @@ export default function EPGList({
     nowTime = dates.getTime() / 1000;
     const getDateString = (date) =>
         `${month[date.getMonth()]} ${date.getDate()}`;
-    // dateSlots[getDateString(date)] = date.getTime() / 1000;
+
     for (let index = 0; index < 8; index++) {
         dateSlots[index < 7 ? getDateString(dates) : ""] =
             dates.getTime() / 1000;
-
         dates.setDate(dates.getDate() + 1);
         dates.setHours(0, 0, 0, 0);
     }
-    const endDates = Object.values(dateSlots)?.reduce(
-        (num, dates, ind, arr) => {
-            if (ind > 0) {
-                num[arr[ind - 1]] = dates;
-            }
-            return num;
-        },
-        {}
-    );
     // console.log("computeDates", dateSlots, endDates);
-    const [endTime, setEndTime] = React.useState(endDates[nowTime]);
     const [currentTime, setCurrentTime] = React.useState(nowTime);
+    const [endTime, setEndTime] = React.useState(Object.values(dateSlots)[1]);
     const currrentTimeElapsed = elapseTime - nowTime;
 
     function filterList() {
@@ -153,10 +143,10 @@ export default function EPGList({
     };
 
     const setDate = (event) => {
-        const setDate = Number(event.target.value);
-        // console.log("DateSelected", elapseTime, setDate, setDate - elapseTime);
-        setEndTime(endDates[setDate]);
-        setCurrentTime(setDate);
+        const setDate = event.target.value.split(",");
+        console.log("DateSelected", elapseTime, setDate);
+        setEndTime(setDate[1]);
+        setCurrentTime(setDate[0]);
     };
 
     const nextEPGDates = () => {
@@ -169,9 +159,15 @@ export default function EPGList({
                 >
                     <div className="timeslot-row--date-select">
                         <select name="epgDate" id="epgDate" onChange={setDate}>
-                            {Object.keys(dateSlots).map((key) =>
+                            {Object.keys(dateSlots).map((key, ind, arr) =>
                                 key ? (
-                                    <option value={dateSlots[key]} key={key}>
+                                    <option
+                                        value={[
+                                            dateSlots[key],
+                                            dateSlots[arr[ind + 1]],
+                                        ]}
+                                        key={key}
+                                    >
                                         {key}
                                     </option>
                                 ) : null
@@ -228,7 +224,11 @@ export default function EPGList({
                 {timeSlots.map((time, index) => (
                     <div
                         className={`${"timeslot-row--time"}`}
-                        style={{ width: Math.floor(constants.EPG_30_MINUTE_WIDTH - 10 )}}
+                        style={{
+                            width: Math.floor(
+                                constants.EPG_30_MINUTE_WIDTH - 10
+                            ),
+                        }}
                         key={time}
                     >
                         <h2>{time}</h2>
@@ -270,7 +270,7 @@ export default function EPGList({
                 onClick={onClick}
                 currrentTimeElapsed={currrentTimeElapsed}
                 favorite={channelIndex < 5}
-                startTime={currentTime<nowTime? nowTime: currentTime}
+                startTime={currentTime < nowTime ? nowTime : currentTime}
                 endTime={endTime}
                 iconClicked={iconClicked}
                 width={channelCellWidth}
@@ -280,7 +280,14 @@ export default function EPGList({
         );
     });
 
-    console.log("endTime", currentTime, endTime, endTime - currentTime);
+    console.log(
+        "current",
+        currentTime,
+        "endTime",
+        endTime,
+        "Diff",
+        endTime - currentTime
+    );
     return (
         <div className="epg">
             {!store.isBreakpoint && (

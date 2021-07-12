@@ -87,11 +87,13 @@ export default async (req, res) => {
 
     if (dspRoute === "live/epg") {
         const date = new Date();
+        date.setMinutes(date.getMinutes()>29? 30:0,0,0);
         const startTime = date
             .toISOString()
             .replace("T", " ")
             .replace("Z", "");
         date.setDate(date.getDate() + 7);
+        date.setHours(0,0,0,0);
         const endTime = date.toISOString().replace("T", " ").replace("Z", "");
         // console.log("dspRoute", dspRoute, date, startTime, endTime);
         const programmSize = 999;
