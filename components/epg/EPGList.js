@@ -186,7 +186,7 @@ export default function EPGList({
         return currentTime > nowTime ? 0 : Math.abs(resultantWidth);
     };
 
-    const onScrollLeft = (left) => {
+    const onHorizontalScroll = (left) => {
         const flag = left ? -1 : 1;
         epgRef.current.scrollLeft += flag * 0.9 * constants.EPG_30_MINUTE_WIDTH;
     };
@@ -272,6 +272,7 @@ export default function EPGList({
                 favorite={channelIndex < 5}
                 startTime={currentTime < nowTime ? nowTime : currentTime}
                 endTime={endTime}
+                elapseTime={elapseTime}
                 iconClicked={iconClicked}
                 width={channelCellWidth}
                 isShowing={channelIndex === currentIndex}
@@ -291,7 +292,7 @@ export default function EPGList({
     return (
         <div className="epg">
             {!store.isBreakpoint && (
-                <ScrollLeftRight onScrollLeft={onScrollLeft} />
+                <ScrollLeftRight onScrollLeft={onHorizontalScroll} />
             )}
             <div className="left-row" style={{ width: channelCellWidth }}>
                 {nextEPGDates()}

@@ -13,18 +13,26 @@ export default function MobileHeader() {
         return null;
     }
     const isChannel = Router.router.route.includes("/channels");
-    console.log('Channels', isChannel);
+    console.log("Channels", isChannel);
 
     return (
         <div className="mobileHeader">
-            <div className="listHeader">
-                <InlineSVG type={isChannel ? "channelsActive" : "channels"} />
-                <h1>Live Channels</h1>
-            </div>
-            <div className="listHeader">
-                <InlineSVG type={isChannel ? "on-demand" : "on-demandActive"} />
-                <h1>On Demand</h1>
-            </div>
+            <a href="/">
+                <div className="listHeader">
+                    <InlineSVG
+                        type={isChannel ? "channelsActive" : "channels"}
+                    />
+                    <h1>Live Channels</h1>
+                </div>
+            </a>
+            <a href="/on-demand">
+                <div className="listHeader">
+                    <InlineSVG
+                        type={isChannel ? "on-demand" : "on-demandActive"}
+                    />
+                    <h1>On Demand</h1>
+                </div>
+            </a>
         </div>
     );
 }

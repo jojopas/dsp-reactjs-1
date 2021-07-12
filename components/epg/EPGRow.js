@@ -12,54 +12,51 @@ export default function EPGRow({
     onClick,
     currrentTimeElapsed,
     width,
-     startTime,
+    startTime,
     endTime,
+    elapseTime,
     iconClicked,
     currentDate,
     isLocked,
 }) {
     //  console.log("endTime", startTime, endTime);
-    const setProgram = () => {        
-            const res = [];
-            let index = 0;
-            for (let i = 0; i < channel.program.length; i++) {
-                const program = channel.program[i];
-                if (program.starts < endTime) {
-                    if (program.ends > startTime) {                        
-                        res.push(
-                            <EPGProgram
-                                tabIndex={1}
-                                currrentTimeElapsed={currrentTimeElapsed}
-                                program={program}
-                                startTime={startTime}
-                                endTime={endTime}
-                                iconClicked={() =>
-                                    iconClicked({
-                                        ...channel,
-                                        nowprogram: program,
-                                    })
-                                }
-                                isShowing={isShowing}
-                                index={index}
-                                key={`${channel.id} ${index}`}
-                            />
-                        );
-                        index++;
-                    }
-                } else {
-                    break;
+    const setProgram = () => {
+        const res = [];
+        let index = 0;
+        for (let i = 0; i < channel.program.length; i++) {
+            const program = channel.program[i];
+            if (program.starts < endTime) {
+                if (program.ends > startTime) {
+                    res.push(
+                        <EPGProgram
+                            tabIndex={1}
+                            currrentTimeElapsed={currrentTimeElapsed}
+                            program={program}
+                            startTime={startTime}
+                            endTime={endTime}
+                            elapseTime={elapseTime}
+                            iconClicked={() =>
+                                iconClicked({
+                                    ...channel,
+                                    nowprogram: program,
+                                })
+                            }
+                            isShowing={isShowing}
+                            index={index}
+                            key={`${channel.id} ${index}`}
+                        />
+                    );
+                    index++;
                 }
+            } else {
+                break;
             }
-            return res;
-        
+        }
+        return res;
     };
 
     return (
-        <div
-            className="channel-row"
-            key={channel.id}
-        >
-            
+        <div className="channel-row" key={channel.id}>
             <div className="channel-row--programs">{setProgram()}</div>
         </div>
     );

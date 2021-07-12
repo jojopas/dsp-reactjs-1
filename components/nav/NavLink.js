@@ -6,14 +6,10 @@ import { pathToRegexp } from 'path-to-regexp';
 export default function NavLink({ href, as, exact, children, passActive, navIndex, shallow, scroll, ...props }) {
     const { asPath } = useRouter();
     const [isActive, setIsActive] = React.useState(false);
-
+    // console.log('Header AsPath', asPath);
     React.useEffect(() => {
         if(!href.includes('http')) {
             let active = pathToRegexp(as || href, [], {sensitive: true, end: !!exact}).test(asPath);
-            
-            // if (as == "/" && !asPath.includes("/movies")) {
-            //     active = false;
-            // }
             setIsActive(active);
             if (passActive && active) {
                 passActive(navIndex);

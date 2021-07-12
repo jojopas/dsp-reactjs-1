@@ -9,6 +9,7 @@ export default function EPGProgram({
     currrentTimeElapsed,
     startTime,
     endTime,
+    elapseTime,
     iconClicked,
     index,
 }) {
@@ -37,12 +38,11 @@ export default function EPGProgram({
             : program.duration;
 
     const separator = "\t . \t";
-    const totalTime = Number(startTime) + Number(currrentTimeElapsed);
     const isBroadcasting =
-        totalTime >= program.starts && totalTime <= program.ends;
+        elapseTime >= program.starts && elapseTime <= program.ends;
     const style = {
         width: Math.floor(
-            (duration * constants.EPG_30_MINUTE_WIDTH / 1800)  - 2
+            (duration * constants.EPG_30_MINUTE_WIDTH) / 1800 - 2
         ),
     };
 

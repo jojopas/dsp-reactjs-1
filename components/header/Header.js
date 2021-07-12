@@ -36,8 +36,8 @@ export default function Header({}) {
         {
             id: "channels",
             inner: "Live Channels",
-            url: "/channels/[[...slug]]",
-            as: "/channels",
+            url: "/",
+            as: "/",
             exact: true,
         },
         {
@@ -68,8 +68,8 @@ export default function Header({}) {
             type: "svg",
             svg: "channels",
             inner: "Live Channels",
-            url: "/channels/[[...slug]]",
-            as: "/channels",
+            url: "/",
+            as: "/",
             exact: true,
         },
         {
