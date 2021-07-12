@@ -17,7 +17,7 @@ import { slugify } from "../../helpers/utils/strings";
 
 import "./index.less";
 
-export default function Home({
+export default function OnDemand({
     session,
     config,
     page,
@@ -144,7 +144,7 @@ export default function Home({
         )
     );
 }
-Home.getLayout = getLayout;
+OnDemand.getLayout = getLayout;
 
 export const getServerSideProps = async ({ req, res }) => {
     let { session, config } = await getSession(req, res);
@@ -167,7 +167,7 @@ export const getServerSideProps = async ({ req, res }) => {
             config: config || null,
             page: page || null,
             error: error || false,
-            pageType: "home",
+            pageType: "on-demand",
             seoObj: {},
         },
     };

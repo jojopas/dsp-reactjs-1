@@ -16,7 +16,7 @@ export default function MobileHeader() {
     console.log("Channels", isChannel);
 
     return (
-        <div className="mobileHeader">
+        <span className="mobileHeader">
             <a href="/">
                 <div className="listHeader">
                     <InlineSVG
@@ -33,6 +33,6 @@ export default function MobileHeader() {
                     <h1>On Demand</h1>
                 </div>
             </a>
-        </div>
+        </span>
     );
 }

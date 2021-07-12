@@ -113,9 +113,16 @@ main {
     }
 
     &.pageType-home,
-    &.pageType-channel {
-        padding-top: 0 !important;
+    &.pageType-channel,
+    &.pageType-on-demand,
+    &.pageType-movie,
+    &.pageType-show,
+    &.pageType-search {
+        padding-top: 0px !important;
         overflow-x: unset;
+        @media (max-width: @mobileLargeBP) {
+            margin-top: 116px !important;
+        }
     }
 
     .overflowWrapper {

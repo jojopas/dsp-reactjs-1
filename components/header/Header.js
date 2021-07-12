@@ -161,8 +161,8 @@ export default function Header({}) {
                         </span>
                     </>
                 ) : null}
-            </header>
             <MobileHeader />{" "}
+            </header>
         </>
     ));
 }
