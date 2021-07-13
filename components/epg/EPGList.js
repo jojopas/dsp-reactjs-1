@@ -1,4 +1,5 @@
 import React from "react";
+import smoothscroll from 'smoothscroll-polyfill';
 
 import { StoreContext } from "../../store";
 import "./epg.less";
@@ -19,6 +20,10 @@ export default function EPGList({
     pageType,
     onClick,
 }) {
+    if(typeof window !== "undefined") {
+        smoothscroll.polyfill();
+    }
+
     const channelCellWidth = 120;
     const epgRef = React.useRef(null);
     const store = React.useContext(StoreContext);
@@ -188,7 +193,39 @@ export default function EPGList({
 
     const onHorizontalScroll = (left) => {
         const flag = left ? -1 : 1;
-        epgRef.current.scrollLeft += flag * 0.9 * constants.EPG_30_MINUTE_WIDTH;
+        // Get Width of the viewable scroll area, and it's scrollLeft
+        let { offsetWidth, scrollLeft, scrollWidth } = epgRef.current;
+        // Check if we are on an increment of 30_MINUTE_WIDTH, if not, fix our positioning
+        if (scrollLeft % constants.EPG_30_MINUTE_WIDTH !== 0) {
+            if (left) {
+                scrollLeft = Math.ceil(scrollLeft / constants.EPG_30_MINUTE_WIDTH) * constants.EPG_30_MINUTE_WIDTH;
+            } else {
+                scrollLeft = Math.floor(scrollLeft / constants.EPG_30_MINUTE_WIDTH) * constants.EPG_30_MINUTE_WIDTH;
+            }
+        }
+        // Max number of complete 30 min blocks that can scroll w/o going past what was viewable before
+        const maxScrollSegments = Math.floor(offsetWidth / constants.EPG_30_MINUTE_WIDTH);
+        // Multiply the 30 minute width times the max segments
+        const scrollAmt = constants.EPG_30_MINUTE_WIDTH * maxScrollSegments;
+        // Get new left scroll position to scroll to
+        let newLeft = scrollLeft + (flag * scrollAmt);
+        // Outer bounds
+        if (newLeft < 0) {
+            // If the newLeft is less than 0, set to 0
+            newLeft = 0;
+        } else if (newLeft > scrollWidth - offsetWidth) {
+            // If the newLeft is greater than scrollWidth - offsetWidth, set to scrollWidth - offsetWidth
+            newLeft = scrollWidth - offsetWidth;
+        }
+        // Only scroll if newLeft is different than current left
+        if (newLeft !== scrollLeft) {
+            // Use native scrollTo (the polyfill is added above)
+            epgRef.current.scrollTo({
+                top: 0,
+                left: newLeft,
+                behavior: 'smooth'
+            });
+        }
     };
 
     const todaysTimeSlots = () => {
