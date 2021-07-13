@@ -545,9 +545,21 @@ export default function InlineSVG({ type }) {
             );
         case "arrow":
             return (
-                <svg viewBox="0 0 24 24">
-                    <path d="M8.053,3.462l8.538,8.531L8.053,20.524,6.992,19.463l7.476-7.469L6.992,4.525Z" />
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="9"
+                    viewBox="0 0 12 9"
+                >
+                    <path
+                        d="M5.168,1.248a1,1,0,0,1,1.664,0l4.131,6.2A1,1,0,0,1,10.131,9H1.869a1,1,0,0,1-.832-1.555Z"
+                        fill="rgba(235,235,235,0.7)"
+                    />
                 </svg>
+
+                // <svg viewBox="0 0 24 24">
+                //     <path d="M8.053,3.462l8.538,8.531L8.053,20.524,6.992,19.463l7.476-7.469L6.992,4.525Z" />
+                // </svg>
             );
         case "backArrow":
             return (

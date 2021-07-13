@@ -16,12 +16,13 @@
         height: @iconWidth;
         border-radius: @iconWidth;
         background-color: #254056;
-        
-
         &:hover {
             background-color: @colorYellow;
-            fill: #0f293d;            
+            fill: #0f293d;
             cursor: pointer;
         }
+    }
+    @media (max-width: (@mobileLargeBP + 1px)) {
+        display: none;
     }
 }

@@ -31,7 +31,6 @@ export default function EPGList({
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
     const [isMobileEPG, setIsMobileEPG] = React.useState(false);
-    let channelRef, timeRowRef;
     let nowTime = 0;
     const now = new Date();
     const elapseTime = now.getTime() / 1000;
@@ -145,7 +144,7 @@ export default function EPGList({
 
     const setDate = (event) => {
         const setDate = event.target.value.split(",");
-        console.log("DateSelected", elapseTime, setDate);
+        // console.log("DateSelected", elapseTime, setDate);
         setEndTime(setDate[1]);
         setCurrentTime(setDate[0]);
     };
@@ -321,9 +320,7 @@ export default function EPGList({
     );
     return (
         <div className="epg">
-            {!store.isBreakpoint && (
-                <ScrollLeftRight onScrollLeft={onHorizontalScroll} />
-            )}
+            <ScrollLeftRight onScrollLeft={onHorizontalScroll} />
             <div className="left-row" style={{ width: channelCellWidth }}>
                 {nextEPGDates()}
                 <div className="channel-logos">{leftContainer}</div>

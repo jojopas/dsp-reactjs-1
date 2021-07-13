@@ -24,10 +24,10 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
     };
 
     React.useEffect(() => {
-        const pdpTop = document.querySelectorAll(".pdp-top");
-        const pdpBG = document.querySelectorAll(".pdp-bg");
-        const pdpHeight = pdpTop[0].clientHeight;
-        pdpBG[0].style.cssText = `padding-Top: ${pdpHeight + 100}px`;
+        const pdpHeight = document.querySelector(".pdp-top").clientHeight;
+        document.querySelector(".pdp-bg").style.cssText = `padding-Top: ${
+            pdpHeight + 100
+        }px`;
     }, []);
 
     const measureDescRef = React.useCallback(
