@@ -30,7 +30,6 @@ export default function EPGList({
     const [rowList, setRowList] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
-    const [marginTop, setMarginTop] = React.useState(0);
     const [isMobileEPG, setIsMobileEPG] = React.useState(false);
     let channelRef, timeRowRef;
     let nowTime = 0;
@@ -153,7 +152,7 @@ export default function EPGList({
 
     const nextEPGDates = () => {
         return (
-            <div className="timeslot-row" style={{ top: marginTop }}>
+            <div className="timeslot-row">
                 <div
                     className="timeslot-row--date"
                     style={{ width: channelCellWidth + 20 }}
@@ -251,9 +250,6 @@ export default function EPGList({
         return (
             <div
                 className="timeslot-row"
-                stay="top"
-                style={{ top: marginTop }}
-                stay-revert-to-fixed="0"
             >
                 {timeSlots.map((time, index) => (
                     <div
