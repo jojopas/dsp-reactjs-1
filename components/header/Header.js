@@ -46,7 +46,6 @@ export default function Header({}) {
             url: "/on-demand",
             as: "/on-demand",
         },
-
         // {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
     ];
 
@@ -125,7 +124,7 @@ export default function Header({}) {
                         >
                             <a title="Settings" className="account">
                                 <InlineSVG type="settings" />
-                                <InlineSVG type="settingsActive" />
+                                <InlineSVG type="settingsSelected" />
                             </a>
                         </NavLink>
                     </>
@@ -161,7 +160,7 @@ export default function Header({}) {
                         </span>
                     </>
                 ) : null}
-            <MobileHeader />{" "}
+                <MobileHeader />{" "}
             </header>
         </>
     ));

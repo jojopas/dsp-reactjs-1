@@ -35,7 +35,7 @@ export default function GenreSelector({
 
             if (router.asPath !== `/${type}`) {
                 const currLink = links.find((el) => el.as === router.asPath);
-                setCurrentName(`${currLink?.inner} ${titleCase(type)}`);
+                setCurrentName(`${currLink?.inner || ''} ${titleCase(type)}`.trim());
             }
         }
     }, [currentGenre, router.asPath]);
@@ -100,7 +100,7 @@ export default function GenreSelector({
             >
                 {currentName}
                 <span className="genreSelector-arrow">
-                    <InlineSVG type="arrow" />
+                    <InlineSVG type="up-arrow" />
                 </span>
             </span>
         </span>
