@@ -22,9 +22,29 @@
 }
 
 .right-row {
-    overflow-x: auto;
+    overflow-x: scroll;
     margin-left: 10px;
     scroll-behavior:smooth;
+
+    &::-webkit-scrollbar {
+        width: 10px;
+        pointer-events:none;
+    }
+
+    /* Track */
+    &::-webkit-scrollbar-track {
+        //background: #000;
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        border-radius: 0;
+        border: none;
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb:window-inactive {
+        background: transparent;
+    }
 }
 
 .channel-logos {
@@ -40,10 +60,8 @@
     white-space: nowrap;
     display: inline-flex;
     color: @colorNavGray;
-    position: relative;
     align-items: flex-end;
     font: 15px Roboto;
-    z-index: 30;
     background-color: #0e212f;
     scroll-behavior:smooth;
 
@@ -166,6 +184,7 @@
     content: "";
     scroll-behavior: smooth;
     white-space: nowrap;
+    z-index:-1;
 
     .channel-row {
         display: -webkit-flex;
