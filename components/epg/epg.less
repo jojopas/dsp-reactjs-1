@@ -4,6 +4,7 @@
 .epg {
     display: flex;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .timeElapsed {
@@ -44,7 +45,7 @@
     font: 15px Roboto;
     z-index: 30;
     background-color: #0e212f;
-    behavior: smooth;
+    scroll-behavior:smooth;
 
     @media (min-width: (@mobileLargeBP + 1px)) {
         top: 0px;
