@@ -141,10 +141,7 @@ export default function EPGList({
                 ? `background-color: #0e212f; transform:translateY(${scrollTop}px)`
                 : `transform:translateY(${scrollTop}px)`;
         });
-        const arrows = document.querySelectorAll(".scroll");
-        arrows.forEach((arrow) => {
-            arrow.style.cssText = `transform:translateY(${scrollTop}px)`;
-        });
+        document.querySelector('.scroll').style.cssText = `transform:translateY(${scrollTop}px)`;
     };
 
     const setDate = (event) => {
