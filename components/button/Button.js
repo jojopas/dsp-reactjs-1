@@ -14,7 +14,7 @@ export default function Button({
     svg,
     ...props
 }) {
-    console.log("Button url", url);
+    // console.log("Button url", url);
     React.useEffect(() => {}, []);
 
     const handleClick = (e) => {

@@ -21,11 +21,11 @@ export default function PromoCard(data) {
         { prefix: '/', slug: '/'},
     ];
 
-    const routerSlug = deepLinks.find(link => data.slug.includes(link.prefix));
+    const routerSlug = deepLinks.find(link => data?.slug?.includes(link.prefix));
 
     const epgTest = () => {
         if(data.changeCurrentSlug && routerSlug.prefix === '/channels'){
-            return data.slug.substring(data.slug.lastIndexOf('/') + 1);
+            return data?.slug.substring(data?.slug.lastIndexOf('/') + 1);
         }
         return false;
     }
@@ -47,7 +47,7 @@ export default function PromoCard(data) {
                         ) : null }
                     </a>
                 ) : (
-                    <Link href={routerSlug.slug} as={data.slug}>
+                    <Link href={routerSlug?.slug} as={data?.slug}>
                         <a className="card">
                             <img
                                 src={constants.NOT_FOUND_SRC}

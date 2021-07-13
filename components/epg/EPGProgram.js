@@ -94,14 +94,12 @@ export default function EPGProgram({
                         {/* {`Duration:${duration}(${program.duration-duration}) ${style.width} ${startTime - program.starts} `} */}
                     </div>
 
-                    {isBroadcasting && (
-                        <div
-                            className="channel-row--program-icon"
-                            onClick={iconClicked}
-                        >
-                            <InlineSVG type="more" />
-                        </div>
-                    )}
+                    <div
+                        className="channel-row--program-icon"
+                        onClick={iconClicked}
+                    >
+                        <InlineSVG type="more" />
+                    </div>
                 </>
             )}
         </div>

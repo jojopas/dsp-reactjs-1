@@ -14,9 +14,10 @@ export default function Footer() {
         {id: 'movies', inner: 'Movies', url: '/movies', as: '/movies'},
         {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
         {id: 'search', inner: 'Search', url: '/search/[[...searchQuery]]', as: '/search'},
-        /*{id: 'account', inner: 'Account', url: '/account/[[...slug]]', as: '/account'},*/
+        {id: 'account', inner: 'Account', url: '/account/[[...slug]]', as: '/account'},
         {id: 'support', inner: 'Support', url: '/about/[[...slug]]', as: '/about/support'},
         {id: 'advertiseWithUs', inner: 'Advertise with Us', url: '/about/[[...slug]]', as: '/about/advertise-with-us'},
+        null,
         {id: 'about', inner: 'About', url: '/about/[[...slug]]', as: '/about', exact: true},
         {id: 'contactus', inner: 'Contact', url: '/about/[[...slug]]', as: '/about/contact'},
         {id: 'terms', inner: 'Terms of Use', url: '/about/[[...slug]]', as: '/about/terms-of-use'},

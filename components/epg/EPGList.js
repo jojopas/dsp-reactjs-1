@@ -1,5 +1,6 @@
 import React from "react";
-import smoothscroll from 'smoothscroll-polyfill';
+import smoothscroll from "smoothscroll-polyfill";
+
 
 import { StoreContext } from "../../store";
 import "./epg.less";
@@ -21,7 +22,7 @@ export default function EPGList({
     onClick,
 }) {
     if(typeof window !== "undefined") {
-        smoothscroll.polyfill();
+         smoothscroll.polyfill();
     }
 
     const channelCellWidth = 120;

@@ -51,7 +51,7 @@ export default function Nav({className, style, links, activeBar}) {
         <>
             <nav className={className} style={style}>
                 <ul>
-                    {links.map((link, index) => (
+                    {links.map((link, index) => link?(
                         <li ref={allNavRefs.current[index]} key={link.id} className={link.class}>
                             <NavLink href={link.url} as={link.as} passActive={detectActiveNavItem} navIndex={index} exact={(link.exact) ? link.exact : false}>
                                 <a
@@ -65,7 +65,7 @@ export default function Nav({className, style, links, activeBar}) {
                                 </a>
                             </NavLink>
                         </li>
-                    ))}
+                    ):<br></br>)}
                 </ul>
                 {activeBar ? <span ref={activeBarRef} className="activeBar" /> : null}
             </nav>

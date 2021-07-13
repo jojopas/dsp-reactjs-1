@@ -114,19 +114,19 @@ export default function OnDemand({
                 <>
                     <h1 className="noShow">On Demand</h1>
                     <Carousel views={views} className="carousel-container" />
-                    {genreNav && (
-                        <GenreSelector type="movies" links={genreNav} />
-                    )}
+
                     <div className="overflowWrapper">
-                        {page.promos?.length > 0 ? (
+                        {page.movies?.length > 0 ? (
                             <CardList
                                 className="homePromo"
-                                type="promoSmall"
-                                useHeader={false}
-                                data={{ cards: page.promos }}
+                                type="title"
+                                data={page.rails[2]}
                                 onHeaderClick={setClickedCardTitle}
                             />
                         ) : null}
+                        {genreNav && (
+                            <GenreSelector type="movies" links={genreNav} />
+                        )}
 
                         {page.rails.map((rail) => (
                             <CardList

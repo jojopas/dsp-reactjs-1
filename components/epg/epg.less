@@ -64,6 +64,8 @@
     font: 15px Roboto;
     background-color: #0e212f;
     scroll-behavior: smooth;
+    position: relative;
+    z-index: 30;
 
     @media (min-width: (@mobileLargeBP + 1px)) {
         top: 0px;
@@ -193,7 +195,6 @@
     content: "";
     scroll-behavior: smooth;
     white-space: nowrap;
-    z-index: -1;
 
     .channel-row {
         display: -webkit-flex;
@@ -254,7 +255,7 @@
 
             &:hover {
                 cursor: pointer;
-                color: white;
+                fill: white;
             }
         }
 

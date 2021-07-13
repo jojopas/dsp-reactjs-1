@@ -5,7 +5,7 @@
     display: flex;
     width: 50px;
     position: absolute;
-    top: 65px;
+    top: 70px;
     z-index: 90;
     right: 45px;
     justify-content: space-between;
@@ -22,6 +22,13 @@
             cursor: pointer;
         }
     }
+
+    .noHover {
+        pointer-events: none;
+        background-color: #929698;
+        fill: #d5d8d596;
+    }
+
     @media (max-width: (@mobileLargeBP + 1px)) {
         display: none;
     }
