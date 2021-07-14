@@ -94,13 +94,13 @@ export default function Footer() {
             <Nav className="footerNav-apps" links={apps}></Nav>
             <Nav className="footerNav-social" links={social}></Nav>
             <div className="copyright">
-                <span>{`© ${new Date().getFullYear()} The Weather Group, Inc. All rights reserved.`}</span>
-                <a
+                <span>{`© ${new Date().getFullYear()} Sports TV. All rights reserved.`}</span>
+                {/* <a
                     href="https://www.babyste.ps"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="siteCredit"
-                >Site by Baby Steps</a>
+                >Site by Baby Steps</a> */}
             </div>
         </footer>
     ))
