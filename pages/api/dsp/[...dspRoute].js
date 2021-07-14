@@ -108,7 +108,7 @@ export default async (req, res) => {
     if (genre !== "") {
         apiUrl = `${apiUrl}?genre=${genre}&programming_type=${genreType}`;
     }
-    console.log("url", apiUrl, dspRoute, ogRoute);
+    // console.log("url", apiUrl, dspRoute, ogRoute);
     const axiosOptions = {
         url: apiUrl,
         method: req.method,

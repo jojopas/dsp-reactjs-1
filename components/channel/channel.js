@@ -100,7 +100,7 @@ export default function Channels({
 
     const onGenreSelect = (event) => {
         const selected = event.target.value;
-        console.log("OnSelect", event.target.value);
+        // console.log("OnSelect", event.target.value);
         setCurrentGenre(selected);
         const { channels } = data.data.data;
 
@@ -281,7 +281,7 @@ export default function Channels({
     const [modalData, setIconClicked] = React.useState(false);
 
     const iconClicked = (data) => {
-        console.log("Kabook Clicked", data);
+        // console.log("Kabook Clicked", data);
         setIconClicked(data);
     };
 
@@ -492,7 +492,7 @@ export default function Channels({
         }, '');
     }
     
-    console.log('Channel', page);
+    // console.log('Channel', page);
     return useObserver(() =>
         !pageError ? (
             <div

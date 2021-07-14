@@ -311,14 +311,14 @@ export default function EPGList({
         );
     });
 
-    console.log(
-        "current",
-        currentTime,
-        "endTime",
-        endTime,
-        "Diff",
-        endTime - currentTime
-    );
+    // console.log(
+    //     "current",
+    //     currentTime,
+    //     "endTime",
+    //     endTime,
+    //     "Diff",
+    //     endTime - currentTime
+    // );
     return (
         <div className="epg">
             <ScrollLeftRight onScrollLeft={onHorizontalScroll} />

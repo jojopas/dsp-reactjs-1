@@ -13,7 +13,7 @@ export default function MobileHeader() {
         return null;
     }
     const isChannel = Router.router.route.includes("/channels");
-    console.log("Channels", isChannel);
+    // console.log("Channels", isChannel);
 
     return (
         <span className="mobileHeader">
