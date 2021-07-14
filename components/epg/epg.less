@@ -248,7 +248,7 @@
         &-icon {
             width: 30px !important;
             height: 64px;
-            display: flex;
+            display: none;
             fill: @colorNavGray;
             align-self: center;
             float: right;
@@ -278,6 +278,12 @@
             font: 12px Roboto;
             color: @colorYellow;
             text-overflow: ellipsis;
+        }
+
+        &:hover {
+            .channel-row--program-icon {
+                display: flex;
+            }
         }
     }
 }
