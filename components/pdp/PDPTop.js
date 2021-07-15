@@ -178,86 +178,42 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
                         <span className="pdp-top-year">{pdp.year}</span>
                         <span className="pdp-top-rating">{pdp.rating}</span>
                     </div>
-                    {store.isBreakpoint ? (
-                        <>
-                            <div className="pdp-top-toolBar">
-                                {/*<span className="pdp-top-likeButton">{watchNow}</span>
+
+                    <div
+                        className={`pdp-top-description${
+                            descIsClamped ? " pdp-top-description-more" : ""
+                        }`}
+                        ref={measureDescRef}
+                    >
+                        {pdp.description}
+                    </div>
+                    {descHasClamp ? (
+                        <Button
+                            className="button-small pdp-top-description-moreButton"
+                            inner={
+                                descIsClamped ? constants.MORE : constants.LESS
+                            }
+                            onClick={toggleDesc}
+                        />
+                    ) : null}
+                    <div className="pdp-top-toolBar">
+                        {/*<span className="pdp-top-likeButton">{watchNow}</span>
                             <span className="pdp-top-dislikeButton">Start Over</span>
                             <span className="pdp-top-watchlistButton">Trailer</span>*/}
-                                <span
-                                    className="pdp-top-shareButton"
-                                    title={constants.SHARE}
-                                    onClick={triggerShare}
-                                >
-                                    <InlineSVG type="share" />
-                                </span>
-                            </div>
-                            <div
-                                className={`pdp-top-description${
-                                    descIsClamped
-                                        ? " pdp-top-description-more"
-                                        : ""
-                                }`}
-                                ref={measureDescRef}
-                            >
-                                {pdp.description}
-                            </div>
-                            {descHasClamp ? (
-                                <Button
-                                    className="button-small pdp-top-description-moreButton"
-                                    inner={
-                                        descIsClamped
-                                            ? constants.MORE
-                                            : constants.LESS
-                                    }
-                                    onClick={toggleDesc}
-                                />
-                            ) : null}
-                        </>
-                    ) : (
-                        <>
-                            <div
-                                className={`pdp-top-description${
-                                    descIsClamped
-                                        ? " pdp-top-description-more"
-                                        : ""
-                                }`}
-                                ref={measureDescRef}
-                            >
-                                {pdp.description}
-                            </div>
-                            {descHasClamp ? (
-                                <Button
-                                    className="button-small pdp-top-description-moreButton"
-                                    inner={
-                                        descIsClamped
-                                            ? constants.MORE
-                                            : constants.LESS
-                                    }
-                                    onClick={toggleDesc}
-                                />
-                            ) : null}
-                            <div className="pdp-top-toolBar">
-                                {/*<span className="pdp-top-likeButton">{watchNow}</span>
-                            <span className="pdp-top-dislikeButton">Start Over</span>
-                            <span className="pdp-top-watchlistButton">Trailer</span>*/}
-                                <span
-                                    className="pdp-top-shareButton"
-                                    title={constants.SHARE}
-                                    onClick={triggerShare}
-                                    onMouseLeave={() => setShareTipOpen(false)}
-                                >
-                                    <InlineSVG type="share" />
-                                    <Share
-                                        className={
-                                            shareTipOpen ? "share-tip-open" : ""
-                                        }
-                                        title={pdp.title}
-                                    />
-                                </span>
-                            </div>
-                        </>
-                    )}
+                        <span
+                            className="pdp-top-shareButton"
+                            title={constants.SHARE}
+                            onClick={triggerShare}
+                            onMouseLeave={() => setShareTipOpen(false)}
+                        >
+                            <InlineSVG type="share" />
+                            <Share
+                                className={shareTipOpen ? "share-tip-open" : ""}
+                                title={pdp.title}
+                            />
+                        </span>
+                    </div>
+
                     <div className="pdp-top-buttonBar">
                         <Button
                             className="pdp-top-watchNowButton"

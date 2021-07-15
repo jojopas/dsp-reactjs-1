@@ -83,13 +83,22 @@ export default function Movie({session, config, page, error, pageType, seoObj}) 
         }
     }, [page]);
 
-    return useObserver(() => (
+    return useObserver(() =>
         !error ? (
             <>
                 <div className="pdp-movies pdp-outer">
-                    <PDPBg pdp={pdp}/>
-                    <PDPTop pdp={pdp} type="movie" currVideo={currVideo}/>
-                    { moreLikeThis ? <CardList key={`more-${pdp.id}`} type="title" data={moreLikeThis}/> : null}
+                    <PDPBg pdp={pdp} />
+                    <PDPTop pdp={pdp} type="movie" currVideo={currVideo} />
+
+                    {moreLikeThis ? (
+                        <div className="pdp-more-like-this">
+                            <CardList
+                                key={`more-${pdp.id}`}
+                                type="title"
+                                data={moreLikeThis}
+                            />{" "}
+                        </div>
+                    ) : null}
                     {/* { genres.length > 0 ? (
                         <ButtonList className="pdp-genres" type="grid" header={constants.GENRES} data={genres} />
                     ) : null}
@@ -97,13 +106,18 @@ export default function Movie({session, config, page, error, pageType, seoObj}) 
                         <ButtonList className="pdp-tags" type="grid" header={constants.TAGS} data={tags} />
                     ) : null} */}
                 </div>
-                <Player pageType={pageType} video={firstVideo} autostart={false} showPlayer={store.showPlayer} />
+                <Player
+                    pageType={pageType}
+                    video={firstVideo}
+                    autostart={false}
+                    showPlayer={store.showPlayer}
+                />
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </>
         ) : (
-            <Error404/>
+            <Error404 />
         )
-    ));
+    );
 }
 Movie.getLayout = getLayout;
 

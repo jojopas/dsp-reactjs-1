@@ -25,7 +25,7 @@ const constants = {
     MORE_LIKE_THIS: "More Like This",
     GENRES: "Genres",
     TAGS: "Tags",
-    SEARCH_SIZE: 200,
+    SEARCH_SIZE: 20,
     RECO_SIZE: 20,
     SEARCH_DEFAULT: "Search for Shows, Movies & More",
     SEARCH_LOADING: "Loading Results...",

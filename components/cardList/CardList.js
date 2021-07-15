@@ -218,7 +218,6 @@ export default function CardList({
     }
 
     Object.assign(slickSettings, settingsOverrides);
-
     const cards = data.cards.map((card, index) => (
         <div key={card.id}>
             {type === "video" ? (
@@ -242,7 +241,7 @@ export default function CardList({
                 <>
                     {useHeader ? (
                         <ListHeader
-                            label={data.category.name}
+                            label={data.category?.name}
                             onClick={() => props?.onHeaderClick? props?.onHeaderClick(data):null}
                         />
                     ) : null}
