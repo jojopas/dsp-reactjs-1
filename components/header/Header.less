@@ -662,9 +662,25 @@ header {
     }
 }
 
-&.pageType-home{
-// , &.pageType-channel {
+&.pageType-home {
+    // , &.pageType-channel {
     header {
         position: relative;
+    }
+}
+
+&.pageType-channel {
+    header {
+        &:before {
+            opacity: 1;
+        }
+    }
+}
+
+&.pageType-on-demand {
+    header {
+        &:before {
+            opacity: 0.6;
+        }
     }
 }

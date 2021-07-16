@@ -13,7 +13,7 @@ import "./Header.less";
 import ButtonList from "../buttonList/ButtonList";
 import MobileHeader from "./MobileHeader.";
 
-export default function Header({}) {
+export default function Header({pageType}) {
     const store = React.useContext(StoreContext);
 
     const [open, setOpen] = React.useState(false);
@@ -101,7 +101,7 @@ export default function Header({}) {
 
     return useObserver(() => (
         <>
-            <header>
+            <header className={pageType=='on-demand'?'on-demand':''}>
                 <Logo />
                 {store.isBreakpoint ? (
                     <NavLink href="/search/[[...searchQuery]]" as="/search">
