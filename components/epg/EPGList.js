@@ -1,7 +1,6 @@
 import React from "react";
 import smoothscroll from "smoothscroll-polyfill";
 
-
 import { StoreContext } from "../../store";
 import "./epg.less";
 import { constants } from "../../config";
@@ -21,8 +20,8 @@ export default function EPGList({
     pageType,
     onClick,
 }) {
-    if(typeof window !== "undefined") {
-         smoothscroll.polyfill();
+    if (typeof window !== "undefined") {
+        smoothscroll.polyfill();
     }
 
     const channelCellWidth = 120;
@@ -140,7 +139,9 @@ export default function EPGList({
                 ? `background-color: #0e212f; transform:translateY(${scrollTop}px)`
                 : `transform:translateY(${scrollTop}px)`;
         });
-        document.querySelector('.scroll').style.cssText = `transform:translateY(${scrollTop}px)`;
+        document.querySelector(
+            ".scroll"
+        ).style.cssText = `transform:translateY(${scrollTop}px)`;
     };
 
     const setDate = (event) => {
@@ -194,17 +195,23 @@ export default function EPGList({
         // Check if we are on an increment of 30_MINUTE_WIDTH, if not, fix our positioning
         if (scrollLeft % constants.EPG_30_MINUTE_WIDTH !== 0) {
             if (left) {
-                scrollLeft = Math.ceil(scrollLeft / constants.EPG_30_MINUTE_WIDTH) * constants.EPG_30_MINUTE_WIDTH;
+                scrollLeft =
+                    Math.ceil(scrollLeft / constants.EPG_30_MINUTE_WIDTH) *
+                    constants.EPG_30_MINUTE_WIDTH;
             } else {
-                scrollLeft = Math.floor(scrollLeft / constants.EPG_30_MINUTE_WIDTH) * constants.EPG_30_MINUTE_WIDTH;
+                scrollLeft =
+                    Math.floor(scrollLeft / constants.EPG_30_MINUTE_WIDTH) *
+                    constants.EPG_30_MINUTE_WIDTH;
             }
         }
         // Max number of complete 30 min blocks that can scroll w/o going past what was viewable before
-        const maxScrollSegments = Math.floor(offsetWidth / constants.EPG_30_MINUTE_WIDTH);
+        const maxScrollSegments = Math.floor(
+            offsetWidth / constants.EPG_30_MINUTE_WIDTH
+        );
         // Multiply the 30 minute width times the max segments
         const scrollAmt = constants.EPG_30_MINUTE_WIDTH * maxScrollSegments;
         // Get new left scroll position to scroll to
-        let newLeft = scrollLeft + (flag * scrollAmt);
+        let newLeft = scrollLeft + flag * scrollAmt;
         // Outer bounds
         if (newLeft < 0) {
             // If the newLeft is less than 0, set to 0
@@ -219,7 +226,7 @@ export default function EPGList({
             epgRef.current.scrollTo({
                 top: 0,
                 left: newLeft,
-                behavior: 'smooth'
+                behavior: "smooth",
             });
         }
     };
@@ -237,21 +244,19 @@ export default function EPGList({
         }
 
         for (let time = initialTime; time < Total_Minutes_A_Day; time += 30) {
-            let hour = Math.floor(time / 60);
+            const hour = Math.floor(time / 60);
             const minute = time % 60;
-            hour = hour === 0? 12: hour;
+
             const hourPast = hour > 12;
             timeSlots.push(
-                `${hourPast ? hour - 12 : hour}:${minute > 29 ? "30" : "00"}${
-                    hourPast || hour === 12 ? "p" : "a"
-                }`
+                `${hourPast ? hour - 12 : hour == 0 ? 12 : hour}:${
+                    minute > 29 ? "30" : "00"
+                }${hourPast || hour === 12 ? "p" : "a"}`
             );
         }
 
         return (
-            <div
-                className="timeslot-row"
-            >
+            <div className="timeslot-row">
                 {timeSlots.map((time, index) => (
                     <div
                         className={`${"timeslot-row--time"}`}

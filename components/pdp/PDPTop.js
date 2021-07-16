@@ -25,7 +25,9 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
 
     React.useEffect(() => {
         const pdpHeight = document.querySelector(".pdp-top").clientHeight;
-        document.querySelector(".pdp-bg").style.cssText = `padding-Top: ${
+        const pdpBg = document.querySelector(".pdp-bg")
+        console.log('pdp height', pdpHeight);
+        pdpBg.style.cssText = `padding-Top: ${
             pdpHeight + 100
         }px`;
     }, []);
