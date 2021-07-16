@@ -77,7 +77,7 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
                 ? store.loadVideo({ id: vId })
                 : null;
             store.setShowPlayer(true);
-            store.playerInstance.startConvivaSession();
+            store.playerInstance?.startConvivaSession();
         }
     };
 

@@ -29,7 +29,7 @@ export default function OnDemand({
     const [clickedCardTitle, setClickedCardTitle] = React.useState();
     const genreNav = page.genres?.map((genre) => ({
         id: genre,
-        inner: genre,
+        inner: genre.toUpperCase(),
         url: `/movies/genre/[...slug]`,
         as: `/movies/genre/${slugify(genre)}`,
     }));
@@ -61,7 +61,7 @@ export default function OnDemand({
                               <div
                                   className="carousel"
                                   style={{
-                                      background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 1) 100%),url("${el.wallpaper}/${width}/500"), no-repeat`,
+                                      background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 1) 100%),url("${el.wallpaper}/${width}/600"), no-repeat`,
                                   }}
                               >
                                   <div className="carousel-about">

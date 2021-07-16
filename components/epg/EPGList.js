@@ -237,8 +237,9 @@ export default function EPGList({
         }
 
         for (let time = initialTime; time < Total_Minutes_A_Day; time += 30) {
-            const hour = Math.floor(time / 60);
+            let hour = Math.floor(time / 60);
             const minute = time % 60;
+            hour = hour === 0? 12: hour;
             const hourPast = hour > 12;
             timeSlots.push(
                 `${hourPast ? hour - 12 : hour}:${minute > 29 ? "30" : "00"}${

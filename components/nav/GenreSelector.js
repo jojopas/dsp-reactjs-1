@@ -85,11 +85,11 @@ export default function GenreSelector({
                     key="all-genres"
                     value={type === "live" ? "" : `/${type}`}
                 >
-                    {type === "live" ? "All Channels" : "All Genres"}
+                    {(type === "live" ? "All Channels" : "All Genres").toUpperCase()}
                 </option>
                 {links.map((link) => (
                     <option key={link.id} value={link.as}>
-                        {link.inner}
+                        {link.inner.toUpperCase()}
                     </option>
                 ))}
             </select>

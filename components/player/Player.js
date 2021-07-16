@@ -239,8 +239,8 @@ export default function Player({
     }, []);
 
     const closeLightBox = () => {
+        store.setShowPlayer(false);
         if (store.playerInstance && store.playerInstance.vjs) {
-            store.setShowPlayer(false);
             if (!store.playerInstance.vjs.isInPictureInPicture()) {
                 store.playerInstance.vjs.pause();
             }

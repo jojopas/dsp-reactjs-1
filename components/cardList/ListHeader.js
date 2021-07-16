@@ -10,11 +10,13 @@ export default function ListHeader({ className, style, label,showArrow=true, onC
                 className={`listHeader${className ? ` ${className}` : ""}`}
                 style={style}
             >
-                {label}
+                {label.toUpperCase()}
             </h2>
-            {showArrow && <div className="listHeaderIcon">
-                <InlineSVG type="arrow" />
-            </div>}
+            {showArrow && (
+                <div className="listHeaderIcon">
+                    <InlineSVG type="arrow" />
+                </div>
+            )}
         </div>
     );
 }
