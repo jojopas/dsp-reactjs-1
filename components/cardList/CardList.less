@@ -1,35 +1,36 @@
 @import "../../styles/config.less";
-@import './slick.less';
+@import "./slick.less";
 
-.listRow{
-    padding:0 (@sitePadding - 10px);
+.listRow {
+    padding: 0 (@sitePadding - 20px);
     visibility: hidden;
+    margin-bottom: 20px;
 
-    @media (max-width: @mobileLargeBP){
-        padding:0 (@sitePaddingMobile - 7.5px);
+    @media (max-width: @mobileLargeBP) {
+        padding: 0 (@sitePaddingMobile - 7.5px);
     }
 
     .slick-initialized {
         visibility: visible;
     }
 
-    .cardList-video{
+    .cardList-video {
         .slick-prev,
         .slick-next {
-            top:105px;
+            top: 105px;
         }
     }
 
-    .slick-list{
-    overflow: visible;
+    .slick-list {
+        overflow: visible;
 
-        .slick-track{
-            margin-left:0;
+        .slick-track {
+            margin-left: 0;
 
-            .slick-slide{
+            .slick-slide {
                 & > div {
                     & > div {
-                        vertical-align:top;
+                        vertical-align: top;
                     }
                 }
             }
@@ -38,34 +39,34 @@
 
     .slick-prev,
     .slick-next {
-        opacity:0;
+        opacity: 0;
     }
 
-    &:hover{
+    &:hover {
         .slick-prev:not(.slick-disabled),
         .slick-next:not(.slick-disabled) {
-            opacity:1;
+            opacity: 1;
         }
     }
 }
 
 .listGrid {
-    padding:0 (@sitePadding - 10px);
+    padding: 0 (@sitePadding - 10px);
 
-    @media (max-width: @mobileLargeBP){
-        padding:0 (@sitePaddingMobile - 7.5px);
+    @media (max-width: @mobileLargeBP) {
+        padding: 0 (@sitePaddingMobile - 7.5px);
     }
 
-    & > div{
-        display:inline-block;
-        width:20%;
+    & > div {
+        display: inline-block;
+        width: 20%;
 
-        @media (max-width: @mobileLargeBP){
-            width:33.333%;
+        @media (max-width: @mobileLargeBP) {
+            width: 33.333%;
         }
 
-        @media (max-width: @mobileMediumBP){
-            width:50%;
+        @media (max-width: @mobileMediumBP) {
+            width: 50%;
         }
     }
 }

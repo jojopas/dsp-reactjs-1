@@ -2,15 +2,15 @@
 
 h2.listHeader {
     color: #b4b7bb;
-    font: 24px Roboto;
+    font: 18px Roboto;
     cursor: pointer;
-	
+
     line-height: 1.333;
     text-overflow: ellipsis;
-    padding-left: 50px;
+    padding-left: 60px;
 
     @media (min-width: @maxSiteWidth) {
-        font-size: 22px;
+        font-size: 18px;
     }
     @media (max-width: @mobileLargeBP) {
         font-size: 15px;
@@ -22,13 +22,14 @@ h2.listHeader {
 .listHeaders {
     display: flex;
     align-items: center;
-    padding-top: 40px;
+    padding-top: 10px;
 
     .listHeaderIcon {
         cursor: pointer;
         fill: @colorYellow;
         width: 24px;
         height: 24px;
+        margin-left: 10px;
     }
 
     @media (max-width: @mobileLargeBP) {

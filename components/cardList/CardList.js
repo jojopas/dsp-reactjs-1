@@ -8,12 +8,17 @@ import VideoCard from "../cards/VideoCard";
 import ListHeader from "./ListHeader";
 import SlickArrow from "./SlickArrow";
 import "./CardList.less";
-
+import { ChannelCard } from "../cards";
+/*
+    showArrow
+*/
 export default function CardList({
     className,
     type,
     useHeader,
+    showArrow = true,
     data,
+    children,
     ...props
 }) {
     let curIndex = 0;
@@ -139,6 +144,36 @@ export default function CardList({
         };
     }
 
+    if ( type == "channel") {
+        settingsOverrides = {
+            className: "cardList cardList-promo",
+            slidesToShow: 3.1,
+            slidesToScroll: 3,
+            touchThreshold: 9,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        arrows: false,
+                        slidesToShow: 2.1,
+                        slidesToScroll: 2,
+                        touchThreshold: 6,
+                    },
+                },
+                {
+                    breakpoint: 479,
+                    settings: {
+                        arrows: false,
+                        slidesToShow: 1.1,
+                        slidesToScroll: 1,
+                        touchThreshold: 5,
+                        speed: 300,
+                    },
+                },
+            ],
+        };
+    }
+
     if (type === "promoSmall") {
         settingsOverrides = {
             className: "cardList cardList-promoSmall",
@@ -218,22 +253,28 @@ export default function CardList({
     }
 
     Object.assign(slickSettings, settingsOverrides);
-    const cards = data.cards.map((card, index) => (
-        <div key={card.id}>
-            {type === "video" ? (
-                <VideoCard
-                    {...card}
-                    onClick={
-                        props.onClick ? () => props.onClick(card.id) : null
-                    }
-                />
-            ) : type === "promo" || type === "promoSmall" ? (
-                <PromoCard {...card} />
-            ) : (
-                <TitleCard  {...{...{locked: (index % 2 === 1)}, ...card}}  />
-            )}
-        </div>
-    ));
+    const cards =
+        children ||
+        data.cards.map((card, index) => (
+            <div key={card.id}>
+                {type === "channel" ? (
+                    <ChannelCard {...card} />
+                ) : type === "video" ? (
+                    <VideoCard
+                        {...card}
+                        onClick={
+                            props.onClick ? () => props.onClick(card.id) : null
+                        }
+                    />
+                ) : type === "promo" || type === "promoSmall" ? (
+                    <PromoCard {...card} />
+                ) : (
+                    <TitleCard
+                        {...{ ...{ locked: index % 2 === 1 }, ...card }}
+                    />
+                )}
+            </div>
+        ));
 
     return (
         <div className={className ? className : ""}>
@@ -242,7 +283,12 @@ export default function CardList({
                     {useHeader ? (
                         <ListHeader
                             label={data.category?.name}
-                            onClick={() => props?.onHeaderClick? props?.onHeaderClick(data):null}
+                            showArrow={showArrow}
+                            onClick={() =>
+                                props?.onHeaderClick
+                                    ? props?.onHeaderClick(data)
+                                    : null
+                            }
                         />
                     ) : null}
                     <div className="listRow">

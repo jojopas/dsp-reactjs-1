@@ -1,63 +1,106 @@
 @import "../../styles/config";
 
-.searchField {
-    position: relative;
-    margin: 30px @sitePadding 1px;
-    display: block;
+.searchTop {
+    background-color: #193347;
 
-    &-input {
-        .bsNoAppearance();
-        width: 100%;
-        border: solid 1px #263446;
-        .bsBorderRadius(4px);
-        background-color: #132336;
-        color: #fff;
-        font-size: 20px;
-        height: 60px;
-        padding: 0 15px 0 60px;
-        .bsBoxSizing();
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        &::placeholder {
-            color: @colorNavGray;
-        }
-    }
-
-    svg {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        width: 30px;
-        height: 30px;
-        fill: @colorNavGray;
-        .bsTransition(fill);
-    }
-
-    @media (max-width: @mobileLargeBP) {
-        margin: 20px @sitePaddingMobile 0;
+    .searchField {
+        position: relative;
+        margin: 30px @sitePadding 30px;
+        display: block;
 
         &-input {
-            font-size: 16px;
-            height: 50px;
-            padding: 0 10px 0 44px;
+            .bsNoAppearance();
+            width: 100%;
+            border: solid 1px #263446;
+            .bsBorderRadius(24px);
+            background-color: #111921;
+            color: #fff;
+            font-size: 20px;
+            height: 60px;
+            margin-top: 20px;
+            padding: 10px 15px 0 60px;
+            .bsBoxSizing();
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &::placeholder {
+                color: @colorNavGray;
+            }
         }
 
         svg {
-            top: 13px;
-            left: 10px;
-            width: 24px;
-            height: 24px;
+            position: absolute;
+            top: 40px;
+            left: 15px;
+            width: 30px;
+            height: 30px;
+            fill: @colorNavGray;
+            .bsTransition(fill);
+        }
+
+        @media (max-width: @mobileLargeBP) {
+            margin: 60px @sitePaddingMobile 30px;
+
+            &-input {
+                font-size: 16px;
+                height: 50px;
+                padding: 0 10px 0 44px;
+            }
+
+            svg {
+                top: 35px;
+                left: 10px;
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        .filled {
+            svg {
+                fill: #fff;
+            }
+        }
+    }
+    .searchResult-heading {
+        border-radius: 30px;
+        margin: auto;
+        justify-content: center;
+        display: flex;
+        .active {
+            color: #ebebeb;
+
+            .count {
+                color: @colorYellow;
+            }
+        }
+
+        h2 {
+            color: @colorNavGray;
+            margin: 10px 20px;
+            font: 18px Roboto;
+            text-align: center;
+            cursor: pointer;
+            .count {
+                margin-left: 5px;
+            }
         }
     }
 
-    .filled {
-        svg {
-            fill: #fff;
-        }
+    .showNone {
+        display: none;
+    }
+
+    .activeBar {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 2px;
+        background-color: @colorYellow;
+        .bsBorderRadius(1px 1px 0 0);
+        .bsTransition(all);
+        transition-property: transform, width;
     }
 }
-
 .searchResults-none,
 .searchResults-loading {
     display: block;
@@ -76,44 +119,6 @@
 .searchResults-loading {
 }
 
-.searchResult-heading {
-    border-radius: 30px;
-    margin: auto;
+.channelCard {
     width: 300px;
-    padding: 20px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-evenly;
-    background-color: black;
-    .active {
-        color: #ebebeb;
-    }
-
-    h2 {
-        color: @colorNavGray;
-        margin: 0px;
-        font: 18px Roboto;
-        text-align: center;
-        cursor: pointer;
-        .count {
-            font: 15px Roboto;
-            color: @colorYellow;
-        }
-    }
-}
-
-.showNone {
-    display: none;
-}
-
-.activeBar {
-    position: absolute;
-    display: block;
-    width: 0;
-    max-width: 120px;
-    height: 2px;
-    background-color: @colorYellow;
-    .bsBorderRadius(1px 1px 0 0);
-    .bsTransition(all);
-    transition-property: transform, width;
 }

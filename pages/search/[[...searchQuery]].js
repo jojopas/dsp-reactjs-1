@@ -68,13 +68,10 @@ export default function Search({
             allRefs.current[currentSearchType].current;
 
         const { offsetLeft, offsetWidth } = activeNavItem;
-        activeBarRef.current.style.transform = `translateX(${offsetLeft}px) translateY(-15px)`;
+        activeBarRef.current.style.transform = `translateX(${offsetLeft}px) translateY(-5px)`;
         activeBarRef.current.style.width = `${offsetWidth}px`;
     };
     React.useEffect(() => {
-        /*if (data && data.data && data.data.data && data.data.data.results) {
-            console.log(data.data.data.results);
-        }*/
         const res = {};
         let flag = false;
         if (data && data.data && data.data.data && data.data.data.results) {
@@ -92,7 +89,7 @@ export default function Search({
 
             res.channel = {
                 cards: channelData?.data?.data?.programs,
-                category: { name: "Channel" },
+                category: { name: " LIVE CHANNELS" },
             };
             res.channel.cards = res.channel.cards.map((card) => {
                 card.slug = `channel/${card.channel.slug}`;
@@ -121,72 +118,84 @@ export default function Search({
         }
     }, [currentSearchType]);
 
+    const showChannel = currentSearchType == 0 || currentSearchType == 1;
+    const showOnDemand = currentSearchType == 0 || currentSearchType == 2;
+    let channelCards = [];
+    if (showChannel) {
+        channelCards = result?.channel?.cards.map((card) => <div></div>);
+    }
     console.log("Search", result);
-
     return useObserver(() =>
         !pageError && !error ? (
             <>
                 <h1 className="noShow">Search</h1>
-                <span className="searchField">
-                    <input
-                        className="searchField-input"
-                        placeholder={constants.SEARCH_DEFAULT}
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                    <InlineSVG type="search" />
-                </span>
-                <div
-                    className={`searchResult-heading ${
-                        result ? "" : "showNone"
-                    }`}
-                >
-                    <h2
-                        className={currentSearchType == 0 ? "active" : ""}
-                        ref={allRefs.current[0]}
-                        onClick={() => setCurrentSearchType(0)}
+                <div className="searchTop">
+                    <span className="searchField">
+                        <input
+                            className="searchField-input"
+                            placeholder={constants.SEARCH_DEFAULT}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                        <InlineSVG type="search" />
+                    </span>
+                    <div
+                        className={`searchResult-heading ${
+                            result ? "" : "showNone"
+                        }`}
                     >
-                        All
-                        <span className="count">
-                            (
-                            {result?.demand?.cards?.length +
-                                result?.channel?.cards?.length}
-                            )
-                        </span>
-                    </h2>
-                    <h2
-                        ref={allRefs.current[1]}
-                        className={currentSearchType == 1 ? "active" : ""}
-                        onClick={() => setCurrentSearchType(1)}
-                    >
-                        Channel
-                        <span className="count">
-                            ({result?.channel?.cards?.length})
-                        </span>
-                    </h2>
-                    <h2
-                        ref={allRefs.current[2]}
-                        className={currentSearchType == 2 ? "active" : ""}
-                        onClick={() => setCurrentSearchType(2)}
-                    >
-                        Movie
-                        <span className="count">
-                            ({result?.demand?.cards?.length})
-                        </span>
-                    </h2>
+                        <h2
+                            className={currentSearchType == 0 ? "active" : ""}
+                            ref={allRefs.current[0]}
+                            onClick={() => setCurrentSearchType(0)}
+                        >
+                            All
+                            <span className="count">
+                                {result?.demand?.cards?.length +
+                                    result?.channel?.cards?.length}
+                            </span>
+                        </h2>
+                        <h2
+                            ref={allRefs.current[1]}
+                            className={currentSearchType == 1 ? "active" : ""}
+                            onClick={() => setCurrentSearchType(1)}
+                        >
+                            LIVE CHANNELS
+                            <span className="count">
+                                {result?.channel?.cards?.length}
+                            </span>
+                        </h2>
+                        <h2
+                            ref={allRefs.current[2]}
+                            className={currentSearchType == 2 ? "active" : ""}
+                            onClick={() => setCurrentSearchType(2)}
+                        >
+                            ON DEMAND
+                            <span className="count">
+                                {result?.demand?.cards?.length}
+                            </span>
+                        </h2>
+                    </div>
+                    <span ref={activeBarRef} className="activeBar" />
                 </div>
-                <span ref={activeBarRef} className="activeBar" />
-                {result && result.channel && !isEmpty(result.channel.cards) && (
+                {showChannel &&
+                    result?.channel &&
+                    !isEmpty(result.channel.cards) && (
+                        <CardList
+                            key="searchChannelResults"
+                            type="channel"
+                            showArrow={false}
+                            data={result.channel}
+                        />
+                    )}
+                {showOnDemand &&
+                result &&
+                result.demand &&
+                !isEmpty(result.demand.cards) ? (
                     <CardList
-                        key="searchResults"
-                        type="promo"
-                        data={result.channel}
-                    />
-                )}
-                {result && result.demand && !isEmpty(result.demand.cards) ? (
-                    <CardList
-                        key="searchResults"
+                        key="searchOnDemandResults"
                         type="title"
+                        showArrow={false}
                         data={result.demand}
                     />
                 ) : searchQuery == "" ? null : isValidating ? (

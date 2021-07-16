@@ -3,7 +3,7 @@ import InlineSVG from "../InlineSVG";
 
 import "./ListHeader.less";
 
-export default function ListHeader({ className, style, label, onClick }) {
+export default function ListHeader({ className, style, label,showArrow=true, onClick }) {
     return (
         <div className="listHeaders" onClick={onClick}>
             <h2
@@ -12,9 +12,9 @@ export default function ListHeader({ className, style, label, onClick }) {
             >
                 {label}
             </h2>
-            <div className="listHeaderIcon">
+            {showArrow && <div className="listHeaderIcon">
                 <InlineSVG type="arrow" />
-            </div>
+            </div>}
         </div>
     );
 }
