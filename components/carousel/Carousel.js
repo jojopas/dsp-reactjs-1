@@ -10,6 +10,7 @@ const Carousel = ({ views, slickSettings, className }) => {
 
     const [currentIndex, setIndex] = React.useState(0);
     const slickRef = React.useRef(null);
+    let slickGoto;
     const slickSetting = slickSettings
         ? slickSettings
         : {
@@ -21,7 +22,6 @@ const Carousel = ({ views, slickSettings, className }) => {
               slidesToScroll: 1,
           };
     slickSetting.afterChange = (idx) => setIndex(idx);
-    slickSetting.initialSlide = currentIndex;
     React.useEffect(() => {
         if (store.isBreakpoint) {
             const slick = document.querySelector(".slick-slider");
@@ -31,14 +31,6 @@ const Carousel = ({ views, slickSettings, className }) => {
             dots.style.cssText = `bottom: ${carouselHeight - 500 + 50}px`;
         }
     }, [store.isBreakpoint]);
-
-    React.useEffect(() => {
-        console.log("SlickRef", slickRef.current?.slickGoTo);
-        if (slickRef.current?.slickGoTo) {
-            slickRef.current?.slickGoto(currentIndex);
-        }
-        
-    }, [currentIndex]);
 
     return (
         <div className={className}>
@@ -58,7 +50,9 @@ const Carousel = ({ views, slickSettings, className }) => {
                                 <div
                                     className="carousel-dot"
                                     key={`dots${index + 1}`}
-                                    onClick={() => setIndex(index)}
+                                    onClick={() => {
+                                        slickRef.current.slickGoTo(index);
+                                    }}
                                 ></div>
                             )
                         )}
