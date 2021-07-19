@@ -13,11 +13,18 @@ export default function EPGProgram({
     iconClicked,
     index,
 }) {
+    const amPm = {};
     const timeDuration = (seconds) => {
         const date = new Date(0);
-        date.setSeconds(seconds);
+        date.setUTCSeconds(seconds);
         // console.log(date.toTimeString());
-        const timeDuration = date.toTimeString().substr(0, 5);
+
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const timeDuration = `${
+            hours === 12 || hours === 0 ? 12 : hours > 12 ? hours - 12 : hours
+        }:${minutes < 10 ? "0" + minutes : minutes}`;
+        amPm[hours > 11 ? "p" : "a"] = 1;
         return timeDuration;
     };
 
@@ -30,12 +37,20 @@ export default function EPGProgram({
         return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
     };
 
-    const duration =
-        program.ends > endTime
-            ? endTime - program.starts
-            : program.ends > startTime && startTime > program.starts
-            ? program.ends - startTime
-            : program.duration;
+    const start = startTime > program.starts ? startTime : program.starts;
+    const end = endTime < program.ends ? endTime : program.ends;
+    const duration = end - start;
+
+    let startString = timeDuration(program.starts);
+    let endString = timeDuration(program.ends);
+    const amPmCheck = Object.keys(amPm);
+    if (amPmCheck.length > 1) {
+        startString += amPmCheck[0];
+        endString += amPmCheck[1];
+        // console.log("AMPM", amPmCheck, startString, endString);
+    } else {
+        endString += amPmCheck[0];
+    }
 
     const separator = "\t . \t";
     const isBroadcasting =
@@ -69,9 +84,7 @@ export default function EPGProgram({
                                     {separator}
                                 </>
                             )}
-                            {`${timeDuration(program.starts)} - ${timeDuration(
-                                program.ends
-                            )}`}
+                            {`${startString} - ${endString}`}
 
                             {isBroadcasting
                                 ? ` ${separator} ${timeLeftDuration(

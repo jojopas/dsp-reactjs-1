@@ -11,11 +11,11 @@ import CardList from "../../components/cardList/CardList";
 import Carousel from "../../components/carousel/Carousel";
 import Button from "../../components/button/Button";
 import { constants } from "../../config";
-import InlineSVG from "../../components/InlineSVG";
 import GenreSelector from "../../components/nav/GenreSelector";
 import { slugify } from "../../helpers/utils/strings";
 
 import "./index.less";
+import ExtendedGenre from "../../components/Genre/ExtendedGenre";
 
 export default function OnDemand({
     session,
@@ -89,27 +89,7 @@ export default function OnDemand({
     return useObserver(() =>
         !error ? (
             clickedCardTitle ? (
-                <>
-                    <h1 className="noShow">
-                        {clickedCardTitle?.category?.name}
-                    </h1>
-                    <div className="clickedTitle">
-                        <div
-                            className="backButton"
-                            onClick={() => setClickedCardTitle(null)}
-                        >
-                            <InlineSVG type="backArrow" />
-                        </div>
-                        <span className="clickedHeader">
-                            {clickedCardTitle?.category?.name}
-                        </span>
-                    </div>
-                    <CardList
-                        key={clickedCardTitle.category.id}
-                        type="grid"
-                        data={clickedCardTitle}
-                    />
-                </>
+                <ExtendedGenre data={clickedCardTitle} setClickedCardTitle={setClickedCardTitle}/>
             ) : (
                 <>
                     <h1 className="noShow">On Demand</h1>

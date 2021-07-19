@@ -65,6 +65,7 @@
             width: 12px;
             height: 12px;
             .bsTransform(translateY(-50%));
+            .bsTransform(rotate(90));
             display: block;
 
             svg {
@@ -77,6 +78,11 @@
                 .bsTransform(translate(-50%, -50%));
                 .bsTransition(fill);
             }
+        }
+
+        &:hover {
+            color: #ebebeb;
+            fill: #ebebeb;
         }
 
         &.genreSelector-hover {
@@ -120,6 +126,12 @@
                 svg {
                     width: 20px;
                     height: 20px;
+                }
+            }
+            &:hover {
+                color: #ebebeb;
+                svg {
+                    fill: #ebebeb;
                 }
             }
 

@@ -104,10 +104,9 @@ export default function Channels({
         setCurrentGenre(selected);
         const { channels } = data.data.data;
 
-        if (selected == 'Category') {
+        if (selected == "Category") {
             setResult(channels);
-        }else {
-
+        } else {
             setResult(
                 channels.filter((channel) =>
                     channel.genres.includes(event.target.value)
@@ -483,15 +482,15 @@ export default function Channels({
     }, []);
     const getCurrentChannelTitle = () => {
         const now = new Date();
-        const nowTime = now.getTime()/1000;
+        const nowTime = now.getTime() / 1000;
         return currentChannel.program.reduce((title, program) => {
-            if (nowTime>program.starts && nowTime<program.ends) {
+            if (nowTime > program.starts && nowTime < program.ends) {
                 title = program.title;
             }
             return title;
-        }, '');
-    }
-    
+        }, "");
+    };
+
     // console.log('Channel', page);
     return useObserver(() =>
         !pageError ? (
@@ -556,7 +555,7 @@ export default function Channels({
                         </div>
                         <div className="ads">
                             <img
-                                src="https://images.dotstudiopro.com/60b5b1e72c75020f1a1b8883/320/400"
+                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/60f5502024f29b00285ca1be/320/400"
                                 alt="Adds"
                             />
                         </div>

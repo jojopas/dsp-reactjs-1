@@ -1,5 +1,7 @@
 import "./Carousel.less";
 import React from "react";
+import "slick-carousel/slick/slick.css";
+
 import Slider from "react-slick";
 import { StoreContext } from "../../store";
 
@@ -7,6 +9,7 @@ const Carousel = ({ views, slickSettings, className }) => {
     const store = React.useContext(StoreContext);
 
     const [currentIndex, setIndex] = React.useState(0);
+    const slickRef = React.useRef(null);
     const slickSetting = slickSettings
         ? slickSettings
         : {
@@ -29,9 +32,19 @@ const Carousel = ({ views, slickSettings, className }) => {
         }
     }, [store.isBreakpoint]);
 
+    React.useEffect(() => {
+        console.log("SlickRef", slickRef.current?.slickGoTo);
+        if (slickRef.current?.slickGoTo) {
+            slickRef.current?.slickGoto(currentIndex);
+        }
+        
+    }, [currentIndex]);
+
     return (
         <div className={className}>
-            <Slider {...slickSetting}>{views}</Slider>
+            <Slider ref={slickRef} {...slickSetting}>
+                {views}
+            </Slider>
             {views && (
                 <div className="carousel-dots-container">
                     <div className="carousel-dots">

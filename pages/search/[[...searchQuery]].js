@@ -71,34 +71,41 @@ export default function Search({
         activeBarRef.current.style.transform = `translateX(${offsetLeft}px) translateY(-5px)`;
         activeBarRef.current.style.width = `${offsetWidth}px`;
     };
+
     React.useEffect(() => {
         const res = {};
         let flag = false;
-        if (data && data.data && data.data.data && data.data.data.results) {
+        let count = 0;
+        if (Array.isArray(data?.data?.data?.results?.cards)) {
             flag = true;
             res.demand = data.data.data.results;
+            console.log("Demand", data?.data?.data?.results?.cards);
             res.demand.category = { name: "Movies" };
-            res.demand.cards = res.demand.cards.map((card) => {
+            res.demand.cards = res.demand?.cards?.map((card) => {
                 card.slug = `${card.type}/${card.slug}`;
                 return card;
             });
+
+            count += res.demand.cards.length;
         }
 
-        if (channelData?.data?.data?.programs) {
+        if (Array.isArray(channelData?.data?.data?.programs)) {
             flag = true;
 
             res.channel = {
                 cards: channelData?.data?.data?.programs,
                 category: { name: " LIVE CHANNELS" },
             };
-            res.channel.cards = res.channel.cards.map((card) => {
+            res.channel.cards = res.channel?.cards?.map((card) => {
                 card.slug = `channel/${card.channel.slug}`;
                 return card;
             });
+            count += res.channel.cards.length;
         }
 
         if (flag) {
             setBarLine();
+            res.total = count;
         }
 
         setResult(flag ? res : null);
@@ -110,19 +117,18 @@ export default function Search({
         } else {
             history.replaceState({}, "", "/search");
         }
+        setBarLine();
     }, [searchQuery]);
 
     React.useEffect(() => {
-        if (result) {
-            setBarLine();
-        }
+        setBarLine();
     }, [currentSearchType]);
 
     const showChannel = currentSearchType == 0 || currentSearchType == 1;
     const showOnDemand = currentSearchType == 0 || currentSearchType == 2;
     let channelCards = [];
     if (showChannel) {
-        channelCards = result?.channel?.cards.map((card) => <div></div>);
+        channelCards = result?.channel?.cards?.map((card) => <div></div>);
     }
     console.log("Search", result);
     return useObserver(() =>
@@ -139,40 +145,63 @@ export default function Search({
                         />
                         <InlineSVG type="search" />
                     </span>
-                    <div
-                        className={`searchResult-heading ${
-                            result ? "" : "showNone"
-                        }`}
-                    >
+                    <div className="searchResult-heading">
                         <h2
                             className={currentSearchType == 0 ? "active" : ""}
                             ref={allRefs.current[0]}
                             onClick={() => setCurrentSearchType(0)}
                         >
-                            All
-                            <span className="count">
-                                {result?.demand?.cards?.length +
-                                    result?.channel?.cards?.length}
+                            ALL
+                            <span
+                                className={`count ${
+                                    Number(result?.total) == 0 ? "showNone" : ""
+                                }`}
+                            >
+                                {Number(result?.total) == 0
+                                    ? "00"
+                                    : result?.total}
                             </span>
                         </h2>
+
                         <h2
                             ref={allRefs.current[1]}
                             className={currentSearchType == 1 ? "active" : ""}
                             onClick={() => setCurrentSearchType(1)}
                         >
                             LIVE CHANNELS
-                            <span className="count">
-                                {result?.channel?.cards?.length}
+                            <span
+                                className={`count ${
+                                    result?.channel &&
+                                    !isEmpty(result?.channel?.cards)
+                                        ? ""
+                                        : "showNone"
+                                }`}
+                            >
+                                {result?.channel &&
+                                !isEmpty(result?.channel?.cards)
+                                    ? result?.channel?.cards?.length
+                                    : "00"}
                             </span>
                         </h2>
+
                         <h2
                             ref={allRefs.current[2]}
                             className={currentSearchType == 2 ? "active" : ""}
                             onClick={() => setCurrentSearchType(2)}
                         >
                             ON DEMAND
-                            <span className="count">
-                                {result?.demand?.cards?.length}
+                            <span
+                                className={`count ${
+                                    result?.demand &&
+                                    !isEmpty(result?.demand?.cards)
+                                        ? ""
+                                        : "showNone"
+                                }`}
+                            >
+                                {result?.demand &&
+                                !isEmpty(result?.demand?.cards)
+                                    ? result?.demand?.cards?.length
+                                    : "00"}
                             </span>
                         </h2>
                     </div>
@@ -202,11 +231,10 @@ export default function Search({
                     <span className="searchResults-loading">
                         {constants.SEARCH_LOADING}
                     </span>
-                ) : result &&
-                  result.results &&
-                  isEmpty(result.results.cards) ? (
+                ) : result && !result?.total ? (
                     <span className="searchResults-none">
                         {constants.NO_RESULTS}
+                        <span className="searchQuery">"{searchQuery}"</span>
                     </span>
                 ) : null}
                 {/*<pre>{JSON.stringify(result, null, 2)}</pre>*/}

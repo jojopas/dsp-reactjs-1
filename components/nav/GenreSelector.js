@@ -78,14 +78,16 @@ export default function GenreSelector({
                         ? currentGenre || ""
                         : currentGenre || `/${type}`
                 }
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                
             >
                 <option
                     key="all-genres"
                     value={type === "live" ? "" : `/${type}`}
                 >
-                    {(type === "live" ? "All Channels" : "All Genres").toUpperCase()}
+                    {(type === "live"
+                        ? "All Channels"
+                        : "All Genres"
+                    ).toUpperCase()}
                 </option>
                 {links.map((link) => (
                     <option key={link.id} value={link.as}>
@@ -100,7 +102,7 @@ export default function GenreSelector({
             >
                 {currentName}
                 <span className="genreSelector-arrow">
-                    <InlineSVG type="up-arrow" />
+                    <InlineSVG type="down-arrow" />
                 </span>
             </span>
         </span>

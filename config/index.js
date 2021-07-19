@@ -29,7 +29,7 @@ const constants = {
     RECO_SIZE: 20,
     SEARCH_DEFAULT: "Search for Shows, Movies & More",
     SEARCH_LOADING: "Loading Results...",
-    NO_RESULTS: "Your search returned no results.",
+    NO_RESULTS: "No results found for...",
     MSG_404:
         "We're currently working on improving your experience. Please wait a few minutes and try again.",
     HOME_404: "Take Me Home",

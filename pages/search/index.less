@@ -5,8 +5,9 @@
 
     .searchField {
         position: relative;
-        margin: 30px @sitePadding 30px;
+        margin: 0px @sitePadding 0px;
         display: block;
+        padding: 10px 0px;
 
         &-input {
             .bsNoAppearance();
@@ -30,7 +31,7 @@
 
         svg {
             position: absolute;
-            top: 40px;
+            top: 50px;
             left: 15px;
             width: 30px;
             height: 30px;
@@ -39,7 +40,7 @@
         }
 
         @media (max-width: @mobileLargeBP) {
-            margin: 60px @sitePaddingMobile 30px;
+            margin: 60px @sitePaddingMobile 0px;
 
             &-input {
                 font-size: 16px;
@@ -48,7 +49,7 @@
             }
 
             svg {
-                top: 35px;
+                top: 45px;
                 left: 10px;
                 width: 24px;
                 height: 24px;
@@ -62,7 +63,6 @@
         }
     }
     .searchResult-heading {
-        border-radius: 30px;
         margin: auto;
         justify-content: center;
         display: flex;
@@ -86,10 +86,6 @@
         }
     }
 
-    .showNone {
-        display: none;
-    }
-
     .activeBar {
         position: absolute;
         display: block;
@@ -100,19 +96,29 @@
         .bsTransition(all);
         transition-property: transform, width;
     }
+
+    .showNone {
+        display: none;
+    }
 }
 .searchResults-none,
 .searchResults-loading {
     display: block;
-    margin: 40px @sitePadding;
+    margin: 20% @sitePadding;
     text-align: center;
     font-weight: 700;
-    font-size: 18px;
+    font: 18px Roboto;
     line-height: 1.25;
     color: @colorCurrent;
 
+    .searchQuery{
+        display: block;
+        margin-top: 10px;
+        color: @colorNavGray
+    }
+
     @media (max-width: @mobileLargeBP) {
-        margin-top: 30px;
+        margin-top: 60px;
     }
 }
 
