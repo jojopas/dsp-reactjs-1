@@ -555,7 +555,7 @@ export default function Channels({
                         </div>
                         <div className="ads">
                             <img
-                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/60f5502024f29b00285ca1be/320/400"
+                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/60f5502024f29b00285ca1be/320"
                                 alt="Adds"
                             />
                         </div>
