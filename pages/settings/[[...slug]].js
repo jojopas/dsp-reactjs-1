@@ -30,7 +30,7 @@ export default function Settings({
                     </p>
 
                     <ContactForm />
-                    <div className="build">Release 1.0 build 3313</div>
+                    <div className="build">Release 1.0 build 3314</div>
                 </div>
             </>
         ) : (
