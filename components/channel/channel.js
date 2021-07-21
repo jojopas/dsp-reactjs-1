@@ -503,9 +503,9 @@ export default function Channels({
                 <div className="epg-container">
                     <div className="epgPlayer" ref={playerContainer}>
                         <div className="fixed-player">
-                            <div className="live-watching">
+                            {/* <div className="live-watching">
                                 {constants.WATCHING}
-                            </div>
+                            </div> */}
                             <Player
                                 pageType={pageType}
                                 video={firstVideo}
@@ -536,7 +536,7 @@ export default function Channels({
                                 </div>
                             )}
                         </div>
-                        <div className="fixed-player-categories">
+                        {/* <div className="fixed-player-categories">
                             <select
                                 name="category"
                                 id="category"
@@ -552,7 +552,7 @@ export default function Channels({
                                     </option>
                                 ))}
                             </select>
-                        </div>
+                        </div> */}
                         <div className="ads">
                             <img
                                 src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/60f5502024f29b00285ca1be/320"

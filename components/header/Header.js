@@ -13,7 +13,7 @@ import "./Header.less";
 import ButtonList from "../buttonList/ButtonList";
 import MobileHeader from "./MobileHeader.";
 
-export default function Header({pageType}) {
+export default function Header({ pageType }) {
     const store = React.useContext(StoreContext);
 
     const [open, setOpen] = React.useState(false);
@@ -101,7 +101,7 @@ export default function Header({pageType}) {
 
     return useObserver(() => (
         <>
-            <header className={pageType=='on-demand'?'on-demand':''}>
+            <header className={pageType == "on-demand" ? "on-demand" : ""}>
                 <Logo />
                 {store.isBreakpoint ? (
                     <NavLink href="/search/[[...searchQuery]]" as="/search">
@@ -117,7 +117,7 @@ export default function Header({pageType}) {
                             links={main}
                             activeBar={true}
                         ></Nav>
-                        <NavLink
+                        {/* <NavLink
                             href="/settings/[[...slug]]"
                             as="/settings"
                             className="account"
@@ -126,7 +126,7 @@ export default function Header({pageType}) {
                                 <InlineSVG type="settings" />
                                 <InlineSVG type="settingsSelected" />
                             </a>
-                        </NavLink>
+                        </NavLink> */}
                     </>
                 )}
                 {store.isBreakpoint ? (

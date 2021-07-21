@@ -17,6 +17,7 @@ export default function CardList({
     type,
     useHeader,
     showArrow = true,
+    gridHeader = false,
     data,
     children,
     ...props
@@ -144,7 +145,7 @@ export default function CardList({
         };
     }
 
-    if ( type == "channel") {
+    if (type == "channel") {
         settingsOverrides = {
             className: "cardList cardList-promo",
             slidesToShow: 3.1,
@@ -296,7 +297,20 @@ export default function CardList({
                     </div>
                 </>
             ) : (
-                <div className="listGrid">{cards}</div>
+                <>
+                    {gridHeader ? (
+                        <ListHeader
+                            label={data.category?.name}
+                            showArrow={showArrow}
+                            onClick={() =>
+                                props?.onHeaderClick
+                                    ? props?.onHeaderClick(data)
+                                    : null
+                            }
+                        />
+                    ) : null}
+                    <div className="listGrid">{cards}</div>
+                </>
             )}
         </div>
     );

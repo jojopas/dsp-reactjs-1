@@ -34,7 +34,7 @@ export default function ChannelCard(data) {
     console.log("ChannelCard", data);
     return (
         <span className="promoCard ">
-            <span className="cardOuter" style={{ paddingBottom: "76.25%" }}>
+            <span className="cardOuter channelCard" >
                 <Link href={routerSlug?.slug} as={data?.slug}>
                     <a className="cardChannel">
                         <img

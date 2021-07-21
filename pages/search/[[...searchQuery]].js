@@ -223,9 +223,10 @@ export default function Search({
                 !isEmpty(result.demand.cards) ? (
                     <CardList
                         key="searchOnDemandResults"
-                        type="title"
+                        type={store.isBreakpoint ? "grid" : "title"}
                         showArrow={false}
                         data={result.demand}
+                        gridHeader={true}
                     />
                 ) : searchQuery == "" ? null : isValidating ? (
                     <span className="searchResults-loading">

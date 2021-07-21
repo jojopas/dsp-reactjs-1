@@ -9,20 +9,82 @@ import {useObserver} from "mobx-react-lite";
 export default function Footer() {
     const store = React.useContext(StoreContext);
     const footer = [
-        {id: 'home', inner: 'Home', url: '/', exact: true},
-        {id: 'channels', inner: 'Channels', url: '/channels/[[...slug]]', as: '/channels'},
-        {id: 'movies', inner: 'Movies', url: '/movies', as: '/movies'},
-        {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
-        {id: 'search', inner: 'Search', url: '/search/[[...searchQuery]]', as: '/search'},
-        {id: 'account', inner: 'Account', url: '/account/[[...slug]]', as: '/account'},
-        {id: 'support', inner: 'Support', url: '/about/[[...slug]]', as: '/about/support'},
-        {id: 'advertiseWithUs', inner: 'Advertise with Us', url: '/about/[[...slug]]', as: '/about/advertise-with-us'},
-        {id: 'about', inner: 'About', url: '/about/[[...slug]]', as: '/about', exact: true},
-        {id: 'contactus', inner: 'Contact', url: '/about/[[...slug]]', as: '/about/contact'},
-        {id: 'terms', inner: 'Terms of Use', url: '/about/[[...slug]]', as: '/about/terms-of-use'},
-        {id: 'privacy', inner: 'Privacy Policy', url: '/about/[[...slug]]', as: '/about/privacy-policy'},
-        {id: 'doNotSell', inner: 'Do Not Sell My Information', url: '/about/[[...slug]]', as: '/about/do-not-sell-my-information'},
-        {id: 'ccpa', inner: 'CCPA', url: '/about/[[...slug]]', as: '/about/ccpa'},
+        { id: "home", inner: "Home", url: "/", exact: true },
+        {
+            id: "channels",
+            inner: "Channels",
+            url: "/channels/[[...slug]]",
+            as: "/channels",
+        },
+        { id: "movies", inner: "Movies", url: "/movies", as: "/movies" },
+        { id: "shows", inner: "Shows", url: "/shows", as: "/shows" },
+        {
+            id: "search",
+            inner: "Search",
+            url: "/search/[[...searchQuery]]",
+            as: "/search",
+        },
+        {
+            id: "account",
+            inner: "Account",
+            url: "/account/[[...slug]]",
+            as: "/account",
+        },
+        {
+            id: "support",
+            inner: "Support",
+            url: "/about/[[...slug]]",
+            as: "/about/support",
+        },
+        {
+            id: "settings",
+            inner: "Settings",
+            url: "/settings",
+            as: "/settings",
+        },
+        {
+            id: "advertiseWithUs",
+            inner: "Advertise with Us",
+            url: "/about/[[...slug]]",
+            as: "/about/advertise-with-us",
+        },
+        {
+            id: "about",
+            inner: "About",
+            url: "/about/[[...slug]]",
+            as: "/about",
+            exact: true,
+        },
+        {
+            id: "contactus",
+            inner: "Contact",
+            url: "/about/[[...slug]]",
+            as: "/about/contact",
+        },
+        {
+            id: "terms",
+            inner: "Terms of Use",
+            url: "/about/[[...slug]]",
+            as: "/about/terms-of-use",
+        },
+        {
+            id: "privacy",
+            inner: "Privacy Policy",
+            url: "/about/[[...slug]]",
+            as: "/about/privacy-policy",
+        },
+        {
+            id: "doNotSell",
+            inner: "Do Not Sell My Information",
+            url: "/about/[[...slug]]",
+            as: "/about/do-not-sell-my-information",
+        },
+        {
+            id: "ccpa",
+            inner: "CCPA",
+            url: "/about/[[...slug]]",
+            as: "/about/ccpa",
+        },
     ];
 
     const apps = [

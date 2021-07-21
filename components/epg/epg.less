@@ -1,5 +1,9 @@
 @import url("../../styles/config.less");
 @colorBorder: #0f293d;
+@fontTitle: 18px Roboto;
+@fontTimeSlot: 15px Roboto;
+@fontProgramTiming: 13px Roboto;
+@fontWatchingNow: 14px Roboto;
 
 .epg {
     display: flex;
@@ -61,7 +65,7 @@
     display: inline-flex;
     color: @colorNavGray;
     align-items: flex-end;
-    font: 15px Roboto;
+    font: @fontTimeSlot;
     background-color: #0e212f;
     scroll-behavior: smooth;
     position: relative;
@@ -103,8 +107,7 @@
 
                 & :after {
                     content: "▼";
-                    font-size: 0.5em;
-                    font-family: arial;
+                    font: 0.5em Roboto;
                     position: absolute;
                     top: 50%;
                     right: 5px;
@@ -126,7 +129,7 @@
 
         h2 {
             padding: 0px;
-            font: 15px Roboto;
+            font: @fontTimeSlot;
             margin: 0px;
             margin-left: 10px;
         }
@@ -237,7 +240,7 @@
         .channel-row--program---title {
             max-height: 2.5em;
             display: block;
-            font: 15px Roboto;
+            font: @fontTitle;
             color: white;
             margin-left: 10px;
             -webkit-line-clamp: 3;
@@ -260,7 +263,7 @@
         }
 
         .channel-row--program---description {
-            font: 12px Roboto;
+            font: @fontProgramTiming;
             color: @colorNavGray;
             margin-left: 10px;
             display: none;
@@ -268,14 +271,15 @@
 
         .channel-row--program---timing {
             display: flex;
-            font: 12px Roboto;
+            align-items: flex-end;
+            font: @fontProgramTiming;
             overflow: hidden;
             color: @colorNavGray;
             margin-left: 10px;
         }
 
         .channel-row--program---watching {
-            font: 12px Roboto;
+            font: @fontWatchingNow;
             color: @colorYellow;
             text-overflow: ellipsis;
         }

@@ -202,7 +202,7 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
                         {/*<span className="pdp-top-likeButton">{watchNow}</span>
                             <span className="pdp-top-dislikeButton">Start Over</span>
                             <span className="pdp-top-watchlistButton">Trailer</span>*/}
-                        <span
+                        {/* <span
                             className="pdp-top-shareButton"
                             title={constants.SHARE}
                             onClick={triggerShare}
@@ -213,7 +213,7 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
                                 className={shareTipOpen ? "share-tip-open" : ""}
                                 title={pdp.title}
                             />
-                        </span>
+                        </span> */}
                     </div>
 
                     <div className="pdp-top-buttonBar">

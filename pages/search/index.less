@@ -77,11 +77,21 @@
         h2 {
             color: @colorNavGray;
             margin: 10px 20px;
-            font: 18px Roboto;
+            font: 15px Roboto;
             text-align: center;
             cursor: pointer;
             .count {
                 margin-left: 5px;
+            }
+        }
+
+        @media (max-width: @mobileLargeBP) {
+            h2 {
+                font: 12px Roboto;
+
+                .count {
+                    margin-left: 3px;
+                }
             }
         }
     }
@@ -111,10 +121,10 @@
     line-height: 1.25;
     color: @colorCurrent;
 
-    .searchQuery{
+    .searchQuery {
         display: block;
         margin-top: 10px;
-        color: @colorNavGray
+        color: @colorNavGray;
     }
 
     @media (max-width: @mobileLargeBP) {

@@ -17,7 +17,8 @@ const Carousel = ({ views, slickSettings, className }) => {
               dots: false,
               infinite: false,
               speed: 400,
-
+              autoplaySpeed: 4000,
+              autoplay: true,
               slidesToShow: 1,
               slidesToScroll: 1,
           };
