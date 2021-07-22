@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 
 import Slider from "react-slick";
 import { StoreContext } from "../../store";
+import SlickArrow from "../cardList/SlickArrow";
 
 const Carousel = ({ views, slickSettings, className }) => {
     const store = React.useContext(StoreContext);
@@ -21,6 +22,10 @@ const Carousel = ({ views, slickSettings, className }) => {
               autoplay: true,
               slidesToShow: 1,
               slidesToScroll: 1,
+              infinite: true,
+              pauseOnHover: false,
+              prevArrow: <SlickArrow />,
+              nextArrow: <SlickArrow />,
           };
     slickSetting.afterChange = (idx) => setIndex(idx);
     React.useEffect(() => {

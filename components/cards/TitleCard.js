@@ -15,9 +15,13 @@ export default function TitleCard(data) {
                     href={
                         data.type === "channels"
                             ? `/${data.type}/[[...slug]]`
-                            : `/${data.type}/[...slug]`
+                            : `on-demand/${data.type}/[...slug]`
                     }
-                    as={`/${data.type}/${data.slug}`}
+                    as={
+                        data.type === "channels"
+                            ? `/${data.type}/${data.slug}`
+                            : `on-demand/${data.type}/${data.slug}`
+                    }
                 >
                     <a className="card">
                         <>

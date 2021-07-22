@@ -1,23 +1,23 @@
 import React from 'react';
 import {useObserver} from 'mobx-react-lite';
 
-import { constants } from '../../config';
-import getSession from '../../helpers/session/get-session';
-import pageError from '../../helpers/page/error';
-import {getLayout} from '../../components/Layout';
-import {StoreContext} from '../../store';
-import {pageBuilder} from '../../helpers/page/builder';
-import Error404 from '../../components/404';
+import { constants } from '../../../config';
+import getSession from '../../../helpers/session/get-session';
+import pageError from '../../../helpers/page/error';
+import {getLayout} from '../../../components/Layout';
+import {StoreContext} from '../../../store';
+import {pageBuilder} from '../../../helpers/page/builder';
+import Error404 from '../../../components/404';
 
 import './index.less';
-import CardList from '../../components/cardList/CardList';
-import {slugify, titleCase} from '../../helpers/utils/strings';
-import {isEmpty} from '../../helpers/utils/objects'
-import PDPTop from '../../components/pdp/PDPTop';
-import PDPBg from '../../components/pdp/PDPBg';
+import CardList from '../../../components/cardList/CardList';
+import {slugify, titleCase} from '../../../helpers/utils/strings';
+import {isEmpty} from '../../../helpers/utils/objects'
+import PDPTop from '../../../components/pdp/PDPTop';
+import PDPBg from '../../../components/pdp/PDPBg';
 
-import ButtonList from '../../components/buttonList/ButtonList';
-import Player from '../../components/player/Player';
+import ButtonList from '../../../components/buttonList/ButtonList';
+import Player from '../../../components/player/Player';
 
 export default function Movie({session, config, page, error, pageType, seoObj}) {
 

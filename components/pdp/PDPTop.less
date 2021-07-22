@@ -24,7 +24,7 @@
         width: 29.437%;
         height: auto;
         min-width: 272px;
-        margin-right: 40px;
+        // margin-right: 40px;
         .bsBorderRadius(7px);
         background-color: #040e19;
         z-index: 1;
@@ -119,23 +119,17 @@
             }
         }
         .pdp-top-year {
-            margin: 0px 10px;
             line-height: 21px;
             color: rgba(255, 255, 255, 0.6);
             &:before {
-                content: ".";
-                position: relative;
-                top: -1px;
-                left: 0;
+                content: "•";
+                margin: 0 10px;
             }
 
             &:after {
-                content: ".";
-                position: relative;
-                top: -1px;
-                left: 10px;
-                right: 10px;
+                content: "•";
                 font-size: 18px;
+                margin: 0 10px;
             }
 
             @media (max-width: @mobileLargeBP) {
@@ -178,6 +172,14 @@
 
             svg {
                 margin-right: 10px;
+                fill: black;
+            }
+
+            &:hover {
+                color: white;
+                svg {
+                    fill: white;
+                }
             }
         }
 

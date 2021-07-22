@@ -1,13 +1,10 @@
 @import "../../styles/config.less";
 
 .homePromo {
-    margin-top: -20px;
-
     @media (max-width: @mobileLargeBP) {
         padding-top: 30px;
     }
 }
-
 
 .carousel-container .carousel {
     width: 100%;
@@ -28,6 +25,9 @@
             width: 60%;
             color: #edd8cd;
             text-shadow: 0 3px 9px #00000066;
+            @media (max-width: @mobileLargeBP) {
+                width: 90%;
+            }
         }
 
         .button {
@@ -39,10 +39,16 @@
             border-radius: 50px;
             cursor: pointer;
             user-select: none;
-            
+            color: black;
             -webkit-transition: all 0.3s ease 0s;
             color: black;
             background-color: @colorYellow;
+            &:hover {
+                color: white;
+            }
+        }
+        @media (max-width: @mobileLargeBP) {
+            width: 90%;
         }
     }
     @media (max-width: @mobileLargeBP) {

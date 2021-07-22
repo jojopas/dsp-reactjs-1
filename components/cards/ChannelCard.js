@@ -3,8 +3,11 @@ import Link from "next/link";
 
 import "./Cards.less";
 import { constants } from "../../config";
+import { StoreContext } from "../../store";
 
 export default function ChannelCard(data) {
+    const store = React.useContext(StoreContext);
+
     const deepLinks = [
         { prefix: "/channels", slug: "/channels/[[...slug]]" },
         { prefix: "/movies/genre/", slug: "/movies/genre/[...slug]" },
@@ -32,9 +35,29 @@ export default function ChannelCard(data) {
     };
 
     console.log("ChannelCard", data);
-    return (
+    return store.isBreakpoint ? (
+        <div className="channelCard">
+            <Link href={routerSlug?.slug} as={data?.slug}>
+                <a className="cardChannel">
+                    <img
+                        src={constants.NOT_FOUND_SRC}
+                        data-src={data.channel.poster+'/180/90'}
+                        alt={data.program_title}
+                        className="lazyload"
+                    />
+                    <div className="title">
+                        {data.program_title ? (
+                            <span>
+                                <span>{data.program_title}</span>
+                            </span>
+                        ) : null}
+                    </div>
+                </a>
+            </Link>
+        </div>
+    ) : (
         <span className="promoCard ">
-            <span className="cardOuter channelCard" >
+            <span className="cardOuter channelCard">
                 <Link href={routerSlug?.slug} as={data?.slug}>
                     <a className="cardChannel">
                         <img

@@ -1,23 +1,23 @@
 import React from "react";
 import { useObserver } from "mobx-react-lite";
 
-import { constants } from "../../config";
-import getSession from "../../helpers/session/get-session";
-import pageError from "../../helpers/page/error";
-import { getLayout } from "../../components/Layout";
-import { StoreContext } from "../../store";
-import { pageBuilder } from "../../helpers/page/builder";
-import Error404 from "../../components/404";
+import { constants } from "../../../config";
+import getSession from "../../../helpers/session/get-session";
+import pageError from "../../../helpers/page/error";
+import { getLayout } from "../../../components/Layout";
+import { StoreContext } from "../../../store";
+import { pageBuilder } from "../../../helpers/page/builder";
+import Error404 from "../../../components/404";
 
-import { slugify, titleCase } from "../../helpers/utils/strings";
-import { isEmpty } from "../../helpers/utils/objects";
-import PDPTop from "../../components/pdp/PDPTop";
-import PDPBg from "../../components/pdp/PDPBg";
-import ButtonList from "../../components/buttonList/ButtonList";
-import CardList from "../../components/cardList/CardList";
+import { slugify, titleCase } from "../../../helpers/utils/strings";
+import { isEmpty } from "../../../helpers/utils/objects";
+import PDPTop from "../../../components/pdp/PDPTop";
+import PDPBg from "../../../components/pdp/PDPBg";
+import ButtonList from "../../../components/buttonList/ButtonList";
+import CardList from "../../../components/cardList/CardList";
 
 import "./show.less";
-import Player from "../../components/player/Player";
+import Player from "../../../components/player/Player";
 
 export default function Show({
     session,
@@ -132,15 +132,17 @@ export default function Show({
                 <div className="pdp-shows pdp-outer">
                     <PDPBg pdp={pdp} />
                     <PDPTop pdp={pdp} type="show" currVideo={currVideo} />
-                    {seasons && seasons.length > 1 ? (
-                        <ButtonList
-                            className="pdp-seasons"
-                            current={currSeason}
-                            data={seasons}
-                        />
-                    ) : (
-                        <span className="pdp-seasons-empty" />
-                    )}
+                    <div className="pdp-episodic">
+                        {seasons && seasons.length > 1 ? (
+                            <ButtonList
+                                className="pdp-seasons"
+                                current={currSeason}
+                                data={seasons}
+                            />
+                        ) : (
+                            <span className="pdp-seasons-empty" />
+                        )}
+                    </div>
                     {pdp.seasons ? (
                         <CardList
                             key={`episodes-${currSeason}`}

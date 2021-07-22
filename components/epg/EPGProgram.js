@@ -52,7 +52,7 @@ export default function EPGProgram({
         endString += amPmCheck[0];
     }
 
-    const separator = "\t . \t";
+    const separator = "\t • \t";
     const isBroadcasting =
         elapseTime >= program.starts && elapseTime <= program.ends;
     const style = {
@@ -63,9 +63,7 @@ export default function EPGProgram({
 
     return (
         <div
-            className={`${
-                isBroadcasting ? "channel-now" : ""
-            } channel-row--program `}
+            className='channel-row--program'
             style={style}
             title={program.title}
             id={program.duration}
@@ -73,7 +71,7 @@ export default function EPGProgram({
             tabIndex={1}
         >
             {program.duration > 50 && (
-                <>
+                <div className={ isBroadcasting ? "channel-now" : ""}>
                     <div className="channel-row--program-about">
                         <div className="channel-row--program---timing">
                             {isShowing && isBroadcasting && (
@@ -113,7 +111,7 @@ export default function EPGProgram({
                     >
                         <InlineSVG type="more" />
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

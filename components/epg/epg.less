@@ -18,7 +18,8 @@
     height: 100%;
     overflow: hidden;
     margin-top: 0px;
-    background-color: #fbcc353b;
+    background-color: #fcc834;
+    opacity: 0.1;
 
     @media (max-width: (@mobileLargeBP + 1px)) {
         margin-top: 2px;
@@ -224,9 +225,6 @@
 
     .channel-row--program {
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         border-top: 2px solid @colorBorder;
         border-right: 2px solid @colorBorder;
         z-index: 20;
@@ -293,17 +291,25 @@
 }
 
 .channel-now {
-    background-color: #fdfdfd27;
+    background-color: #fff;
+    opacity: 0.2;
+    width: 100%;
+    height: 100%;
     font-weight: bold;
     z-index: 50;
     color: @colorNavGray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
     &:hover {
-        background-color: #fdfffd80;
-        color: white;
+        background-color: #fff;
+        opacity: 0.4;
+        color: #ebebeb;
 
         .channel-row--program---timing {
-            color: white;
+            color: #ebebeb;
         }
     }
 }
+

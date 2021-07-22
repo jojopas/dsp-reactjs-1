@@ -88,7 +88,7 @@ body {
 
 main {
     position: relative;
-    padding-top: @headerHeight;
+    margin-top: @headerHeight;
     padding-bottom: 60px;
     min-height: 85vh;
     overflow-x: hidden;
@@ -112,26 +112,23 @@ main {
         padding-top: @headerHeightMob;
     }
 
-    &.pageType-home,
     &.pageType-channel {
         padding-top: 0px !important;
         overflow-x: unset;
-        @media (max-width: @mobileLargeBP) {
-            margin-top: 116px !important;
-        }
     }
-    
-    &.pageType-on-demand {
-        padding-top: 0px !important;
+
+    &.pageType-search {
         @media (max-width: @mobileLargeBP) {
-            margin-top: 116px !important;
+            margin-top: 0px;
+            padding-top: 0px;
         }
     }
 
     &.pageType-movie,
     &.pageType-show {
         @media (max-width: @mobileLargeBP) {
-            padding-top: 116px !important;
+            // margin-top: 0px;
+            padding-top: 0px;
         }
     }
 

@@ -102,33 +102,6 @@ export default function Header({ pageType }) {
     return useObserver(() => (
         <>
             <header className={pageType == "on-demand" ? "on-demand" : ""}>
-                <Logo />
-                {store.isBreakpoint ? (
-                    <NavLink href="/search/[[...searchQuery]]" as="/search">
-                        <a title="Search" className="header-mobileSearch">
-                            <InlineSVG type="search" />
-                            <InlineSVG type="searchActive" />
-                        </a>
-                    </NavLink>
-                ) : (
-                    <>
-                        <Nav
-                            className="header-nav"
-                            links={main}
-                            activeBar={true}
-                        ></Nav>
-                        {/* <NavLink
-                            href="/settings/[[...slug]]"
-                            as="/settings"
-                            className="account"
-                        >
-                            <a title="Settings" className="account">
-                                <InlineSVG type="settings" />
-                                <InlineSVG type="settingsSelected" />
-                            </a>
-                        </NavLink> */}
-                    </>
-                )}
                 {store.isBreakpoint ? (
                     <>
                         <span
@@ -160,7 +133,36 @@ export default function Header({ pageType }) {
                         </span>
                     </>
                 ) : null}
-                <MobileHeader />{" "}
+
+                <Logo />
+                {store.isBreakpoint ? (
+                    <NavLink href="/search/[[...searchQuery]]" as="/search">
+                        <a title="Search" className="header-mobileSearch">
+                            <InlineSVG type="search" />
+                            <InlineSVG type="searchActive" />
+                        </a>
+                    </NavLink>
+                ) : (
+                    <>
+                        <Nav
+                            className="header-nav"
+                            links={main}
+                            activeBar={true}
+                        ></Nav>
+                        {/* <NavLink
+                            href="/settings/[[...slug]]"
+                            as="/settings"
+                            className="account"
+                        >
+                            <a title="Settings" className="account">
+                                <InlineSVG type="settings" />
+                                <InlineSVG type="settingsSelected" />
+                            </a>
+                        </NavLink> */}
+                    </>
+                )}
+                {pageType == "channel" ||
+                    (pageType === "on-demand" && <MobileHeader />)}
             </header>
         </>
     ));

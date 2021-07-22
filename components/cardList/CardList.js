@@ -18,6 +18,7 @@ export default function CardList({
     useHeader,
     showArrow = true,
     gridHeader = false,
+    horizontal = true,
     data,
     children,
     ...props
@@ -293,7 +294,11 @@ export default function CardList({
                         />
                     ) : null}
                     <div className="listRow">
-                        <Slider {...slickSettings}>{cards}</Slider>
+                        {horizontal ? (
+                            cards
+                        ) : (
+                            <Slider {...slickSettings}>{cards}</Slider>
+                        )}
                     </div>
                 </>
             ) : (
