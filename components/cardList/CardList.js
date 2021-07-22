@@ -294,7 +294,7 @@ export default function CardList({
                         />
                     ) : null}
                     <div className="listRow">
-                        {horizontal ? (
+                        {!horizontal ? (
                             cards
                         ) : (
                             <Slider {...slickSettings}>{cards}</Slider>

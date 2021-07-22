@@ -1,16 +1,16 @@
 import React from 'react';
 import {useObserver} from 'mobx-react-lite';
 
-import getSession from '../../../helpers/session/get-session';
-import pageError from '../../../helpers/page/error';
-import {getLayout} from '../../../components/Layout';
-import {StoreContext} from '../../../store';
-import {pageBuilder} from '../../../helpers/page/builder';
-import Error404 from '../../../components/404';
+import getSession from '../../../../helpers/session/get-session';
+import pageError from '../../../../helpers/page/error';
+import {getLayout} from '../../../../components/Layout';
+import {StoreContext} from '../../../../store';
+import {pageBuilder} from '../../../../helpers/page/builder';
+import Error404 from '../../../../components/404';
 
-import CardList from '../../../components/cardList/CardList';
-import {slugify} from '../../../helpers/utils/strings';
-import GenreSelector from '../../../components/nav/GenreSelector';
+import CardList from '../../../../components/cardList/CardList';
+import {slugify} from '../../../../helpers/utils/strings';
+import GenreSelector from '../../../../components/nav/GenreSelector';
 
 export default function MovieGenre({session, config, page, error, slug, pageType, seoObj}) {
 

@@ -213,6 +213,7 @@ export default function Search({
                         <CardList
                             key="searchChannelResults"
                             type="channel"
+                            horizontal={false}
                             showArrow={false}
                             data={result.channel}
                         />
