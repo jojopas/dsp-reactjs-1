@@ -63,7 +63,11 @@ export default function EPGProgram({
 
     return (
         <div
-            className='channel-row--program'
+            className={
+                isBroadcasting
+                    ? "channel-row--program channel-now"
+                    : "channel-row--program"
+            }
             style={style}
             title={program.title}
             id={program.duration}
@@ -71,7 +75,7 @@ export default function EPGProgram({
             tabIndex={1}
         >
             {program.duration > 50 && (
-                <div className={ isBroadcasting ? "channel-now" : ""}>
+                <>
                     <div className="channel-row--program-about">
                         <div className="channel-row--program---timing">
                             {isShowing && isBroadcasting && (
@@ -111,7 +115,7 @@ export default function EPGProgram({
                     >
                         <InlineSVG type="more" />
                     </div>
-                </div>
+                </>
             )}
         </div>
     );
