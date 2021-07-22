@@ -8,13 +8,15 @@
 .pdp-top {
     position: relative;
     display: flex;
+    width: 90%;
     align-items: flex-start;
     padding: 40px @sitePadding;
     // margin: 0 auto 30px;
-    max-width: 1000px;
+    
 
     @media (max-width: @mobileLargeBP) {
         display: block;
+        width: 100%;
         padding: 20px @sitePaddingMobile 0;
     }
 
@@ -29,6 +31,7 @@
         background-color: #040e19;
         z-index: 1;
         flex-shrink: 0;
+        margin: 0 30px;
 
         @media (max-width: @mobileLargeBP) {
             justify-self: center;
