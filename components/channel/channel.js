@@ -491,6 +491,22 @@ export default function Channels({
         }, "");
     };
 
+    let fullTimer;
+    fullTimer = setTimeout(()=>{
+        if (!userIsActive && store.playerInstance && store.playerInstance.vjs) {
+            const vjs = document.querySelector('.video-js');
+            const rect = vjs.getBoundingClientRect();
+            vjs.style.cssText = `position:fixed;top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;`;
+            setTimeout(()=>{
+                setTimeout(()=>{
+                    store.playerInstance.vjs.enterFullWindow();
+                }, 250);
+                vjs.style.cssText = `${vjs.style.cssText}transition:all 0.5s ease 0s`;
+            }, 500);
+
+        }
+    }, 5000);
+
     console.log('Channel', page);
     return useObserver(() =>
         !pageError ? (
