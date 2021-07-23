@@ -85,7 +85,7 @@ export default function OnDemand({
             : null
         : null;
 
-    // console.log("page", page);
+    console.log("page", page);
     return useObserver(() =>
         !error ? (
             clickedCardTitle ? (

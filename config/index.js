@@ -1,6 +1,6 @@
 const constants = {
     ENV_DSP_API_URL: "api.myspotlight.tv",
-    ENV_DSP_API_KEY: "2c4262e3dc004e2f22c6d03de10ff0c06596edd3", // prod:'2c4262e3dc004e2f22c6d03de10ff0c06596edd3' staging:'f36c883f5037af539572f2d1a362573bb683c727'
+    ENV_DSP_API_KEY: "05639804ced58e218b6f218ac5a40e7f03bc3a46", // prod:'2c4262e3dc004e2f22c6d03de10ff0c06596edd3' staging:'f36c883f5037af539572f2d1a362573bb683c727'
     ENV_GA_ID: "UA-84268486-6", // For debugging 'UA-3115785-11',
     ENV_DSP_PLAYER_KEY: "5ef4a47fc27512184b7d2b62", // staging: 5ef5185b8949063e3a66d133 prod: 5ef4a47fc27512184b7d2b62
     ENV_DSP_PLAYER_URL: "https://www.dplayer.pro/dotplayer.js",
