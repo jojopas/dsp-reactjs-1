@@ -52,6 +52,7 @@ const constants = {
     ],
     CONTACTUS_FORM_SUBMIT: "Submit",
     GOOGLE_RECAPTCHA_SITEKEY: "6Lc5WT0aAAAAAK1o9PAW59s700x_adV7pgiyUC2F",
+    BULLETS: "\t • \t",
 };
 
 module.exports = {

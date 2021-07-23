@@ -624,10 +624,13 @@
         align-items: center;
 
         img {
-            width: 50%;
-            height: 30%;
-            margin: 5px;
-            border-radius: 5px;
+            @media (max-width: @mobileLargeBP) {
+                width: 50%;
+                height: 30%;
+
+                margin: 5px;
+                border-radius: 5px;
+            }
         }
 
         .title {

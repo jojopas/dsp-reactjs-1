@@ -2,30 +2,19 @@ import "./modal.less";
 import { constants } from "../../config";
 import InliveSVG from "../InlineSVG";
 import InlineSVG from "../InlineSVG";
+import {
+    timeDurationStartStop,
+    getFormattedDate,
+    timeLeftDuration,
+} from "../../helpers/utils/dates/dates";
 
 const Modal = ({ data, resetFn, onClick }) => {
-    const timeDuration = (seconds) => {
-        const date = new Date(0);
-        date.setSeconds(seconds);
-        // console.log(date.toTimeString());
-        const timeDuration = date.toTimeString().substr(0, 5);
-        return timeDuration;
-    };
-
-    const timeLeftDuration = (seconds) => {
-        const date = new Date(0);
-        date.setUTCSeconds(seconds);
-        const hours = date.getUTCHours();
-        const minutes = date.getUTCMinutes();
-        const timeDuration = date.toISOString().substr(11, 5);
-        return hours > 0 ? `${hours}h ${minutes}m ` : `${minutes}m `;
-    };
     const now = new Date();
     const nowTime = now.getTime() / 1000;
     const isBroadcasting =
         nowTime >= data?.nowprogram?.starts &&
         nowTime <= data?.nowprogram?.ends;
-
+    console.log("date", data, getFormattedDate);
     return data ? (
         <div id="myModal" className="modal">
             <div className="modal-content">
@@ -35,10 +24,11 @@ const Modal = ({ data, resetFn, onClick }) => {
                 <div className="modal-header">
                     <div>
                         <div className="modal-time">
-                            {`${timeDuration(
-                                data.nowprogram.starts
-                            )} - ${timeDuration(data.nowprogram.ends)}`}
-                            {" . "}
+                            {timeDurationStartStop(
+                                data.nowprogram.starts,
+                                data.nowprogram.ends
+                            )}{" "}
+                            {constants.BULLETS}
                             <span className="modal-time-left">
                                 {timeLeftDuration(
                                     isBroadcasting
@@ -63,6 +53,11 @@ const Modal = ({ data, resetFn, onClick }) => {
 
                 <div class="modal-body">
                     <h1>{`${data.nowprogram.title} Presented by ${data.name}`}</h1>
+                    <span className="info">
+                        Airdate:{getFormattedDate(data.nowprogram.starts)}{" "}
+                        {constants.BULLETS} PG {constants.BULLETS}{" "}
+                        {data.genres.join(constants.BULLETS)}
+                    </span>
                     <p>{data.nowprogram.description}</p>
                 </div>
                 <div

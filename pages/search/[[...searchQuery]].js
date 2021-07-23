@@ -213,7 +213,7 @@ export default function Search({
                         <CardList
                             key="searchChannelResults"
                             type="channel"
-                            horizontal={false}
+                            horizontal={!store.isBreakpoint}
                             showArrow={false}
                             data={result.channel}
                         />
