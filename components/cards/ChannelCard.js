@@ -34,7 +34,7 @@ export default function ChannelCard(data) {
         return false;
     };
 
-    console.log("ChannelCard", data);
+    // console.log("ChannelCard", data);
     return store.isBreakpoint ? (
         <div className="channelCard">
             <Link href={routerSlug?.slug} as={data?.slug}>

@@ -33,7 +33,7 @@ const Carousel = ({ views, slickSettings, className }) => {
         if (store.isBreakpoint) {
             const slick = document.querySelector(".slick-slider");
             const carouselHeight = slick.clientHeight;
-            console.log("Slick", carouselHeight);
+            // console.log("Slick", carouselHeight);
             const dots = document.querySelector(".carousel-dots-container");
             dots.style.cssText = `bottom: ${carouselHeight - 500 + 50}px`;
         }

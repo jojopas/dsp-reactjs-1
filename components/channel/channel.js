@@ -491,7 +491,7 @@ export default function Channels({
         }, "");
     };
 
-    console.log('Channel', page);
+    // console.log('Channel', page);
     return useObserver(() =>
         !pageError ? (
             <div

@@ -79,7 +79,7 @@ export default function Search({
         if (Array.isArray(data?.data?.data?.results?.cards)) {
             flag = true;
             res.demand = data.data.data.results;
-            console.log("Demand", data?.data?.data?.results?.cards);
+            // console.log("Demand", data?.data?.data?.results?.cards);
             res.demand.category = { name: "Movies" };
             res.demand.cards = res.demand?.cards?.map((card) => {
                 card.slug = `${card.type}/${card.slug}`;
@@ -130,7 +130,7 @@ export default function Search({
     if (showChannel) {
         channelCards = result?.channel?.cards?.map((card) => <div></div>);
     }
-    console.log("Search", result);
+    // console.log("Search", result);
     return useObserver(() =>
         !pageError && !error ? (
             <>

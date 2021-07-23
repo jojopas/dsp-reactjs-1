@@ -24,7 +24,7 @@ export default function Player({
     const [playerStyle, setPlayerStyle] = React.useState({});
 
     const vodPage = lightBoxPageTypes.includes(pageType);
-    console.log("store", store.playerInstance);
+    // console.log("store", store.playerInstance);
     React.useEffect(() => {
         (async () => {
             if (!plyrRef && !window) {

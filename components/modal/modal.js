@@ -14,7 +14,7 @@ const Modal = ({ data, resetFn, onClick }) => {
     const isBroadcasting =
         nowTime >= data?.nowprogram?.starts &&
         nowTime <= data?.nowprogram?.ends;
-    console.log("date", data, getFormattedDate);
+    // console.log("date", data, getFormattedDate);
     return data ? (
         <div id="myModal" className="modal">
             <div className="modal-content">
