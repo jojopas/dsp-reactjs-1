@@ -62,7 +62,7 @@ export default function Movies({
                       index > 5 ? null : (
                           <div key={el.title}>
                               <div
-                                  className="carousel"
+                                  className="carousel lazyload"
                                   style={{
                                       background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 1) 100%),url("${el.wallpaper}/${width}/500"), no-repeat`,
                                   }}

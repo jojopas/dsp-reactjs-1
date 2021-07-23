@@ -24,8 +24,8 @@ export default function InlineSVG({ type }) {
                             transform="translate(716.222 3.39)"
                             fill="none"
                             stroke="red"
-                            stroke-linejoin="round"
-                            stroke-width="42"
+                            strokeLinejoin="round"
+                            strokeWidth="42"
                         />
                         <path
                             id="Path_12975"
