@@ -41,7 +41,7 @@ export default function ChannelCard(data) {
                 <a className="cardChannel">
                     <img
                         src={constants.NOT_FOUND_SRC}
-                        data-src={data.channel.poster+'/180/90'}
+                        data-src={data.channel.poster + "/180/90"}
                         alt={data.program_title}
                         className="lazyload"
                     />
@@ -57,7 +57,7 @@ export default function ChannelCard(data) {
         </div>
     ) : (
         <span className="promoCard ">
-            <span className="cardOuter channelCard">
+            <span className="cardOuter" style={{ paddingBottom: "86.25%" }}>
                 <Link href={routerSlug?.slug} as={data?.slug}>
                     <a className="cardChannel">
                         <img
