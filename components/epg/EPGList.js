@@ -287,7 +287,7 @@ export default function EPGList({
 
     const leftContainer = [];
 
-    const rightContainer = [<TimeElapsed />];
+    const rightContainer = [<TimeElapsed key="timeElapse" />];
 
     rowList.forEach((channel, channelIndex) => {
         leftContainer.push(
