@@ -44,8 +44,8 @@ const Modal = ({ data, resetFn, onClick }) => {
                         className="current-channel-information-img"
                         src={constants.NOT_FOUND_SRC}
                         data-sizes="auto"
-                        data-srcset={`${data.logo}/30`}
-                        data-src={`${data.logo}/30`}
+                        data-srcset={`${data.logo}/60`}
+                        data-src={`${data.logo}/60`}
                         alt={data.name}
                         className="lazyload"
                     />

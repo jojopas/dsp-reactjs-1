@@ -2,6 +2,10 @@ import React from "react";
 import { constants } from "../../config";
 import InlineSVG from "../InlineSVG";
 import "./epg.less";
+import {
+    timeDurationStartStop,
+    timeLeftDuration,
+} from "../../helpers/utils/dates/dates";
 export default function EPGProgram({
     program,
     isShowing,
@@ -13,46 +17,10 @@ export default function EPGProgram({
     iconClicked,
     index,
 }) {
-    const amPm = {};
-    const timeDuration = (seconds) => {
-        const date = new Date(0);
-        date.setUTCSeconds(seconds);
-        // console.log(date.toTimeString());
-
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const timeDuration = `${
-            hours === 12 || hours === 0 ? 12 : hours > 12 ? hours - 12 : hours
-        }:${minutes < 10 ? "0" + minutes : minutes}`;
-        amPm[hours > 11 ? "p" : "a"] = 1;
-        return timeDuration;
-    };
-
-    const timeLeftDuration = (seconds) => {
-        const date = new Date(0);
-        date.setUTCSeconds(seconds);
-        const hours = date.getUTCHours();
-        const minutes = date.getUTCMinutes() + 1;
-        const timeDuration = date.toISOString().substr(11, 5);
-        return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
-    };
-
     const start = startTime > program.starts ? startTime : program.starts;
     const end = endTime < program.ends ? endTime : program.ends;
     const duration = end - start;
 
-    let startString = timeDuration(program.starts);
-    let endString = timeDuration(program.ends);
-    const amPmCheck = Object.keys(amPm);
-    if (amPmCheck.length > 1) {
-        startString += amPmCheck[0];
-        endString += amPmCheck[1];
-        // console.log("AMPM", amPmCheck, startString, endString);
-    } else {
-        endString += amPmCheck[0];
-    }
-
-    const separator = "\t • \t";
     const isBroadcasting =
         elapseTime >= program.starts && elapseTime <= program.ends;
     const style = {
@@ -83,13 +51,16 @@ export default function EPGProgram({
                                     <div className="channel-row--program---watching">
                                         {constants.WATCHING}
                                     </div>
-                                    {separator}
+                                    {constants.BULLETS}
                                 </>
                             )}
-                            {`${startString} - ${endString}`}
+                            {timeDurationStartStop(
+                                program.starts,
+                                program.ends
+                            )}
 
                             {isBroadcasting
-                                ? ` ${separator} ${timeLeftDuration(
+                                ? ` ${constants.BULLETS} ${timeLeftDuration(
                                       program.ends -
                                           startTime -
                                           currrentTimeElapsed

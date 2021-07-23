@@ -23,7 +23,8 @@ const Carousel = ({ views, slickSettings, className }) => {
               slidesToShow: 1,
               slidesToScroll: 1,
               infinite: true,
-              pauseOnHover: false,
+              pauseOnHover: true,
+              touchThreshold: 20,
               prevArrow: <SlickArrow />,
               nextArrow: <SlickArrow />,
           };

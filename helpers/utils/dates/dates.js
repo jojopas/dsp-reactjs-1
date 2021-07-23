@@ -5,7 +5,7 @@ export const getFormattedDate = (date, config = { separator: "." }) => {
     let enterDate = date;
     // console.log("getFormattedDate", typeof date);
     if (typeof date === "number") {
-        enterDate = new Date();
+        enterDate = new Date(0);
         enterDate.setUTCSeconds(date);
     }
     var year = enterDate.getFullYear();
@@ -40,19 +40,19 @@ export const timeDurationStartStop = (
     endSeconds,
     config = { separator: "-" }
 ) => {
-    const date = new Date();
+    const date = new Date(0);
     date.setUTCSeconds(startSeconds);
     const startTime = getTimeString(date);
-    const endDate = new Date()
+    const endDate = new Date(0)
     endDate.setUTCSeconds(endSeconds);
     const endTime = getTimeString(endDate);
     let timeString;
     if (startTime.amPm === endTime.amPm) {
-        timeString = `${startTime.time}${config.separator}${endTime.time}${startTime.amPm}`;
+        timeString = `${startTime.time} ${config.separator} ${endTime.time}${startTime.amPm}`;
     } else {
-        timeString = `${Object.values(startTime).join("")}${
+        timeString = `${Object.values(startTime).join("")} ${
             config.separator
-        }${Object.values(endTime).join("")}`;
+        } ${Object.values(endTime).join("")}`;
     }
 
     return timeString;
@@ -62,8 +62,7 @@ export const timeLeftDuration = (seconds) => {
     const date = new Date(0);
     date.setUTCSeconds(seconds);
     const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-    const timeDuration = date.toISOString().substr(11, 5);
+    const minutes = date.getUTCMinutes()+1;
     return hours > 0 ? `${hours}h ${minutes}m ` : `${minutes}m `;
 };
     
