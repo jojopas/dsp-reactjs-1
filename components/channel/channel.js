@@ -502,7 +502,7 @@ export default function Channels({
                     store.playerInstance.vjs.enterFullWindow();
                 }, 250);
                 vjs.style.cssText = `${vjs.style.cssText}transition:all 0.5s ease 0s`;
-            }, 500);
+            }, 250);
 
         }
     }, 5000);
