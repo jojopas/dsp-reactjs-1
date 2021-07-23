@@ -8,8 +8,6 @@ export default function InlineSVG({ type }) {
             return (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="999.95"
-                    height="128"
                     viewBox="0 0 999.95 128"
                 >
                     <g
@@ -349,7 +347,7 @@ export default function InlineSVG({ type }) {
             );
         case "searchActive":
             return (
-                <svg viewBox="0 0 24 24" fill='#ebebebe'>
+                <svg viewBox="0 0 24 24" fill="#ebebebe">
                     <path d="M21.432,20.368l-4.679-4.675a7.711,7.711,0,1,0-1.061,1.06l4.68,4.676ZM10.804,17.119A6.319,6.319,0,1,1,17.123,10.8v.002a6.276,6.276,0,0,1-6.23472,6.317Q10.84615,17.1193,10.804,17.119Zm4.75-6.319a4.75,4.75,0,1,1-4.75-4.75,4.75,4.75,0,0,1,4.75,4.75v0Z" />
                 </svg>
             );
@@ -542,7 +540,7 @@ export default function InlineSVG({ type }) {
                     <path d="M8.053,3.462l8.538,8.531L8.053,20.524,6.992,19.463l7.476-7.469L6.992,4.525Z" />
                 </svg>
             );
-        case "backArrow":
+        case "backArrow":   
             return (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -551,8 +549,6 @@ export default function InlineSVG({ type }) {
                     viewBox="0 0 12.931 23.819"
                 >
                     <path
-                        id="Path_13189"
-                        data-name="Path 13189"
                         d="M148.086,473.079a.744.744,0,0,1-.53-.22l-11.431-11.43a.75.75,0,1,1,1.061-1.061l10.9,10.9,7.848-7.848,2.51-2.51a.75.75,0,0,1,1.06,1.06l-10.888,10.888A.744.744,0,0,1,148.086,473.079Z"
                         transform="translate(473.079 -135.905) rotate(90)"
                     />
@@ -582,6 +578,16 @@ export default function InlineSVG({ type }) {
             return (
                 <svg viewBox="0 0 24 24">
                     <path d="M2.50781,12.008a9.49976,9.49976,0,0,1,9.5-9.5h0a9.49976,9.49976,0,0,1,9.5,9.5h0a9.49977,9.49977,0,0,1-9.5,9.5h0a9.49977,9.49977,0,0,1-9.5-9.5Zm1.5,0a8,8,0,1,0,8-8A8.0102,8.0102,0,0,0,4.00781,12.008ZM11.252,16.501V9.921l-3.08984,3.09L7.10059,11.953l4.94824-4.952L17.001,11.953l-1.06153,1.058L12.751,9.822v6.679Z" />
+                </svg>
+            );
+        case "settingsArrow":
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+                    <path
+                        d="M15.769,8.109H2.513l5.861,5.86-.926.926L0,7.448,7.448,0l.926.926L2.5,6.8H15.769Z"
+                        transform="translate(18.462 17.702) rotate(180)"
+                        fill="#101d33"
+                    />
                 </svg>
             );
         case "skip":
