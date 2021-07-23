@@ -8,8 +8,7 @@
 .button {
     position: relative;
     color: @colorNavGray;
-    font-size: 16px;
-    font-weight: 400;
+    font: 15px Roboto;
     line-height: 40px;
     display: inline-block;
     .bsBoxSizing();
@@ -22,6 +21,20 @@
     // text-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
     .bsTransition(all);
     transition-property: background-color, color;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        fill: black;
+    }
+
+    &:hover {
+        color: white;
+        svg {
+            fill: white;
+        }
+    }
 
     &.button-current {
         .buttonCurrent();
