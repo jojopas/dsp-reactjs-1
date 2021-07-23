@@ -54,7 +54,7 @@ export default function OnDemand({
 
     const views = width
         ? page?.movies
-            ? page?.movies[0].channels
+            ? page?.movies[0]?.channels
                   .map((el, index) =>
                       index > 5 ? null : (
                           <div key={el.title}>
@@ -89,7 +89,10 @@ export default function OnDemand({
     return useObserver(() =>
         !error ? (
             clickedCardTitle ? (
-                <ExtendedGenre data={clickedCardTitle} setClickedCardTitle={setClickedCardTitle}/>
+                <ExtendedGenre
+                    data={clickedCardTitle}
+                    setClickedCardTitle={setClickedCardTitle}
+                />
             ) : (
                 <>
                     <h1 className="noShow">On Demand</h1>
