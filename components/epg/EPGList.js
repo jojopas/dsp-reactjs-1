@@ -65,7 +65,7 @@ export default function EPGList({
     // console.log("computeDates", dateSlots, endDates);
     const [startTime, setStartTime] = React.useState(nowTime);
     const [endTime, setEndTime] = React.useState(
-        nowTime + constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND
+      store.isBreakpoint? Object.values(dateSlots)[1]: nowTime + constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND
     );
     const [scrolledTime, setScrolledTime] = React.useState(nowTime);
     const currrentTimeElapsed = elapseTime - nowTime;
@@ -121,10 +121,10 @@ export default function EPGList({
         );
 
     const extendProgram = () => {
-        if (store.isBreakpoint) {
+        if (!store.isBreakpoint) {
             let { offsetWidth, scrollLeft, scrollWidth } = epgRef.current;
             setScrolledTimeFromScrollLeft(scrollLeft);
-    
+
             if (scrollWidth - scrollLeft < 2 * offsetWidth) {
                 console.log(
                     scrollWidth - scrollLeft < 2 * offsetWidth,
@@ -190,9 +190,18 @@ export default function EPGList({
         const setDate = Number(event.target.value);
         // console.log("DateSelected", elapseTime, setDate);
         setStartTime(setDate);
-        setEndTime(
-            setDate + constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND
-        );
+        if (store.isBreakpoint) {
+            Object.values(dateSlots).forEach((itm, index, arr) => {
+                if (itm === setDate) {
+                    setEndTime(arr[index+1]);
+                }
+            });
+        } else {
+            setEndTime(
+                setDate +
+                    constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND
+            );
+        }
     };
 
     const nextEPGDates = () => {
