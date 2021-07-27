@@ -18,7 +18,7 @@ export default function EPGProgram({
     index,
 }) {
     const start = startTime > program.starts ? startTime : program.starts;
-    const end = endTime < program.ends ? endTime : program.ends;
+    const end =  endTime < program.ends ? endTime : program.ends;
     const duration = end - start;
 
     const isBroadcasting =
