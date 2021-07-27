@@ -94,7 +94,7 @@ export default async (req, res) => {
         date.setHours(0, 0, 0, 0);
         const endTime = sanitizeDateString(date);
         // console.log("dspRoute", dspRoute, date, startTime, endTime);
-        const programmSize = 999;
+        const programmSize = -1;
         apiUrl = `https://api.staging.myspotlight.tv/live/epg/${constants.DSP_COUNTRY}?start_time=${startTime}&end_time=${endTime}&programme_size=${programmSize}&from=0`;
     }
 
