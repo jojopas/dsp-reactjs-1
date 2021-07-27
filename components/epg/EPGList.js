@@ -116,7 +116,7 @@ export default function EPGList({
 
     const setScrolledTimeFromScrollLeft = (dx) =>
         setScrolledTime(
-            nowTime +
+            startTime +
                 (dx / constants.EPG_30_MINUTE_WIDTH) * constants.EPG_SLOT_SECOND
         );
 
@@ -190,6 +190,7 @@ export default function EPGList({
         const setDate = Number(event.target.value);
         // console.log("DateSelected", elapseTime, setDate);
         setStartTime(setDate);
+        setScrolledTime(setDate);
         if (store.isBreakpoint) {
             Object.values(dateSlots).forEach((itm, index, arr) => {
                 if (itm === setDate) {
