@@ -249,7 +249,7 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
                     ${pdp.poster}/400 400w,
                     ${pdp.poster}/500 500w,
                     ${pdp.poster}/600 600w`}
-                        data-src={`${pdp.poster}/300`}
+                        data-src={`${pdp.poster}/250`}
                         alt={pdp.title}
                         className="lazyload"
                     />
