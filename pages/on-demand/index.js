@@ -68,9 +68,9 @@ export default function OnDemand({
                                       <div className="carousel-title">
                                           {el.title}
                                       </div>
-                                      <div className="carousel-description">
+                                      <p className="carousel-description">
                                           {el.description}
-                                      </div>
+                                      </p>
                                       <Button
                                           inner={constants.WATCH_NOW}
                                           url={`/movies/${el.slug}`}
