@@ -113,7 +113,7 @@ export default async (req, res) => {
         date.setDate(date.getDate() + 1);
         date.setHours(0, 0, 0, 0);
         const endTime = sanitizeDateString(date);
-        apiUrl = `https://api.staging.myspotlight.tv/find/programmes/${constants.DSP_PLATFORM}/${constants.DSP_COUNTRY}?q=${ogRoute[1]}&size=${constants.SEARCH_SIZE}&start_time=${startTime}&end_time=${endTime}`;
+        apiUrl = `https://api.staging.myspotlight.tv/find/programs/${constants.DSP_COUNTRY}/${constants.DSP_PLATFORM}?q=${ogRoute[1]}&size=${constants.SEARCH_SIZE}&start_time=${startTime}&end_time=${endTime}`;
     }
     // console.log("url", apiUrl, dspRoute, ogRoute);
     const axiosOptions = {

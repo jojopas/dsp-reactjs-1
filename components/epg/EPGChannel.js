@@ -29,7 +29,6 @@ const ChannelLogo = ({
             {channel.logo ? (
                 <img
                     className="channel-info--image"
-                    src={constants.NOT_FOUND_SRC}
                     data-sizes="auto"
                     sizes={`${width - imageDiff}px`}
                     data-srcset={`${channel.logo}/${imageDiff}/${imageDiff}`}

@@ -19,6 +19,7 @@ export default function CardList({
     showArrow = true,
     gridHeader = false,
     horizontal = true,
+    isOnDemand = false,
     data,
     children,
     ...props
@@ -272,7 +273,7 @@ export default function CardList({
                     <PromoCard {...card} />
                 ) : (
                     <TitleCard
-                        {...{ ...{ locked: index % 2 === 1 }, ...card }}
+                        {...{ ...{ locked: index % 2 === 1 }, ...card, isOnDemand }}
                     />
                 )}
             </div>

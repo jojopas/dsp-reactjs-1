@@ -89,7 +89,10 @@ export default function OnDemand({
     return useObserver(() =>
         !error ? (
             clickedCardTitle ? (
-                <ExtendedGenre data={clickedCardTitle} setClickedCardTitle={setClickedCardTitle}/>
+                <ExtendedGenre
+                    data={clickedCardTitle}
+                    setClickedCardTitle={setClickedCardTitle}
+                />
             ) : (
                 <>
                     <h1 className="noShow">On Demand</h1>
@@ -100,7 +103,8 @@ export default function OnDemand({
                             <CardList
                                 className="homePromo"
                                 type="title"
-                                data={page.rails[2]}
+                                isOnDemand={true}
+                                data={page.rails[0]}
                                 onHeaderClick={setClickedCardTitle}
                             />
                         ) : null}
@@ -108,14 +112,17 @@ export default function OnDemand({
                             <GenreSelector type="movies" links={genreNav} />
                         )}
 
-                        {page.rails.map((rail) => (
-                            <CardList
-                                key={rail.category.id}
-                                type="title"
-                                data={rail}
-                                onHeaderClick={setClickedCardTitle}
-                            />
-                        ))}
+                        {page.rails.map((rail, index) =>
+                            index > 0 ? (
+                                <CardList
+                                    key={rail.category.id}
+                                    type="title"
+                                    data={rail}
+                                    isOnDemand={true}
+                                    onHeaderClick={setClickedCardTitle}
+                                />
+                            ) : null
+                        )}
                     </div>
                 </>
             )

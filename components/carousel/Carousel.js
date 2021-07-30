@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import Slider from "react-slick";
 import { StoreContext } from "../../store";
 import SlickArrow from "../cardList/SlickArrow";
+import InlineSVG from "../InlineSVG";
 
 const Carousel = ({ views, slickSettings, className }) => {
     const store = React.useContext(StoreContext);
@@ -24,9 +25,10 @@ const Carousel = ({ views, slickSettings, className }) => {
               slidesToScroll: 1,
               infinite: true,
               pauseOnHover: true,
+              arrows: false,
               touchThreshold: 20,
-              prevArrow: <SlickArrow />,
-              nextArrow: <SlickArrow />,
+              //   prevArrow: <SlickArrow />,
+              //   nextArrow: <SlickArrow />,
           };
     slickSetting.afterChange = (idx) => setIndex(idx);
     React.useEffect(() => {
@@ -49,6 +51,14 @@ const Carousel = ({ views, slickSettings, className }) => {
             {views && (
                 <div className="carousel-dots-container">
                     <div className="carousel-dots">
+                        <div
+                            className="right-arrow left"
+                            onClick={() => {
+                                slickRef.current.slickGoTo(currentIndex - 1);
+                            }}
+                        >
+                            <InlineSVG type="arrow" />
+                        </div>
                         {views.map((_, index) =>
                             currentIndex === index ? (
                                 <div
@@ -65,6 +75,14 @@ const Carousel = ({ views, slickSettings, className }) => {
                                 ></div>
                             )
                         )}
+                        <div
+                            className="right-arrow"
+                            onClick={() => {
+                                slickRef.current.slickGoTo(currentIndex + 1);
+                            }}
+                        >
+                            <InlineSVG type="arrow" />
+                        </div>
                     </div>
                 </div>
             )}

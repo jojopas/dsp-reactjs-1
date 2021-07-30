@@ -53,7 +53,6 @@ export default function Channels({
     const firstVideoRef = React.useRef(firstVideo);
 
     const setFirstVideo = (data) => {
-
         if (data.slug) {
             setCurrentChannel(data);
             changeCurrentSlug(data.slug);
@@ -70,12 +69,20 @@ export default function Channels({
     };
 
     const fullScreen = (data) => {
-         setTimeout(() => {
-             store.playerInstance.vjs.enterFullWindow();
-             setFirstVideo(data)
-         }, 250);
-
-    }
+        const video = document.getElementById("content-video_html5_api");
+         console.log("video got ", video);
+        if (video) {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                /* Safari */
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                /* IE11 */
+                video.msRequestFullscreen();
+            }
+        }
+    };
 
     React.useEffect(() => {
         if (data && data.data && data.data.data && data.data.data.channels) {
@@ -220,8 +227,7 @@ export default function Channels({
         visibilityChange = visibility.visibilityChange;
     }, []);
 
-    React.useEffect(() => {}, []);
-
+    
     React.useEffect(() => {
         if (document) {
             document.addEventListener(
@@ -568,7 +574,7 @@ export default function Channels({
                         </div> */}
                         <div className="ads">
                             <img
-                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/60f5502024f29b00285ca1be/320"
+                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/60f5502024f29b00285ca1be/321"
                                 alt="Adds"
                             />
                         </div>

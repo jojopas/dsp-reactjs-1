@@ -2,8 +2,8 @@
 @colorBorder: #0f293d;
 @fontTitle: 18px Roboto;
 @fontTimeSlot: 15px Roboto;
-@fontProgramTiming: 13px Roboto;
-@fontWatchingNow: 14px Roboto;
+@fontProgramTiming: 15px Roboto;
+@fontWatchingNow: 15px Roboto;
 
 .epg {
     display: flex;
@@ -157,9 +157,10 @@
 
     &.active {
         height: 70px;
+        padding: 8px 3px;
         background-color: rgba(255, 255, 255, 0.1) !important;
-        // border: inset 2px solid @colorYellow;
-        box-shadow: inset 0 0 3px @colorYellow;
+        border: 2px solid @colorYellow;
+        // box-shadow: inset 0 0 3px @colorYellow;
     }
 
     .channel-info--favorite {
