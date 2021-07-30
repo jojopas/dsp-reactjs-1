@@ -98,7 +98,7 @@ export default function Header({ pageType }) {
             as: "/account",
         },
     ];
-
+    console.log("pageType", pageType);
     return useObserver(() => (
         <>
             <header className={pageType == "on-demand" ? "on-demand" : ""}>
@@ -161,8 +161,8 @@ export default function Header({ pageType }) {
                         </NavLink> */}
                     </>
                 )}
-                {pageType == "channel" ||
-                    (pageType === "on-demand" && <MobileHeader />)}
+                {(pageType == "channel" ||
+                    pageType === "on-demand") && <MobileHeader />}
             </header>
         </>
     ));

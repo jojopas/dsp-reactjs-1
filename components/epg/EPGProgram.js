@@ -6,6 +6,7 @@ import {
     timeDurationStartStop,
     timeLeftDuration,
 } from "../../helpers/utils/dates/dates";
+import { store } from "../../store";
 export default function EPGProgram({
     program,
     isShowing,
@@ -15,10 +16,11 @@ export default function EPGProgram({
     endTime,
     elapseTime,
     iconClicked,
+    fullScreen,
     index,
 }) {
     const start = startTime > program.starts ? startTime : program.starts;
-    const end =  endTime < program.ends ? endTime : program.ends;
+    const end = endTime < program.ends ? endTime : program.ends;
     const duration = end - start;
 
     const isBroadcasting =
@@ -41,6 +43,7 @@ export default function EPGProgram({
             id={program.duration}
             key={key}
             tabIndex={1}
+            onClick={store.isBreakpoint ? () => iconClicked() : null}
         >
             {program.duration > 50 && (
                 <>
@@ -51,7 +54,6 @@ export default function EPGProgram({
                                     <div className="channel-row--program---watching">
                                         {constants.WATCHING}
                                     </div>
-                                    {constants.BULLETS}
                                 </>
                             )}
                             {timeDurationStartStop(
@@ -68,7 +70,10 @@ export default function EPGProgram({
                     left`
                                 : null}
                         </div>
-                        <div className="channel-row--program---title">
+                        <div
+                            className="channel-row--program---title"
+                            onClick={store.isBreakpoint ? null : fullScreen}
+                        >
                             {program.title}
                         </div>
                         <div

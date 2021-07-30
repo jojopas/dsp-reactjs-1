@@ -36,6 +36,7 @@ export default function Channels({
     const { genres, promos, channels } = page;
     const [currentGenre, setCurrentGenre] = React.useState();
     const [currentChannel, setCurrentChannel] = React.useState();
+
     const [currentSlug, setCurrentSlug] = React.useState(slug);
     const [epgListCurrentSlug, setEpgListCurrentSlug] = React.useState(slug);
 
@@ -52,6 +53,7 @@ export default function Channels({
     const firstVideoRef = React.useRef(firstVideo);
 
     const setFirstVideo = (data) => {
+
         if (data.slug) {
             setCurrentChannel(data);
             changeCurrentSlug(data.slug);
@@ -66,6 +68,14 @@ export default function Channels({
         isFirstVideoRef.current = data;
         _setIsFirstVideo(data);
     };
+
+    const fullScreen = (data) => {
+         setTimeout(() => {
+             store.playerInstance.vjs.enterFullWindow();
+             setFirstVideo(data)
+         }, 250);
+
+    }
 
     React.useEffect(() => {
         if (data && data.data && data.data.data && data.data.data.channels) {
@@ -95,6 +105,9 @@ export default function Channels({
 
     const getSlugFromVideoId = (id) => {
         const channel = result.find((c) => c.videoId === id);
+        if (slug && channel) {
+            setCurrentChannel(channel);
+        }
         return channel ? channel.slug : null;
     };
 
@@ -565,6 +578,7 @@ export default function Channels({
                         className={!userIsActive ? "epgInactive" : ""}
                         data={result}
                         onClick={setFirstVideo}
+                        fullScreen={fullScreen}
                         changeCurrentSlug={changeCurrentSlug}
                         currentSlug={epgListCurrentSlug}
                         activatePlayerUI={activatePlayerUI}
@@ -580,7 +594,7 @@ export default function Channels({
                 <Modal
                     data={modalData}
                     resetFn={iconClicked}
-                    onClick={setFirstVideo}
+                    onClick={fullScreen}
                 />
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
             </div>

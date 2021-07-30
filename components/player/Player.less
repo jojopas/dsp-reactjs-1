@@ -28,6 +28,16 @@
                     border: 2px solid transparent;
                     cursor: default;
                 }
+
+                @media (max-width: @mobileLargeBP) {
+                    &:hover {
+                        border: none;
+                    }
+                    &.vjs-user-active {
+                        border: none;
+                        cursor: default;
+                    }
+                }
             }
             .vjs-control-bar {
                 pointer-events: none;

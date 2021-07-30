@@ -18,6 +18,7 @@ export default function EPGRow({
     iconClicked,
     currentDate,
     isLocked,
+    fullScreen,
 }) {
     //  console.log("endTime", startTime, endTime);
     const setProgram = () => {
@@ -43,7 +44,8 @@ export default function EPGRow({
                             }
                             isShowing={isShowing}
                             index={index}
-                            key={`${channel.id} ${index}`}
+                            fullScreen={fullScreen}
+                            key={`${channel._id} ${index}`}
                         />
                     );
                     index++;

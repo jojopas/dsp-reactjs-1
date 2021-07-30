@@ -15,6 +15,11 @@ const Modal = ({ data, resetFn, onClick }) => {
         nowTime >= data?.nowprogram?.starts &&
         nowTime <= data?.nowprogram?.ends;
     // console.log("date", data, getFormattedDate);
+    const clicked = () => {
+        console.log("Clicked", data);
+        resetFn();
+        onClick(data);
+    };
     return data ? (
         <div id="myModal" className="modal">
             <div className="modal-content">
@@ -62,7 +67,7 @@ const Modal = ({ data, resetFn, onClick }) => {
                 </div>
                 <div
                     class="modal-footer"
-                    onClick={() => (isBroadcasting ? onClick(data) : null)}
+                    onClick={isBroadcasting ? clicked : null}
                 >
                     <div
                         className={`watch ${isBroadcasting ? "" : "inActive"}`}

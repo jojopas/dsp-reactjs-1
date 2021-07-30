@@ -115,6 +115,10 @@ main {
     &.pageType-channel {
         padding-top: 0px !important;
         overflow-x: unset;
+        @media (max-width: @mobileLargeBP) {
+            // display: -webkit-box;
+            margin-top: 116px !important;
+        }
     }
 
     &.pageType-search {

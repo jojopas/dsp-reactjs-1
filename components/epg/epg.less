@@ -151,13 +151,15 @@
     display: inline-flex;
     justify-content: center;
     border-top: 2px solid @colorBorder;
-    border-right: 2px solid @colorBorder;
+    // border-right: 2px solid @colorBorder;
     padding: 10px 5px;
     cursor: pointer;
 
-    &:active {
+    &.active {
         height: 70px;
-        background-color: @colorYellow;
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        // border: inset 2px solid @colorYellow;
+        box-shadow: inset 0 0 3px @colorYellow;
     }
 
     .channel-info--favorite {
@@ -190,6 +192,10 @@
         position: absolute;
         right: 5px;
         top: 5px;
+    }
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
     }
 }
 
@@ -284,6 +290,12 @@
             font: @fontWatchingNow;
             color: @colorYellow;
             text-overflow: ellipsis;
+
+            &:after {
+                content: "•";
+                color: @colorNavGray;
+                margin: 0px 2px;
+            }
         }
 
         &:hover {

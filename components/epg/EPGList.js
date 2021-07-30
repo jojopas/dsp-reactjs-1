@@ -17,6 +17,7 @@ export default function EPGList({
     genreHoveredListener,
     promos,
     iconClicked,
+    fullScreen,
     pageType,
     onClick,
 }) {
@@ -306,6 +307,7 @@ export default function EPGList({
                 onClick={onClick}
                 currrentTimeElapsed={currrentTimeElapsed}
                 favorite={channelIndex < 5}
+                fullScreen={fullScreen}
                 startTime={currentTime < nowTime ? nowTime : currentTime}
                 endTime={endTime}
                 elapseTime={elapseTime}
