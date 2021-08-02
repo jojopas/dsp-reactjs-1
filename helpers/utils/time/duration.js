@@ -55,7 +55,7 @@ export const TimeStringList = (
         }
         is30Minute = !is30Minute;
     }
-    while (time <= endTime) {
+    while (time < endTime) {
         timeList.push(
             `${getSanitiseHour(hour)}:${is30Minute ? "30" : "00"}${
                 hour > 11 ? "p" : "a"

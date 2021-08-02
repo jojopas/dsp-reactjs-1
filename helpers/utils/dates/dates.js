@@ -35,6 +35,18 @@ export const timeDuration = (seconds) => {
     return getTimeString(date).time;
 };
 
+export const startDate = () => {
+    const date = new Date();
+    date.setMinutes(date.getMinutes() > 29 ? 30 : 0, 0, 0);
+    return date;
+};
+
+export const fullDate = (seconds) => {
+    const date = new Date(0);
+    date.setUTCSeconds(seconds);
+    return date;
+};
+
 export const timeDurationStartStop = (
     startSeconds,
     endSeconds,
@@ -43,7 +55,7 @@ export const timeDurationStartStop = (
     const date = new Date(0);
     date.setUTCSeconds(startSeconds);
     const startTime = getTimeString(date);
-    const endDate = new Date(0)
+    const endDate = new Date(0);
     endDate.setUTCSeconds(endSeconds);
     const endTime = getTimeString(endDate);
     let timeString;
@@ -62,7 +74,6 @@ export const timeLeftDuration = (seconds) => {
     const date = new Date(0);
     date.setUTCSeconds(seconds);
     const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes()+1;
+    const minutes = date.getUTCMinutes() + 1;
     return hours > 0 ? `${hours}h ${minutes}m ` : `${minutes}m `;
 };
-    
