@@ -8,10 +8,7 @@ import EPGRow from "./EPGRow";
 import ChannelLogo from "./EPGChannel";
 import ScrollLeftRight from "./ScrollLeftRight";
 import { TimeStringList } from "../../helpers/utils/time";
-import {
-    fullDate,
-    startDate,
-} from "../../helpers/utils/dates/dates";
+import { fullDate, startDate } from "../../helpers/utils/dates/dates";
 
 export default function EPGList({
     data,
@@ -391,6 +388,7 @@ export default function EPGList({
                 isShowing={channelIndex === currentIndex}
                 isLocked={channelIndex % 2 === 1}
                 index={channelIndex}
+                id={channel._id}
             />
         );
         rightContainer.push(

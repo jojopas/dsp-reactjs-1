@@ -8,6 +8,7 @@ const ChannelLogo = ({
     width,
     onClick,
     index,
+    id,
 }) => {
     const channelStyle = {
         width: width,
@@ -25,6 +26,7 @@ const ChannelLogo = ({
             style={channelStyle}
             title={channel.name}
             onClick={onClick}
+            key={id}
         >
             {channel.logo ? (
                 <img

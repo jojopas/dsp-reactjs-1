@@ -10,7 +10,7 @@ import { store } from "../../store";
 export default function EPGProgram({
     program,
     isShowing,
-    key,
+    id,
     currrentTimeElapsed,
     startTime,
     endTime,
@@ -41,7 +41,7 @@ export default function EPGProgram({
             style={style}
             title={program.title}
             id={program.duration}
-            key={key}
+            key={id}
             tabIndex={1}
             onClick={store.isBreakpoint ? () => iconClicked() : null}
         >

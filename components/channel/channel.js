@@ -69,19 +69,26 @@ export default function Channels({
     };
 
     const fullScreen = (data) => {
-        const video = document.getElementById("content-video_html5_api");
-         console.log("video got ", video);
-        if (video) {
-            if (video.requestFullscreen) {
-                video.requestFullscreen();
-            } else if (video.webkitRequestFullscreen) {
-                /* Safari */
-                video.webkitRequestFullscreen();
-            } else if (video.msRequestFullscreen) {
-                /* IE11 */
-                video.msRequestFullscreen();
-            }
+        let timer = 250;
+        if (currentSlug != data.slug) {
+            // console.log("video got ", data, currentSlug, video);
+            setFirstVideo(data);
+            timer = 3000;
         }
+        setTimeout(() => {
+            const video = document.getElementById("content-video_html5_api");
+            if (video) {
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    /* Safari */
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                    /* IE11 */
+                    video.msRequestFullscreen();
+                }
+            }
+        }, timer);
     };
 
     React.useEffect(() => {
@@ -112,7 +119,7 @@ export default function Channels({
 
     const getSlugFromVideoId = (id) => {
         const channel = result.find((c) => c.videoId === id);
-        if (slug && channel) {
+        if (channel) {
             setCurrentChannel(channel);
         }
         return channel ? channel.slug : null;
@@ -227,7 +234,6 @@ export default function Channels({
         visibilityChange = visibility.visibilityChange;
     }, []);
 
-    
     React.useEffect(() => {
         if (document) {
             document.addEventListener(
@@ -500,17 +506,44 @@ export default function Channels({
         };
     }, []);
     const getCurrentChannelTitle = () => {
-        const now = new Date();
-        const nowTime = now.getTime() / 1000;
-        return currentChannel.program.reduce((title, program) => {
-            if (nowTime > program.starts && nowTime < program.ends) {
-                title = program.title;
-            }
-            return title;
-        }, "");
+        if (currentChannel) {
+            const now = new Date();
+            const nowTime = now.getTime() / 1000;
+            const title = currentChannel?.program?.reduce((title, program) => {
+                if (nowTime > program.starts && nowTime < program.ends) {
+                    title = program.title;
+                }
+                return title;
+            }, null);
+
+            return (
+                <>
+                    {" "}
+                    <div>
+                        <h1>
+                            {currentChannel?.name}
+                            {" : "}
+                            <span className="channelName">{title}</span>
+                        </h1>
+                    </div>
+                    <div className="current-channel-information-img">
+                        <img
+                            className="current-channel-information-img"
+                            src={constants.NOT_FOUND_SRC}
+                            data-sizes="auto"
+                            data-srcset={`${currentChannel?.logo || ""}/30`}
+                            data-src={`${currentChannel?.logo || ""}/30`}
+                            alt={currentChannel?.name || "now"}
+                            className="lazyload"
+                        />
+                    </div>
+                </>
+            );
+        }
+        return null;
     };
 
-    // console.log('Channel', page);
+    // console.log("Channel", page, currentSlug, slug);
     return useObserver(() =>
         !pageError ? (
             <div
@@ -525,35 +558,17 @@ export default function Channels({
                             {/* <div className="live-watching">
                                 {constants.WATCHING}
                             </div> */}
-                            <Player
-                                pageType={pageType}
-                                video={firstVideo}
-                                showPlayer={store.showPlayer}
-                            />
-                            {currentChannel && (
+                            <div className="live-watching">
+                                <Player
+                                    pageType={pageType}
+                                    video={firstVideo}
+                                    showPlayer={store.showPlayer}
+                                />
+
                                 <div className="current-channel-information">
-                                    <div>
-                                        <h1>
-                                            {currentChannel?.name}
-                                            {" : "}
-                                            <span className="channelName">
-                                                {getCurrentChannelTitle()}
-                                            </span>
-                                        </h1>
-                                    </div>
-                                    <div className="current-channel-information-img">
-                                        <img
-                                            className="current-channel-information-img"
-                                            src={constants.NOT_FOUND_SRC}
-                                            data-sizes="auto"
-                                            data-srcset={`${currentChannel.logo}/30`}
-                                            data-src={`${channel.logo}/30`}
-                                            alt={currentChannel.name}
-                                            className="lazyload"
-                                        />
-                                    </div>
+                                    {getCurrentChannelTitle()}
                                 </div>
-                            )}
+                            </div>
                         </div>
                         {/* <div className="fixed-player-categories">
                             <select
@@ -574,7 +589,7 @@ export default function Channels({
                         </div> */}
                         <div className="ads">
                             <img
-                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/60f5502024f29b00285ca1be/321"
+                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/6108009c5c6fc570262e0c65"
                                 alt="Adds"
                             />
                         </div>

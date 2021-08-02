@@ -45,7 +45,7 @@ export default function EPGRow({
                             isShowing={isShowing}
                             index={index}
                             fullScreen={fullScreen}
-                            key={`${channel._id} ${index}`}
+                            id={`${channel._id} ${index}`}
                         />
                     );
                     index++;
