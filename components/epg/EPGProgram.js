@@ -47,7 +47,10 @@ export default function EPGProgram({
         >
             {program.duration > 50 && (
                 <>
-                    <div className="channel-row--program-about">
+                    <div
+                        className="channel-row--program-about"
+                        style={{ width: style.width - 30 }}
+                    >
                         <div className="channel-row--program---timing">
                             {isShowing && isBroadcasting && (
                                 <>
