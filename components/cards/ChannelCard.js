@@ -9,7 +9,7 @@ export default function ChannelCard(data) {
     const store = React.useContext(StoreContext);
 
     const deepLinks = [
-        { prefix: "/channels", slug: "/channels/[[...slug]]" },
+        { prefix: "channel", slug: "/channels/[[...slug]]" },
         { prefix: "/movies/genre/", slug: "/movies/genre/[...slug]" },
         { prefix: "/movies/", slug: "/movies/[...slug]" },
         { prefix: "/movies", slug: "/movies" },
@@ -29,15 +29,16 @@ export default function ChannelCard(data) {
 
     const sanitiseSlug = (slug) => {
         if (slug[0] !== "/") {
-            return "/" + data.slug;
+            const last = slug.split('/')
+            return "/channels/" + last[1];
         }
         return slug;
     };
 
-    // console.log("ChannelCard", data, routerSlug);
+    console.log("ChannelCard", data, routerSlug);
     return store.isBreakpoint ? (
         <div className="channelCard">
-            <Link href={routerSlug?.slug} as={data?.slug}>
+            <Link href={routerSlug?.slug} as={sanitiseSlug(data?.slug)}>
                 <a className="cardChannel">
                     <img
                         src={constants.NOT_FOUND_SRC}

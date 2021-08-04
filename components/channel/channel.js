@@ -543,7 +543,7 @@ export default function Channels({
         return null;
     };
 
-    // console.log("Channel", page, currentSlug, slug);
+    console.log("Channel", page, currentSlug, slug);
     return useObserver(() =>
         !pageError ? (
             <div
@@ -570,23 +570,7 @@ export default function Channels({
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="fixed-player-categories">
-                            <select
-                                name="category"
-                                id="category"
-                                onChange={onGenreSelect}
-                                value={currentGenre}
-                            >
-                                <option value="Category" key="categoryId">
-                                    Category
-                                </option>
-                                {genres.map((genre) => (
-                                    <option value={genre} key={genre}>
-                                        {genre}
-                                    </option>
-                                ))}
-                            </select>
-                        </div> */}
+                        
                         <div className="ads">
                             <img
                                 src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/6108009c5c6fc570262e0c65"
