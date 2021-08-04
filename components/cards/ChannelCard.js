@@ -9,7 +9,7 @@ export default function ChannelCard(data) {
     const store = React.useContext(StoreContext);
 
     const deepLinks = [
-        { prefix: "/channels", slug: "../channels/[[...slug]]" },
+        { prefix: "/channels", slug: "/channels/[[...slug]]" },
         { prefix: "/movies/genre/", slug: "/movies/genre/[...slug]" },
         { prefix: "/movies/", slug: "/movies/[...slug]" },
         { prefix: "/movies", slug: "/movies" },
@@ -27,14 +27,14 @@ export default function ChannelCard(data) {
         data?.slug?.includes(link.prefix)
     );
 
-    const epgTest = () => {
-        if (data.changeCurrentSlug && routerSlug.prefix === "/channels") {
-            return data?.slug.substring(data?.slug.lastIndexOf("/") + 1);
+    const sanitiseSlug = (slug) => {
+        if (slug[0] !== "/") {
+            return "/" + data.slug;
         }
-        return false;
+        return slug;
     };
 
-    console.log("ChannelCard", data, routerSlug);
+    // console.log("ChannelCard", data, routerSlug);
     return store.isBreakpoint ? (
         <div className="channelCard">
             <Link href={routerSlug?.slug} as={data?.slug}>
@@ -58,7 +58,7 @@ export default function ChannelCard(data) {
     ) : (
         <span className="promoCard ">
             <span className="cardOuter" style={{ paddingBottom: "86.25%" }}>
-                <Link href={routerSlug?.slug} as={data?.slug}>
+                <Link href={routerSlug?.slug} as={sanitiseSlug(data?.slug)}>
                     <a className="cardChannel">
                         <img
                             src={constants.NOT_FOUND_SRC}
