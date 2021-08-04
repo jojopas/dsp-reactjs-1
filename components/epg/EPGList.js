@@ -322,29 +322,7 @@ export default function EPGList({
     };
 
     const todaysTimeSlots = () => {
-        const Total_Minutes_A_Day = 24 * 60;
-        const now = new Date();
-        const hours = now.getHours();
-        let minutes = now.getMinutes() > 29 ? 30 : 0;
-        now.setMinutes(minutes, 0, 0);
-        let timeSlots = [];
-        let initialTime = hours * 60 + minutes;
-        if (startTime > elapseTime) {
-            initialTime = 0;
-        }
-
-        for (let time = initialTime; time < Total_Minutes_A_Day; time += 30) {
-            const hour = Math.floor(time / 60);
-            const minute = time % 60;
-
-            const hourPast = hour > 12;
-            timeSlots.push(
-                `${hourPast ? hour - 12 : hour == 0 ? 12 : hour}:${
-                    minute > 29 ? "30" : "00"
-                }${hourPast || hour === 12 ? "p" : "a"}`
-            );
-        }
-
+        const timeSlots = TimeStringList(startTime, endTime);
         return (
             <div className="timeslot-row">
                 {timeSlots.map((time, index) => (
