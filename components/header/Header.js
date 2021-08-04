@@ -37,8 +37,8 @@ export default function Header({ pageType }) {
             id: "channels",
             inner: "Live Channels",
             url: "/",
-            as: "/",
-            exact: true,
+            as: ["/", "/channels"],
+            exact: [true, false],
         },
         {
             id: "ondemand",
@@ -161,8 +161,9 @@ export default function Header({ pageType }) {
                         </NavLink> */}
                     </>
                 )}
-                {(pageType == "channel" ||
-                    pageType === "on-demand") && <MobileHeader />}
+                {(pageType == "channel" || pageType === "on-demand") && (
+                    <MobileHeader />
+                )}
             </header>
         </>
     ));

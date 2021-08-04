@@ -28,6 +28,59 @@ export default function EPGList({
     }
 
     const channelCellWidth = 120;
+    if (!data) {
+        /// create loader
+        const channelRow = (id) => (
+            <div className="channel-row" key={id}>
+                {Array(5).map((_, index) => (
+                    <div
+                        className="channel-row--programs"
+                        style={{ width: constants.EPG_30_MINUTE_WIDTH }}
+                        key={`${id} ${index}`}
+                    ></div>
+                ))}
+            </div>
+        );
+        const channelRowsNumber = 10;
+        return (
+            <div className="epg" style={{ width: "100%" }}>
+                <div
+                    className="left-row"
+                    style={{ width: channelCellWidth + 20 }}
+                >
+                    <div className="timeslot-row" style={{ width: "100%" }}>
+                        <div
+                            className="timeslot-row--date"
+                            style={{ width: "100%" }}
+                        ></div>
+                    </div>
+                    <div className="channel-logos" id="channel">
+                        {Array(channelRowsNumber).map((_, index) => (
+                            <div
+                                className="channel-info"
+                                style={{ width: channelCellWidth + 20 }}
+                            ></div>
+                        ))}
+                    </div>
+                </div>
+                <div className="right-row" style={{ width: "100%" }}>
+                    <div className="timeslot-row" style={{ width: "100%" }}>
+                        <div
+                            className="timeslot-row--date"
+                            style={{ width: "100%" }}
+                        ></div>
+                    </div>
+
+                    <div className="channel" id="channel">
+                        {Array(channelRowsNumber).map((_, index) =>
+                            channelRow(index)
+                        )}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     const epgRef = React.useRef(null);
     const store = React.useContext(StoreContext);
     const [rowList, setRowList] = React.useState([]);
@@ -217,6 +270,7 @@ export default function EPGList({
     const setDate = (event) => {
         const setDate = Number(event.target.value);
         console.log("DateSelected", {
+            event: event.target.value,
             elapseTime: fullDate(elapseTime),
             selected: fullDate(setDate),
         });
@@ -236,11 +290,7 @@ export default function EPGList({
                         obj.value = dateSlots[key];
                     }
                     obj.options.push(
-                        <option
-                            value={dateSlots[key]}
-                            key={key}
-                            onClick={() => setDate(dateSlots[key])}
-                        >
+                        <option value={dateSlots[key]} key={key}>
                             {key}
                         </option>
                     );
@@ -261,6 +311,7 @@ export default function EPGList({
                             name="epgDate"
                             id="epgDate"
                             value={selectValue.value}
+                            onChange={setDate}
                         >
                             {selectValue.options}
                         </select>

@@ -35,11 +35,20 @@ export default function Nav({ className, style, links, activeBar }) {
                 allNavRefs.current[activeSlideIndex] &&
                 allNavRefs.current[activeSlideIndex].current;
             if (activeNavItem) {
-                const active = pathToRegexp(
-                    links[activeSlideIndex].as || links[activeSlideIndex].url,
-                    [],
-                    { sensitive: true, end: !!links[activeSlideIndex].exact }
-                ).test(asPath);
+                const selectedLink = links[activeSlideIndex];
+                const active = Array.isArray(selectedLink?.as)
+                    ? selectedLink.as.reduce((isAs, asItems, index) => {
+                          const thisAsItem = pathToRegexp(asItems, [], {
+                              sensitive: true,
+                              end: !!selectedLink.exact[index],
+                          }).test(asPath);
+                          return isAs || thisAsItem;
+                      }, false)
+                    : pathToRegexp(selectedLink.as || selectedLink.url, [], {
+                          sensitive: true,
+                          end: !!selectedLink.exact,
+                      }).test(asPath);
+
                 if (!active) {
                     setActiveSlideIndex(null);
                 } else {
@@ -57,8 +66,6 @@ export default function Nav({ className, style, links, activeBar }) {
     const detectActiveNavItem = (activeNavItemIndex) => {
         setActiveSlideIndex(activeNavItemIndex);
     };
-
-    console.log("activeSlideIndex", activeSlideIndex, links[activeSlideIndex]);
 
     return (
         <>
