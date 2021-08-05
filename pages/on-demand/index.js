@@ -71,11 +71,14 @@ export default function OnDemand({
                                       <p className="carousel-description">
                                           {el.description}
                                       </p>
-                                      <Button
-                                          inner={constants.WATCH_NOW}
-                                          url={`/movies/${el.slug}`}
-                                          as={`/movies/${el.slug}`}
-                                      />
+                                      <div className="cta">
+                                          <Button
+                                              className="cta-button"
+                                              inner={constants.WATCH_NOW}
+                                              url={`/on-demand/${el.type}/${el.slug}`}
+                                              as={`/on-demand/${el.type}/${el.slug}`}
+                                          />
+                                      </div>
                                   </div>
                               </div>
                           </div>

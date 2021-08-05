@@ -2,7 +2,7 @@
 
 .buttonCurrent() {
     background-color: @colorYellow;
-    color: #000;
+    color: @colorBlue;
 }
 
 .button {
@@ -12,9 +12,9 @@
     line-height: 40px;
     display: inline-block;
     .bsBoxSizing();
-    padding: 0 25px;
+    padding: 5px 25px;
     background: rgba(255, 255, 255, 0.08);
-    border-radius: 4px;
+    border-radius: 50px;
     margin: 0;
     cursor: pointer;
     user-select: none;
@@ -28,13 +28,14 @@
         width: 20px;
         height: 20px;
         margin-right: 10px;
-        fill: black;
+        fill: white;
     }
 
     &:hover {
-        color: white;
+        background-color: @colorYellow;
+        color: @colorBlue;
         svg {
-            fill: white;
+            fill: @colorBlue;
         }
     }
 

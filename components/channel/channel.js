@@ -9,7 +9,7 @@ import { StoreContext } from "../../store";
 import Error404 from "../404";
 import EPGList from "../epg/EPGList";
 import { fetchData } from "../../helpers/utils/fetch-data";
-import Modal from "../modal/modal";
+import EPGModal from "../modal/epgModal";
 const { publicRuntimeConfig } = getConfig();
 import LocalSEOTags from "../../head/local";
 import { visibilityCheck } from "../../helpers/utils/browser";
@@ -543,7 +543,7 @@ export default function Channels({
         return null;
     };
 
-    console.log("Channel", page, currentSlug, slug);
+    // console.log("Channel", page, currentSlug, slug);
     return useObserver(() =>
         !pageError ? (
             <div
@@ -596,7 +596,7 @@ export default function Channels({
                         pageType={pageType}
                     />
                 </div>
-                <Modal
+                <EPGModal
                     data={modalData}
                     resetFn={iconClicked}
                     onClick={fullScreen}

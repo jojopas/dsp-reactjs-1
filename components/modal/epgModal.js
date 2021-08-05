@@ -7,8 +7,9 @@ import {
     getFormattedDate,
     timeLeftDuration,
 } from "../../helpers/utils/dates/dates";
+import Button from "../button/Button";
 
-const Modal = ({ data, resetFn, onClick }) => {
+const EPGModal = ({ data, resetFn, onClick }) => {
     const now = new Date();
     const nowTime = now.getTime() / 1000;
     const isBroadcasting =
@@ -65,24 +66,17 @@ const Modal = ({ data, resetFn, onClick }) => {
                     </span>
                     <p>{data.nowprogram.description}</p>
                 </div>
-                <div
-                    class="modal-footer"
-                    onClick={isBroadcasting ? clicked : null}
-                >
-                    <div
-                        className={`watch ${isBroadcasting ? "" : "inActive"}`}
-                    >
-                        <InliveSVG type="play" />
-                        {isBroadcasting
-                            ? "Watch Now"
-                            : `Watch after ${timeLeftDuration(
-                                  data.nowprogram.starts - nowTime
-                              )}`}
-                    </div>
+                <div class="modal-footer">
+                    <Button
+                        className='watch'
+                        svg="play"
+                        inner={isBroadcasting ? "Watch Now" : `Watch Channel`}
+                        onClick={isBroadcasting ? clicked : null}
+                    />
                 </div>
             </div>
         </div>
     ) : null;
 };
 
-export default Modal;
+export default EPGModal;

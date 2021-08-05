@@ -30,7 +30,7 @@
         display: inline-block;
         .bsBoxSizing();
         padding: 0 25px;
-        border-radius: 4px;
+        border-radius: 50px;
         border: none;
         margin: 0 0 0 25px;
         cursor: pointer;
@@ -38,11 +38,12 @@
         .bsTransition(all);
         transition-property: background-color;
         background-color: @colorYellow;
-        color: #ffffff;
+        color: @colorBlue;
         white-space: nowrap;
 
         &:hover {
-            background-color: #909190;
+            background-color: @ButtonBackground;
+            color: #fff;
         }
     }
 
