@@ -64,7 +64,7 @@ export default function OnDemand({
                                       background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 1) 100%),url("${el.wallpaper}/${width}/600"), no-repeat`,
                                   }}
                               >
-                                  <div className="carousel-about">
+                                  <div className="carousel-info">
                                       <div className="carousel-title">
                                           {el.title}
                                       </div>
