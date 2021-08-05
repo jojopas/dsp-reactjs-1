@@ -80,7 +80,7 @@ export default function Search({
             flag = true;
             res.demand = data.data.data.results;
             // console.log("Demand", data?.data?.data?.results?.cards);
-            res.demand.category = { name: "On Demand" };
+            res.demand.category = { name: constants.ONDEMAND };
             res.demand.cards = res.demand?.cards?.map((card) => {
                 // card.slug = `${card.slug}`;
                 return card;
@@ -94,7 +94,7 @@ export default function Search({
 
             res.channel = {
                 cards: channelData?.data?.data?.programs,
-                category: { name: " LIVE CHANNELS" },
+                category: { name: constants.CHANNELS },
             };
             res.channel.cards = res.channel?.cards?.map((card) => {
                 card.slug = `channel/${card.channel.slug}`;
@@ -168,7 +168,7 @@ export default function Search({
                             className={currentSearchType == 1 ? "active" : ""}
                             onClick={() => setCurrentSearchType(1)}
                         >
-                            LIVE CHANNELS
+                            {constants.CHANNELS.toUpperCase()}
                             <span
                                 className={`count ${
                                     result?.channel &&
@@ -189,7 +189,7 @@ export default function Search({
                             className={currentSearchType == 2 ? "active" : ""}
                             onClick={() => setCurrentSearchType(2)}
                         >
-                            ON DEMAND
+                            {constants.ONDEMAND.toUpperCase()}
                             <span
                                 className={`count ${
                                     result?.demand &&

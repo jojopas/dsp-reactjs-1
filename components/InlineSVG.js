@@ -540,7 +540,7 @@ export default function InlineSVG({ type }) {
                     <path d="M8.053,3.462l8.538,8.531L8.053,20.524,6.992,19.463l7.476-7.469L6.992,4.525Z" />
                 </svg>
             );
-        case "backArrow":   
+        case "backArrow":
             return (
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -761,6 +761,647 @@ export default function InlineSVG({ type }) {
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d="M0 0h24v24H0V0z" fill="none" />
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z" />
+                </svg>
+            );
+        case "splash":
+            return (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1029 631">
+                    <circle
+                        cx="41.5"
+                        cy="41.5"
+                        r="41.5"
+                        transform="translate(-0.02 -1.071)"
+                        fill="#fff"
+                        opacity="0.05"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="41.5"
+                        rx="41"
+                        ry="41.5"
+                        transform="translate(93.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.1"
+                    />
+                    <ellipse
+                        cx="39.5"
+                        cy="41.5"
+                        rx="39.5"
+                        ry="41.5"
+                        transform="translate(190.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.05"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41.5"
+                        rx="40.5"
+                        ry="41.5"
+                        transform="translate(284.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.02"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41.5"
+                        rx="40.5"
+                        ry="41.5"
+                        transform="translate(378.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.01"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="41.5"
+                        rx="41"
+                        ry="41.5"
+                        transform="translate(473.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.06"
+                    />
+                    <circle
+                        cx="41.5"
+                        cy="41.5"
+                        r="41.5"
+                        transform="translate(567.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.1"
+                    />
+                    <ellipse
+                        cx="40"
+                        cy="41.5"
+                        rx="40"
+                        ry="41.5"
+                        transform="translate(664.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.02"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41.5"
+                        rx="40.5"
+                        ry="41.5"
+                        transform="translate(758.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.07"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="41.5"
+                        rx="41"
+                        ry="41.5"
+                        transform="translate(851.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.07"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41.5"
+                        rx="40.5"
+                        ry="41.5"
+                        transform="translate(947.98 -1.071)"
+                        fill="#fff"
+                        opacity="0.01"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="40.5"
+                        rx="41.5"
+                        ry="40.5"
+                        transform="translate(-0.02 91.929)"
+                        fill="#fff"
+                        opacity="0.03"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="40.5"
+                        rx="41"
+                        ry="40.5"
+                        transform="translate(93.98 91.929)"
+                        fill="#fff"
+                        opacity="0.2"
+                    />
+                    <ellipse
+                        cx="39.5"
+                        cy="40.5"
+                        rx="39.5"
+                        ry="40.5"
+                        transform="translate(190.98 91.929)"
+                        fill="#fff"
+                        opacity="0.07"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(284.98 91.929)"
+                        fill="#fff"
+                        opacity="0.13"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(378.98 91.929)"
+                        fill="#fff"
+                        opacity="0.15"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="40.5"
+                        rx="41"
+                        ry="40.5"
+                        transform="translate(473.98 91.929)"
+                        fill="#fff"
+                        opacity="0.01"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="40.5"
+                        rx="41.5"
+                        ry="40.5"
+                        transform="translate(567.98 91.929)"
+                        fill="#fff"
+                        opacity="0.03"
+                    />
+                    <ellipse
+                        cx="40"
+                        cy="40.5"
+                        rx="40"
+                        ry="40.5"
+                        transform="translate(664.98 91.929)"
+                        fill="#fff"
+                        opacity="0.2"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(758.98 91.929)"
+                        fill="#fff"
+                        opacity="0.1"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="40.5"
+                        rx="41"
+                        ry="40.5"
+                        transform="translate(851.98 91.929)"
+                        fill="#fff"
+                        opacity="0.05"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(947.98 91.929)"
+                        fill="#fff"
+                        opacity="0.03"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="41"
+                        rx="41.5"
+                        ry="41"
+                        transform="translate(-0.02 181.929)"
+                        fill="#fff"
+                        opacity="0.11"
+                    />
+                    <circle
+                        cx="41"
+                        cy="41"
+                        r="41"
+                        transform="translate(93.98 181.929)"
+                        fill="#fff"
+                        opacity="0.17"
+                    />
+                    <ellipse
+                        cx="39.5"
+                        cy="41"
+                        rx="39.5"
+                        ry="41"
+                        transform="translate(190.98 181.929)"
+                        fill="#fff"
+                        opacity="0.16"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(284.98 181.929)"
+                        fill="#fff"
+                        opacity="0.03"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(378.98 181.929)"
+                        fill="#fff"
+                        opacity="0.02"
+                    />
+                    <circle
+                        cx="41"
+                        cy="41"
+                        r="41"
+                        transform="translate(473.98 181.929)"
+                        fill="#fff"
+                        opacity="0.06"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="41"
+                        rx="41.5"
+                        ry="41"
+                        transform="translate(567.98 181.929)"
+                        fill="#fff"
+                        opacity="0.18"
+                    />
+                    <ellipse
+                        cx="40"
+                        cy="41"
+                        rx="40"
+                        ry="41"
+                        transform="translate(664.98 181.929)"
+                        fill="#fff"
+                        opacity="0.07"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(758.98 181.929)"
+                        fill="#fff"
+                        opacity="0.02"
+                    />
+                    <circle
+                        cx="41"
+                        cy="41"
+                        r="41"
+                        transform="translate(851.98 181.929)"
+                        fill="#fff"
+                        opacity="0.03"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(947.98 181.929)"
+                        fill="#fff"
+                        opacity="0.07"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="40.5"
+                        rx="41.5"
+                        ry="40.5"
+                        transform="translate(-0.02 274.929)"
+                        fill="#fff"
+                        opacity="0.04"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="40.5"
+                        rx="41"
+                        ry="40.5"
+                        transform="translate(93.98 274.929)"
+                        fill="#fff"
+                        opacity="0.01"
+                    />
+                    <ellipse
+                        cx="39.5"
+                        cy="40.5"
+                        rx="39.5"
+                        ry="40.5"
+                        transform="translate(190.98 274.929)"
+                        fill="#fff"
+                        opacity="0.1"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(284.98 274.929)"
+                        fill="#fff"
+                        opacity="0.07"
+                    />
+                    <ellipse
+                        cx="40"
+                        cy="40.5"
+                        rx="40"
+                        ry="40.5"
+                        transform="translate(664.98 274.929)"
+                        fill="#fff"
+                        opacity="0.05"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="40.5"
+                        rx="41"
+                        ry="40.5"
+                        transform="translate(851.98 274.929)"
+                        fill="#fff"
+                        opacity="0.03"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(947.98 274.929)"
+                        fill="#fff"
+                        opacity="0.1"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="41"
+                        rx="41.5"
+                        ry="41"
+                        transform="translate(-0.02 365.929)"
+                        fill="#fff"
+                        opacity="0.14"
+                    />
+                    <circle
+                        cx="41"
+                        cy="41"
+                        r="41"
+                        transform="translate(93.98 365.929)"
+                        fill="#fff"
+                        opacity="0.21"
+                    />
+                    <ellipse
+                        cx="39.5"
+                        cy="41"
+                        rx="39.5"
+                        ry="41"
+                        transform="translate(190.98 365.929)"
+                        fill="#fff"
+                        opacity="0.13"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(284.98 365.929)"
+                        fill="#fff"
+                        opacity="0.07"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(378.98 365.929)"
+                        fill="#fff"
+                        opacity="0.1"
+                    />
+                    <circle
+                        cx="41"
+                        cy="41"
+                        r="41"
+                        transform="translate(473.98 365.929)"
+                        fill="#fff"
+                        opacity="0.02"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="41"
+                        rx="41.5"
+                        ry="41"
+                        transform="translate(567.98 365.929)"
+                        fill="#fff"
+                        opacity="0.07"
+                    />
+                    <ellipse
+                        cx="40"
+                        cy="41"
+                        rx="40"
+                        ry="41"
+                        transform="translate(664.98 365.929)"
+                        fill="#fff"
+                        opacity="0.05"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(758.98 365.929)"
+                        fill="#fff"
+                        opacity="0.21"
+                    />
+                    <circle
+                        cx="41"
+                        cy="41"
+                        r="41"
+                        transform="translate(851.98 365.929)"
+                        fill="#fff"
+                        opacity="0.07"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(947.98 365.929)"
+                        fill="#fff"
+                        opacity="0.06"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="40.5"
+                        rx="41.5"
+                        ry="40.5"
+                        transform="translate(-0.02 456.929)"
+                        fill="#fff"
+                        opacity="0.11"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="40.5"
+                        rx="41"
+                        ry="40.5"
+                        transform="translate(93.98 456.929)"
+                        fill="#fff"
+                        opacity="0.17"
+                    />
+                    <ellipse
+                        cx="39.5"
+                        cy="40.5"
+                        rx="39.5"
+                        ry="40.5"
+                        transform="translate(190.98 456.929)"
+                        fill="#fff"
+                        opacity="0.06"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(284.98 456.929)"
+                        fill="#fff"
+                        opacity="0.09"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(378.98 456.929)"
+                        fill="#fff"
+                        opacity="0.05"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="40.5"
+                        rx="41"
+                        ry="40.5"
+                        transform="translate(473.98 456.929)"
+                        fill="#fff"
+                        opacity="0.2"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="40.5"
+                        rx="41.5"
+                        ry="40.5"
+                        transform="translate(567.98 456.929)"
+                        fill="#fff"
+                        opacity="0.09"
+                    />
+                    <ellipse
+                        cx="40"
+                        cy="40.5"
+                        rx="40"
+                        ry="40.5"
+                        transform="translate(664.98 456.929)"
+                        fill="#fff"
+                        opacity="0.02"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(758.98 456.929)"
+                        fill="#fff"
+                        opacity="0.1"
+                    />
+                    <ellipse
+                        cx="41"
+                        cy="40.5"
+                        rx="41"
+                        ry="40.5"
+                        transform="translate(851.98 456.929)"
+                        fill="#fff"
+                        opacity="0.05"
+                    />
+                    <circle
+                        cx="40.5"
+                        cy="40.5"
+                        r="40.5"
+                        transform="translate(947.98 456.929)"
+                        fill="#fff"
+                        opacity="0.15"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="41"
+                        rx="41.5"
+                        ry="41"
+                        transform="translate(-0.02 547.929)"
+                        fill="#fff"
+                        opacity="0.05"
+                    />
+                    <circle
+                        cx="41"
+                        cy="41"
+                        r="41"
+                        transform="translate(93.98 547.929)"
+                        fill="#fff"
+                        opacity="0.1"
+                    />
+                    <ellipse
+                        cx="39.5"
+                        cy="41"
+                        rx="39.5"
+                        ry="41"
+                        transform="translate(190.98 547.929)"
+                        fill="#fff"
+                        opacity="0.04"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(284.98 547.929)"
+                        fill="#fff"
+                        opacity="0.02"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(378.98 547.929)"
+                        fill="#fff"
+                        opacity="0.15"
+                    />
+                    <circle
+                        cx="41"
+                        cy="41"
+                        r="41"
+                        transform="translate(473.98 547.929)"
+                        fill="#fff"
+                        opacity="0.05"
+                    />
+                    <ellipse
+                        cx="41.5"
+                        cy="41"
+                        rx="41.5"
+                        ry="41"
+                        transform="translate(567.98 547.929)"
+                        fill="#fff"
+                        opacity="0.08"
+                    />
+                    <ellipse
+                        cx="40"
+                        cy="41"
+                        rx="40"
+                        ry="41"
+                        transform="translate(664.98 547.929)"
+                        fill="#fff"
+                        opacity="0.01"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(758.98 547.929)"
+                        fill="#fff"
+                        opacity="0.12"
+                    />
+                    <circle
+                        cx="41"
+                        cy="41"
+                        r="41"
+                        transform="translate(851.98 547.929)"
+                        fill="#fff"
+                        opacity="0.06"
+                    />
+                    <ellipse
+                        cx="40.5"
+                        cy="41"
+                        rx="40.5"
+                        ry="41"
+                        transform="translate(947.98 547.929)"
+                        fill="#fff"
+                        opacity="0.02"
+                    />
                 </svg>
             );
         default:

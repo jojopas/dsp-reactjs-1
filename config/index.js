@@ -17,6 +17,8 @@ const constants = {
     SEASON: "Season",
     WATCH_NOW: "Watch Now",
     WATCHING: "Watching",
+    CHANNELS: "Live Channels",
+    ONDEMAND: "On Demand",
     START_OVER: "Start Over",
     TRAILER: "Trailer",
     MORE: "More",

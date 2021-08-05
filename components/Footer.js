@@ -5,6 +5,7 @@ import Nav from './nav/Nav';
 import './Footer.less';
 import {StoreContext} from "../store";
 import {useObserver} from "mobx-react-lite";
+import { constants } from '../config';
 
 export default function Footer() {
     const store = React.useContext(StoreContext);
@@ -12,12 +13,17 @@ export default function Footer() {
         { id: "home", inner: "Home", url: "/", exact: true },
         {
             id: "channels",
-            inner: "Channels",
+            inner: constants.CHANNELS,
             url: "/channels/[[...slug]]",
             as: "/channels",
         },
-        { id: "movies", inner: "Movies", url: "/movies", as: "/movies" },
-        { id: "shows", inner: "Shows", url: "/shows", as: "/shows" },
+        {
+            id: "on-demand",
+            inner: constants.ONDEMAND,
+            url: "/on-demand",
+            as: "/on-demand",
+        },
+        // { id: "shows", inner: "Shows", url: "/shows", as: "/shows" },
         {
             id: "search",
             inner: "Search",

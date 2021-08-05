@@ -1,22 +1,27 @@
-import React from 'react';
+import React from "react";
 
-import './404.less';
-import Button from './button/Button';
-import {constants} from '../config';
-import {sendToSegment} from '../analytics';
+import "./404.less";
+import Button from "./button/Button";
+import { constants } from "../config";
+import { sendToSegment } from "../analytics";
+import InlineSVG from "./InlineSVG";
 
 export default function Error404() {
     return (
         <div className="not-found-container">
+            <InlineSVG type="splash" />
             <div className="not-found-inner">
-            <h1>{constants.MSG_404}</h1>
-            <Button
-                url="/"
-                as="/"
-                inner={constants.HOME_404}
-                className="button-current"
-                onClick={()=>{sendToSegment('track', { event:'Error Message' });}}/>
+                <h1>{constants.MSG_404}</h1>
+                <Button
+                    url="/"
+                    as="/"
+                    inner={constants.HOME_404}
+                    // className="button-current"
+                    onClick={() => {
+                        sendToSegment("track", { event: "Error Message" });
+                    }}
+                />
             </div>
         </div>
-    )
+    );
 }

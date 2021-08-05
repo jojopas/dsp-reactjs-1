@@ -8,6 +8,7 @@ import Logo from "./Logo";
 import Nav from "../nav/Nav";
 import NavLink from "../nav/NavLink";
 import InlineSVG from "../InlineSVG";
+import { constants } from "../../config";
 
 import "./Header.less";
 import ButtonList from "../buttonList/ButtonList";
@@ -35,14 +36,14 @@ export default function Header({ pageType }) {
         // { id: "home", inner: "Featured", url: "/", exact: true },
         {
             id: "channels",
-            inner: "Live Channels",
+            inner: constants.CHANNELS,
             url: "/",
             as: ["/", "/channels"],
             exact: [true, false],
         },
         {
             id: "ondemand",
-            inner: "On Demand",
+            inner: constants.ONDEMAND,
             url: "/on-demand",
             as: "/on-demand",
         },
@@ -66,18 +67,26 @@ export default function Header({ pageType }) {
             id: "channels",
             type: "svg",
             svg: "channels",
-            inner: "Live Channels",
+            inner: constants.CHANNELS,
             url: "/",
-            as: "/",
-            exact: true,
+            as: ["/", "/channels"],
+            exact: [true, false],
         },
         {
             id: "on-demand",
             type: "svg",
             svg: "on-demand",
-            inner: "On Demand",
+            inner: constants.ONDEMAND,
             url: "/on-demand",
             as: "/on-demand",
+        },
+        {
+            id: "search",
+            type: "svg",
+            svg: "search",
+            inner: "Search",
+            url: "/search",
+            as: "/search",
         },
         {
             id: "settings",
