@@ -27,7 +27,7 @@ export default function EPGProgram({
         elapseTime >= program.starts && elapseTime <= program.ends;
     const style = {
         width: Math.floor(
-            (duration * constants.EPG_30_MINUTE_WIDTH) / 1800 - 2
+            (duration * constants.EPG_30_MINUTE_WIDTH) / 1800 
         ),
     };
 

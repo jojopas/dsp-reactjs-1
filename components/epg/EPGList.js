@@ -182,7 +182,9 @@ export default function EPGList({
         startTime +
         (dx / constants.EPG_30_MINUTE_WIDTH) * constants.EPG_SLOT_SECOND;
 
-    const scrolledTimed = (dx) => setScrolledTime(getScrolledTime(dx));
+    const scrolledTimed = (dx) => {
+        console.log('scrolled', dx);
+        setScrolledTime(getScrolledTime(dx));}
 
     const setScrolledTimeFromScrollLeft = debounce((dx) => scrolledTimed(dx));
     const extendProgram = debounce((dx) => extendingEndTime(dx));
