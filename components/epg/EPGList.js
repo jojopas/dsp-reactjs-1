@@ -183,7 +183,7 @@ export default function EPGList({
         (dx / constants.EPG_30_MINUTE_WIDTH) * constants.EPG_SLOT_SECOND;
 
     const scrolledTimed = (dx) => {
-        console.log("scrolled", dx);
+        console.log("scrolled", dx, fullDate(getScrolledTime(dx)));
         setScrolledTime(getScrolledTime(dx));
     };
 
