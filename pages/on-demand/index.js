@@ -75,8 +75,12 @@ export default function OnDemand({
                                           <Button
                                               className="cta-button"
                                               inner={constants.WATCH_NOW}
-                                              url={`/on-demand/${el.type}/${el.slug}`}
-                                              as={`/on-demand/${el.type}/${el.slug}`}
+                                              url={`/on-demand/${
+                                                  el.type || "movies"
+                                              }/${el.slug}`}
+                                              as={`/on-demand/${
+                                                  el.type || "movies"
+                                              }/${el.slug}`}
                                           />
                                       </div>
                                   </div>
