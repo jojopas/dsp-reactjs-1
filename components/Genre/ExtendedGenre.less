@@ -1,13 +1,14 @@
 @import "../../styles/config.less";
 
-
 .clickedTitle {
     display: flex;
+    display: -webkit-flex;
     height: 40px;
     margin-top: 30px;
 
     .backButton {
         display: flex;
+        display: -webkit-flex;
         align-self: center;
         cursor: pointer;
         width: 24px;
@@ -19,8 +20,7 @@
         }
 
         &:hover {
-            svg{
-
+            svg {
                 fill: #ebebeb;
             }
         }
@@ -32,4 +32,3 @@
         text-align: center;
     }
 }
-

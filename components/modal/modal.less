@@ -22,7 +22,7 @@
         -webkit-animation-name: animatetop;
         -webkit-animation-duration: 0.4s;
         animation-name: animatetop;
-        animation-duration: 0.4s;
+        animation-duration: 1s;
         .close {
             fill: rgb(184, 183, 183);
             float: right;
@@ -41,6 +41,7 @@
             width: 100%;
             margin-top: 80px;
             display: flex;
+            display: -webkit-flex;
             justify-content: space-between;
             align-items: center;
 
@@ -57,7 +58,7 @@
                 width: 60px;
                 height: 60px;
                 border-radius: 50%;
-                border: 2px solid @colorYellow;
+                // border: 2px solid @colorYellow;
                 padding: 4px;
             }
 
@@ -95,6 +96,7 @@
             .watch {
                 padding: 5px 20px;
                 display: flex;
+                display: -webkit-flex;
                 align-items: center;
                 justify-content: center;
             }
@@ -143,7 +145,7 @@
         opacity: 0;
     }
     to {
-        bottom: -100px;
+        bottom: 100px;
         opacity: 1;
     }
 }
@@ -154,7 +156,7 @@
         opacity: 0;
     }
     to {
-        bottom: 0;
+        bottom: 100px;
         opacity: 1;
     }
 }

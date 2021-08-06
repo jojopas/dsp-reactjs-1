@@ -1,10 +1,12 @@
 @import "../../styles/config.less";
 
 .epg-container {
+    display: -webkit-flex;
     display: flex;
     // padding-top: @headerHeight;
 
     .epgPlayer {
+        display: -webkit-flex;
         display: flex;
         flex-direction: column;
         position: sticky;
@@ -23,6 +25,7 @@
                 min-height: 230px;
                 .current-channel-information {
                     display: flex;
+                    display: -webkit-flex;
                     height: 56px;
                     padding: 0px 10px;
                     justify-content: space-between;
@@ -60,6 +63,7 @@
             &-categories {
                 margin: 10px 0px;
                 display: flex;
+                display: -webkit-flex;
                 background-color: #ffffff31;
                 opacity: 70%;
                 border-radius: 30px;
@@ -104,12 +108,13 @@
 
         .ads {
             display: flex;
+            display: -webkit-flex;
             justify-content: center;
             align-items: center;
             width: 100%;
             margin: 42px 2px 2px 2px;
             border-radius: 10px;
-            
+
             background-color: rgba(0, 0, 0, 0.1);
 
             @media (max-width: @mobileLargeBP) {

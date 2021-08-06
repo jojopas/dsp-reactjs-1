@@ -262,7 +262,7 @@ export default function EPGList({
         const rows = document.querySelectorAll(".timeslot-row");
         rows.forEach((row) => {
             row.style.cssText = isTop
-                ? `background-color: #0e212f; transform:translateY(${scrollTop}px)`
+                ? `transform:translateY(${scrollTop}px)`
                 : `transform:translateY(${scrollTop}px)`;
         });
         document.querySelector(
@@ -306,7 +306,7 @@ export default function EPGList({
             <div className="timeslot-row">
                 <div
                     className="timeslot-row--date"
-                    style={{ width: channelCellWidth + 20 }}
+                    style={{ width: channelCellWidth }}
                     key={"Date"}
                 >
                     <div className="timeslot-row--date-select">
@@ -376,16 +376,17 @@ export default function EPGList({
     };
 
     const todaysTimeSlots = () => {
-        const timeSlots = TimeStringList(startTime, endTime);
+        const timeSlots = TimeStringList(
+            Math.abs(nowTime - startTime) < 6000 ? nowTime : startTime,
+            endTime
+        );
         return (
             <div className="timeslot-row">
                 {timeSlots.map((time, index) => (
                     <div
                         className={`${"timeslot-row--time"}`}
                         style={{
-                            width: Math.floor(
-                                constants.EPG_30_MINUTE_WIDTH - 10
-                            ),
+                            width: Math.floor(constants.EPG_30_MINUTE_WIDTH),
                         }}
                         key={`${time}${index}`}
                     >
