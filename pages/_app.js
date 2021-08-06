@@ -3,7 +3,7 @@ import getConfig from "next/config";
 import { useRouter } from "next/router";
 import "lazysizes";
 import "lazysizes/plugins/attrchange/ls.attrchange";
-import Preloading from "../components/preloading/preloading";
+import Preloading from "../components/preloading/Preloading";
 
 import { InjectStoreContext, StoreContext } from "../store";
 import config from "../head/config";
