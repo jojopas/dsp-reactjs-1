@@ -85,17 +85,33 @@ export default async (req, res) => {
         apiUrl = `${apiUrl}/${constants.DSP_COUNTRY}`;
     }
 
-    if (dspRoute === "live/epg") {
-        const date = new Date();
-        date.setMinutes(date.getMinutes() > 29 ? 30 : 0, 0, 0);
-        const startTime = sanitizeDateString(date);
-        date.setDate(date.getDate() + 7);
-        date.setHours(0, 0, 0, 0);
-        const endTime = sanitizeDateString(date);
+    if (dspRoute.includes("live/epg")) {
+        let startDate, endDate;
+        // set startTime
+        if (ogRoute[2] && Number.isInteger(ogRoute[2])) {
+            startDate = new Date(0);
+            startDate.setUTCSeconds(Number(ogRoute[2]));
+        } else {
+            startDate = new Date();
+            startDate.setMinutes(startDate.getMinutes() > 29 ? 30 : 0, 0, 0);
+        }
+        // set EndTime
+        if (ogRoute[3] && !Number.isNaN(ogRoute[3])) {
+            endDate = new Date(0);
+            endDate.setUTCSeconds(Number(ogRoute[3]));
+        } else {
+            endDate = new Date(0);
+            endDate.setUTCSeconds(
+                startDate.getTime() / 1000 +
+                    constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND
+            );
+        }
+        const startTime = sanitizeDateString(startDate);
+        const endTime = sanitizeDateString(endDate);
         const programmSize = -1;
         apiUrl = `https://api.staging.myspotlight.tv/live/epg/${constants.DSP_COUNTRY}?start_time=${startTime}&end_time=${endTime}&programme_size=${programmSize}&from=0`;
+        console.log("dspRoute", apiUrl, dspRoute, ogRoute[2]);
     }
-    // console.log("dspRoute", apiUrl);
 
     if (platformRoutes.includes(dspRoute)) {
         apiUrl = `${apiUrl}/${constants.DSP_PLATFORM}`;

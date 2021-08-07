@@ -41,7 +41,7 @@ function App({ Component, pageProps }) {
             });
             // Segment Page View
             sendToSegment("page");
-            setPageLoading(true);
+            setPageLoading(false);
         });
         router.events.on("routeChangeError", handleComplete);
     }, [router]);

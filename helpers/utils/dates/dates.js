@@ -37,7 +37,9 @@ export const timeDuration = (seconds) => {
 
 export const startDate = () => {
     const date = new Date();
+    
     date.setMinutes(date.getMinutes() > 29 ? 30 : 0, 0, 0);
+    date.setHours(22, 0,0,0);
     return date;
 };
 
@@ -76,4 +78,44 @@ export const timeLeftDuration = (seconds) => {
     const hours = date.getUTCHours();
     const minutes = date.getUTCMinutes() + 1;
     return hours > 0 ? `${hours}h ${minutes}m ` : `${minutes}m `;
+};
+
+export const timeAfterDay = (day) => {
+    const date = new Date();
+    date.setDate(date.getDate() + day);
+    date.setHours(0, 0, 0, 0);
+    console.log('TimeAfterDay', day);
+    return date.getTime() / 1000;
+};
+
+export const DateString = (nowTime) => {
+    const dateSlots = {};
+    const dates = new Date(0);
+    dates.setUTCSeconds(nowTime);
+    const month = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ];
+    const getDateString = (date) =>
+        `${month[date.getMonth()]} ${date.getDate()}`;
+
+    for (let index = 0; index < 8; index++) {
+        dateSlots[index < 7 ? getDateString(dates) : ""] =
+            dates.getTime() / 1000;
+        dates.setDate(dates.getDate() + 1);
+        dates.setHours(0, 0, 0, 0);
+    }
+    console.log("DateString", { nowTime, dateSlots });
+
+    return dateSlots;
 };

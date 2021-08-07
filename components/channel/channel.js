@@ -543,7 +543,7 @@ export default function Channels({
         return null;
     };
 
-    // console.log("Channel", page, currentSlug, slug);
+    console.log("Channel", page, currentSlug, slug);
     return useObserver(() =>
         !pageError ? (
             <div
