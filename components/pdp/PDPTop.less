@@ -5,6 +5,25 @@
     overflow: hidden;
 }
 
+.secondarybutton() {
+    background: none;
+    background-color: @ButtonBackground;
+    color: @colorWhite;
+
+    svg {
+        fill: @colorWhite;
+    }
+
+    &:hover {
+        background: @colorYellow;
+        color: @colorBlue;
+
+        svg {
+            fill: @colorBlue;
+        }
+    }
+}
+
 .pdp-top {
     position: relative;
     display: flex;
@@ -202,10 +221,10 @@
         .pdp-top-watchNowButton {
         }
         .pdp-top-startOverButton {
-            color: #ebebeb;
+            .secondarybutton();
         }
         .pdp-top-trailerButton {
-            color: #ebebeb;
+            .secondarybutton();
         }
     }
 
