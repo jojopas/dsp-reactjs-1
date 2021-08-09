@@ -174,12 +174,17 @@
                     -moz-appearance: none; /* Firefox */
                     -webkit-appearance: none; /* Safari and Chrome */
                     background-color: @colorBG;
+                    color: @colorNavGray;
 
-                    :checked,
-                    :hover {
-                        background-color: @colorYellow;
-                        color: @colorBlue;
-                    }
+                    // &:focus {
+                    //     background-color: @colorYellow;
+                    //     color: @colorBlue;
+                    // }
+                }
+
+                &:focus {
+                    background-color: @colorYellow;
+                    color: @colorBlue;
                 }
 
                 & :after {
@@ -190,6 +195,8 @@
                     right: 5px;
                     transform: translate(0, -50%);
                 }
+
+                
             }
 
             /*For IE*/

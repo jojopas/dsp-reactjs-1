@@ -1,5 +1,6 @@
 import InlineSVG from "../InlineSVG";
 import "./Preloading.less";
+
 const Preloading = () => {
     // console.log('Preloading started');
     return (
