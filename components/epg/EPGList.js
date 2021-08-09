@@ -44,7 +44,6 @@ export default function EPGList({
     const now = new Date();
     const elapseTime = now.getTime() / 1000;
     const nowTime = startDate().getTime() / 1000;
-    // console.log("computeDates", dateSlots, endDates);
 
     const [epgTime, setEPGTime] = React.useState({
         start: nowTime,
@@ -112,9 +111,6 @@ export default function EPGList({
                 scroll += OneDayScroll;
             }
         }
-        // console.log("Milestone init", {
-        //     scrollCheckList,
-        // });
     };
 
     React.useEffect(() => {
@@ -172,28 +168,9 @@ export default function EPGList({
     //     }
     // };
     const scrolledTimed = (dx) => {
-        // console.log("scrolledTimes", {
-        //     dx,
-        //     selectedDate,
-        //     lower: scrollCheckList[selectedDate],
-        //     upper: scrollCheckList[selectedDate + 1],
-        //     scrollCheckList,
-        // });
         if (dx < scrollCheckList[selectedDate]) {
-            // console.log(
-            //     "scrollDate -1",
-            //     scrollCheckList[selectedDate] - dx,
-            //     dx,
-            //     selectedDate - 1
-            // );
             setSelectedDate(selectedDate - 1);
         } else if (dx > scrollCheckList[selectedDate + 1]) {
-            // console.log(
-            //     "scrollDate +1",
-            //     dx - scrollCheckList[selectedDate + 1],
-            //     dx,
-            //     selectedDate + 1
-            // );
             setSelectedDate(selectedDate + 1);
         }
     };

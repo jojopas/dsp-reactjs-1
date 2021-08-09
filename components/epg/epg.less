@@ -170,10 +170,16 @@
                 background-position-y: 7px;
 
                 option {
+                    appearance: none;
                     -moz-appearance: none; /* Firefox */
                     -webkit-appearance: none; /* Safari and Chrome */
-                    appearance: none;
                     background-color: @colorBG;
+
+                    :checked,
+                    :hover {
+                        background-color: @colorYellow;
+                        color: @colorBlue;
+                    }
                 }
 
                 & :after {

@@ -100,11 +100,14 @@ export default async (req, res) => {
             endDate = new Date(0);
             endDate.setUTCSeconds(Number(ogRoute[3]));
         } else {
-            endDate = new Date(0);
-            endDate.setUTCSeconds(
-                startDate.getTime() / 1000 +
-                    constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND
-            );
+            // endDate = new Date(0);
+            // endDate.setUTCSeconds(
+            //     startDate.getTime() / 1000 +
+            //         constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND
+            // );
+            endDate = new Date();
+            endDate.setDate(endDate.getDate() + constants.EPG_NUMBER_DAYS);
+            endDate.setHours(0, 0, 0, 0);
         }
         const startTime = sanitizeDateString(startDate);
         const endTime = sanitizeDateString(endDate);
