@@ -4,7 +4,7 @@ const Preloading = () => {
     // console.log('Preloading started');
     return (
         <div className="preloading">
-            <InlineSVG type="splash" />
+            {/* <InlineSVG type="splash" /> */}
             <img src="/images/Loading.gif" />
         </div>
     );
