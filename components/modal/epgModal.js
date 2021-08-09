@@ -17,7 +17,7 @@ const EPGModal = ({ data, resetFn, onClick }) => {
         nowTime <= data?.nowprogram?.ends;
     // console.log("date", data, getFormattedDate);
     const clicked = () => {
-        console.log("Clicked", data);
+        // console.log("Clicked", data);
         resetFn();
         onClick(data);
     };

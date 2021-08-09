@@ -271,6 +271,7 @@ export default function EPGList({
             event: event.target.value,
             elapseTime: fullDate(elapseTime),
             selected: fullDate(dateTime),
+            epgTime,
             // scrolledTime: fullDate(scrolledTime),
             endTime: fullDate(epgTime.end),
         });

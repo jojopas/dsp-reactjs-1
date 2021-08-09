@@ -87,7 +87,7 @@ export const timeAfterDay = (day) => {
     const date = new Date();
     date.setDate(date.getDate() + day);
     date.setHours(0, 0, 0, 0);
-    console.log("TimeAfterDay", day);
+    // console.log("TimeAfterDay", day);
     return date.getTime() / 1000;
 };
 
@@ -117,7 +117,7 @@ export const DateString = (nowTime, config = { days: constants.EPG_NUMBER_DAYS }
         dates.setDate(dates.getDate() + 1);
         dates.setHours(0, 0, 0, 0);
     }
-    console.log("DateString", { nowTime, dateSlots });
+    // console.log("DateString", { nowTime, dateSlots });
 
     return dateSlots;
 };

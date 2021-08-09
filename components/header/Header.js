@@ -107,7 +107,7 @@ export default function Header({ pageType }) {
             as: "/account",
         },
     ];
-    console.log("pageType", pageType);
+    // console.log("pageType", pageType);
     return useObserver(() => (
         <>
             <header className={pageType == "on-demand" ? "on-demand" : ""}>
