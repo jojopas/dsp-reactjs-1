@@ -115,8 +115,7 @@
             width: 100%;
             margin: 42px 2px 2px 2px;
             border-radius: 10px;
-
-            background-color: rgba(0, 0, 0, 0.1);
+            // background-color: rgba(0, 0, 0, 0.1);
 
             @media (max-width: @mobileLargeBP) {
                 display: none;
@@ -124,11 +123,10 @@
 
             img {
                 width: auto;
-            }
-
-            &:hover {
-                border: 2px solid @colorYellow;
-                margin: 40px 0px 0px 0px;
+                border: 2px solid transparent;
+                &:hover {
+                    border: 2px solid @colorYellow;
+                }
             }
         }
     }

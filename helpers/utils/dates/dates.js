@@ -39,7 +39,7 @@ export const startDate = () => {
     const date = new Date();
     
     date.setMinutes(date.getMinutes() > 29 ? 30 : 0, 0, 0);
-    date.setHours(22, 0,0,0);
+    // date.setHours(22, 0,0,0);
     return date;
 };
 

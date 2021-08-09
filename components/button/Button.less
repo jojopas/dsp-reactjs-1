@@ -7,13 +7,13 @@
 
 .button {
     position: relative;
-    color: @colorNavGray;
+    color: @colorBlue;
     font: 18px Roboto;
     line-height: 40px;
     display: inline-block;
     .bsBoxSizing();
     padding: 5px 25px;
-    background: rgba(255, 255, 255, 0.08);
+    background: #F5DA39;
     border-radius: 50px;
     margin: 0;
     cursor: pointer;
@@ -28,15 +28,11 @@
         width: 20px;
         height: 20px;
         margin-right: 10px;
-        fill: white;
+        fill: @colorBlue;
     }
 
     &:hover {
-        background-color: @colorYellow;
-        color: @colorBlue;
-        svg {
-            fill: @colorBlue;
-        }
+        background-color: #E6CB35;
     }
 
     &.button-current {
