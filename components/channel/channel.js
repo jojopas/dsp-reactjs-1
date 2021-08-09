@@ -543,7 +543,7 @@ export default function Channels({
         return null;
     };
 
-    console.log("Channel", page, currentSlug, slug);
+    // console.log("Channel", page, currentSlug, slug);
     return useObserver(() =>
         !pageError ? (
             <div
@@ -581,7 +581,7 @@ export default function Channels({
                     <EPGList
                         ref={epgContainer}
                         className={!userIsActive ? "epgInactive" : ""}
-                        data={result}
+                        epgData={result}
                         onClick={setFirstVideo}
                         fullScreen={fullScreen}
                         changeCurrentSlug={changeCurrentSlug}

@@ -48,6 +48,8 @@ const constants = {
     EPG_SLOT_TO_RENDER: 10,
     EPG_SLOT_SECOND: 30 * 60,
     EPG_SCROLL_RENDER_TILL: 3,
+    EPG_NUMBER_DAYS: 7,
+    EPG_LOGO_WIDTH: 120,
     COOKIE_NO_EXPIRE: new Date("2100/10/10"),
     CORS_WHITELIST: [
         "http://localhost:3000",

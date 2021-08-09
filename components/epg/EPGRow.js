@@ -11,7 +11,6 @@ export default function EPGRow({
     isShowing,
     onClick,
     currrentTimeElapsed,
-    width,
     startTime,
     endTime,
     elapseTime,
