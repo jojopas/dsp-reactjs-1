@@ -27,13 +27,11 @@ export default function EPGProgram({
     const isBroadcasting =
         elapseTime >= program.starts && elapseTime <= program.ends;
     const style = {
-        width: Math.floor(
-            (duration * constants.EPG_30_MINUTE_WIDTH) / 1800 
-        ),
+        width: Math.floor((duration * constants.EPG_30_MINUTE_WIDTH) / 1800),
     };
 
     const dateToSend = { ...channel, nowprogram: program };
-
+    const durationString = timeDurationStartStop(program.starts, program.ends);
     return (
         <div
             className={
@@ -48,61 +46,57 @@ export default function EPGProgram({
             tabIndex={1}
             onClick={store.isBreakpoint ? () => iconClicked(dateToSend) : null}
         >
-            {program.duration > 50 && (
-                <>
+            <>
+                <div
+                    className="channel-row--program-about"
+                    style={{ width: style.width - 30 }}
+                >
                     <div
-                        className="channel-row--program-about"
-                        style={{ width: style.width - 30 }}
+                        className="channel-row--program---timing"
+                        title={durationString}
                     >
-                        <div className="channel-row--program---timing">
-                            {isShowing && isBroadcasting && (
-                                <>
-                                    <div className="channel-row--program---watching">
-                                        {constants.WATCHING}
-                                    </div>
-                                </>
-                            )}
-                            {timeDurationStartStop(
-                                program.starts,
-                                program.ends
-                            )}
+                        {isShowing && isBroadcasting && (
+                            <>
+                                <div className="channel-row--program---watching">
+                                    {constants.WATCHING}
+                                </div>
+                            </>
+                        )}
+                        {durationString}
 
-                            {isBroadcasting
-                                ? ` ${constants.BULLETS} ${timeLeftDuration(
-                                      program.ends -
-                                          startTime -
-                                          currrentTimeElapsed
-                                  )}
+                        {isBroadcasting
+                            ? ` ${constants.BULLETS} ${timeLeftDuration(
+                                  program.ends - startTime - currrentTimeElapsed
+                              )}
                     left`
-                                : null}
-                        </div>
-                        <div
-                            className="channel-row--program---title"
-                            onClick={
-                                store.isBreakpoint
-                                    ? null
-                                    : () => fullScreen(dateToSend)
-                            }
-                        >
-                            {program.title}
-                        </div>
-                        <div
+                            : null}
+                    </div>
+                    <div
+                        className="channel-row--program---title"
+                        onClick={
+                            store.isBreakpoint
+                                ? null
+                                : () => fullScreen(dateToSend)
+                        }
+                    >
+                        {program.title}
+                    </div>
+                    {/* <div
                             className="channel-row--program---description"
                             title={program.description}
                         >
                             {program.description}
-                        </div>
-                        {/* {`Duration:${duration}(${program.duration-duration}) ${style.width} ${startTime - program.starts} `} */}
-                    </div>
+                        </div> */}
+                    {/* {`Duration:${duration}(${program.duration-duration}) ${style.width} ${startTime - program.starts} `} */}
+                </div>
 
-                    <div
-                        className="channel-row--program-icon"
-                        onClick={() => iconClicked(dateToSend)}
-                    >
-                        <InlineSVG type="more" />
-                    </div>
-                </>
-            )}
+                <div
+                    className="channel-row--program-icon"
+                    onClick={() => iconClicked(dateToSend)}
+                >
+                    <InlineSVG type="more" />
+                </div>
+            </>
         </div>
     );
 }

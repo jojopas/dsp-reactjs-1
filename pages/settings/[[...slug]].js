@@ -20,7 +20,7 @@ export default function Settings({
                 <LocalSEOTags pageType="settings" seoObj={seoObj} />
                 <h1 className="noShow">Settings</h1>
                 <div className="settings">
-                    <LeftNav />
+                    {/* <LeftNav /> */}
                     <div className="placeholder">
                         <h1>Contact Us</h1>
                         <p>

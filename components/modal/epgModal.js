@@ -1,4 +1,4 @@
-import "./modal.less";
+import "./epgModal.less";
 import { constants } from "../../config";
 import InliveSVG from "../InlineSVG";
 import InlineSVG from "../InlineSVG";
@@ -7,9 +7,12 @@ import {
     getFormattedDate,
     timeLeftDuration,
 } from "../../helpers/utils/dates/dates";
-import Button from "../button/Button";
+import Button from "../button/Button"   ;
+import { StoreContext } from "../../store";
+
 
 const EPGModal = ({ data, resetFn, onClick }) => {
+    const store = React.useContext(StoreContext);
     const now = new Date();
     const nowTime = now.getTime() / 1000;
     const isBroadcasting =
@@ -21,6 +24,17 @@ const EPGModal = ({ data, resetFn, onClick }) => {
         resetFn();
         onClick(data);
     };
+
+    const ModalButton = () => (
+        <div class="modal-footer">
+            <Button
+                className="watch"
+                svg="play"
+                inner={isBroadcasting ? "Watch Now" : `Watch Channel`}
+                onClick={isBroadcasting ? clicked : null}
+            />
+        </div>
+    );
     return data ? (
         <div id="myModal" className="modal">
             <div className="modal-content">
@@ -57,7 +71,7 @@ const EPGModal = ({ data, resetFn, onClick }) => {
                             className="lazyload"
                         />
                     </div>
-
+                    {store.isBreakpoint ? <ModalButton /> : null}
                     <div class="modal-body">
                         <h1>{`${data.nowprogram.title} Presented by ${data.name}`}</h1>
                         <span className="info">
@@ -67,16 +81,7 @@ const EPGModal = ({ data, resetFn, onClick }) => {
                         </span>
                         <p>{data.nowprogram.description}</p>
                     </div>
-                    <div class="modal-footer">
-                        <Button
-                            className="watch"
-                            svg="play"
-                            inner={
-                                isBroadcasting ? "Watch Now" : `Watch Channel`
-                            }
-                            onClick={isBroadcasting ? clicked : null}
-                        />
-                    </div>
+                    {!store.isBreakpoint ? <ModalButton /> : null}
                 </div>
             </div>
         </div>
