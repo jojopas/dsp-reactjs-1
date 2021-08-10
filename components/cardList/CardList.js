@@ -150,7 +150,7 @@ export default function CardList({
     if (type == "channel") {
         settingsOverrides = {
             className: "cardList cardList-promo",
-            slidesToShow: 3.1,
+            slidesToShow: 3.5,
             slidesToScroll: 3,
             touchThreshold: 9,
             responsive: [
@@ -158,8 +158,8 @@ export default function CardList({
                     breakpoint: 1024,
                     settings: {
                         arrows: false,
-                        slidesToShow: 2.1,
-                        slidesToScroll: 2,
+                        slidesToShow: 3.1,
+                        slidesToScroll: 3,
                         touchThreshold: 6,
                     },
                 },
