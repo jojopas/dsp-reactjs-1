@@ -22,7 +22,7 @@ const ChannelLogo = ({
     const imageDiff = 70;
     return (
         <div
-            className={`channel-info ${isShowing? 'active': ''}`}
+            className={`channel-info ${isShowing ? "active" : ""}`}
             style={channelStyle}
             title={channel.name}
             onClick={onClick}
@@ -37,8 +37,9 @@ const ChannelLogo = ({
                     data-src={`${channel.logo}/${width - imageDiff}/${
                         width - imageDiff
                     }`}
-                    alt={channel.name}
+                    alt=""
                     className="lazyload"
+                    onerror="this.style.display='none'"
                 />
             ) : (
                 <img
