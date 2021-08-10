@@ -176,16 +176,27 @@
                     background-color: @colorBG;
                     color: @colorNavGray;
 
-                    // &:focus {
+                    // &.selected {
                     //     background-color: @colorYellow;
                     //     color: @colorBlue;
+                    //     outline: none !important;
+                    //     border: none !important;
+                    //     box-shadow: none !important;
+                    // }
+                    
+                    // &:focus {
+                    //     background-color: @colorYellow !important;
+                    //     color: @colorBlue !important;;
+                    //     outline: none !important;
+                    //     border: none !important;
+                    //     box-shadow: none !important;
                     // }
                 }
 
-                &:focus {
-                    background-color: @colorYellow;
-                    color: @colorBlue;
-                }
+                // &:focus {
+                //     background-color: @colorYellow;
+                //     color: @colorBlue;
+                // }
 
                 & :after {
                     content: "▼";
@@ -195,8 +206,6 @@
                     right: 5px;
                     transform: translate(0, -50%);
                 }
-
-                
             }
 
             /*For IE*/

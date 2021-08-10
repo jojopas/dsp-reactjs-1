@@ -70,10 +70,10 @@ export default function Channels({
 
     const fullScreen = (data) => {
         let timer = 250;
+        console.log("video got ", data, currentSlug);
         if (currentSlug != data.slug) {
-            // console.log("video got ", data, currentSlug, video);
             setFirstVideo(data);
-            timer = 3000;
+            timer = 1000;
         }
         setTimeout(() => {
             const video = document.getElementById("content-video_html5_api");
@@ -570,7 +570,7 @@ export default function Channels({
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div className="ads">
                             <img
                                 src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/6108009c5c6fc570262e0c65"

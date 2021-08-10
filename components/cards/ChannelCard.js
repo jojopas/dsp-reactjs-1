@@ -35,7 +35,7 @@ export default function ChannelCard(data) {
         return slug;
     };
 
-    console.log("ChannelCard", data, routerSlug);
+    // console.log("ChannelCard", data, routerSlug);
     return store.isBreakpoint ? (
         <div className="channelCard">
             <Link href={routerSlug?.slug} as={sanitiseSlug(data?.slug)}>

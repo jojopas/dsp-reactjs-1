@@ -17,6 +17,7 @@ export default function EPGProgram({
     elapseTime,
     iconClicked,
     fullScreen,
+    channel,
     index,
 }) {
     const start = startTime > program.starts ? startTime : program.starts;
@@ -31,6 +32,8 @@ export default function EPGProgram({
         ),
     };
 
+    const dateToSend = { ...channel, nowprogram: program };
+
     return (
         <div
             className={
@@ -43,7 +46,7 @@ export default function EPGProgram({
             id={program.duration}
             key={id}
             tabIndex={1}
-            onClick={store.isBreakpoint ? () => iconClicked() : null}
+            onClick={store.isBreakpoint ? () => iconClicked(dateToSend) : null}
         >
             {program.duration > 50 && (
                 <>
@@ -75,7 +78,11 @@ export default function EPGProgram({
                         </div>
                         <div
                             className="channel-row--program---title"
-                            onClick={store.isBreakpoint ? null : fullScreen}
+                            onClick={
+                                store.isBreakpoint
+                                    ? null
+                                    : () => fullScreen(dateToSend)
+                            }
                         >
                             {program.title}
                         </div>
@@ -90,7 +97,7 @@ export default function EPGProgram({
 
                     <div
                         className="channel-row--program-icon"
-                        onClick={iconClicked}
+                        onClick={() => iconClicked(dateToSend)}
                     >
                         <InlineSVG type="more" />
                     </div>

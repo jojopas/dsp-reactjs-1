@@ -35,12 +35,8 @@ export default function EPGRow({
                             startTime={startTime}
                             endTime={endTime}
                             elapseTime={elapseTime}
-                            iconClicked={() =>
-                                iconClicked({
-                                    ...channel,
-                                    nowprogram: program,
-                                })
-                            }
+                            iconClicked={iconClicked}
+                            channel={channel}
                             isShowing={isShowing}
                             index={index}
                             fullScreen={fullScreen}

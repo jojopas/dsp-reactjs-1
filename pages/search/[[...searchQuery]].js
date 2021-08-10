@@ -81,10 +81,14 @@ export default function Search({
             res.demand = data.data.data.results;
             // console.log("Demand", data?.data?.data?.results?.cards);
             res.demand.category = { name: constants.ONDEMAND };
+            // console.log("card", res.demand?.cards);
             res.demand.cards = res.demand?.cards?.map((card) => {
                 // card.slug = `${card.slug}`;
+                if (card.type === 'channels') {
+                    return null;
+                }
                 return card;
-            });
+            }).filter((card) => card);
 
             count += res.demand.cards.length;
         }
