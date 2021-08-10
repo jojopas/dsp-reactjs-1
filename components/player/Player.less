@@ -21,11 +21,13 @@
             .video-js {
                 cursor: none;
                 border: 2px solid transparent;
+                .bsTransition(border-color);
+
                 &:hover {
-                    border: 2px solid @colorYellow;
+                    border-color: @colorYellow;
                 }
                 &.vjs-user-active {
-                    border: 2px solid transparent;
+                    //border: 2px solid transparent;
                     cursor: default;
                 }
 
