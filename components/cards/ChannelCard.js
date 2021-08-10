@@ -29,7 +29,7 @@ export default function ChannelCard(data) {
 
     const sanitiseSlug = (slug) => {
         if (slug[0] !== "/") {
-            const last = slug.split('/')
+            const last = slug.split("/");
             return "/channels/" + last[1];
         }
         return slug;
@@ -58,14 +58,19 @@ export default function ChannelCard(data) {
         </div>
     ) : (
         <span className="promoCard ">
-            <span className="cardOuter" style={{ paddingBottom: "86.25%" }}>
+            <span className="cardOuter" style={{ paddingBottom: "66.25%" }}>
                 <Link href={routerSlug?.slug} as={sanitiseSlug(data?.slug)}>
-                    <a className="cardChannel">
+                    <a className="cardChannel" style={{ paddingBottom: 50 }}>
                         <img
                             src={constants.NOT_FOUND_SRC}
                             data-src={data.channel.logo}
                             alt={data.program_title}
                             className="lazyload"
+                            style={{
+                                borderRadius: 0,
+                                borderTopLeftRadius: 7,
+                                borderTopRightRadius: 7,
+                            }}
                         />
 
                         <div className="title">
