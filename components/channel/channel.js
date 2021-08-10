@@ -79,7 +79,7 @@ export default function Channels({
             const video = document.getElementById("content-video_html5_api");
             if (video) {
                 if (video.requestFullscreen) {
-                    video.requestFullscreen();
+                    store.playerInstance.vjs.requestFullscreen();
                 } else if (video.webkitRequestFullscreen) {
                     /* Safari */
                     video.webkitRequestFullscreen();
