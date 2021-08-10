@@ -231,7 +231,7 @@ export default function EPGList({
     };
 
     const TimeElapsed = () =>
-        selectedDate === 0 ? null : (
+        selectedDate !== 0 ? null : (
             <div
                 key="timeElapsed"
                 className="timeElapsed"
@@ -267,6 +267,7 @@ export default function EPGList({
         });
         reCalculateScrollMilestone();
         setSelectedDate(dateSelected);
+        window.scrollTo(0, 0);
         console.log("DateSelected", {
             event: event.target.value,
             elapseTime: fullDate(elapseTime),
