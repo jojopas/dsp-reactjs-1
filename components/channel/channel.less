@@ -108,13 +108,13 @@
         }
 
         .ads {
+            position:relative;
             display: flex;
             display: -webkit-flex;
             justify-content: center;
             align-items: center;
             width: 100%;
             margin: 42px 2px 2px 2px;
-            border-radius: 10px;
             // background-color: rgba(0, 0, 0, 0.1);
 
             @media (max-width: @mobileLargeBP) {
@@ -123,9 +123,24 @@
 
             img {
                 width: auto;
+                z-index:1;
+            }
+
+            &:after {
+                content:'';
+                display:block;
+                pointer-events:none;
+                position:absolute;
+                inset:2px;
+                border-radius:12px;
                 border: 2px solid transparent;
-                &:hover {
-                    border: 2px solid @colorYellow;
+                .bsTransition(border-color);
+                z-index:10;
+            }
+
+            &:hover {
+                &:after {
+                    border-color: @colorYellow;
                 }
             }
         }
