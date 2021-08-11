@@ -43,7 +43,7 @@ export default function Channels({
     const { data, error, isValidating } = useSWR(
         "/api/dsp/live/epg",
         async (url) => await fetchData(url),
-        { refreshInterval: constants.EPG_POLLING * 1000 }
+        { initialData: page.channels }
     );
     const [result, setResult] = React.useState(channels);
 
