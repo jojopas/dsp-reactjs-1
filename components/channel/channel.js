@@ -491,21 +491,50 @@ export default function Channels({
         }, "");
     };
 
-    let fullTimer;
-    fullTimer = setTimeout(()=>{
-        if (!userIsActive && store.playerInstance && store.playerInstance.vjs) {
+
+
+    /* Auto Fullscreen */
+    let fsTimer;
+    function throttled(delay, fn) {
+        let lastCall = 0;
+        return function (...args) {
+            const now = (new Date).getTime();
+            if (now - lastCall < delay) {
+                return;
+            }
+            lastCall = now;
+            return fn(...args);
+        }
+    }
+    function autoFS() {
+        if (store.playerInstance && store.playerInstance.vjs) {
             const vjs = document.querySelector('.video-js');
             const rect = vjs.getBoundingClientRect();
             vjs.style.cssText = `position:fixed;top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;`;
             setTimeout(()=>{
                 setTimeout(()=>{
                     store.playerInstance.vjs.enterFullWindow();
+                    store.playerInstance.vjs.addClass('vjs-full-window');
                 }, 250);
-                vjs.style.cssText = `${vjs.style.cssText}transition:all 0.5s ease 0s`;
+                vjs.style.cssText = `${vjs.style.cssText}transition:all 0.6s ease 0s`;
             }, 250);
-
         }
-    }, 5000);
+    }
+    function testMouseMove() {
+        clearTimeout(fsTimer);
+        fsTimer = setTimeout(autoFS, 15000);
+    }
+    const throttledTestMouse = throttled(1000, testMouseMove);
+
+    React.useEffect(() => {
+        document.addEventListener('mousemove', throttledTestMouse);
+        throttledTestMouse();
+
+        return () => {
+            clearTimeout(fsTimer);
+            document.removeEventListener('mousemove', throttledTestMouse);
+        };
+    }, []);
 
     console.log('Channel', page);
     return useObserver(() =>

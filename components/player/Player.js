@@ -18,6 +18,7 @@ export default function Player({
     const plyrRef = React.useRef(null);
     const outerPlyrRef = React.useRef(null);
     const playerCloseButton = React.useRef(null);
+    const liveCloseButton = React.useRef(null);
 
     const lightBoxPageTypes = ["movie", "show"];
     const showPlayerAtStartPageTypes = ["home", "channel"];
@@ -60,6 +61,12 @@ export default function Player({
                 });
                 store.setIsPlayerSetup(true);
                 store.setPlayerInstance(player);
+
+                if(window && pageType === 'channel' && liveCloseButton && liveCloseButton.current){
+                    console.log('lets go');
+                    const vjsControls = document.querySelector('.vjs-control-bar');
+                    vjsControls.appendChild(liveCloseButton.current);
+                }
             }
         })();
     }, [plyrRef, video]);
@@ -248,6 +255,13 @@ export default function Player({
         }
     };
 
+    const closeLiveFS = () => {
+        if (store.playerInstance && store.playerInstance.vjs) {
+            store.playerInstance.vjs.exitFullWindow();
+            store.playerInstance.vjs.removeClass('vjs-full-window');
+        }
+    };
+
     return useObserver(() => {
         return (
             <div
@@ -264,7 +278,16 @@ export default function Player({
                     >
                         <InlineSVG type="close" />
                     </button>
-                ) : null}
+                ) : pageType === 'channel' ? (
+                    <button
+                        ref={liveCloseButton}
+                        className="player-liveClose"
+                        onClick={() => closeLiveFS()}
+                        title="Close"
+                    >
+                        <InlineSVG type="channels" /> Live Channels
+                    </button>
+                ) : null }
                 <div id="dsp-player" ref={plyrRef} />
                 <div className="player-halfHeight" />
             </div>
