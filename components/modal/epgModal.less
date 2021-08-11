@@ -106,12 +106,19 @@
                     background-color: @colorNavGray;
                 }
             }
+
+            @media (max-width: @mobileLargeBP) {
+                padding: 10px;
+                padding-top: 30px;
+            }
         }
 
         @media (max-width: @mobileLargeBP) {
-            width: 80%;
+            position: fixed;
+            bottom: 0;
             -webkit-animation-name: animatebottom;
             animation-name: animatebottom;
+            max-height: 330px;
         }
     }
 
@@ -151,7 +158,7 @@
         opacity: 0;
     }
     to {
-        bottom: 100px;
+        bottom: 0px;
         opacity: 1;
     }
 }
@@ -162,7 +169,7 @@
         opacity: 0;
     }
     to {
-        bottom: 100px;
+        bottom: 0px;
         opacity: 1;
     }
 }
