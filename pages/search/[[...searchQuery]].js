@@ -134,7 +134,7 @@ export default function Search({
     if (showChannel) {
         channelCards = result?.channel?.cards?.map((card) => <div></div>);
     }
-    // console.log("Search", result);
+    console.log("Search", result);
     return useObserver(() =>
         !pageError && !error ? (
             <>
