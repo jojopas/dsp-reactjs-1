@@ -71,23 +71,13 @@ export default function Channels({
     const fullScreen = (data) => {
         let timer = 250;
         console.log("video got ", data, currentSlug);
+        store.playerInstance.vjs.dispose();
         if (currentSlug != data.slug) {
             setFirstVideo(data);
             timer = 1000;
         }
         setTimeout(() => {
-            const video = document.getElementById("content-video_html5_api");
-            if (video) {
-                if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                } else if (video.webkitRequestFullscreen) {
-                    /* Safari */
-                    video.webkitRequestFullscreen();
-                } else if (video.msRequestFullscreen) {
-                    /* IE11 */
-                    video.msRequestFullscreen();
-                }
-            }
+            store.playerInstance.vjs.requestFullscreen();
         }, timer);
     };
 
@@ -559,11 +549,13 @@ export default function Channels({
                                 {constants.WATCHING}
                             </div> */}
                             <div className="live-watching">
-                                <Player
-                                    pageType={pageType}
-                                    video={firstVideo}
-                                    showPlayer={store.showPlayer}
-                                />
+                                <div className="player">
+                                    <Player
+                                        pageType={pageType}
+                                        video={firstVideo}
+                                        showPlayer={store.showPlayer}
+                                    />
+                                </div>
 
                                 <div className="current-channel-information">
                                     {getCurrentChannelTitle()}
