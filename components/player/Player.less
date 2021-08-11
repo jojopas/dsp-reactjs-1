@@ -18,27 +18,27 @@
         }
 
         #dsp-player {
-            .video-js {
-                cursor: none;
+            &:after {
+                content:'';
+                display:block;
+                position:absolute;
+                inset:0;
                 border: 2px solid transparent;
                 .bsTransition(border-color);
+                pointer-events:none;
+            }
 
-                &:hover {
+            &:hover {
+                &:after {
                     border-color: @colorYellow;
                 }
-                &.vjs-user-active {
-                    //border: 2px solid transparent;
-                    cursor: default;
-                }
+            }
 
-                @media (max-width: @mobileLargeBP) {
-                    &:hover {
-                        border: none;
-                    }
-                    &.vjs-user-active {
-                        border: none;
-                        cursor: default;
-                    }
+            .video-js {
+                cursor: none;
+
+                &.vjs-user-active {
+                    cursor: default;
                 }
             }
             .vjs-control-bar {
