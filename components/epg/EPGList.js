@@ -38,9 +38,7 @@ export default function EPGList({
     const [rowList, setRowList] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
-    const [isMobileEPG, setIsMobileEPG] = React.useState(false);
     const [selectedDate, setSelectedDate] = React.useState(0);
-    const [scrollMilestone, setScrollMilestone] = React.useState();
     const now = new Date();
     const elapseTime = now.getTime() / 1000;
     const nowTime = startDate().getTime() / 1000;
@@ -241,22 +239,43 @@ export default function EPGList({
             ></div>
         );
 
-    const epgScroll = (eve) => {
-        if (!isMobileEPG) {
-            setIsMobileEPG(true);
-        }
-        const scrollTop = eve.target.scrollingElement.scrollTop;
-        const isTop = scrollTop > 0;
-        const rows = document.querySelectorAll(".timeslot-row");
-        rows.forEach((row) => {
-            row.style.cssText = isTop
-                ? `transform:translateY(${scrollTop}px)`
-                : `transform:translateY(${scrollTop}px)`;
-        });
-        document.querySelector(
-            ".scroll"
-        ).style.cssText = `transform:translateY(${scrollTop}px)`;
+    const epgScrollDebounce = (timeout) => {
+        let rows;
+        let pagination;
+        let timer;
+        let debounceRunning = 0;
+
+        return (eve) => {
+            if (!rows) {
+                rows = document.querySelectorAll(".timeslot-row");
+                pagination = document.querySelector(".scroll");
+            }
+            clearTimeout(timer);
+            if (debounceRunning < 1) {
+                rows.forEach((row) => {
+                    row.style.cssText = `opacity: 0`;
+                });
+                pagination.style.cssText = `opacity: 0`;
+            }
+            debounceRunning++;
+
+            timer = setTimeout(() => {
+                const scrollTop = eve.target.scrollingElement.scrollTop;
+                rows.forEach((row) => {
+                    row.style.cssText = `opacity: 1;transform:translateY(${scrollTop}px)`;
+                });
+                pagination.style.cssText = `opacity: 1;transform:translateY(${scrollTop}px)`;
+                console.log("Debounce", debounceRunning, {
+                    scrollTop,
+                    timeout,
+                    timer,
+                });
+                debounceRunning = 0;
+            }, timeout);
+        };
     };
+
+    const epgScroll = epgScrollDebounce(100);
 
     const setDate = (dateTime, dateSelected) => {
         epgRef.current.scrollTo({
