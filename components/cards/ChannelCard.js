@@ -46,29 +46,40 @@ export default function ChannelCard(data) {
                         alt={data.program_title}
                         className="lazyload"
                     />
-                    {data.program_title && (
-                        <div className="title">{data.program_title}</div>
-                    )}
+                    <div className="title">
+                        {data.program_title ? (
+                            <span>
+                                <span>{data.program_title}</span>
+                            </span>
+                        ) : null}
+                    </div>
                 </a>
             </Link>
         </div>
     ) : (
-        <span className="channelCard ">
-            <span className="channelOuter">
+        <span className="promoCard ">
+            <span className="cardOuter" style={{ paddingBottom: "66.25%" }}>
                 <Link href={routerSlug?.slug} as={sanitiseSlug(data?.slug)}>
                     <a className="cardChannel" style={{ paddingBottom: 50 }}>
                         <img
                             src={constants.NOT_FOUND_SRC}
-                            data-src={data.image}
+                            data-src={data.channel.logo}
                             alt={data.program_title}
                             className="lazyload"
+                            style={{
+                                borderRadius: 0,
+                                borderTopLeftRadius: 7,
+                                borderTopRightRadius: 7,
+                            }}
                         />
 
-                        {data.program_title && (
-                            <div className="title" style={{ color: "white" }}>
-                                {data.program_title}
-                            </div>
-                        )}
+                        <div className="title">
+                            {data.program_title ? (
+                                <span>
+                                    <span>{data.program_title}</span>
+                                </span>
+                            ) : null}
+                        </div>
                     </a>
                 </Link>
             </span>
