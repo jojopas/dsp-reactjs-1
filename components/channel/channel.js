@@ -71,7 +71,7 @@ export default function Channels({
     const fullScreen = (data) => {
         let timer = 250;
         console.log("video got ", data, currentSlug);
-        store.playerInstance.vjs.dispose();
+        // store.playerInstance.vjs.dispose();
         if (currentSlug != data.slug) {
             setFirstVideo(data);
             timer = 1000;
