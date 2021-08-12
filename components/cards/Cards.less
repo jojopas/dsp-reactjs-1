@@ -177,20 +177,44 @@
                 pointer-events: none;
             }
 
-            img {
+            .image {
                 position: relative;
-                width: 100%;
                 height: 100%;
-                object-fit: cover;
-                z-index: 2;
-                opacity: 0;
-                .bsTransition(opacity, 0.4s, ease-out);
-                .bsBorderRadius(7px);
-                overflow: hidden;
-                background-color: #040e19;
+                width: 100%;
+                img {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    z-index: 2;
+                    opacity: 0;
+                    .bsTransition(opacity, 0.4s, ease-out);
+                    .bsBorderRadius(7px);
+                    overflow: hidden;
+                    background-color: #040e19;
 
-                &.lazyloaded {
-                    opacity: 1;
+                    &.lazyloaded {
+                        opacity: 1;
+                    }
+                }
+                .logo {
+                    width: 50px;
+                    height: 50px;
+                    right: 0;
+                    top: 0;
+                    position: absolute;
+                }
+
+                .live {
+                    position: absolute;
+                    left: 10px;
+                    bottom: 10px;
+                    z-index: 20;
+                    .bsBorderRadius(5px);
+                    padding: 2px 10px;
+                    font: 13px Roboto;
+                    background-color: @colorYellow;
+                    color: @colorBlue;
                 }
             }
 
@@ -215,8 +239,6 @@
                 img {
                     .bsBorderRadius(4px);
                 }
-
-                
             }
         }
     }
@@ -364,34 +386,21 @@
         display: block;
         width: 100%;
         height: 0;
+    }
 
-        .cardChannel {
-            .bsBorderRadius(7px);
-            display: block;
-            background-color: #213549;
-            padding-bottom: 70px !important;
-            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+    .cardChannel {
+        display: -webkit-flex;
+        display: flex;
+        align-items: center;
 
-            &:before {
-                content: "";
-                position: absolute;
-                top: -5px;
-                left: -5px;
-                right: -5px;
-                bottom: -5px;
-                display: block;
-                border: solid 3px @colorYellow;
-                .bsBorderRadius(12px);
-                background-color: @colorBG;
-                opacity: 0;
-                .bsTransition(opacity);
-                pointer-events: none;
-            }
-
+        .image {
+            position: relative;
+            height: 90px;
+            width: 100%;
             img {
                 position: relative;
-                width: 100%;
-                height: 100%;
+                width: 180px;
+                height: 90px;
                 object-fit: cover;
                 z-index: 2;
                 opacity: 0;
@@ -404,38 +413,31 @@
                     opacity: 1;
                 }
             }
-
-            .title {
-                color: #ebebeb;
-                padding: 10px 25px;
-            }
-
-            @media (min-width: (@mobileLargeBP + 1)) and (hover: hover) and (pointer: fine) {
-                &:hover {
-                    transform: translate(-50%, -50%) scale(1.1);
-
-                    &:before {
-                        opacity: 1;
-                    }
-                }
-            }
-
-            @media (max-width: @mobileLargeBP) {
-                .bsBorderRadius(4px);
+            .logo {
+                width: 50px;
+                height: 50px;
+                right: 0;
+                top: 0;
+                position: absolute;
+                box-sizing: border-box;
 
                 img {
-                    .bsBorderRadius(4px);
+                    width: 50px;
+                    height: 50px;
                 }
             }
-        }
-    }
 
-    .cardChannel {
-        display: -webkit-flex;
-        display: flex;
-        align-items: center;
-
-        img {
+            .live {
+                position: absolute;
+                left: 10px;
+                bottom: 10px;
+                z-index: 20;
+                .bsBorderRadius(5px);
+                padding: 2px 10px;
+                font: 13px Roboto;
+                background-color: @colorYellow;
+                color: @colorBlue;
+            }
             @media (max-width: @mobileLargeBP) {
                 width: 180px;
                 height: 30%;

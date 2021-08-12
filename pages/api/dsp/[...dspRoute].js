@@ -129,7 +129,7 @@ export default async (req, res) => {
         const date = new Date();
         date.setMinutes(date.getMinutes() > 29 ? 30 : 0, 0, 0);
         const startTime = sanitizeDateString(date);
-        date.setDate(date.getDate() + 1);
+        date.setDate(date.getDate() + 8);
         date.setHours(0, 0, 0, 0);
         const endTime = sanitizeDateString(date);
         apiUrl = `https://api.staging.myspotlight.tv/find/programs/${constants.DSP_COUNTRY}/${constants.DSP_PLATFORM}?q=${ogRoute[1]}&size=${constants.SEARCH_SIZE}&start_time=${startTime}&end_time=${endTime}`;

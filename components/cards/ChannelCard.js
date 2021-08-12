@@ -35,17 +35,48 @@ export default function ChannelCard(data) {
         return slug;
     };
 
+    const SearchImage = ({ isMobile }) => {
+        const date = new Date();
+        const nowTime = date.getTime() / 1000;
+        const isLive = data.starts_at <= nowTime && data.ends_at > nowTime;
+        const style = !isMobile
+            ? {
+                  borderRadius: 0,
+                  borderTopLeftRadius: 7,
+                  borderTopRightRadius: 7,
+              }
+            : null;
+        return (
+            <div className="image">
+                <img
+                    // src={constants.NOT_FOUND_SRC}
+                    data-src={`${data.image || data.channel.logo}${
+                        isMobile ? "/180/90" : ""
+                    }`}
+                    alt={data.program_title}
+                    className="lazyload"
+                    style={style}
+                />
+                <div className="logo">
+                    <img
+                        src={constants.NOT_FOUND_SRC}
+                        data-src={data.channel.logo + "/50/50"}
+                        alt={data.program_title}
+                        className="lazyload"
+                    />
+                </div>
+                {isLive && <div className="live">LIVE</div>}
+            </div>
+        );
+    };
+
     // console.log("ChannelCard", data, routerSlug);
     return store.isBreakpoint ? (
         <div className="channelCard">
             <Link href={routerSlug?.slug} as={sanitiseSlug(data?.slug)}>
                 <a className="cardChannel">
-                    <img
-                        src={constants.NOT_FOUND_SRC}
-                        data-src={data.channel.poster + "/180/90"}
-                        alt={data.program_title}
-                        className="lazyload"
-                    />
+                    <SearchImage isMobile={true} />
+
                     <div className="title">
                         {data.program_title ? (
                             <span>
@@ -61,17 +92,7 @@ export default function ChannelCard(data) {
             <span className="cardOuter" style={{ paddingBottom: "66.25%" }}>
                 <Link href={routerSlug?.slug} as={sanitiseSlug(data?.slug)}>
                     <a className="cardChannel" style={{ paddingBottom: 50 }}>
-                        <img
-                            src={constants.NOT_FOUND_SRC}
-                            data-src={data.channel.logo}
-                            alt={data.program_title}
-                            className="lazyload"
-                            style={{
-                                borderRadius: 0,
-                                borderTopLeftRadius: 7,
-                                borderTopRightRadius: 7,
-                            }}
-                        />
+                        <SearchImage isMobile={false} />
 
                         <div className="title">
                             {data.program_title ? (
