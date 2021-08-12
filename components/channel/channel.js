@@ -77,7 +77,18 @@ export default function Channels({
             timer = 1000;
         }
         setTimeout(() => {
-            store.playerInstance.vjs.requestFullscreen();
+            const video = document.getElementById("content-video_html5_api");
+            if (video) {
+                if (video.requestFullscreen) {
+                    store.playerInstance.vjs.requestFullscreen();
+                } else if (video.webkitRequestFullscreen) {
+                    /* Safari */
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) {
+                    /* IE11 */
+                    video.msRequestFullscreen();
+                }
+            }
         }, timer);
     };
 
