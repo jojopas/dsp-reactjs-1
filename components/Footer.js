@@ -158,8 +158,8 @@ export default function Footer() {
     return useObserver(() => (
         <footer>
             <Nav className="footerNav-general" links={footer}></Nav>
-            <Nav className="footerNav-apps" links={apps}></Nav>
-            <Nav className="footerNav-social" links={social}></Nav>
+            {/* <Nav className="footerNav-apps" links={apps}></Nav>
+            <Nav className="footerNav-social" links={social}></Nav> */}
             <div className="copyright">
                 <span>{`© ${new Date().getFullYear()} Sports TV. All rights reserved.`}</span>
                 {/* <a

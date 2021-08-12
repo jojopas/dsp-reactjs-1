@@ -11,6 +11,7 @@ import GlobalSEOTags from "../head/global";
 import { sendWebVitals, sendToSegment } from "../analytics";
 const { publicRuntimeConfig } = getConfig();
 import "../styles/main.less";
+import nProgress from "nprogress";
 
 // module.hot.dispose event not being called on local dev causes css loss from time to time
 // https://github.com/sheerun/extracted-loader/issues/11
@@ -27,10 +28,12 @@ function App({ Component, pageProps }) {
     const [pageLoading, setPageLoading] = React.useState(false);
     React.useEffect(() => {
         const handleStart = () => {
-            setPageLoading(true);
+            // setPageLoading(true);
+            nProgress.start();
         };
         const handleComplete = () => {
-            setPageLoading(false);
+            // setPageLoading(false);
+            nProgress.done();
         };
 
         router.events.on("routeChangeStart", handleStart);
@@ -41,7 +44,8 @@ function App({ Component, pageProps }) {
             });
             // Segment Page View
             sendToSegment("page");
-            setPageLoading(false);
+            handleComplete();
+            // setPageLoading(false);
         });
         router.events.on("routeChangeError", handleComplete);
     }, [router]);
