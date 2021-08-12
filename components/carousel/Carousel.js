@@ -31,17 +31,17 @@ const Carousel = ({ views, slickSettings, className }) => {
               //   nextArrow: <SlickArrow />,
           };
     slickSetting.afterChange = (idx) => setIndex(idx);
-    React.useEffect(() => {
-        if (store.isBreakpoint) {
-            const slick = document.querySelector(".slick-slider");
-            const carouselHeight = slick.clientHeight;
-            // console.log("Slick", carouselHeight);
-            const dots = document.querySelector(".carousel-dots-container");
-            if (dots) {
-                dots.style.cssText = `bottom: ${carouselHeight - 500 + 50}px`;
-            }
-        }
-    }, [store.isBreakpoint]);
+    // React.useEffect(() => {
+    //     if (store.isBreakpoint) {
+    //         const slick = document.querySelector(".slick-slider");
+    //         const carouselHeight = slick.clientHeight;
+    //         // console.log("Slick", carouselHeight);
+    //         const dots = document.querySelector(".carousel-dots-container");
+    //         if (dots) {
+    //             dots.style.cssText = `bottom: ${carouselHeight -  20}px`;
+    //         }
+    //     }
+    // }, [store.isBreakpoint]);
 
     return (
         <div className={className}>
