@@ -80,7 +80,12 @@ export default function OnDemand({
                         width={width}
                         index={0}
                     /> */}
-                    <Carousel views={views} className="carousel-container" />
+                    <div className="carousels-wrapper">
+                        <Carousel
+                            views={views}
+                            className="carousel-container"
+                        />
+                    </div>
 
                     <div className="overflowWrapper">
                         {page.movies?.length > 0 ? (

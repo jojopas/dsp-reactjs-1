@@ -12,11 +12,12 @@ const FeaturedView = ({ data, width, index }) => {
         // console.log("FeaturedCarousel", backgroundStyle);
     }
     return (
-        <div className="featured" title={data.title} style={{}}>
-            <span
-                className="featured-bg"
-                style={{
-                    background: `linear-gradient(
+        <div className="featured" title={data.title}>
+            <div className="featured-wrapper">
+                <span
+                    className="featured-wrapper-bg"
+                    style={{
+                        background: `linear-gradient(
                             to bottom,
                             rgba(13, 38, 56, 0) 0%,
                             rgba(13, 38, 56, 0) 60%,                            
@@ -31,35 +32,34 @@ const FeaturedView = ({ data, width, index }) => {
                         url("${
                             data.image || data.wallpaper || data.poster
                         }/${width}/600") no-repeat center center`,
-                }}
-            ></span>
-            <div
-                className="featured-container"
-            >
-                <div className="info">
-                    <div className="info-container">
-                        <h1>{data.title}</h1>
-                        <p>{data.description}</p>
-                        <div className="cta">
-                            <Button
-                                className="cta-button"
-                                inner={constants.WATCH_NOW}
-                                url={`/on-demand/${data.type || "movies"}/${
-                                    data.slug
-                                }`}
-                                as={`/on-demand/${data.type || "movies"}/${
-                                    data.slug
-                                }`}
-                            />
+                    }}
+                ></span>
+                <div className="featured-wrapper-container">
+                    <div className="info">
+                        <div className="info-container">
+                            <h1>{data.title}</h1>
+                            <p>{data.description}</p>
+                            <div className="cta">
+                                <Button
+                                    className="cta-button"
+                                    inner={constants.WATCH_NOW}
+                                    url={`/on-demand/${data.type || "movies"}/${
+                                        data.slug
+                                    }`}
+                                    as={`/on-demand/${data.type || "movies"}/${
+                                        data.slug
+                                    }`}
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="image">
-                    <img
-                        src={`${data.image || data.poster}/400/500`}
-                        alt=''
-                        className="lazyload"
-                    />
+                    <div className="image">
+                        <img
+                            src={`${data.image || data.poster}/400/500`}
+                            alt=""
+                            className="lazyload"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
