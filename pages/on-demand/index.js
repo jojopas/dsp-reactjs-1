@@ -25,6 +25,8 @@ export default function OnDemand({
     pageType,
     seoObj,
 }) {
+    const store = React.useContext(StoreContext);
+
     const [width, setWidth] = React.useState();
     const [clickedCardTitle, setClickedCardTitle] = React.useState();
     const genreNav = page.genres?.map((genre) => ({
@@ -57,7 +59,7 @@ export default function OnDemand({
             ? page?.movies[0].channels
                   .map((el, index) =>
                       index > 5 ? null : (
-                          <FeaturedView data={el} width={width} index={index} />
+                          <FeaturedView data={el} width={width} index={index} isMobile={store.isBreakpoint} />
                       )
                   )
                   .filter((view) => view)

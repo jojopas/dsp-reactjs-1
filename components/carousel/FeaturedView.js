@@ -2,7 +2,7 @@ import Button from "../button/Button";
 import { constants } from "../../config";
 import "./FeaturedView.less";
 
-const FeaturedView = ({ data, width, index }) => {
+const FeaturedView = ({ data, width, index, isMobile }) => {
     // const backgroundStyle = ["linear-gradient"].map(
     //     (browser) =>
     //         `${browser}(to bottom, rgba(13, 38, 56, 0) 0%, rgba(13, 38, 56, 0) 39%, rgba(13, 38, 56, 1) 100%), ${browser}(to left, rgba(13, 38, 56, 0) 0%, rgba(13, 38, 56, 0) 39%, rgba(13, 38, 56, 1) 100%), url("${data.image}/${width}/600?blur=90") no-repeat cover`
@@ -17,7 +17,7 @@ const FeaturedView = ({ data, width, index }) => {
                 <span
                     className="featured-wrapper-bg"
                     style={{
-                        background: `linear-gradient(
+                        background: `${isMobile?'':`linear-gradient(
                             to bottom,
                             rgba(13, 38, 56, 0) 0%,
                             rgba(13, 38, 56, 0) 60%,                            
@@ -28,7 +28,7 @@ const FeaturedView = ({ data, width, index }) => {
                             rgba(13, 38, 56, 1) 0%,
                             rgba(13, 38, 56, 1) 20%,
                             rgba(13, 38, 56, 0) 70%,
-                            rgba(13, 38, 56, 0) 100%),
+                            rgba(13, 38, 56, 0) 100%)`},
                         url("${
                             data.image || data.wallpaper || data.poster
                         }/${width}/600") no-repeat center center`,
