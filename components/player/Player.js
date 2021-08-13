@@ -160,14 +160,13 @@ export default function Player({
     };
 
     const fullscreenChange = () => {
-        console.log('fullscreenChange: is full', store.playerInstance.vjs.isFullscreen());
+        // console.log('fullscreenChange: is full', store.playerInstance.vjs.isFullscreen());
         if (
             !store.playerInstance.vjs.isFullscreen() &&
             store.playerInstance.vjs.paused() &&
             !store.isAdRunning
         ) {
             store.playerInstance.vjs.play();
-            console.log('attempt to play');
         }
     };
 
