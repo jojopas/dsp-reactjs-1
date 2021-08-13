@@ -583,15 +583,17 @@ export default function Channels({
             fsTimer = setTimeout(autoFS, 15000);
         }
 
-        const throttledTestMouse = throttled(1000, testMouseMove);
+        const throttledTestMouse = throttled(2000, testMouseMove);
 
         React.useEffect(() => {
             document.addEventListener('mousemove', throttledTestMouse);
+            document.addEventListener('scroll', throttledTestMouse);
             throttledTestMouse();
 
             return () => {
                 clearTimeout(fsTimer);
                 document.removeEventListener('mousemove', throttledTestMouse);
+                document.addEventListener('scroll', throttledTestMouse);
             };
         }, []);
     }
