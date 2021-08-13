@@ -2,11 +2,13 @@
 
 .epg-container {
     display: flex;
+    display: -webkit-flex;
     overflow: hidden;
     padding-top: @headerHeight;
 
     .epgPlayer {
         display: flex;
+        display: -webkit-flex;
         flex-direction: column;
         position: sticky;
         align-self: flex-start;
@@ -18,6 +20,7 @@
 
         .fixed-player {
             position: relative;
+            z-index:2;
 
             .live-watching {
                 // position: absolute;
@@ -36,6 +39,7 @@
             }
             .current-channel-information {
                 display: flex;
+                display: -webkit-flex;
                 margin-top: 10px;
                 color: white;
                 align-items: center;
@@ -66,9 +70,11 @@
 
         .ads {
             display: flex;
+            display: -webkit-flex;
             justify-content: center;
             width: 100%;
             margin-top: 30px;
+            z-index:1;
 
             @media (max-width: @mobileLargeBP) {
                 display: none;

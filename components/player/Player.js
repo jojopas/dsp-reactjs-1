@@ -25,7 +25,7 @@ export default function Player({
     const [playerStyle, setPlayerStyle] = React.useState({});
 
     const vodPage = lightBoxPageTypes.includes(pageType);
-    console.log("store", store.playerInstance);
+    // console.log("store", store.playerInstance);
     React.useEffect(() => {
         (async () => {
             if (!plyrRef && !window) {
@@ -63,7 +63,6 @@ export default function Player({
                 store.setPlayerInstance(player);
 
                 if(window && pageType === 'channel' && liveCloseButton && liveCloseButton.current){
-                    console.log('lets go');
                     const vjsControls = document.querySelector('.vjs-control-bar');
                     vjsControls.appendChild(liveCloseButton.current);
                 }
@@ -259,6 +258,9 @@ export default function Player({
         if (store.playerInstance && store.playerInstance.vjs) {
             store.playerInstance.vjs.exitFullWindow();
             store.playerInstance.vjs.removeClass('vjs-full-window');
+            setTimeout(() => {
+                store.playerInstance.vjs.contentEl().style.cssText = '';
+            }, 1000);
         }
     };
 

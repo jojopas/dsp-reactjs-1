@@ -9,7 +9,7 @@ import { StoreContext } from "../../store";
 import Error404 from "../404";
 import EPGList from "../epg/EPGList";
 import { fetchData } from "../../helpers/utils/fetch-data";
-import Modal from "../modal/modal";
+import EPGModal from "../modal/epgModal";
 const { publicRuntimeConfig } = getConfig();
 import LocalSEOTags from "../../head/local";
 import { visibilityCheck } from "../../helpers/utils/browser";
@@ -31,18 +31,18 @@ export default function Channels({
     const store = React.useContext(StoreContext);
     const playerContainer = React.useRef(null);
     const epgPageRef = React.useRef(null);
-    const epgContainer = React.useRef(null);
     const router = useRouter();
     const { genres, promos, channels } = page;
     const [currentGenre, setCurrentGenre] = React.useState();
     const [currentChannel, setCurrentChannel] = React.useState();
+
     const [currentSlug, setCurrentSlug] = React.useState(slug);
     const [epgListCurrentSlug, setEpgListCurrentSlug] = React.useState(slug);
 
     const { data, error, isValidating } = useSWR(
         "/api/dsp/live/epg",
         async (url) => await fetchData(url),
-        { refreshInterval: constants.EPG_POLLING * 1000 }
+        { initialData: page.channels }
     );
     const [result, setResult] = React.useState(channels);
 
@@ -65,6 +65,29 @@ export default function Channels({
     const setIsFirstVideo = (data) => {
         isFirstVideoRef.current = data;
         _setIsFirstVideo(data);
+    };
+
+    const fullScreen = (data) => {
+        /*let timer = 250;
+        console.log("video got ", data, currentSlug);*/
+        // store.playerInstance.vjs.dispose();
+        if (currentSlug != data.slug) {
+            setFirstVideo(data);
+            //timer = 1000;
+        }
+
+        const video = document.getElementById("content-video_html5_api");
+        if (video) {
+            if (video.requestFullscreen) {
+                store.playerInstance.vjs.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                /* Safari */
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                /* IE11 */
+                video.msRequestFullscreen();
+            }
+        }
     };
 
     React.useEffect(() => {
@@ -95,6 +118,9 @@ export default function Channels({
 
     const getSlugFromVideoId = (id) => {
         const channel = result.find((c) => c.videoId === id);
+        if (channel) {
+            setCurrentChannel(channel);
+        }
         return channel ? channel.slug : null;
     };
 
@@ -206,8 +232,6 @@ export default function Channels({
         hidden = visibility.hidden;
         visibilityChange = visibility.visibilityChange;
     }, []);
-
-    React.useEffect(() => {}, []);
 
     React.useEffect(() => {
         if (document) {
@@ -481,14 +505,41 @@ export default function Channels({
         };
     }, []);
     const getCurrentChannelTitle = () => {
-        const now = new Date();
-        const nowTime = now.getTime() / 1000;
-        return currentChannel.program.reduce((title, program) => {
-            if (nowTime > program.starts && nowTime < program.ends) {
-                title = program.title;
-            }
-            return title;
-        }, "");
+        if (currentChannel) {
+            const now = new Date();
+            const nowTime = now.getTime() / 1000;
+            const title = currentChannel?.program?.reduce((title, program) => {
+                if (nowTime > program.starts && nowTime < program.ends) {
+                    title = program.title;
+                }
+                return title;
+            }, null);
+
+            return (
+                <>
+                    {" "}
+                    <div>
+                        <h1>
+                            {currentChannel?.name}
+                            {" : "}
+                            <span className="channelName">{title}</span>
+                        </h1>
+                    </div>
+                    <div className="current-channel-information-img">
+                        <img
+                            className="current-channel-information-img"
+                            src={constants.NOT_FOUND_SRC}
+                            data-sizes="auto"
+                            data-srcset={`${currentChannel?.logo || ""}/30`}
+                            data-src={`${currentChannel?.logo || ""}/30`}
+                            alt={currentChannel?.name || "now"}
+                            className="lazyload"
+                        />
+                    </div>
+                </>
+            );
+        }
+        return null;
     };
 
 
@@ -512,6 +563,9 @@ export default function Channels({
         function autoFS() {
             if (store.playerInstance && store.playerInstance.vjs) {
                 const vjs = document.querySelector('.video-js');
+                if(vjs.classList.contains('vjs-full-window')){
+                    return;
+                }
                 const rect = vjs.getBoundingClientRect();
                 vjs.style.cssText = `position:fixed;top:${rect.top}px;left:${rect.left}px;width:${rect.width}px;height:${rect.height}px;`;
                 setTimeout(() => {
@@ -542,7 +596,7 @@ export default function Channels({
         }, []);
     }
 
-    console.log('Channel', page);
+    // console.log("Channel", page, currentSlug, slug);
     return useObserver(() =>
         !pageError ? (
             <div
@@ -557,65 +611,33 @@ export default function Channels({
                             {/* <div className="live-watching">
                                 {constants.WATCHING}
                             </div> */}
-                            <Player
-                                pageType={pageType}
-                                video={firstVideo}
-                                showPlayer={store.showPlayer}
-                            />
-                            {currentChannel && (
-                                <div className="current-channel-information">
-                                    <div>
-                                        <h1>
-                                            {currentChannel?.name}
-                                            {" : "}
-                                            <span className="channelName">
-                                                {getCurrentChannelTitle()}
-                                            </span>
-                                        </h1>
-                                    </div>
-                                    <div className="current-channel-information-img">
-                                        <img
-                                            className="current-channel-information-img"
-                                            src={constants.NOT_FOUND_SRC}
-                                            data-sizes="auto"
-                                            data-srcset={`${currentChannel.logo}/30`}
-                                            data-src={`${channel.logo}/30`}
-                                            alt={currentChannel.name}
-                                            className="lazyload"
-                                        />
-                                    </div>
+                            <div className="live-watching">
+                                <div className="player">
+                                    <Player
+                                        pageType={pageType}
+                                        video={firstVideo}
+                                        showPlayer={store.showPlayer}
+                                    />
                                 </div>
-                            )}
+
+                                <div className="current-channel-information">
+                                    {getCurrentChannelTitle()}
+                                </div>
+                            </div>
                         </div>
-                        {/* <div className="fixed-player-categories">
-                            <select
-                                name="category"
-                                id="category"
-                                onChange={onGenreSelect}
-                                value={currentGenre}
-                            >
-                                <option value="Category" key="categoryId">
-                                    Category
-                                </option>
-                                {genres.map((genre) => (
-                                    <option value={genre} key={genre}>
-                                        {genre}
-                                    </option>
-                                ))}
-                            </select>
-                        </div> */}
+
                         <div className="ads">
                             <img
-                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/60f5502024f29b00285ca1be/320"
+                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/6108009c5c6fc570262e0c65"
                                 alt="Adds"
                             />
                         </div>
                     </div>
                     <EPGList
-                        ref={epgContainer}
                         className={!userIsActive ? "epgInactive" : ""}
-                        data={result}
+                        epgData={result}
                         onClick={setFirstVideo}
+                        fullScreen={fullScreen}
                         changeCurrentSlug={changeCurrentSlug}
                         currentSlug={epgListCurrentSlug}
                         activatePlayerUI={activatePlayerUI}
@@ -628,7 +650,7 @@ export default function Channels({
                         pageType={pageType}
                     />
                 </div>
-                <Modal
+                <EPGModal
                     data={modalData}
                     resetFn={iconClicked}
                     onClick={setFirstVideo}

@@ -18,11 +18,25 @@
         }
 
         #dsp-player {
+            &:after {
+                content:'';
+                display:block;
+                position:absolute;
+                inset:0;
+                border: 2px solid transparent;
+                .bsTransition(border-color);
+                pointer-events:none;
+            }
+
+            &:hover {
+                &:after {
+                    border-color: @colorYellow;
+                }
+            }
+
             .video-js {
                 cursor: none;
-                &:hover {
-                    border: 2px solid @colorYellow;
-                }
+
                 &.vjs-user-active {
                     cursor: default;
                 }
@@ -198,6 +212,12 @@
         }
         .vjs-fullscreen-control{
             display: none;
+        }
+
+        &.vjs-user-active{
+            .vjs-control-bar {
+                display: flex !important;
+            }
         }
     }
 
