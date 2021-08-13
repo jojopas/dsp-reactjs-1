@@ -36,9 +36,9 @@ export default function ChannelCard(data) {
     };
 
     const SearchImage = ({ isMobile }) => {
-        const date = new Date();
-        const nowTime = date.getTime() / 1000;
-        const isLive = data.starts_at <= nowTime && data.ends_at > nowTime;
+        // const date = new Date();
+        // const nowTime = date.getTime() / 1000;
+        // const isLive = data.starts_at <= nowTime && data.ends_at > nowTime;
         const style = !isMobile
             ? {
                   borderRadius: 0,
@@ -50,22 +50,33 @@ export default function ChannelCard(data) {
             <div className="image">
                 <img
                     // src={constants.NOT_FOUND_SRC}
-                    data-src={`${data.image || data.channel.logo}${
+                    data-src={`${data.image || data.channel.spotlight_poster}${
                         isMobile ? "/180/90" : ""
                     }`}
                     alt={data.program_title}
                     className="lazyload"
                     style={style}
                 />
-                <div className="logo">
-                    <img
-                        src={constants.NOT_FOUND_SRC}
-                        data-src={data.channel.logo + "/50/50"}
-                        alt={data.program_title}
-                        className="lazyload"
-                    />
+                <div
+                    className="logo"
+                    style={{
+                        background: `linear-gradient(
+            to bottom left,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0)  40%,
+            rgba(0, 0, 0, 0) 100%   
+        s)`,
+                    }}
+                >
+                    <div
+                        className="logo-image"
+                        style={{
+                            background: `
+        url("${data.channel.logo}/50") no-repeat`,
+                        }}
+                    ></div>
                 </div>
-                {isLive && <div className="live">LIVE</div>}
+                {/* {isLive && <div className="live">LIVE</div>} */}
             </div>
         );
     };

@@ -19,12 +19,13 @@ const FeaturedView = ({ data, width, index }) => {
                     background: `linear-gradient(
             to bottom,
             rgba(13, 38, 56, 0) 0%,
-            rgba(13, 38, 56, 0) 60%,
+            rgba(13, 38, 56, 0) 50%,
             rgba(13, 38, 56, 1) 100%
         ),
         linear-gradient(
             to right,
-            rgba(13, 38, 56, 0.4) 0%,
+            rgba(13, 38, 56, 1) 0%,
+            rgba(13, 38, 56, 1) 20%,
             rgba(13, 38, 56, 0.1) 100%
         ), url("${data.image || data.poster}/${width}/600") no-repeat`,
                 }}
