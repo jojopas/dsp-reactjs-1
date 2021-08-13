@@ -3,22 +3,28 @@
 
 .featured {
     width: 100%;
+    margin: 0;
+    padding: 0;
     height: @CarouselHeight;
     box-sizing: border-box;
+    z-index: 0;
+    position: relative;
 
     &-bg {
         position: absolute;
-        filter: blur(8px);
+        filter: blur(15px);
         width: 100%;
         height: @CarouselHeight;
+        z-index: 1;
     }
 
     &-container {
         display: -webkit-flex;
         width: 100%;
+        z-index: 0;
         flex-direction: row;
         height: @CarouselHeight;
-        justify-content: space-between;
+        background-color: transparent;
 
         .info {
             margin-left: @sitePadding;
@@ -110,11 +116,13 @@
             }
         }
         .image {
+            width: 50%;
             display: -webkit-flex;
             justify-content: center;
             align-items: center;
             margin: 0 @sitePadding;
             z-index: 10;
+
             img {
                 width: 300px;
                 height: 450px;
@@ -124,6 +132,7 @@
                 overflow: hidden;
                 box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
                 object-fit: cover;
+                background-color: #00000066;
             }
         }
 

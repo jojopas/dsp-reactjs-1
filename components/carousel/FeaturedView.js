@@ -33,7 +33,9 @@ const FeaturedView = ({ data, width, index }) => {
                         }/${width}/600") no-repeat center center`,
                 }}
             ></span>
-            <div className="featured-container">
+            <div
+                className="featured-container"
+            >
                 <div className="info">
                     <div className="info-container">
                         <h1>{data.title}</h1>
@@ -54,9 +56,8 @@ const FeaturedView = ({ data, width, index }) => {
                 </div>
                 <div className="image">
                     <img
-                        src={constants.NOT_FOUND_SRC}
-                        data-src={`${data.image || data.poster}/400/500`}
-                        alt={data.title}
+                        src={`${data.image || data.poster}/400/500`}
+                        alt=''
                         className="lazyload"
                     />
                 </div>
