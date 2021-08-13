@@ -160,13 +160,14 @@ export default function Player({
     };
 
     const fullscreenChange = () => {
-        //console.log('fullscreenChange: is full', store.playerInstance.vjs.isFullscreen());
+        console.log('fullscreenChange: is full', store.playerInstance.vjs.isFullscreen());
         if (
             !store.playerInstance.vjs.isFullscreen() &&
             store.playerInstance.vjs.paused() &&
             !store.isAdRunning
         ) {
             store.playerInstance.vjs.play();
+            console.log('attempt to play');
         }
     };
 
@@ -201,10 +202,7 @@ export default function Player({
                 store.playerInstance.vjs.on("useractive", userActive);
                 store.playerInstance.vjs.on("userinactive", userInActive);
                 store.playerInstance.vjs.on("ended", ended);
-                store.playerInstance.vjs.on(
-                    "fullscreenchange",
-                    fullscreenChange
-                );
+                store.playerInstance.vjs.on("fullscreenchange", fullscreenChange);
                 store.playerInstance.vjs.on("ads-manager", adsReady);
             }
         }, 16);
@@ -216,10 +214,7 @@ export default function Player({
                 store.playerInstance.vjs.off("useractive", userActive);
                 store.playerInstance.vjs.off("userinactive", userInActive);
                 store.playerInstance.vjs.off("ended", ended);
-                store.playerInstance.vjs.off(
-                    "fullscreenchange",
-                    fullscreenChange
-                );
+                store.playerInstance.vjs.off("fullscreenchange", fullscreenChange);
                 store.playerInstance.vjs.off("ads-manager", adsReady);
                 if (
                     store.playerInstance.vjs.ima &&
