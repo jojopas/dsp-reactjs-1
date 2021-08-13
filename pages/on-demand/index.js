@@ -75,11 +75,11 @@ export default function OnDemand({
             ) : (
                 <>
                     <h1 className="noShow">On Demand</h1>
-                    {/* <FeaturedView
-                        data={page.movies[0].channels[0]}
+                    <FeaturedView
+                        data={page.movies[0].channels[5]}
                         width={width}
                         index={0}
-                    /> */}
+                    />
                     <div className="carousels-container">
                         <Carousel
                             views={views}
