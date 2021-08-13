@@ -28,9 +28,11 @@
                 pointer-events:none;
             }
 
-            &:hover {
-                &:after {
-                    border-color: @colorYellow;
+            @media (min-width: (@mobileLargeBP + 1)) and (hover: hover) and (pointer: fine) {
+                &:hover {
+                    &:after {
+                        border-color: @colorYellow;
+                    }
                 }
             }
 
