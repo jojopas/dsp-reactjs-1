@@ -84,6 +84,12 @@
                 }
             }
 
+            .video-js:not(.vjs-fullscreen):not(.vjs-full-window) {
+                .vjs-subs-caps-button{
+                    display:none !important;
+                }
+            }
+
             @media (min-width: (@mobileLargeBP + 1px)) {
                 .vjs-tech {
                     pointer-events: none;
