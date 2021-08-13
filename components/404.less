@@ -17,6 +17,15 @@
     padding: 10%;
     .bsBoxSizing();
 
+    svg {
+        position: fixed;
+        width: 100%;
+         @media (max-width: @mobileLargeBP){
+             width: auto;
+             height: 100%;
+         }
+    }
+
     .not-found-inner{
         padding:30px;
         display:flex;

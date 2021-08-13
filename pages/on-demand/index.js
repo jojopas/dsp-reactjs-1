@@ -13,7 +13,7 @@ import Button from "../../components/button/Button";
 import { constants } from "../../config";
 import GenreSelector from "../../components/nav/GenreSelector";
 import { slugify } from "../../helpers/utils/strings";
-
+import FeaturedView from "../../components/carousel/FeaturedView";
 import "./index.less";
 import ExtendedGenre from "../../components/Genre/ExtendedGenre";
 
@@ -25,6 +25,8 @@ export default function OnDemand({
     pageType,
     seoObj,
 }) {
+    const store = React.useContext(StoreContext);
+
     const [width, setWidth] = React.useState();
     const [clickedCardTitle, setClickedCardTitle] = React.useState();
     const genreNav = page.genres?.map((genre) => ({
@@ -57,28 +59,7 @@ export default function OnDemand({
             ? page?.movies[0]?.channels
                   .map((el, index) =>
                       index > 5 ? null : (
-                          <div key={el.title}>
-                              <div
-                                  className="carousel"
-                                  style={{
-                                      background: `linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 39%, rgba(0, 0, 0, 1) 100%),url("${el.wallpaper}/${width}/600"), no-repeat`,
-                                  }}
-                              >
-                                  <div className="carousel-about">
-                                      <div className="carousel-title">
-                                          {el.title}
-                                      </div>
-                                      <div className="carousel-description">
-                                          {el.description}
-                                      </div>
-                                      <Button
-                                          inner={constants.WATCH_NOW}
-                                          url={`/movies/${el.slug}`}
-                                          as={`/movies/${el.slug}`}
-                                      />
-                                  </div>
-                              </div>
-                          </div>
+                          <FeaturedView data={el} width={width} index={index} isMobile={store.isBreakpoint} />
                       )
                   )
                   .filter((view) => view)
@@ -96,14 +77,25 @@ export default function OnDemand({
             ) : (
                 <>
                     <h1 className="noShow">On Demand</h1>
-                    <Carousel views={views} className="carousel-container" />
+                    {/* <FeaturedView
+                        data={page.movies[0].channels[5]}
+                        width={width}
+                        index={0}
+                    /> */}
+                    <div className="carousels-wrapper">
+                        <Carousel
+                            views={views}
+                            className="carousel-container"
+                        />
+                    </div>
 
                     <div className="overflowWrapper">
                         {page.movies?.length > 0 ? (
                             <CardList
                                 className="homePromo"
                                 type="title"
-                                data={page.rails[2]}
+                                isOnDemand={true}
+                                data={page.rails[0]}
                                 onHeaderClick={setClickedCardTitle}
                             />
                         ) : null}
@@ -111,14 +103,17 @@ export default function OnDemand({
                             <GenreSelector type="movies" links={genreNav} />
                         )}
 
-                        {page.rails.map((rail) => (
-                            <CardList
-                                key={rail.category.id}
-                                type="title"
-                                data={rail}
-                                onHeaderClick={setClickedCardTitle}
-                            />
-                        ))}
+                        {page.rails.map((rail, index) =>
+                            index > 0 ? (
+                                <CardList
+                                    key={rail.category.id}
+                                    type="title"
+                                    data={rail}
+                                    isOnDemand={true}
+                                    onHeaderClick={setClickedCardTitle}
+                                />
+                            ) : null
+                        )}
                     </div>
                 </>
             )

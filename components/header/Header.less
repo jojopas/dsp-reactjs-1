@@ -86,8 +86,8 @@ header {
         }
 
         @media (max-width: @mobileLargeBP) {
-            top: 6px;
-            left: @headerHPadMob;
+            left: 50%;
+            transform: translateX(-50%);
             width: 120px;
             height: 40px;
         }
@@ -114,9 +114,7 @@ header {
                 a {
                     position: relative;
                     padding: 10px 0px;
-                    font-size: 17px;
-                    font-weight: 400;
-                    font-family: Roboto;
+                    font: 400 18px Roboto;
                     color: @colorHeaderNav;
                     .bsTransition(color);
 
@@ -277,7 +275,7 @@ header {
         width: 24px;
         height: 24px;
         top: 16px;
-        left: 171px;
+        right: @headerHPadMob;
 
         svg {
             position: absolute;
@@ -292,7 +290,7 @@ header {
 
         svg:last-child {
             opacity: 0;
-            fill: #ebebeb;
+            fill: @colorYellow;
         }
 
         &:hover {
@@ -359,7 +357,7 @@ header {
         position: absolute;
         top: 50%;
         .bsTransform(translateY(-50%));
-        right: (@headerHPadMob - 3);
+        left: (@headerHPadMob - 3);
         width: 24px;
         height: 24px;
         cursor: pointer;
@@ -424,22 +422,26 @@ header {
         position: absolute;
         top: 100%;
         left: 0;
-        width: 100%;
+        width: 60%;
+        max-width: 220px;
         pointer-events: none;
         height: 0;
         display: none;
 
         .header-navMobile-mask {
             display: flex;
+            display: -webkit-flex;
             flex-direction: column;
             overflow: hidden;
+            height: inherit;
             position: relative;
 
             .header-navMobile-inner {
                 position: relative;
                 display: block;
-                background: rgba(4, 14, 25, 0.98);
+                background: @headerBGMob;
                 width: 100%;
+                height: inherit;
                 .bsTransform(translateY(-100%));
                 .bsTransition(transform);
 
@@ -460,13 +462,14 @@ header {
                     left: 0;
                     width: 100%;
                     height: 105px;
-                    background: transparent
-                        radial-gradient(
-                            closest-side at 50% 50%,
-                            rgba(255, 255, 255, 1) 0%,
-                            rgba(0, 0, 0, 0) 100%
-                        )
-                        0% 0% no-repeat padding-box;
+
+                    // background: transparent
+                    //     radial-gradient(
+                    //         closest-side at 50% 50%,
+                    //         rgba(255, 255, 255, 1) 0%,
+                    //         rgba(0, 0, 0, 0) 100%
+                    //     )
+                    //     0% 0% no-repeat padding-box;
                     // opacity: 0.15;
                 }
 
@@ -474,16 +477,17 @@ header {
                     position: relative;
                     pointer-events: auto;
                     padding: 20px 20px 0;
+                    height: inherit;
 
                     ul {
                         .bsNavReset();
-                        display: flex;
                         flex-wrap: wrap;
                         position: relative;
 
                         li {
-                            display: block;
-                            width: 50%;
+                            display: flex;
+                            display: -webkit-flex;
+                            width: 100%;
                             position: relative;
 
                             &:before {
@@ -492,22 +496,23 @@ header {
                                 display: block;
                                 height: 0;
                                 width: 100%;
-                                padding-bottom: 74.074%;
+                                padding-bottom: 38.074%;
                             }
 
                             a {
                                 display: flex;
-                                flex-direction: column;
+                                display: -webkit-flex;
+                                flex-direction: row;
                                 justify-content: center;
                                 align-items: center;
                                 position: absolute;
                                 top: 50%;
-                                left: 50%;
+                                left: 35%;
                                 .bsTransform(translate(-50%, -50%));
                                 .bsBoxSizing();
                                 width: 100%;
                                 height: 100%;
-                                padding: 5px @headerHPadMob;
+                                padding: 5px 5px 0px @headerHPadMob;
                                 font-size: 18px;
                                 font-weight: 400;
                                 color: @colorHeaderNav;
@@ -539,8 +544,8 @@ header {
                                 &:after {
                                     content: attr(title);
                                     position: relative;
-                                    display: block;
-                                    text-align: center;
+                                    left: 24px;
+                                    width: 100%;
                                 }
 
                                 &.active {
@@ -571,30 +576,30 @@ header {
                             .bsTransform(translate(-50%, -50%));
                             width: 100%;
                             height: 1px;
-                            background: transparent
-                                linear-gradient(
-                                    90deg,
-                                    rgba(0, 0, 0, 0) 0%,
-                                    rgba(255, 255, 255, 1) 42%,
-                                    rgba(255, 255, 255, 1) 58%,
-                                    rgba(0, 0, 0, 0) 100%
-                                )
-                                0% 0% no-repeat padding-box;
+                            // background: transparent
+                            //     linear-gradient(
+                            //         90deg,
+                            //         rgba(0, 0, 0, 0) 0%,
+                            //         rgba(255, 255, 255, 1) 42%,
+                            //         rgba(255, 255, 255, 1) 58%,
+                            //         rgba(0, 0, 0, 0) 100%
+                            //     )
+                            //     0% 0% no-repeat padding-box;
                             opacity: 0.4;
                         }
 
                         &:after {
                             width: 1px;
                             height: 100%;
-                            background: transparent
-                                linear-gradient(
-                                    0deg,
-                                    rgba(0, 0, 0, 0) 0%,
-                                    rgba(255, 255, 255, 1) 42%,
-                                    rgba(255, 255, 255, 1) 58%,
-                                    rgba(0, 0, 0, 0) 100%
-                                )
-                                0% 0% no-repeat padding-box;
+                            // background: transparent
+                            //     linear-gradient(
+                            //         0deg,
+                            //         rgba(0, 0, 0, 0) 0%,
+                            //         rgba(255, 255, 255, 1) 42%,
+                            //         rgba(255, 255, 255, 1) 58%,
+                            //         rgba(0, 0, 0, 0) 100%
+                            //     )
+                            //     0% 0% no-repeat padding-box;
                         }
                     }
                 }
@@ -648,7 +653,7 @@ header {
         }
 
         &.header-navMobile-open {
-            height: auto;
+            height: 100vh;
             .header-navMobile-mask {
                 .header-navMobile-inner {
                     .bsTransform(translateY(0));

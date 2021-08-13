@@ -1,3 +1,3 @@
-import duration from './duration';
+import {duration ,TimeStringList } from "./duration";
 
-export { duration };
+export { duration, TimeStringList };

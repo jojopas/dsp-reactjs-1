@@ -12,15 +12,15 @@ export default function MobileHeader() {
     if (!store.isBreakpoint) {
         return null;
     }
-    const isChannel = Router.router.route.includes("/channels");
-    // console.log("Channels", isChannel);
+    const isOnDemand = Router.router.route.includes("/on-demand");
+    // console.log("Channels", isOnDemand, Router.router.route);
 
     return (
         <span className="mobileHeader">
             <a href="/">
                 <div className="listHeader">
                     <InlineSVG
-                        type={isChannel ? "channelsActive" : "channels"}
+                        type={isOnDemand ? "channels" : "channelsActive"}
                     />
                     <h1>Live Channels</h1>
                 </div>
@@ -28,7 +28,7 @@ export default function MobileHeader() {
             <a href="/on-demand">
                 <div className="listHeader">
                     <InlineSVG
-                        type={isChannel ? "on-demand" : "on-demandActive"}
+                        type={isOnDemand ? "on-demandActive" : "on-demand"}
                     />
                     <h1>On Demand</h1>
                 </div>

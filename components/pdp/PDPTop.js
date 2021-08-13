@@ -26,7 +26,7 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
     React.useEffect(() => {
         const pdpHeight = document.querySelector(".pdp-top").clientHeight;
         const pdpBg = document.querySelector(".pdp-bg")
-        console.log('pdp height', pdpHeight);
+        // console.log('pdp height', pdpHeight);
         pdpBg.style.cssText = `padding-Top: ${
             pdpHeight + 100
         }px`;
@@ -74,6 +74,8 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
     };
 
     const launchPlayer = (vId, currVideo) => {
+        // console.log('pdp player', {vId, currVideo});
+
         if (vId) {
             currVideo && vId !== currVideo
                 ? store.loadVideo({ id: vId })
@@ -82,7 +84,7 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
             store.playerInstance?.startConvivaSession();
         }
     };
-
+    // console.log('pdp', pdp);
     return useObserver(() =>
         store.isBreakpoint ? (
             <div className="pdp-top">
@@ -235,7 +237,7 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
                             <Button
                                 className="pdp-top-trailerButton"
                                 inner={constants.TRAILER}
-                                onClick={() => launchPlayer(pdp.trailer)}
+                                onClick={() => launchPlayer(pdp.trailer, currVideo)}
                             />
                         ) : null}
                     </div>
@@ -249,7 +251,7 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
                     ${pdp.poster}/400 400w,
                     ${pdp.poster}/500 500w,
                     ${pdp.poster}/600 600w`}
-                        data-src={`${pdp.poster}/300`}
+                        data-src={`${pdp.poster}/250`}
                         alt={pdp.title}
                         className="lazyload"
                     />

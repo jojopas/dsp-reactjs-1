@@ -7,9 +7,17 @@ import { constants } from "../../config";
 import EPGRow from "./EPGRow";
 import ChannelLogo from "./EPGChannel";
 import ScrollLeftRight from "./ScrollLeftRight";
-
+import { TimeStringList } from "../../helpers/utils/time";
+import {
+    fullDate,
+    startDate,
+    timeAfterDay,
+} from "../../helpers/utils/dates/dates";
+import EPGDateDropDown from "./EPGDateDropDown";
+let diffScrollTOEOD = 500;
+let scrollCheckList;
 export default function EPGList({
-    data,
+    epgData,
     changeCurrentSlug,
     currentSlug,
     className,
@@ -17,57 +25,32 @@ export default function EPGList({
     genreHoveredListener,
     promos,
     iconClicked,
+    fullScreen,
     pageType,
     onClick,
 }) {
     if (typeof window !== "undefined") {
         smoothscroll.polyfill();
     }
-
-    const channelCellWidth = 120;
+    const OneDayScroll = 24 * 2 * constants.EPG_30_MINUTE_WIDTH;
     const epgRef = React.useRef(null);
     const store = React.useContext(StoreContext);
     const [rowList, setRowList] = React.useState([]);
     const [currentIndex, setCurrentIndex] = React.useState(null);
     const [currentGenre, setCurrentGenre] = React.useState(null);
-    const [isMobileEPG, setIsMobileEPG] = React.useState(false);
-    let nowTime = 0;
+    const [selectedDate, setSelectedDate] = React.useState(0);
     const now = new Date();
     const elapseTime = now.getTime() / 1000;
-    const dateSlots = {};
-    const dates = new Date();
-    const month = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-    ];
-    dates.setMinutes(dates.getMinutes() > 29 ? 30 : 0, 0, 0);
-    nowTime = dates.getTime() / 1000;
-    const getDateString = (date) =>
-        `${month[date.getMonth()]} ${date.getDate()}`;
+    const nowTime = startDate().getTime() / 1000;
 
-    for (let index = 0; index < 8; index++) {
-        dateSlots[index < 7 ? getDateString(dates) : ""] =
-            dates.getTime() / 1000;
-        dates.setDate(dates.getDate() + 1);
-        dates.setHours(0, 0, 0, 0);
-    }
-    // console.log("computeDates", dateSlots, endDates);
-    const [currentTime, setCurrentTime] = React.useState(nowTime);
-    const [endTime, setEndTime] = React.useState(Object.values(dateSlots)[1]);
+    const [epgTime, setEPGTime] = React.useState({
+        start: nowTime,
+        end: nowTime + constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND,
+    });
     const currrentTimeElapsed = elapseTime - nowTime;
 
     function filterList() {
-        const filteredResult = data.filter((row, index) => {
+        const filteredResult = epgData.filter((row, index) => {
             if (row.slug === currentSlug) {
                 setCurrentIndex(index);
                 // return false;
@@ -105,19 +88,148 @@ export default function EPGList({
     }
 
     React.useEffect(() => {
-        if (data) {
+        if (epgData) {
             setRowList(filterList());
         }
-    }, [data, currentSlug]);
+    }, [epgData, currentSlug]);
+
+    const reCalculateScrollMilestone = () => {
+        const nextDay = timeAfterDay(1);
+        diffScrollTOEOD = Math.floor(
+            ((nextDay - nowTime) / 30 / 60) * constants.EPG_30_MINUTE_WIDTH
+        );
+        scrollCheckList = [0];
+        let scroll = diffScrollTOEOD;
+        if (selectedDate > 0) {
+            scroll = 0;
+        }
+        for (let i = 1; i < constants.EPG_NUMBER_DAYS; i++) {
+            scrollCheckList.push(scroll);
+            if (selectedDate <= i) {
+                scroll += OneDayScroll;
+            }
+        }
+    };
+
+    React.useEffect(() => {
+        if (!scrollCheckList) {
+            reCalculateScrollMilestone();
+        }
+        // console.log("Milestone init");
+    }, [scrollCheckList]);
+
+    const debounce = (func, timeout = 1000) => {
+        let timer;
+        return (...args) => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                func.apply(this, args);
+            }, timeout);
+        };
+    };
+
+    const getScrolledTime = (dx) =>
+        epgTime.start +
+        (dx / constants.EPG_30_MINUTE_WIDTH) * constants.EPG_SLOT_SECOND;
+
+    // const checkDateBYScrolled = (scrolledTime) => {
+    //     if (nextDayTime === -1) {
+    //         nextDayTime = timeAfterDay(1);
+    //     }
+    //     let res = -1;
+    //     if (selectedDate === 0) {
+    //         if (scrolledTime > nextDayTime) {
+    //             res = 1;
+    //         }
+    //     } else {
+    //         if (scrolledTime < nextDayTime) {
+    //             res = 0;
+    //         } else {
+    //             const day = Math.floor(
+    //                 Math.abs((scrolledTime - nextDayTime) / 86400)
+    //             );
+    //             if (day > 1) {
+    //                 if (day !== selectedDate - 1) {
+    //                     res = 1 + day;
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     console.log("scrolled", {
+    //         nextDayTime,
+    //         diff: scrolledTime - nextDayTime,
+    //         selectedDate,
+    //         res,
+    //     });
+    //     if (res !== -1) {
+    //         setSelectedDate(res);
+    //     }
+    // };
+    const scrolledTimed = (dx) => {
+        if (dx < scrollCheckList[selectedDate]) {
+            setSelectedDate(selectedDate - 1);
+        } else if (dx > scrollCheckList[selectedDate + 1]) {
+            setSelectedDate(selectedDate + 1);
+        }
+    };
+
+    const setScrolledTimeFromScrollLeft = debounce((dx) => scrolledTimed(dx));
+    const extendProgram = debounce((dx) => extendingEndTime(dx));
+
+    const extendingEndTime = (manualscrollLeft) => {
+        // if (!store.isBreakpoint) {
+        let { offsetWidth, scrollLeft, scrollWidth } = epgRef.current;
+        const finalScroll = manualscrollLeft || scrollLeft;
+        // console.log("extendProgram", { offsetWidth, finalScroll, scrollWidth });
+
+        if (
+            scrollWidth - finalScroll <=
+            constants.EPG_SCROLL_RENDER_TILL * offsetWidth
+        ) {
+            setEPGTime({
+                start: epgTime.start,
+                end:
+                    epgTime.end +
+                    constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND,
+            });
+            console.log("extendProgram true", {
+                offsetWidth: offsetWidth,
+                scrollLeft: fullDate(getScrolledTime(finalScroll)),
+                scrollWidth: fullDate(getScrolledTime(scrollWidth)),
+                scrolled: scrollWidth - finalScroll,
+                epgTime,
+                // scrolled: fullDate(scrolledTime),
+            });
+        }
+        setScrolledTimeFromScrollLeft(finalScroll);
+        // }
+    };
 
     React.useEffect(() => {
         window.addEventListener("scroll", epgScroll);
+        window.addEventListener("touchmove", touchMoveEvent);
+        window.addEventListener("wheel", wheelMoveEvent);
 
-        return () => window.removeEventListener("scroll", epgScroll);
-    }, [currentGenre, store.isVideoLoading]);
+        return () => {
+            window.removeEventListener("scroll", epgScroll);
+            window.removeEventListener("touchmove", touchMoveEvent);
+            window.removeEventListener("wheel", wheelMoveEvent);
+        };
+    }, []);
+
+    const touchMoveEvent = (event) => {
+        // console.log("touchmove", event);
+        extendProgram();
+    };
+
+    const wheelMoveEvent = (event) => {
+        if (event.deltaY <= 0) {
+            extendProgram();
+        }
+    };
 
     const TimeElapsed = () =>
-        currentTime > elapseTime ? null : (
+        selectedDate !== 0 ? null : (
             <div
                 key="timeElapsed"
                 className="timeElapsed"
@@ -127,65 +239,76 @@ export default function EPGList({
             ></div>
         );
 
-    const epgScroll = (eve) => {
-        if (!isMobileEPG) {
-            setIsMobileEPG(true);
-        }
-        const scrollTop = eve.target.scrollingElement.scrollTop;
-        const isTop = scrollTop > 0;
-        const rows = document.querySelectorAll(".timeslot-row");
-        rows.forEach((row) => {
-            row.style.cssText = isTop
-                ? `background-color: #0e212f; transform:translateY(${scrollTop}px)`
-                : `transform:translateY(${scrollTop}px)`;
+    const epgScrollDebounce = (timeout) => {
+        let rows;
+        let pagination;
+        let timer;
+        let debounceRunning = 0;
+
+        return (eve) => {
+            if (!rows) {
+                rows = document.querySelectorAll(".timeslot-row");
+                pagination = document.querySelector(".scroll");
+            }
+            clearTimeout(timer);
+            if (debounceRunning < 1) {
+                rows.forEach((row) => {
+                    row.style.cssText = `opacity: 0`;
+                });
+                pagination.style.cssText = `opacity: 0`;
+            }
+            debounceRunning++;
+
+            timer = setTimeout(() => {
+                const scrollTop = eve.target.scrollingElement.scrollTop;
+                rows.forEach((row) => {
+                    row.style.cssText = `opacity: 1;transform:translateY(${scrollTop}px)`;
+                });
+                pagination.style.cssText = `opacity: 1;transform:translateY(${scrollTop}px)`;
+                console.log("Debounce", debounceRunning, {
+                    scrollTop,
+                    timeout,
+                    timer,
+                });
+                debounceRunning = 0;
+            }, timeout);
+        };
+    };
+
+    const epgScroll = epgScrollDebounce(100);
+
+    const setDate = (dateTime, dateSelected) => {
+        epgRef.current.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
         });
-        document.querySelector(
-            ".scroll"
-        ).style.cssText = `transform:translateY(${scrollTop}px)`;
-    };
-
-    const setDate = (event) => {
-        const setDate = event.target.value.split(",");
-        // console.log("DateSelected", elapseTime, setDate);
-        setEndTime(setDate[1]);
-        setCurrentTime(setDate[0]);
-    };
-
-    const nextEPGDates = () => {
-        return (
-            <div className="timeslot-row">
-                <div
-                    className="timeslot-row--date"
-                    style={{ width: channelCellWidth + 20 }}
-                    key={"Date"}
-                >
-                    <div className="timeslot-row--date-select">
-                        <select name="epgDate" id="epgDate" onChange={setDate}>
-                            {Object.keys(dateSlots).map((key, ind, arr) =>
-                                key ? (
-                                    <option
-                                        value={[
-                                            dateSlots[key],
-                                            dateSlots[arr[ind + 1]],
-                                        ]}
-                                        key={key}
-                                    >
-                                        {key}
-                                    </option>
-                                ) : null
-                            )}
-                        </select>
-                    </div>
-                </div>
-            </div>
-        );
+        setEPGTime({
+            start: dateTime,
+            end:
+                dateTime +
+                constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND,
+        });
+        reCalculateScrollMilestone();
+        setSelectedDate(dateSelected);
+        console.log("DateSelected", {
+            event: event.target.value,
+            elapseTime: fullDate(elapseTime),
+            selected: fullDate(dateTime),
+            epgTime,
+            // scrolledTime: fullDate(scrolledTime),
+            endTime: fullDate(epgTime.end),
+        });
     };
 
     const currrentTimeWidth = () => {
-        const resultantWidth = Math.floor(
-            (currrentTimeElapsed / 30 / 60) * constants.EPG_30_MINUTE_WIDTH
-        );
-        return currentTime > nowTime ? 0 : Math.abs(resultantWidth);
+        if (epgTime.start < elapseTime) {
+            const resultantWidth = Math.floor(
+                (currrentTimeElapsed / 30 / 60) * constants.EPG_30_MINUTE_WIDTH
+            );
+            return Math.abs(resultantWidth);
+        }
+        return 0;
     };
 
     const onHorizontalScroll = (left) => {
@@ -228,44 +351,24 @@ export default function EPGList({
                 left: newLeft,
                 behavior: "smooth",
             });
+            extendProgram(newLeft);
         }
     };
 
     const todaysTimeSlots = () => {
-        const Total_Minutes_A_Day = 24 * 60;
-        const now = new Date();
-        const hours = now.getHours();
-        let minutes = now.getMinutes() > 29 ? 30 : 0;
-        now.setMinutes(minutes, 0, 0);
-        let timeSlots = [];
-        let initialTime = hours * 60 + minutes;
-        if (currentTime > elapseTime) {
-            initialTime = 0;
-        }
-
-        for (let time = initialTime; time < Total_Minutes_A_Day; time += 30) {
-            const hour = Math.floor(time / 60);
-            const minute = time % 60;
-
-            const hourPast = hour > 12;
-            timeSlots.push(
-                `${hourPast ? hour - 12 : hour == 0 ? 12 : hour}:${
-                    minute > 29 ? "30" : "00"
-                }${hourPast || hour === 12 ? "p" : "a"}`
-            );
-        }
-
+        const timeSlots = TimeStringList(
+            selectedDate == 0 ? nowTime : epgTime.start,
+            epgTime.end
+        );
         return (
             <div className="timeslot-row">
                 {timeSlots.map((time, index) => (
                     <div
                         className={`${"timeslot-row--time"}`}
                         style={{
-                            width: Math.floor(
-                                constants.EPG_30_MINUTE_WIDTH - 10
-                            ),
+                            width: Math.floor(constants.EPG_30_MINUTE_WIDTH),
                         }}
-                        key={time}
+                        key={`${time}${index}`}
                     >
                         <h2>{time}</h2>
                         {index === 0 ? (
@@ -287,49 +390,55 @@ export default function EPGList({
 
     const leftContainer = [];
 
-    const rightContainer = [<TimeElapsed />];
+    const rightContainer = [<TimeElapsed key="timeElapse" />];
 
     rowList.forEach((channel, channelIndex) => {
         leftContainer.push(
             <ChannelLogo
+                key={`logo-${channelIndex}`}
                 channel={channel}
                 onClick={() => onClick(channel)}
-                width={channelCellWidth}
+                width={constants.EPG_LOGO_WIDTH}
                 isShowing={channelIndex === currentIndex}
                 isLocked={channelIndex % 2 === 1}
                 index={channelIndex}
+                id={channel._id}
             />
         );
         rightContainer.push(
             <EPGRow
+                key={`row-${channelIndex}`}
                 channel={channel}
                 onClick={onClick}
                 currrentTimeElapsed={currrentTimeElapsed}
                 favorite={channelIndex < 5}
-                startTime={currentTime < nowTime ? nowTime : currentTime}
-                endTime={endTime}
+                fullScreen={fullScreen}
+                startTime={epgTime.start < nowTime ? nowTime : epgTime.start}
+                endTime={epgTime.end}
                 elapseTime={elapseTime}
                 iconClicked={iconClicked}
-                width={channelCellWidth}
                 isShowing={channelIndex === currentIndex}
                 isLocked={channelIndex % 2 === 1}
             />
         );
     });
 
-    // console.log(
-    //     "current",
-    //     currentTime,
-    //     "endTime",
-    //     endTime,
-    //     "Diff",
-    //     endTime - currentTime
-    // );
+    // console.log({
+    //    selectedDate
+    // });
     return (
         <div className="epg">
             <ScrollLeftRight onScrollLeft={onHorizontalScroll} />
-            <div className="left-row" style={{ width: channelCellWidth }}>
-                {nextEPGDates()}
+            <div
+                className="left-row"
+                style={{ width: constants.EPG_LOGO_WIDTH }}
+            >
+                <EPGDateDropDown
+                    value={selectedDate}
+                    setDate={setDate}
+                    nowTime={nowTime}
+                />
+
                 <div className="channel-logos">{leftContainer}</div>
             </div>
             <div className="right-row" ref={epgRef}>

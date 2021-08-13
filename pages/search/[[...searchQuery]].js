@@ -79,12 +79,16 @@ export default function Search({
         if (Array.isArray(data?.data?.data?.results?.cards)) {
             flag = true;
             res.demand = data.data.data.results;
-            console.log("Demand", data?.data?.data?.results?.cards);
-            res.demand.category = { name: "Movies" };
+            // console.log("Demand", data?.data?.data?.results?.cards);
+            res.demand.category = { name: constants.ONDEMAND };
+            // console.log("card", res.demand?.cards);
             res.demand.cards = res.demand?.cards?.map((card) => {
-                card.slug = `${card.type}/${card.slug}`;
+                // card.slug = `${card.slug}`;
+                if (card.type === 'channels') {
+                    return null;
+                }
                 return card;
-            });
+            }).filter((card) => card);
 
             count += res.demand.cards.length;
         }
@@ -94,7 +98,7 @@ export default function Search({
 
             res.channel = {
                 cards: channelData?.data?.data?.programs,
-                category: { name: " LIVE CHANNELS" },
+                category: { name: constants.CHANNELS },
             };
             res.channel.cards = res.channel?.cards?.map((card) => {
                 card.slug = `channel/${card.channel.slug}`;
@@ -168,7 +172,7 @@ export default function Search({
                             className={currentSearchType == 1 ? "active" : ""}
                             onClick={() => setCurrentSearchType(1)}
                         >
-                            LIVE CHANNELS
+                            {constants.CHANNELS.toUpperCase()}
                             <span
                                 className={`count ${
                                     result?.channel &&
@@ -189,7 +193,7 @@ export default function Search({
                             className={currentSearchType == 2 ? "active" : ""}
                             onClick={() => setCurrentSearchType(2)}
                         >
-                            ON DEMAND
+                            {constants.ONDEMAND.toUpperCase()}
                             <span
                                 className={`count ${
                                     result?.demand &&
@@ -213,7 +217,7 @@ export default function Search({
                         <CardList
                             key="searchChannelResults"
                             type="channel"
-                            horizontal={false}
+                            horizontal={!store.isBreakpoint}
                             showArrow={false}
                             data={result.channel}
                         />
@@ -226,6 +230,7 @@ export default function Search({
                         key="searchOnDemandResults"
                         type={store.isBreakpoint ? "grid" : "title"}
                         showArrow={false}
+                        isOnDemand={true}
                         data={result.demand}
                         gridHeader={true}
                     />

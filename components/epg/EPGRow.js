@@ -11,13 +11,13 @@ export default function EPGRow({
     isShowing,
     onClick,
     currrentTimeElapsed,
-    width,
     startTime,
     endTime,
     elapseTime,
     iconClicked,
     currentDate,
     isLocked,
+    fullScreen,
 }) {
     //  console.log("endTime", startTime, endTime);
     const setProgram = () => {
@@ -29,21 +29,19 @@ export default function EPGRow({
                 if (program.ends > startTime) {
                     res.push(
                         <EPGProgram
+                            key={`${channel._id} ${index}`}
                             tabIndex={1}
                             currrentTimeElapsed={currrentTimeElapsed}
                             program={program}
                             startTime={startTime}
                             endTime={endTime}
                             elapseTime={elapseTime}
-                            iconClicked={() =>
-                                iconClicked({
-                                    ...channel,
-                                    nowprogram: program,
-                                })
-                            }
+                            iconClicked={iconClicked}
+                            channel={channel}
                             isShowing={isShowing}
                             index={index}
-                            key={`${channel.id} ${index}`}
+                            fullScreen={fullScreen}
+                            id={`${channel._id} ${index}`}
                         />
                     );
                     index++;

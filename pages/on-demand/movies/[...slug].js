@@ -95,6 +95,7 @@ export default function Movie({session, config, page, error, pageType, seoObj}) 
                             <CardList
                                 key={`more-${pdp.id}`}
                                 type="title"
+                                showArrow={false}
                                 data={moreLikeThis}
                             />{" "}
                         </div>

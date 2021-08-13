@@ -2,26 +2,38 @@
 
 .buttonCurrent() {
     background-color: @colorYellow;
-    color: #ffffff;
+    color: @colorBlue;
 }
 
 .button {
     position: relative;
-    color: @colorNavGray;
-    font-size: 16px;
-    font-weight: 400;
+    color: @colorBlue;
+    font: 18px Roboto;
     line-height: 40px;
     display: inline-block;
     .bsBoxSizing();
-    padding: 0 25px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 4px;
+    padding: 5px 25px;
+    background: linear-gradient(#f5da39, #ffc233);
+    border-radius: 50px;
     margin: 0;
     cursor: pointer;
     user-select: none;
+    transition: none;
+    -webkit-transition: none;
     // text-shadow: 0 3px 9px rgba(0, 0, 0, 0.4);
-    .bsTransition(all);
+    // .bsTransition(all);
     transition-property: background-color, color;
+
+    svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        fill: @colorBlue;
+    }
+
+    &:hover {
+        background: linear-gradient(#e6cb35, #ebb22f);
+    }
 
     &.button-current {
         .buttonCurrent();
@@ -29,11 +41,8 @@
 
     @media (min-width: (@mobileLargeBP + 1)) and (hover: hover) and (pointer: fine) {
         &:hover {
-            .buttonCurrent();
-        }
-
-        &.button-current:hover {
-            background-color: #3d994b;
+            background: linear-gradient(#e6cb35, #ebb22f);
+            color: @colorBlue;
         }
     }
 
@@ -54,7 +63,10 @@
         font-weight: 500;
         line-height: 36px;
         padding: 0 10px;
+        background: none;
         border-radius: 30px;
+        color: @colorWhite;
+        background-color: rgba(235, 235, 235, 0.1);
 
         &:before {
             content: "S";

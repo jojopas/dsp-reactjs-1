@@ -1,0 +1,22 @@
+@import "../../styles/config.less";
+
+.preloading {
+    svg {
+        position: fixed;
+        top: @headerHeight;
+        width: 100%;
+
+        @media (max-width: @mobileLargeBP) {
+            top: @headerHeightMob;
+            width: auto;
+            height: 100%;
+        }
+    }
+
+    img {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

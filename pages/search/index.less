@@ -43,7 +43,7 @@
             margin: 60px @sitePaddingMobile 0px;
 
             &-input {
-                font-size: 16px;
+                font: 14px Roboto;
                 height: 50px;
                 padding: 0 10px 0 44px;
             }
@@ -66,6 +66,7 @@
         margin: auto;
         justify-content: center;
         display: flex;
+        display: -webkit-flex;
         .active {
             color: #ebebeb;
 
@@ -87,7 +88,7 @@
 
         @media (max-width: @mobileLargeBP) {
             h2 {
-                font: 12px Roboto;
+                font: 10px Roboto;
 
                 .count {
                     margin-left: 3px;
@@ -137,4 +138,10 @@
 
 .channelCard {
     width: 300px;
+}
+
+h2.listHeader {
+    @media (max-width: @mobileLargeBP) {
+        font: 12px Roboto;
+    }
 }

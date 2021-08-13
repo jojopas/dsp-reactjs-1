@@ -33,7 +33,7 @@ export const getServerSideProps = async ({ req, res, query }) => {
     const { session, config } = await getSession(req, res);
     const routes = [
         "/api/dsp/live/epg",
-        "/api/dsp/company/available/genres/live",
+        // "/api/dsp/company/available/genres/live",
     ];
     const pageOptions = { req, routes, session, config };
     const page = await pageBuilder(pageOptions);

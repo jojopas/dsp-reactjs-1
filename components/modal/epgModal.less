@@ -1,0 +1,178 @@
+@import "../../styles/config.less";
+
+.modal {
+    position: fixed;
+    z-index: 100;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .modal-content {
+        position: relative;
+        background-color: #32424e;
+        margin: auto;
+        padding: 10px;
+        max-width: 518px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+            0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 1s;
+        .close {
+            fill: rgb(184, 183, 183);
+            float: right;
+            width: 14px;
+            height: 14px;
+            font-weight: bold;
+
+            &:hover {
+                color: #fff;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+        &-container {
+            padding: 30px;
+            .modal-header {
+                padding: 0 0 12px;
+                width: 100%;
+                display: flex;
+                display: -webkit-flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .modal-time {
+                    font: 12px Roboto;
+                    color: @colorNavGray;
+
+                    &-left {
+                        color: @colorYellow;
+                    }
+                }
+
+                img {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 5px;
+                    // border: 2px solid @colorYellow;
+                    padding: 4px;
+                }
+
+                h1 {
+                    margin: 0px;
+                    font: bold 18px Roboto;
+                }
+            }
+
+            .modal-body {
+                padding: 12px 0px;
+                font: 12px Roboto;
+
+                h1 {
+                    margin: 0px;
+                    padding: 0px;
+                    font: 15px Roboto;
+                    margin-bottom: 10px;
+                }
+
+                .info {
+                    margin-bottom: 10px;
+                    color: @colorNavGray;
+                }
+
+                p {
+                    margin: 5px 0px;
+                }
+            }
+
+            .modal-footer {
+                padding: 12px 0;
+                cursor: pointer;
+
+                .watch {
+                    padding: 5px 20px;
+                    display: flex;
+                    display: -webkit-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .inActive {
+                    background-color: @colorNavGray;
+                }
+            }
+
+            @media (max-width: @mobileLargeBP) {
+                padding: 10px;
+                padding-top: 30px;
+            }
+        }
+
+        @media (max-width: @mobileLargeBP) {
+            position: fixed;
+            bottom: 0;
+            -webkit-animation-name: animatebottom;
+            animation-name: animatebottom;
+            max-height: 330px;
+        }
+    }
+
+    @media (max-width: @mobileLargeBP) {
+        padding-top: 60%;
+    display: flex;
+    justify-content: center;
+    }
+}
+
+/* Modal Content */
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+    to {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes animatebottom {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+    to {
+        bottom: 0px;
+        opacity: 1;
+    }
+}
+
+@keyframes animatebottom {
+    from {
+        bottom: -300px;
+        opacity: 0;
+    }
+    to {
+        bottom: 0px;
+        opacity: 1;
+    }
+}
+/* The Close Button */

@@ -55,7 +55,7 @@ function Layout({ config, session, pageType, seoObj, children }) {
             // clearInterval(interval);
         };
     }, []);
-    console.log('Layout', pageType);
+    // console.log('Layout', pageType);
     return useObserver(() => (
         <>
             <LocalSEOTags pageType={pageType} seoObj={seoObj} />

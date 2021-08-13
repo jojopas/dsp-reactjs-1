@@ -4,7 +4,7 @@ const constants = {
     ENV_GA_ID: "UA-84268486-6", // For debugging 'UA-3115785-11',
     ENV_DSP_PLAYER_KEY: "5ef4a47fc27512184b7d2b62", // staging: 5ef5185b8949063e3a66d133 prod: 5ef4a47fc27512184b7d2b62
     ENV_DSP_PLAYER_URL: "https://www.dplayer.pro/dotplayer.js",
-    ENV_SEGMENT_WRITE_KEY: "9kHi1nwhf7ueC4RGAorDHGWfxWPLWhaM", // qa: pJOFZYQaXKgw4QwFLgCcX3lwcPHRSnBB prod: JiuzpzcYrsdlvAVEWW9vedGw3dXqyZ5V
+    ENV_SEGMENT_WRITE_KEY: "gagYMDOWghSYQSmAIBXWm99lxmWQqGot", // qa: pJOFZYQaXKgw4QwFLgCcX3lwcPHRSnBB prod: JiuzpzcYrsdlvAVEWW9vedGw3dXqyZ5V
     COOKIE_PREFIX: "ln",
     DSP_COUNTRY: "US",
     DSP_PLATFORM: "website",
@@ -17,6 +17,8 @@ const constants = {
     SEASON: "Season",
     WATCH_NOW: "Watch Now",
     WATCHING: "Watching",
+    CHANNELS: "Live Channels",
+    ONDEMAND: "On Demand",
     START_OVER: "Start Over",
     TRAILER: "Trailer",
     MORE: "More",
@@ -43,6 +45,11 @@ const constants = {
     EPG_PROMO_CNT: 10,
     EPG_UI_TIMEOUT: 4,
     EPG_30_MINUTE_WIDTH: 300,
+    EPG_SLOT_TO_RENDER: 10,
+    EPG_SLOT_SECOND: 30 * 60,
+    EPG_SCROLL_RENDER_TILL: 3,
+    EPG_NUMBER_DAYS: 7,
+    EPG_LOGO_WIDTH: 120,
     COOKIE_NO_EXPIRE: new Date("2100/10/10"),
     CORS_WHITELIST: [
         "http://localhost:3000",
@@ -52,6 +59,7 @@ const constants = {
     ],
     CONTACTUS_FORM_SUBMIT: "Submit",
     GOOGLE_RECAPTCHA_SITEKEY: "6Lc5WT0aAAAAAK1o9PAW59s700x_adV7pgiyUC2F",
+    BULLETS: "\t • \t",
 };
 
 module.exports = {

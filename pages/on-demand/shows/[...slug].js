@@ -158,6 +158,7 @@ export default function Show({
                             <CardList
                                 key={`more-${pdp.id}`}
                                 type="title"
+                                showArrow={false}
                                 data={moreLikeThis}
                             />{" "}
                         </div>

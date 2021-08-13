@@ -9,7 +9,7 @@ export default function ChannelCard(data) {
     const store = React.useContext(StoreContext);
 
     const deepLinks = [
-        { prefix: "/channels", slug: "/channels/[[...slug]]" },
+        { prefix: "channel", slug: "/channels/[[...slug]]" },
         { prefix: "/movies/genre/", slug: "/movies/genre/[...slug]" },
         { prefix: "/movies/", slug: "/movies/[...slug]" },
         { prefix: "/movies", slug: "/movies" },
@@ -27,24 +27,67 @@ export default function ChannelCard(data) {
         data?.slug?.includes(link.prefix)
     );
 
-    const epgTest = () => {
-        if (data.changeCurrentSlug && routerSlug.prefix === "/channels") {
-            return data?.slug.substring(data?.slug.lastIndexOf("/") + 1);
+    const sanitiseSlug = (slug) => {
+        if (slug[0] !== "/") {
+            const last = slug.split("/");
+            return "/channels/" + last[1];
         }
-        return false;
+        return slug;
     };
 
-    console.log("ChannelCard", data);
+    const SearchImage = ({ isMobile }) => {
+        // const date = new Date();
+        // const nowTime = date.getTime() / 1000;
+        // const isLive = data.starts_at <= nowTime && data.ends_at > nowTime;
+        const style = !isMobile
+            ? {
+                  borderRadius: 0,
+                  borderTopLeftRadius: 7,
+                  borderTopRightRadius: 7,
+              }
+            : null;
+        return (
+            <div className="image">
+                <img
+                    // src={constants.NOT_FOUND_SRC}
+                    data-src={`${data.image || data.channel.spotlight_poster}${
+                        isMobile ? "/180/90" : ""
+                    }`}
+                    alt={data.program_title}
+                    className="lazyload"
+                    style={style}
+                />
+                <div
+                    className="logo"
+                    style={{
+                        background: `linear-gradient(
+            to bottom left,
+            rgba(0, 0, 0, 1) 0%,
+            rgba(0, 0, 0, 0)  40%,
+            rgba(0, 0, 0, 0) 100%   
+        s)`,
+                    }}
+                >
+                    <div
+                        className="logo-image"
+                        style={{
+                            background: `
+        url("${data.channel.logo}/50") no-repeat`,
+                        }}
+                    ></div>
+                </div>
+                {/* {isLive && <div className="live">LIVE</div>} */}
+            </div>
+        );
+    };
+
+    // console.log("ChannelCard", data, routerSlug);
     return store.isBreakpoint ? (
         <div className="channelCard">
-            <Link href={routerSlug?.slug} as={data?.slug}>
+            <Link href={routerSlug?.slug} as={sanitiseSlug(data?.slug)}>
                 <a className="cardChannel">
-                    <img
-                        src={constants.NOT_FOUND_SRC}
-                        data-src={data.channel.poster+'/180/90'}
-                        alt={data.program_title}
-                        className="lazyload"
-                    />
+                    <SearchImage isMobile={true} />
+
                     <div className="title">
                         {data.program_title ? (
                             <span>
@@ -57,15 +100,10 @@ export default function ChannelCard(data) {
         </div>
     ) : (
         <span className="promoCard ">
-            <span className="cardOuter channelCard">
-                <Link href={routerSlug?.slug} as={data?.slug}>
-                    <a className="cardChannel">
-                        <img
-                            src={constants.NOT_FOUND_SRC}
-                            data-src={data.channel.logo}
-                            alt={data.program_title}
-                            className="lazyload"
-                        />
+            <span className="cardOuter" style={{ paddingBottom: "66.25%" }}>
+                <Link href={routerSlug?.slug} as={sanitiseSlug(data?.slug)}>
+                    <a className="cardChannel" style={{ paddingBottom: 50 }}>
+                        <SearchImage isMobile={false} />
 
                         <div className="title">
                             {data.program_title ? (
