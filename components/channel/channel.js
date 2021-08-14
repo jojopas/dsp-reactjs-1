@@ -580,7 +580,7 @@ export default function Channels({
 
         function testMouseMove() {
             clearTimeout(fsTimer);
-            fsTimer = setTimeout(autoFS, 15000);
+            fsTimer = setTimeout(autoFS, 20000);
         }
 
         const throttledTestMouse = throttled(2000, testMouseMove);
