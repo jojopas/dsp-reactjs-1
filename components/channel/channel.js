@@ -593,7 +593,7 @@ export default function Channels({
             return () => {
                 clearTimeout(fsTimer);
                 document.removeEventListener('mousemove', throttledTestMouse);
-                document.addEventListener('scroll', throttledTestMouse);
+                document.removeEventListener('scroll', throttledTestMouse);
             };
         }, []);
     }
