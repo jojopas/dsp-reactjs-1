@@ -55,7 +55,7 @@ const FeaturedView = ({ data, width, index, isMobile }) => {
                     </div>
                     <div className="image">
                         <img
-                            src={`${data.image || data.poster}/400/500`}
+                            src={`${data.image || data.poster}`}
                             alt=""
                             className="lazyload"
                         />
