@@ -257,9 +257,16 @@
     }
 
     &-description-moreButton {
+        background: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        color: white;
         position: relative;
         margin-top: 10px;
         z-index: 1;
+
+        &:hover {
+            color: @colorBlue;
+        }
     }
 
     &-toolBar {
