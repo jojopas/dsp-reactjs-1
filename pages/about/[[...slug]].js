@@ -22,7 +22,7 @@ export default function About({ session, config, page, error, slug }) {
         return <ContactForm />;
     };
 
-    const sanitize = (str) => str?.toUpperCase()?.replaceAll("-", " ");
+    const sanitize = (str) => str.toUpperCase().replace("-", " ");
 
     return slug === "contact" ? (
         <div className="placeholder">
