@@ -72,7 +72,7 @@ export default function ChannelCard(data) {
                         className="logo-image"
                         style={{
                             background: `
-        url("${data.channel.logo}/50") no-repeat`,
+        url("${data.channel.logo}/40") no-repeat`,
                         }}
                     ></div>
                 </div>

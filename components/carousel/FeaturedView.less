@@ -88,6 +88,9 @@
                     margin-left: 0;
                     margin: auto;
 
+                    display: -webkit-flex;
+                    align-items: flex-end;
+
                     &-container {
                         height: auto;
 
@@ -140,8 +143,9 @@
                     width: 100%;
                     margin: 20px 0px;
                     margin-top: 50px;
+                    display: block;
                     img {
-                        height: auto;
+                        // height: auto;
                         margin: auto;
                     }
                 }
@@ -149,6 +153,7 @@
 
             @media (max-width: @mobileLargeBP) {
                 flex-direction: column-reverse;
+                margin-top: 40px;
             }
         }
 
