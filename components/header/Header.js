@@ -50,7 +50,7 @@ export default function Header({ pageType }) {
         // {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
     ];
 
-    const navAccount = [
+    /*const navAccount = [
         {
             id: "settings",
             class: "settings",
@@ -60,7 +60,7 @@ export default function Header({ pageType }) {
             url: "/settings/[[...slug]]",
             as: "/settings",
         },
-    ];
+    ];*/
 
     const mainMobile = [
         {
@@ -88,14 +88,14 @@ export default function Header({ pageType }) {
             url: "/search",
             as: "/search",
         },
-        {
+        /*{
             id: "settings",
             type: "svg",
             inner: "Settings",
             svg: "settings",
             url: "/settings/[[...slug]]",
             as: "/settings",
-        },
+        },*/
         // {id: 'shows', type:'svg', svg:'shows', inner: 'Shows', url: '/shows', as: '/shows'}
     ];
 
