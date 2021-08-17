@@ -29,8 +29,8 @@ export default function Search({
 }) {
     const store = React.useContext(StoreContext);
 
-    const allRefs = React.useRef([0, 1, 2].map(() => React.createRef()));
-    const activeBarRef = React.useRef(null);
+    /*const allRefs = React.useRef([0, 1, 2].map(() => React.createRef()));
+    const activeBarRef = React.useRef(null);*/
     const [searchQuery, setSearchQuery] = React.useState(
         query.searchQuery
             ? query.searchQuery[0]
@@ -63,13 +63,13 @@ export default function Search({
     const [result, setResult] = React.useState(null);
 
     const setBarLine = () => {
-        const activeNavItem =
+        /*const activeNavItem =
             allRefs.current[currentSearchType] &&
             allRefs.current[currentSearchType].current;
 
         const { offsetLeft, offsetWidth } = activeNavItem;
         activeBarRef.current.style.transform = `translateX(${offsetLeft}px) translateY(-5px)`;
-        activeBarRef.current.style.width = `${offsetWidth}px`;
+        activeBarRef.current.style.width = `${offsetWidth}px`;*/
     };
 
     React.useEffect(() => {
@@ -93,7 +93,7 @@ export default function Search({
             count += res.demand.cards.length;
         }
 
-        if (Array.isArray(channelData?.data?.data?.programs)) {
+        /*if (Array.isArray(channelData?.data?.data?.programs)) {
             flag = true;
 
             res.channel = {
@@ -105,7 +105,7 @@ export default function Search({
                 return card;
             });
             count += res.channel.cards.length;
-        }
+        }*/
 
         if (flag) {
             setBarLine();
@@ -128,12 +128,12 @@ export default function Search({
         setBarLine();
     }, [currentSearchType]);
 
-    const showChannel = currentSearchType == 0 || currentSearchType == 1;
+    //const showChannel = currentSearchType == 0 || currentSearchType == 1;
     const showOnDemand = currentSearchType == 0 || currentSearchType == 2;
-    let channelCards = [];
-    if (showChannel) {
+    //let channelCards = [];
+    /*if (showChannel) {
         channelCards = result?.channel?.cards?.map((card) => <div></div>);
-    }
+    }*/
     console.log("Search", result);
     return useObserver(() =>
         !pageError && !error ? (
@@ -149,7 +149,7 @@ export default function Search({
                         />
                         <InlineSVG type="search" />
                     </span>
-                    <div className="searchResult-heading">
+                    {/*<div className="searchResult-heading">
                         <h2
                             className={currentSearchType == 0 ? "active" : ""}
                             ref={allRefs.current[0]}
@@ -209,9 +209,9 @@ export default function Search({
                             </span>
                         </h2>
                     </div>
-                    <span ref={activeBarRef} className="activeBar" />
+                    <span ref={activeBarRef} className="activeBar" />*/}
                 </div>
-                {showChannel &&
+                {/*{showChannel &&
                     result?.channel &&
                     !isEmpty(result.channel.cards) && (
                         <CardList
@@ -221,11 +221,8 @@ export default function Search({
                             showArrow={false}
                             data={result.channel}
                         />
-                    )}
-                {showOnDemand &&
-                result &&
-                result.demand &&
-                !isEmpty(result.demand.cards) ? (
+                    )}*/}
+                {showOnDemand && result && result.demand && !isEmpty(result.demand.cards) ? (
                     <CardList
                         key="searchOnDemandResults"
                         type={store.isBreakpoint ? "grid" : "title"}
@@ -238,7 +235,7 @@ export default function Search({
                     <span className="searchResults-loading">
                         {constants.SEARCH_LOADING}
                     </span>
-                ) : result && !result?.total ? (
+                ) : (result && result.demand && isEmpty(result.demand.cards)) || !result ? (
                     <span className="searchResults-none">
                         {constants.NO_RESULTS}
                         <span className="searchQuery">"{searchQuery}"</span>
