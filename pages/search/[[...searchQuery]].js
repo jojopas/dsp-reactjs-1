@@ -225,7 +225,8 @@ export default function Search({
                 {showOnDemand && result && result.demand && !isEmpty(result.demand.cards) ? (
                     <CardList
                         key="searchOnDemandResults"
-                        type={store.isBreakpoint ? "grid" : "title"}
+                        //type={store.isBreakpoint ? "grid" : "title"}
+                        type="grid"
                         showArrow={false}
                         isOnDemand={true}
                         data={result.demand}
