@@ -54,6 +54,8 @@
         @media (max-width: @mobileLargeBP) {
             justify-self: center;
             margin: auto;
+            width: 200px;
+            min-width: auto;
             .bsBorderRadius(4px);
         }
 
@@ -80,6 +82,7 @@
             }
 
             @media (max-width: @mobileLargeBP) {
+                width: 200px;
                 .bsBorderRadius(4px);
             }
         }
@@ -116,6 +119,7 @@
         @media (max-width: @mobileLargeBP) {
             // font-size: 18px;
             text-align: center;
+            font: bold 28px Roboto;
         }
     }
 
@@ -257,15 +261,15 @@
     }
 
     &-description-moreButton {
-        background: none;
-        background-color: rgba(0, 0, 0, 0.2);
-        color: white;
+        background: none !important;
+        background-color: rgba(0, 0, 0, 0.2) !important;
+        color: @colorNavGray !important;
         position: relative;
-        margin-top: 10px;
+        margin-top: 10px !important;
         z-index: 1;
 
         &:hover {
-            color: @colorBlue;
+            color: @colorWhite;
         }
     }
 
@@ -326,8 +330,17 @@
         }
     }
 }
+.pdp-episodic {
+    @media (max-width: @mobileLargeBP) {
+        margin-top: 0px !important;
+    }
+
+}
 
 .pdp-more-like-this {
+    @media (max-width: @mobileLargeBP) {
+        margin-top: 0px !important;
+    }
     .listRow {
         margin-bottom: 40px;
     }
