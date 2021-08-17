@@ -17,7 +17,6 @@ const Carousel = ({ views, slickSettings, className }) => {
         ? slickSettings
         : {
               dots: false,
-              infinite: false,
               speed: 400,
               autoplaySpeed: 4000,
               autoplay: true,
