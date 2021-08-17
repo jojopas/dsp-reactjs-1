@@ -29,12 +29,12 @@ export default function OnDemand({
 
     const [width, setWidth] = React.useState();
     const [clickedCardTitle, setClickedCardTitle] = React.useState();
-    const genreNav = page.genres?.map((genre) => ({
+    /*const genreNav = page.genres?.map((genre) => ({
         id: genre,
         inner: genre.toUpperCase(),
         url: `/movies/genre/[...slug]`,
         as: `/movies/genre/${slugify(genre)}`,
-    }));
+    }));*/
 
     React.useEffect(() => {
         if (!width && typeof window !== "undefined") {
@@ -59,14 +59,14 @@ export default function OnDemand({
             ? page?.movies[0]?.channels
                   .map((el, index) =>
                       index > 5 ? null : (
-                          <FeaturedView data={el} width={width} index={index} isMobile={store.isBreakpoint} />
+                          <FeaturedView data={el} width={width} key={index} index={index} isMobile={store.isBreakpoint} />
                       )
                   )
                   .filter((view) => view)
             : null
         : null;
 
-    console.log("page", page);
+    // console.log("page", page);
     return useObserver(() =>
         !error ? (
             clickedCardTitle ? (
@@ -88,23 +88,12 @@ export default function OnDemand({
                             className="carousel-container"
                         />
                     </div>
-
+                    {/*{genreNav && (
+                        <GenreSelector type="movies" links={genreNav} />
+                    )}*/}
                     <div className="overflowWrapper">
-                        {page.movies?.length > 0 ? (
-                            <CardList
-                                className="homePromo"
-                                type="title"
-                                isOnDemand={true}
-                                data={page.rails[0]}
-                                onHeaderClick={setClickedCardTitle}
-                            />
-                        ) : null}
-                        {genreNav && (
-                            <GenreSelector type="movies" links={genreNav} />
-                        )}
-
-                        {page.rails.map((rail, index) =>
-                            index > 0 ? (
+                        {page.rails.slice(1).map((rail, index) =>
+                            (
                                 <CardList
                                     key={rail.category.id}
                                     type="title"
@@ -112,7 +101,7 @@ export default function OnDemand({
                                     isOnDemand={true}
                                     onHeaderClick={setClickedCardTitle}
                                 />
-                            ) : null
+                            )
                         )}
                     </div>
                 </>
@@ -127,7 +116,7 @@ OnDemand.getLayout = getLayout;
 export const getServerSideProps = async ({ req, res }) => {
     let { session, config } = await getSession(req, res);
     const routes = [
-        "/api/dsp/company/available/genres/movies",
+        //"/api/dsp/company/available/genres/movies",
         "/api/dsp/homepage",
         "/api/dsp/movies/US/ios",
     ];
