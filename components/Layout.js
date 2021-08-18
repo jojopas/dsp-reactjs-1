@@ -75,27 +75,6 @@ function Layout({ config, session, pageType, seoObj, children }) {
                     {constants.GDPR_TEXT}
                 </CookieConsent>
             </div>
-            {/* Truoptik Pixel */}
-            <img
-                className="do-not-lazysize"
-                alt="truoptik"
-                style={{
-                    width: "1px",
-                    height: "1px",
-                    position: "fixed",
-                    top: "-100px",
-                    left: "-100px",
-                    visibility: "hidden",
-                }}
-                src="https://dmp.truoptik.com/a311adc7f8b7f20c/sync.gif"
-            />
-            {/* Active Campaign */}
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `(function(e,t,o,n,p,r,i){e.visitorGlobalObjectAlias=n;e[e.visitorGlobalObjectAlias]=e[e.visitorGlobalObjectAlias]||function(){(e[e.visitorGlobalObjectAlias].q=e[e.visitorGlobalObjectAlias].q||[]).push(arguments)};e[e.visitorGlobalObjectAlias].l=(new Date).getTime();r=t.createElement("script");r.src=o;r.async=true;i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)})(window,document,"https://diffuser-cdn.app-us1.com/diffuser/diffuser.js","vgo");
-                            vgo('setAccount', '650363305');vgo('setTrackByDefault', true);vgo('process');`,
-                }}
-            />
         </>
     ));
 }
