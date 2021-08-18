@@ -4,7 +4,13 @@
 
     https://sportstv-dev.herokuapp.com/
 
--   ##### To run the development server with NPM:
+##### To run the development server with YARN (Preferred):
+
+```bash
+yarn dev
+```
+
+##### To run the development server with NPM:
 
 ```bash
 npm install
@@ -19,11 +25,7 @@ npm install --save react-dom
 npm install --save next
 ```
 
-##### To run the development server with YARN:
 
-```bash
-yarn dev
-```
 
 #### Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
