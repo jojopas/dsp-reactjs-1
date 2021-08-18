@@ -5,7 +5,7 @@ const constants = {
     ENV_DSP_PLAYER_KEY: "5ef4a47fc27512184b7d2b62", // staging: 5ef5185b8949063e3a66d133 prod: 5ef4a47fc27512184b7d2b62
     ENV_DSP_PLAYER_URL: "https://www.dplayer.pro/dotplayer.js",
     ENV_SEGMENT_WRITE_KEY: "gagYMDOWghSYQSmAIBXWm99lxmWQqGot", // qa: pJOFZYQaXKgw4QwFLgCcX3lwcPHRSnBB prod: JiuzpzcYrsdlvAVEWW9vedGw3dXqyZ5V
-    COOKIE_PREFIX: "ln",
+    COOKIE_PREFIX: "stv",
     DSP_COUNTRY: "US",
     DSP_PLATFORM: "website",
     DSP_IMG_PREFIX: "https://images.dotstudiopro.com/",
