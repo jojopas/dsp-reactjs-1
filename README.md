@@ -37,8 +37,6 @@ The page auto-updates as you edit files.
 | DSP_API_KEY              |                                                                                                      | 'f36c883f5037af539572f2d1a362573bb683c727' |
 | DSP_PLAYER_KEY           | staging: '5ef5185b8949063e3a66d133' prod: '5ef4a47fc27512184b7d2b62'                                 | '5ef4a47fc27512184b7d2b62'                 |
 | DSP_PLAYER_URL           | prod: 'https://www.dplayer.pro/dotplayer.js'                                                         | 'https://www.dplayer.pro/dotplayer.js'     |
-| LN_API_URL               | qa: 'qa.localnowapi.com', prod: 'prod.localnowapi.com'                                               | 'qa.localnowapi.com'                       |
-| LN_API_KEY               | staging: 'urwF64ogf84Ol9W0GDBSx2ezVlCgEjwf5ytgu8hr' prod: 'AQKFCPy1Fz3cZLPgiIeaF424KRSRpqjw1XCCfcJU' | 'urwF64ogf84Ol9W0GDBSx2ezVlCgEjwf5ytgu8hr' |
 | GA_ID                    | staging: 'UA-84268486-6' prod: 'UA-84268486-2'                                                       | 'UA-84268486-6'                            |
 | SEGMENT_WRITE_KEY        | qa: 'pJOFZYQaXKgw4QwFLgCcX3lwcPHRSnBB' prod: 'JiuzpzcYrsdlvAVEWW9vedGw3dXqyZ5V'                      | 'pJOFZYQaXKgw4QwFLgCcX3lwcPHRSnBB'         |
 | APP_VERSION              |                                                                                                      | '0.0.0'                                    |
