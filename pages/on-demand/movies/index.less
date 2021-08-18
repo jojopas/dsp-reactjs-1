@@ -1,0 +1,107 @@
+@import "../../../styles/config.less";
+
+.moviesPromo {
+    padding-top: 30px;
+
+    @media (max-width: @mobileLargeBP) {
+        padding-top: 20px;
+    }
+}
+
+.clickedTitle {
+    display: flex;
+    display: -webkit-flex;
+    height: 40px;
+    margin-top: 30px;
+
+    .backButton {
+        display: flex;
+        display: -webkit-flex;
+        align-self: center;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        margin-left: 30px;
+    }
+
+    .clickedHeader {
+        font: 24px Roboto;
+        margin: auto;
+        text-align: center;
+    }
+}
+
+.carousel-container {
+    .carousel {
+        width: 100%;
+        height: 300px;
+
+        padding: 150px 0px 50px 50px;
+        .carousel-about {
+            width: 60%;
+            // margin: 150px auto;
+            padding: auto;
+            .carousel-title {
+                font: bold 36px Roboto;
+                text-shadow: 0 3px 9px #00000066;
+                color: white;
+            }
+
+            .carousel-description {
+                font: 18px Roboto;
+                color: #edd8cd;
+                text-shadow: 0 3px 9px #00000066;
+            }
+
+            .button {
+                margin-top: 30px;
+                line-height: 40px;
+                display: inline-block;
+                font-weight: 700;
+                padding: 0 20px;
+                border-radius: 50px;
+                cursor: pointer;
+                user-select: none;
+                text-shadow: 0 3px 9px #00000066;
+                -webkit-transition: all 0.3s ease 0s;
+                color: black;
+                background-color: @colorYellow;
+            }
+        }
+        @media (max-width: @mobileLargeBP) {
+            padding: 100px 10px;
+        }
+    }
+}
+
+// .carousel-container .slick-list {
+//     position: relative;
+//     display: inline-flex;
+//     overflow: hidden;
+//     margin: 0;
+//     padding: 0;
+// }
+
+.carousel-container .carousel-dots {
+    display: flex;
+    display: -webkit-flex;
+    list-style-type: none;
+}
+
+.genreSelector {
+    @media (max-width: @mobileLargeBP) {
+        margin-bottom: -10px !important;
+    }
+}
+
+.pdp-more-like-this {
+    margin-top: 50px;
+    .listHeaders {
+        .listHeader {
+            cursor: auto !important;
+        }
+        .listHeaderIcon {
+            cursor: auto !important;
+        }
+    }
+}

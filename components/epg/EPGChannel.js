@@ -1,0 +1,59 @@
+import { constants } from "../../config";
+import InlineSVG from "../InlineSVG";
+
+const ChannelLogo = ({
+    channel,
+    isLocked,
+    isShowing,
+    width,
+    onClick,
+    index,
+    id,
+}) => {
+    const channelStyle = {
+        width: width,
+        // background: `url(${channel.logo}/${width - 10})`,
+    };
+    // if (isShowing) {
+    //     channelStyle.backgroundColor = "#fbcc35";
+    //     channelStyle.fill = "#122d42";
+    // }
+
+    const imageDiff = 70;
+    return (
+        <div
+            className={`channel-info ${isShowing ? "active" : ""}`}
+            style={channelStyle}
+            title={channel.name}
+            onClick={onClick}
+            key={id}
+        >
+            {channel.logo ? (
+                <img
+                    data-sizes="auto"
+                    sizes={`${width - imageDiff}px`}
+                    data-srcset={`${channel.logo}/${imageDiff}/${imageDiff}`}
+                    data-src={`${channel.logo}/${width - imageDiff}/${
+                        width - imageDiff
+                    }`}
+                    alt=""
+                    className="channel-info--image lazyload"
+                    /*onError="this.style.display='none'"*/
+                />
+            ) : (
+                <img
+                    src={constants.NOT_FOUND_SRC}
+                    alt={channel.name}
+                    className="channel-info--image lazyloaded"
+                />
+            )}
+            {/* {isLocked && (
+                <div className="channel-info--locked">
+                    <InlineSVG type="lock" />
+                </div>
+            )} */}
+        </div>
+    );
+};
+
+export default ChannelLogo;

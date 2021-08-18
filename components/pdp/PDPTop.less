@@ -1,0 +1,352 @@
+@import "../../styles/config.less";
+
+.pdp-outer {
+    position: relative;
+    overflow: hidden;
+}
+
+.secondarybutton() {
+    background: none;
+    background-color: @ButtonBackground;
+    color: @colorWhite;
+
+    svg {
+        fill: @colorWhite;
+    }
+
+    &:hover {
+        background: @colorYellow;
+        color: @colorBlue;
+
+        svg {
+            fill: @colorBlue;
+        }
+    }
+}
+
+.pdp-top {
+    position: relative;
+    display: flex;
+    display: -webkit-flex;
+    width: 90%;
+    align-items: flex-start;
+    padding: 40px @sitePadding;
+    // margin: 0 auto 30px;
+
+    @media (max-width: @mobileLargeBP) {
+        display: block;
+        padding: 20px @sitePaddingMobile 0;
+    }
+
+    &-img {
+        position: relative;
+        .bsBoxSizing();
+        width: 250px;
+        height: auto;
+        min-width: 272px;
+        // margin-right: 40px;
+        .bsBorderRadius(7px);
+        background-color: #040e19;
+        z-index: 1;
+        flex-shrink: 0;
+        margin: 0 30px;
+
+        @media (max-width: @mobileLargeBP) {
+            justify-self: center;
+            margin: auto;
+            width: 200px;
+            min-width: auto;
+            .bsBorderRadius(4px);
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            opacity: 0;
+            .bsTransition(opacity, 0.4s, ease-out);
+            .bsBorderRadius(7px);
+            overflow: hidden;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            object-fit: cover;
+
+            &.lazyloaded {
+                opacity: 1;
+            }
+
+            &[src="/images/noImage.svg"] {
+                object-fit: contain !important;
+            }
+
+            @media (max-width: @mobileLargeBP) {
+                width: 200px;
+                .bsBorderRadius(4px);
+            }
+        }
+
+        &:after {
+            position: relative;
+            content: "";
+            display: block;
+            height: 0;
+            width: 100%;
+            padding-bottom: 150%;
+        }
+    }
+
+    &-info {
+        position: relative;
+        padding-top: 20px;
+        z-index: 2;
+        flex: 1;
+
+        @media (max-width: @mobileLargeBP) {
+            padding-top: 16px;
+        }
+    }
+
+    h1 {
+        margin: 0;
+        font: bold 36px Roboto;
+        line-height: 1.25;
+
+        color: #ffffff;
+        text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.4);
+
+        @media (max-width: @mobileLargeBP) {
+            // font-size: 18px;
+            text-align: center;
+            font: bold 28px Roboto;
+        }
+    }
+
+    &-ratingBar {
+        padding-top: 32px;
+        display: flex;
+        display: -webkit-flex;
+        font: 18px Roboto;
+
+        @media (max-width: @mobileLargeBP) {
+            padding-top: 10px;
+            justify-content: center;
+        }
+
+        .pdp-top-rating {
+            line-height: 21px;
+            color: rgba(255, 255, 255, 0.6);
+
+            @media (max-width: @mobileLargeBP) {
+                padding: 5px 7px 0;
+                // font-size: 10px;
+                line-height: 6px;
+            }
+        }
+        .pdp-top-year {
+            line-height: 21px;
+            color: rgba(255, 255, 255, 0.6);
+            &:before {
+                content: "•";
+                margin: 0 10px;
+            }
+
+            &:after {
+                content: "•";
+                font-size: 18px;
+                margin: 0 10px;
+            }
+
+            @media (max-width: @mobileLargeBP) {
+                // font-size: 11px;
+                line-height: 17px;
+            }
+        }
+        .pdp-top-duration,
+        .pdp-top-seasons {
+            position: relative;
+            line-height: 21px;
+            color: rgba(255, 255, 255, 0.6);
+
+            @media (max-width: @mobileLargeBP) {
+                padding-left: 8px;
+                line-height: 17px;
+            }
+        }
+    }
+
+    &-buttonBar {
+        padding-top: 30px;
+        margin: 0 -10px;
+        align-items: center;
+        display: flex;
+        display: -webkit-flex;
+        .bsBorderRadius(17px);
+
+        @media (max-width: @mobileLargeBP) {
+            clear: left;
+            padding-top: 15px;
+            margin: 0;
+        }
+
+        .pdp-top-watchNowButton {
+            // color: black;
+            // background-color: @colorYellow;
+            align-items: center;
+            justify-content: center;
+            display: inline-flex;
+        }
+
+        & > a {
+            margin: 0 10px;
+            // color: black;
+            align-items: center;
+            justify-content: center;
+
+            @media (max-width: @mobileLargeBP) {
+                width: 100%;
+                margin: 10px 0 0;
+                .bsBoxSizing();
+                text-align: center;
+
+                &:first-child {
+                    align-items: center;
+                    display: flex;
+                    display: -webkit-flex;
+                    justify-content: center;
+                    margin-top: 0;
+                    margin: auto;
+                    color: black;
+                }
+            }
+        }
+
+        .pdp-top-watchNowButton {
+        }
+        .pdp-top-startOverButton {
+            .secondarybutton();
+        }
+        .pdp-top-trailerButton {
+            .secondarybutton();
+        }
+    }
+
+    &-description {
+        position: relative;
+        // padding-top: 30px;
+        display: -webkit-box;
+        font: 18px Roboto;
+        // line-height: 1.5333;
+        color: #ffffff;
+        -webkit-line-clamp: initial;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        z-index: 1;
+
+        @media (max-width: @mobileLargeBP) {
+            font-size: 13px;
+            padding-top: 15px;
+        }
+
+        &-more {
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            max-height: 66px;
+
+            @media (max-width: @mobileLargeBP) {
+                max-height: 57px;
+            }
+        }
+    }
+
+    &-description-moreButton {
+        background: none !important;
+        background-color: rgba(0, 0, 0, 0.2) !important;
+        color: @colorNavGray !important;
+        position: relative;
+        margin-top: 10px !important;
+        z-index: 1;
+
+        &:hover {
+            color: @colorWhite;
+        }
+    }
+
+    &-toolBar {
+        position: relative;
+        padding-top: 30px;
+        display: flex;
+        display: -webkit-flex;
+        margin: 0 -18px;
+        z-index: 20;
+
+        @media (max-width: @mobileLargeBP) {
+            padding-top: 20px;
+            margin: 0 -20px;
+        }
+
+        & > span {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            margin: 0 18px;
+            z-index: 1;
+
+            @media (max-width: @mobileLargeBP) {
+                width: 24px;
+                height: 24px;
+                margin: 0 20px;
+            }
+
+            svg {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                fill: #c2c2c2;
+                .bsTransition(fill);
+                z-index: 1;
+            }
+
+            &:hover {
+                & > svg {
+                    fill: @colorYellow;
+                }
+            }
+        }
+
+        .pdp-top-likeButton {
+        }
+
+        .pdp-top-dislikeButton {
+        }
+
+        .pdp-top-watchlistButton {
+        }
+
+        .pdp-top-shareButton {
+            z-index: 2;
+        }
+    }
+}
+.pdp-episodic {
+    @media (max-width: @mobileLargeBP) {
+        margin-top: 0px !important;
+    }
+
+}
+
+.pdp-more-like-this {
+    @media (max-width: @mobileLargeBP) {
+        margin-top: 0px !important;
+    }
+    .listRow {
+        margin-bottom: 40px;
+    }
+}
+.pdp-tags {
+    .listHeader {
+        // padding-top: 30px;
+    }
+}

@@ -1,0 +1,151 @@
+@import "../../styles/config";
+
+.searchTop {
+    background-color: #193347;
+
+    .searchField {
+        position: relative;
+        margin: 0px @sitePadding 0px;
+        display: block;
+        padding: 10px 0px;
+
+        &-input {
+            .bsNoAppearance();
+            width: 100%;
+            border: solid 1px #263446;
+            .bsBorderRadius(24px);
+            background-color: #111921;
+            color: #fff;
+            font-size: 20px;
+            height: 60px;
+            margin-top: 20px;
+            padding: 10px 15px 0 60px;
+            .bsBoxSizing();
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            &::placeholder {
+                color: @colorNavGray;
+            }
+        }
+
+        svg {
+            position: absolute;
+            top: 50px;
+            left: 15px;
+            width: 30px;
+            height: 30px;
+            fill: @colorNavGray;
+            .bsTransition(fill);
+        }
+
+        @media (max-width: @mobileLargeBP) {
+            margin: 60px @sitePaddingMobile 0px;
+
+            &-input {
+                font: 14px Roboto;
+                height: 50px;
+                padding: 0 10px 0 44px;
+            }
+
+            svg {
+                top: 45px;
+                left: 10px;
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        .filled {
+            svg {
+                fill: #fff;
+            }
+        }
+    }
+    .searchResult-heading {
+        margin: auto;
+        justify-content: center;
+        display: flex;
+        display: -webkit-flex;
+        .active {
+            color: #ebebeb;
+
+            .count {
+                color: @colorYellow;
+            }
+        }
+
+        h2 {
+            color: @colorNavGray;
+            margin: 10px 20px;
+            font: 15px Roboto;
+            text-align: center;
+            cursor: pointer;
+            .count {
+                margin-left: 5px;
+            }
+        }
+
+        @media (max-width: @mobileLargeBP) {
+            h2 {
+                font: 10px Roboto;
+
+                .count {
+                    margin-left: 3px;
+                }
+            }
+        }
+    }
+
+    .activeBar {
+        position: absolute;
+        display: block;
+        width: 0;
+        height: 2px;
+        background-color: @colorYellow;
+        .bsBorderRadius(1px 1px 0 0);
+        .bsTransition(all);
+        transition-property: transform, width;
+    }
+
+    .showNone {
+        display: none;
+    }
+}
+.searchResults-none,
+.searchResults-loading {
+    display: block;
+    margin: 20% @sitePadding;
+    text-align: center;
+    font-weight: 700;
+    font: 18px Roboto;
+    line-height: 1.25;
+    color: @colorCurrent;
+
+    .searchQuery {
+        display: block;
+        margin-top: 10px;
+        color: @colorNavGray;
+    }
+
+    @media (max-width: @mobileLargeBP) {
+        margin-top: 60px;
+    }
+}
+
+.searchResults-loading {
+}
+
+.channelCard {
+    width: 300px;
+}
+.listHeaders {
+    margin-bottom: 0px !important;
+
+}
+
+h2.listHeader {
+    @media (max-width: @mobileLargeBP) {
+        font: 12px Roboto;
+    }
+}

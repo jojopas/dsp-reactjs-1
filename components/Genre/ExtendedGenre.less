@@ -1,0 +1,34 @@
+@import "../../styles/config.less";
+
+.clickedTitle {
+    display: flex;
+    display: -webkit-flex;
+    height: 40px;
+    margin-top: 30px;
+
+    .backButton {
+        display: flex;
+        display: -webkit-flex;
+        align-self: center;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        margin-left: 30px;
+
+        svg {
+            fill: @colorNavGray;
+        }
+
+        &:hover {
+            svg {
+                fill: #ebebeb;
+            }
+        }
+    }
+
+    .clickedHeader {
+        font: 24px Roboto;
+        margin: auto;
+        text-align: center;
+    }
+}

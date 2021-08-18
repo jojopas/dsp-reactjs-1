@@ -1,0 +1,36 @@
+@import url("../../styles/config.less");
+@iconWidth: 20px;
+
+.scroll {
+    display: flex;
+    display: -webkit-flex;
+    width: 50px;
+    position: absolute;
+    top: 10px;
+    z-index: 90;
+    right: 45px;
+    justify-content: space-between;
+    fill: white;
+
+    .scrollLeftRight {
+        width: @iconWidth;
+        height: @iconWidth;
+        border-radius: @iconWidth;
+        background-color: rgba(255, 255, 255, 0.08);
+        &:hover {
+            background-color: @colorYellow;
+            fill: @colorBlue;
+            cursor: pointer;
+        }
+    }
+
+    .noHover {
+        pointer-events: none;
+        background-color: #929698;
+        fill: #d5d8d596;
+    }
+
+    @media (max-width: (@mobileLargeBP + 1px)) {
+        display: none;
+    }
+}

@@ -1,0 +1,188 @@
+import axios from "axios";
+import axiosRetry from "axios-retry";
+import getConfig from "next/config";
+
+const { serverRuntimeConfig } = getConfig();
+import { constants } from "../../../config";
+import unauthorized from "../../../helpers/auth/unauthorized";
+import { validateCors } from "../../../helpers/cors";
+import {
+    EPG,
+    Genres,
+    Page,
+    PDP,
+    Rails,
+    Recommendation,
+    Search,
+} from "../../../models";
+
+export default async (req, res) => {
+    await validateCors(req, res);
+    let {
+        query: { dspRoute },
+        body,
+    } = req;
+    const dspTokenObj = serverRuntimeConfig.DSP_TOKEN
+        ? JSON.parse(serverRuntimeConfig.DSP_TOKEN)
+        : null;
+    const authorization = dspTokenObj ? dspTokenObj.token : null; // JUST WOW 2.0
+    const ogRoute = dspRoute;
+    dspRoute = dspRoute.join("/");
+
+    /*
+    console.log('=====================================');
+    console.log(serverRuntimeConfig.DSP_TOKEN);
+    console.log('=====================================');
+    */
+
+    const platformRoutes = ["homepage", "movies", "series"];
+    const countryRoutes = [
+        "homepage",
+        "movies",
+        "series",
+        "live/epg",
+        "channels",
+    ];
+    const RailsModelRoutes = ["homepage", "movies", "series", "channels"];
+    const sanitizeDateString = (date) => date.toISOString();
+    // Recommendation
+    if (ogRoute[0] === "search") {
+        if (ogRoute[1] === "recommendation") {
+            dspRoute = `${ogRoute[0]}/${ogRoute[1]}/${ogRoute[2]}?q=${ogRoute[3]}&size=${constants.RECO_SIZE}`;
+        } else {
+            dspRoute = `${ogRoute[0]}?q=${ogRoute[1]}&size=${constants.SEARCH_SIZE}`;
+        }
+    }
+
+    // Search
+    if (ogRoute[0] === "find") {
+        dspRoute = `find/channels/${constants.DSP_PLATFORM}?q=${ogRoute[1]}&size=${constants.SEARCH_SIZE}`;
+    }
+
+    // Genres
+    let genres = "";
+    if (ogRoute[2] === "genres") {
+        genres = ogRoute[ogRoute.length - 1];
+        const genreRoute = ogRoute.pop();
+        dspRoute = ogRoute.join("/");
+    }
+
+    // Genre
+    let genre = "";
+    let genreType = "";
+    if (ogRoute[1] === "genre") {
+        //genre = encodeURIComponent(ogRoute[ogRoute.length-1].replace(/-/g,' '));
+        //remove last two elements before creating dsp route.  these are for us to pass params to this page
+        genre = encodeURIComponent(ogRoute.pop().replace(/-/g, " "));
+        ogRoute.pop();
+        genreType = ogRoute.pop();
+        dspRoute = "channels";
+        //https://api.myspotlight.tv/channels/US?genre=<genre>&programming_type=<movie || series>
+    }
+    let apiUrl = `https://${serverRuntimeConfig.DSP_API_URL}/${dspRoute}`;
+
+    if (countryRoutes.includes(dspRoute)) {
+        apiUrl = `${apiUrl}/${constants.DSP_COUNTRY}`;
+    }
+
+    if (dspRoute.includes("live/epg")) {
+        let startDate, endDate;
+        // set startTime
+        if (ogRoute[2] && Number.isInteger(ogRoute[2])) {
+            startDate = new Date(0);
+            startDate.setUTCSeconds(Number(ogRoute[2]));
+        } else {
+            startDate = new Date();
+            startDate.setMinutes(startDate.getMinutes() > 29 ? 30 : 0, 0, 0);
+        }
+        // set EndTime
+        if (ogRoute[3] && !Number.isNaN(ogRoute[3])) {
+            endDate = new Date(0);
+            endDate.setUTCSeconds(Number(ogRoute[3]));
+        } else {
+            // endDate = new Date(0);
+            // endDate.setUTCSeconds(
+            //     startDate.getTime() / 1000 +
+            //         constants.EPG_SLOT_TO_RENDER * constants.EPG_SLOT_SECOND
+            // );
+            endDate = new Date();
+            endDate.setDate(endDate.getDate() + constants.EPG_NUMBER_DAYS);
+            endDate.setHours(0, 0, 0, 0);
+        }
+        const startTime = sanitizeDateString(startDate);
+        const endTime = sanitizeDateString(endDate);
+        const programmSize = -1;
+        apiUrl = `https://api.staging.myspotlight.tv/live/epg/${constants.DSP_COUNTRY}?start_time=${startTime}&end_time=${endTime}&programme_size=${programmSize}&from=0`;
+        console.log("dspRoute", apiUrl, dspRoute, ogRoute[2]);
+    }
+
+    if (platformRoutes.includes(dspRoute)) {
+        apiUrl = `${apiUrl}/${constants.DSP_PLATFORM}`;
+    }
+
+    // Genre
+    if (genre !== "") {
+        apiUrl = `${apiUrl}?genre=${genre}&programming_type=${genreType}`;
+    }
+
+    if (ogRoute[0] === "findChannels") {
+        const date = new Date();
+        date.setMinutes(date.getMinutes() > 29 ? 30 : 0, 0, 0);
+        const startTime = sanitizeDateString(date);
+        date.setDate(date.getDate() + 8);
+        date.setHours(0, 0, 0, 0);
+        const endTime = sanitizeDateString(date);
+        apiUrl = `https://api.staging.myspotlight.tv/find/programs/${constants.DSP_COUNTRY}/${constants.DSP_PLATFORM}?q=${ogRoute[1]}&size=${constants.SEARCH_SIZE}&start_time=${startTime}&end_time=${endTime}`;
+    }
+    // console.log("url", apiUrl, dspRoute, ogRoute);
+    const axiosOptions = {
+        url: apiUrl,
+        method: req.method,
+        headers: {
+            "x-access-token": authorization,
+        },
+    };
+
+    if (req.method === "POST") {
+        axiosOptions.body = JSON.stringify(body);
+    }
+    axiosRetry(axios, { retries: constants.AXIOS_RETRY_CNT });
+    const { data } = await axios(axiosOptions);
+    let pageData = data;
+
+    // Rails Model
+    if (RailsModelRoutes.includes(dspRoute)) {
+        pageData = new Rails(genre !== "" ? data : data[dspRoute]);
+    }
+
+    //Genres Model
+    else if (genres !== "") {
+        pageData = new Genres(data, genres);
+    }
+
+    // EPG Model
+    else if (dspRoute === "live/epg") {
+        pageData = new EPG(data);
+    }
+
+    // PDP Model
+    else if (ogRoute[0] === "channel") {
+        pageData = new PDP(data);
+    }
+    // Recommendation Model
+    else if (ogRoute[0] === "search") {
+        pageData = new Recommendation(data);
+    }
+
+    // Recommendation Model
+    else if (ogRoute[0] === "find") {
+        pageData = new Search(data);
+    }
+
+    // Pages Model
+    else if (dspRoute.includes("pages")) {
+        pageData = new Page(data);
+    }
+
+    res.status(200).json({ data: pageData });
+};

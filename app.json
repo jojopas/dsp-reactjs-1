@@ -1,0 +1,15 @@
+{
+    "name": "sports-tv",
+    "scripts": {
+    },
+    "env": {},
+    "formation": {
+    },
+    "addons": [
+    ],
+    "buildpacks": [
+        {
+            "url": "heroku/nodejs"
+        }
+    ]
+}

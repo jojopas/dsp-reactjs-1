@@ -1,0 +1,37 @@
+@import "../../styles/config.less";
+
+h2.listHeader {
+    color: #b4b7bb;
+    font: 18px Roboto;
+    cursor: pointer;
+
+    line-height: 1.333;
+    text-overflow: ellipsis;
+    padding-left: 45px;
+
+    @media (max-width: @mobileLargeBP) {
+        font: 15px Roboto;
+        padding-left: 20px;
+        // padding: 30px (@sitePaddingMobile + 4) 12px;
+    }
+}
+
+.listHeaders {
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+    margin-bottom: 10px;
+
+    .listHeaderIcon {
+        cursor: pointer;
+        fill: @colorYellow;
+        width: 24px;
+        height: 24px;
+        margin-left: 10px;
+    }
+
+    @media (max-width: @mobileLargeBP) {
+        padding-top: 10px;
+    }
+}

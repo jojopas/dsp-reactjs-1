@@ -1,0 +1,111 @@
+@import "../../styles/config.less";
+
+.epg-container {
+    display: flex;
+    display: -webkit-flex;
+    overflow: hidden;
+    padding-top: @headerHeight;
+
+    .epgPlayer {
+        display: flex;
+        display: -webkit-flex;
+        flex-direction: column;
+        position: sticky;
+        align-self: flex-start;
+        top: @headerHeight;
+        width: 400px;
+        z-index: 90;
+        padding: 0 20px;
+        .bsBoxSizing();
+
+        .fixed-player {
+            position: relative;
+            z-index:2;
+
+            .live-watching {
+                // position: absolute;
+                // top: 40px;
+                color: @colorYellow;
+                font-size: large;
+
+                @media (max-width: @mobileLargeBP) {
+                    display: none;
+                }
+            }
+
+            @media (max-width: @mobileLargeBP) {
+                padding-top: 0;
+                background-color: #0e212f;
+            }
+            .current-channel-information {
+                display: flex;
+                display: -webkit-flex;
+                margin-top: 10px;
+                color: white;
+                align-items: center;
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                    margin-right: 20px;
+                }
+
+                .now-playing {
+                    font: 12px Roboto;
+                    color: #fbcc35;
+                    text-overflow: ellipsis;
+                }
+
+                h1 {
+                    align-self: center;
+                    margin: 0px;
+                    font: 15px Roboto;
+                }
+
+                .channelName {
+                    font: 12px Roboto;
+                }
+            }
+        }
+
+        .ads {
+            display: flex;
+            display: -webkit-flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 30px;
+            z-index:1;
+
+            @media (max-width: @mobileLargeBP) {
+                display: none;
+            }
+        }
+        @media (max-width: @mobileLargeBP) {
+            padding: 0;
+            top: @headerHeightMob;
+            display: block;
+            width: 100%;
+            position: fixed;
+        }
+    }
+
+    @media (max-width: @mobileLargeBP) {
+        flex-direction: column;
+        padding-top: @headerHeightMob;
+    }
+}
+
+@media (min-width: (@mobileLargeBP + 1px)) {
+    .epgInactive {
+        .epgPlayer {
+            .video-js {
+                &:after {
+                    opacity: 0;
+                }
+            }
+            &:after {
+                opacity: 1;
+            }
+        }
+    }
+}
