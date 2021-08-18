@@ -112,8 +112,7 @@ export default async (req, res) => {
         const startTime = sanitizeDateString(startDate);
         const endTime = sanitizeDateString(endDate);
         const programmSize = -1;
-        apiUrl = `https://api.staging.myspotlight.tv/live/epg/${constants.DSP_COUNTRY}?start_time=${startTime}&end_time=${endTime}&programme_size=${programmSize}&from=0`;
-        console.log("dspRoute", apiUrl, dspRoute, ogRoute[2]);
+        apiUrl = `${apiUrl}?start_time=${startTime}&end_time=${endTime}&programme_size=${programmSize}&from=0`;
     }
 
     if (platformRoutes.includes(dspRoute)) {
@@ -132,7 +131,7 @@ export default async (req, res) => {
         date.setDate(date.getDate() + 8);
         date.setHours(0, 0, 0, 0);
         const endTime = sanitizeDateString(date);
-        apiUrl = `https://api.staging.myspotlight.tv/find/programs/${constants.DSP_COUNTRY}/${constants.DSP_PLATFORM}?q=${ogRoute[1]}&size=${constants.SEARCH_SIZE}&start_time=${startTime}&end_time=${endTime}`;
+        apiUrl = `https://${serverRuntimeConfig.DSP_API_URL}/find/programs/${constants.DSP_COUNTRY}/${constants.DSP_PLATFORM}?q=${ogRoute[1]}&size=${constants.SEARCH_SIZE}&start_time=${startTime}&end_time=${endTime}`;
     }
     // console.log("url", apiUrl, dspRoute, ogRoute);
     const axiosOptions = {
