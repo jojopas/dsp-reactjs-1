@@ -33,27 +33,11 @@ function Layout({ config, session, pageType, seoObj, children }) {
         }
     }, [siteWrapperRef]);
 
-    // Poll for if someone deletes their city cookie.  We need a city cookie to locate them.
-
-    // Fix for people that had visited the site before we implemented the market cookie for cache strategy
-
-    // Destroy the experience cookie on unload
-    const destroyExpCookie = () => {
-        //console.log('destroy');
-        destroyCookie(null, `_${constants.COOKIE_PREFIX}_experienceId`);
-    };
 
     React.useEffect(() => {
-        // interval = setInterval(cityCookieCheck, 10000);
-
         if (window) {
-            window.addEventListener("beforeunload", destroyExpCookie);
             sendToSegment("page");
         }
-
-        return () => {
-            // clearInterval(interval);
-        };
     }, []);
     // console.log('Layout', pageType);
     return useObserver(() => (
