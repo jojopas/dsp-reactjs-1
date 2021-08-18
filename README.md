@@ -2,7 +2,7 @@
 
 ### Deployment Link
 
-    https://sportstv.herokuapp.com/
+    https://sportstv-dev.herokuapp.com/
 
 -   ##### To run the development server with NPM:
 
