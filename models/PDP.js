@@ -26,11 +26,11 @@ export default class PDP {
             };
 
             if (pdp.childchannels && pdp.childchannels.length > 0) {
-                const seasons = pdp.childchannels.map((c) => {
+                const seasons = pdp.childchannels.map((c, index) => {
                     const episodes = c.playlist;
                     return {
                         season: {
-                            number: episodes[0].season,
+                            number: episodes[0].season ? episodes[0].season : index+1,
                             episodes: episodes.length.toString(),
                         },
                         cards: episodes.map((e) => {
