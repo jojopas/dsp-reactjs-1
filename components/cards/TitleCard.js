@@ -25,7 +25,6 @@ export default function TitleCard(data) {
                 >
                     <a className="card">
                         <>
-                            {" "}
                             {data.image ? (
                                 <img
                                     src={constants.NOT_FOUND_SRC}
