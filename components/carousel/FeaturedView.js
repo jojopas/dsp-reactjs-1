@@ -1,4 +1,5 @@
 import Button from "../button/Button";
+import NavLink from "../nav/NavLink";
 import { constants } from "../../config";
 import "./FeaturedView.less";
 
@@ -20,7 +21,7 @@ const FeaturedView = ({ data, width, index, isMobile }) => {
                         background: `${isMobile?'':`linear-gradient(
                             to bottom,
                             rgba(13, 38, 56, 0) 0%,
-                            rgba(13, 38, 56, 0) 60%,                            
+                            rgba(13, 38, 56, 0) 60%,
                             rgba(13, 38, 56, 1) 90%,
                             rgba(13, 38, 56, 1) 100%),
                         linear-gradient(
@@ -33,23 +34,17 @@ const FeaturedView = ({ data, width, index, isMobile }) => {
                             data.image || data.wallpaper || data.poster
                         }/${width}/600") no-repeat center center`,
                     }}
-                ></span>
+                />
                 <div className="featured-wrapper-container">
                     <div className="info">
                         <div className="info-container">
                             <h1>{data.title}</h1>
                             <p>{data.description}</p>
                             <div className="cta">
-                                <Button
-                                    className="cta-button"
-                                    inner={constants.WATCH_NOW}
-                                    url={`/on-demand/${data.type || "movies"}/${
-                                        data.slug
-                                    }`}
-                                    as={`/on-demand/${data.type || "movies"}/${
-                                        data.slug
-                                    }`}
-                                />
+                                <NavLink
+                                    href={`/on-demand/${data.type || "movies"}/[...slug]`}
+                                    as={`/on-demand/${data.type || "movies"}/${data.slug}`}
+                                ><a className="button cta-button">{constants.WATCH_NOW}</a></NavLink>
                             </div>
                         </div>
                     </div>

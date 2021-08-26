@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import getConfig from "next/config";
-import { useRouter } from "next/router";
+import Router from 'next/router';
+import NProgress from 'nprogress';
 import "lazysizes";
 import "lazysizes/plugins/attrchange/ls.attrchange";
-import Preloading from "../components/preloading/Preloading";
 
 import { InjectStoreContext, StoreContext } from "../store";
 import config from "../head/config";
@@ -11,7 +11,6 @@ import GlobalSEOTags from "../head/global";
 import { sendWebVitals, sendToSegment } from "../analytics";
 const { publicRuntimeConfig } = getConfig();
 import "../styles/main.less";
-import nProgress from "nprogress";
 
 // module.hot.dispose event not being called on local dev causes css loss from time to time
 // https://github.com/sheerun/extracted-loader/issues/11
@@ -23,37 +22,25 @@ if (module.hot) {
     });
 }
 
+Router.events.on('routeChangeStart', (url) => {
+    NProgress.start();
+})
+Router.events.on('routeChangeComplete', (url) => {
+    NProgress.done();
+    // GA Page View
+    window.gtag('config', publicRuntimeConfig.GA_ID, {
+        page_path: url,
+    })
+    // Segment Page View
+    sendToSegment('page');
+});
+Router.events.on('routeChangeError', () => NProgress.done());
+
 function App({ Component, pageProps }) {
-    const router = useRouter();
-    const [pageLoading, setPageLoading] = React.useState(false);
-    React.useEffect(() => {
-        const handleStart = () => {
-            // setPageLoading(true);
-            nProgress.start();
-        };
-        const handleComplete = () => {
-            // setPageLoading(false);
-            nProgress.done();
-        };
-
-        router.events.on("routeChangeStart", handleStart);
-        router.events.on("routeChangeComplete", (url) => {
-            // GA Page View
-            window.gtag("config", publicRuntimeConfig.GA_ID, {
-                page_path: url,
-            });
-            // Segment Page View
-            sendToSegment("page");
-            handleComplete();
-            // setPageLoading(false);
-        });
-        router.events.on("routeChangeError", handleComplete);
-    }, [router]);
-
     // If your page has Next.js data fetching methods returning a state for the Mobx store,
     // then you can hydrate it here.
     const getLayout = Component.getLayout || ((page) => page);
-    return !pageLoading ? (
+    return (
         <InjectStoreContext
             initialData={pageProps.initialStoreData}
             sessionData={pageProps.sessionStoreData}
@@ -61,8 +48,6 @@ function App({ Component, pageProps }) {
             <GlobalSEOTags title={config.title} suffix={config.suffix} />
             {getLayout(<Component {...pageProps} />)}
         </InjectStoreContext>
-    ) : (
-        <Preloading />
     );
 }
 

@@ -4,6 +4,7 @@ import { useObserver } from "mobx-react-lite";
 
 import { StoreContext } from "../../store";
 import InlineSVG from "../InlineSVG";
+import NavLink from "../nav/NavLink";
 import "./MobileHeader.less";
 
 export default function MobileHeader() {
@@ -17,22 +18,29 @@ export default function MobileHeader() {
 
     return (
         <span className="mobileHeader">
-            <a href="/">
+            <NavLink
+                href="/"
+                as="/"
+                exact={true}
+            >
                 <div className="listHeader">
                     <InlineSVG
                         type={isOnDemand ? "channels" : "channelsActive"}
                     />
                     <h1>Live Channels</h1>
                 </div>
-            </a>
-            <a href="/on-demand">
+            </NavLink>
+            <NavLink
+                href="/on-demand/[[...slug]]"
+                as="/on-demand"
+            >
                 <div className="listHeader">
                     <InlineSVG
                         type={isOnDemand ? "on-demandActive" : "on-demand"}
                     />
                     <h1>On Demand</h1>
                 </div>
-            </a>
+            </NavLink>
         </span>
     );
 }

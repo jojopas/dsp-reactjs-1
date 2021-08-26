@@ -22,6 +22,7 @@ export default function CardList({
     isOnDemand = false,
     data,
     children,
+    index,
     ...props
 }) {
     let curIndex = 0;
@@ -289,7 +290,7 @@ export default function CardList({
                             showArrow={showArrow}
                             onClick={() =>
                                 props?.onHeaderClick
-                                    ? props?.onHeaderClick(data)
+                                    ? props?.onHeaderClick(index)
                                     : null
                             }
                         />

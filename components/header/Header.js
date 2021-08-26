@@ -12,7 +12,7 @@ import { constants } from "../../config";
 
 import "./Header.less";
 import ButtonList from "../buttonList/ButtonList";
-import MobileHeader from "./MobileHeader.";
+import MobileHeader from "./MobileHeader";
 
 export default function Header({ pageType }) {
     const store = React.useContext(StoreContext);
@@ -44,7 +44,7 @@ export default function Header({ pageType }) {
         {
             id: "ondemand",
             inner: constants.ONDEMAND,
-            url: "/on-demand",
+            url: "/on-demand/[[...slug]]",
             as: "/on-demand",
         },
         // {id: 'shows', inner: 'Shows', url: '/shows', as: '/shows'},
@@ -77,7 +77,7 @@ export default function Header({ pageType }) {
             type: "svg",
             svg: "on-demand",
             inner: constants.ONDEMAND,
-            url: "/on-demand",
+            url: "/on-demand/[[...slug]]",
             as: "/on-demand",
         },
         {
@@ -85,7 +85,7 @@ export default function Header({ pageType }) {
             type: "svg",
             svg: "search",
             inner: "Search",
-            url: "/search",
+            url: "/search/[[...searchQuery]]",
             as: "/search",
         },
         /*{

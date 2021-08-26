@@ -20,7 +20,7 @@ export default function Footer() {
         {
             id: "on-demand",
             inner: constants.ONDEMAND,
-            url: "/on-demand",
+            url: "/on-demand/[[...slug]]",
             as: "/on-demand",
         },
         // { id: "shows", inner: "Shows", url: "/shows", as: "/shows" },

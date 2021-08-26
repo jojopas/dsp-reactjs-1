@@ -1,5 +1,5 @@
 import React from "react";
-import { useObserver } from "mobx-react-lite";
+import { useRouter } from 'next/router';
 
 import getSession from "../../helpers/session/get-session";
 import pageError from "../../helpers/page/error";
@@ -9,50 +9,59 @@ import { pageBuilder } from "../../helpers/page/builder";
 import Error404 from "../../components/404";
 import CardList from "../../components/cardList/CardList";
 import Carousel from "../../components/carousel/Carousel";
-import Button from "../../components/button/Button";
-import { constants } from "../../config";
-import GenreSelector from "../../components/nav/GenreSelector";
-import { slugify } from "../../helpers/utils/strings";
 import FeaturedView from "../../components/carousel/FeaturedView";
-import "./index.less";
 import ExtendedGenre from "../../components/Genre/ExtendedGenre";
+import {slugify} from '../../helpers/utils/strings';
 
-export default function OnDemand({
-    session,
-    config,
-    page,
-    error,
-    pageType,
-    seoObj,
-}) {
+import "./index.less";
+
+export default function OnDemand({page, error}) {
     const store = React.useContext(StoreContext);
+    const router = useRouter();
 
     const [width, setWidth] = React.useState();
-    const [clickedCardTitle, setClickedCardTitle] = React.useState();
-    /*const genreNav = page.genres?.map((genre) => ({
-        id: genre,
-        inner: genre.toUpperCase(),
-        url: `/movies/genre/[...slug]`,
-        as: `/movies/genre/${slugify(genre)}`,
-    }));*/
+    const [viewAllData, setViewAllData] = React.useState(null);
+
+    const viewAllClick = (railIndex) => {
+        const railData = (railIndex !== null) ? page.rails[railIndex+1] : null;
+        let path = '/on-demand/[[...slug]]';
+        let as = '/on-demand';
+        if(railIndex !== null) {
+            as = `${as}/all/${slugify(railData.category.name)}`;
+            window.scrollTo(0,0);
+        }
+        router.push(path, as, {shallow: true});
+    };
+
+    const routeFix = (url) => {
+        const pathParts = url.substring(1).split('/');
+        let newRailData;
+        if(pathParts.length === 3){
+            newRailData = page.rails.filter(obj => {
+                return slugify(obj.category.name) === pathParts[2];
+            })[0];
+        }
+        setViewAllData(newRailData);
+
+    }
+
+    React.useEffect(() => {
+        if(window.location.pathname !== '/on-demand'){
+            routeFix(window.location.pathname);
+        }
+
+        router.events.on('routeChangeComplete', routeFix);
+
+        return () => {
+            router.events.off('routeChangeComplete', routeFix);
+        }
+    }, []);
 
     React.useEffect(() => {
         if (!width && typeof window !== "undefined") {
             setWidth(window.innerWidth);
         }
     }, [width]);
-
-    React.useEffect(() => {
-        if (clickedCardTitle) {
-            history?.replaceState(
-                null,
-                "",
-                `/category/${clickedCardTitle?.category?.name}`
-            );
-        } else {
-            history?.replaceState(null, "", `/on-demand`);
-        }
-    }, [clickedCardTitle]);
 
     const views = width
         ? page?.movies
@@ -67,12 +76,12 @@ export default function OnDemand({
         : null;
 
     // console.log("page", page);
-    return useObserver(() =>
+    return (
         !error ? (
-            clickedCardTitle ? (
+            viewAllData ? (
                 <ExtendedGenre
-                    data={clickedCardTitle}
-                    setClickedCardTitle={setClickedCardTitle}
+                    data={viewAllData}
+                    setClickedCardTitle={viewAllClick}
                 />
             ) : (
                 <>
@@ -88,35 +97,30 @@ export default function OnDemand({
                             className="carousel-container"
                         />
                     </div>
-                    {/*{genreNav && (
-                        <GenreSelector type="movies" links={genreNav} />
-                    )}*/}
-                    <div className="overflowWrapper">
-                        {page.rails.slice(1).map((rail, index) =>
-                            (
-                                <CardList
-                                    key={rail.category.id}
-                                    type="title"
-                                    data={rail}
-                                    isOnDemand={true}
-                                    onHeaderClick={setClickedCardTitle}
-                                />
-                            )
-                        )}
-                    </div>
+                    {page.rails.slice(1).map((rail, index) =>
+                        (
+                            <CardList
+                                key={rail.category.id}
+                                type="title"
+                                data={rail}
+                                isOnDemand={true}
+                                index={index}
+                                onHeaderClick={viewAllClick}
+                            />
+                        )
+                    )}
                 </>
             )
         ) : (
             <Error404 />
         )
-    );
+    )
 }
 OnDemand.getLayout = getLayout;
 
 export const getServerSideProps = async ({ req, res }) => {
     let { session, config } = await getSession(req, res);
     const routes = [
-        //"/api/dsp/company/available/genres/movies",
         "/api/dsp/homepage",
         "/api/dsp/movies/US/ios",
     ];
@@ -135,7 +139,9 @@ export const getServerSideProps = async ({ req, res }) => {
             page: page || null,
             error: error || false,
             pageType: "on-demand",
-            seoObj: {},
+            seoObj: {
+                title: "On Demand"
+            },
         },
     };
 };

@@ -3,9 +3,6 @@ import InlineSVG from "../InlineSVG";
 import CardList from "../cardList/CardList";
 
 export default function ExtendedGenre({ data, setClickedCardTitle }) {
-    React.useEffect(() => {
-        window.scrollTo(0, 0);
-    });
     return (
         <>
             <h1 className="noShow">{data?.category?.name}</h1>
