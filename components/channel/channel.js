@@ -594,6 +594,9 @@ export default function Channels({
                 clearTimeout(fsTimer);
                 document.removeEventListener('mousemove', throttledTestMouse);
                 document.removeEventListener('scroll', throttledTestMouse);
+
+                document.querySelector('body').classList.remove('vjs-full-window');
+                document.querySelector('html').style.cssText = '';
             };
         }, []);
     }
