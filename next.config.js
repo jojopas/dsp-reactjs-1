@@ -100,7 +100,8 @@ const nextConfig = {
         APP_VERSION: process.env.APP_VERSION || '0.0.0',
         GA_ID: process.env.GA_ID || constants.ENV_GA_ID,
         SEGMENT_WRITE_KEY: process.env.SEGMENT_WRITE_KEY || constants.ENV_SEGMENT_WRITE_KEY,
-        GOOGLE_RECAPTCHA_SITEKEY: process.env.GOOGLE_RECAPTCHA_SITEKEY || constants.GOOGLE_RECAPTCHA_SITEKEY
+        GOOGLE_RECAPTCHA_SITEKEY: process.env.GOOGLE_RECAPTCHA_SITEKEY || constants.GOOGLE_RECAPTCHA_SITEKEY,
+        LIVE_AD_URL: process.env.LIVE_AD_URL || constants.ENV_LIVE_AD_URL
     },
     poweredByHeader: false,
 }

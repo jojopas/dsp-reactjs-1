@@ -10,7 +10,6 @@ import Error404 from "../404";
 import EPGList from "../epg/EPGList";
 import { fetchData } from "../../helpers/utils/fetch-data";
 import EPGModal from "../modal/epgModal";
-const { publicRuntimeConfig } = getConfig();
 import LocalSEOTags from "../../head/local";
 import { visibilityCheck } from "../../helpers/utils/browser";
 import Player from "../player/Player";
@@ -18,6 +17,8 @@ import getConfig from "next/config";
 import { sendToSegment } from "../../analytics";
 // import "./index.less";
 import "./channel.less";
+
+const { publicRuntimeConfig } = getConfig();
 
 export default function Channels({
     session,
@@ -633,8 +634,8 @@ export default function Channels({
 
                         <div className="ads">
                             <img
-                                src="https://f9q4g5j6.ssl.hwcdn.net/mediaassets/6108009c5c6fc570262e0c65"
-                                alt="Adds"
+                                src={publicRuntimeConfig.LIVE_AD_URL}
+                                alt="Advertisement"
                             />
                         </div>
                     </div>

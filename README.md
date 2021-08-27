@@ -43,3 +43,4 @@ The page auto-updates as you edit files.
 | SEGMENT_WRITE_KEY        | qa: 'pJOFZYQaXKgw4QwFLgCcX3lwcPHRSnBB' prod: 'JiuzpzcYrsdlvAVEWW9vedGw3dXqyZ5V'                      | 'pJOFZYQaXKgw4QwFLgCcX3lwcPHRSnBB'         |
 | APP_VERSION              |                                                                                                      | '0.0.0'                                    |
 | GOOGLE_RECAPTCHA_SITEKEY |                                                                                                      | '6Lc5WT0aAAAAAK1o9PAW59s700x_adV7pgiyUC2F' |
+| LIVE_AD_URL | | 'https://f9q4g5j6.ssl.hwcdn.net/mediaassets/6108009c5c6fc570262e0c65'
