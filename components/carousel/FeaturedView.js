@@ -2,6 +2,7 @@ import Button from "../button/Button";
 import NavLink from "../nav/NavLink";
 import { constants } from "../../config";
 import "./FeaturedView.less";
+import React from 'react';
 
 const FeaturedView = ({ data, width, index, isMobile }) => {
     // const backgroundStyle = ["linear-gradient"].map(
@@ -49,11 +50,25 @@ const FeaturedView = ({ data, width, index, isMobile }) => {
                         </div>
                     </div>
                     <div className="image">
-                        <img
-                            src={`${data.image || data.poster}`}
-                            alt=""
-                            className="lazyload"
-                        />
+                        {data.image || data.poster ? (
+                            <img
+                                src={constants.NOT_FOUND_SRC}
+                                data-sizes="auto"
+                                data-srcset={`${data.image || data.poster}/200 200w,
+                                ${data.image || data.poster}/300 300w,
+                                ${data.image || data.poster}/400 400w,
+                                ${data.image || data.poster}/600 600w`}
+                                data-src={`${data.image || data.poster}/200`}
+                                alt={data.title}
+                                className="lazyload"
+                            />
+                        ) : (
+                            <img
+                                src={constants.NOT_FOUND_SRC}
+                                alt={data.title}
+                                className="lazyloaded"
+                            />
+                        )}
                     </div>
                 </div>
             </div>
