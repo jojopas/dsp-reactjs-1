@@ -1,53 +1,112 @@
 import React from "react";
-import { useObserver } from "mobx-react-lite";
 import useSWR from "swr";
+import {useRouter} from 'next/router';
 import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
 
 import getSession from "../../helpers/session/get-session";
 import pageError from "../../helpers/page/error";
 import { getLayout } from "../../components/Layout";
-import { StoreContext } from "../../store";
 import Error404 from "../../components/404";
 import { slugify } from "../../helpers/utils/strings";
-
-import "./index.less";
-import "../../components/cards/Cards.less";
 import CardList from "../../components/cardList/CardList";
 import InlineSVG from "../../components/InlineSVG";
 import { constants } from "../../config";
 import { isEmpty } from "../../helpers/utils/objects";
 import { fetchData } from "../../helpers/utils/fetch-data";
+import SearchModel from '../../models/Search';
 
-export default function Search({
-    session,
-    config,
-    query,
-    pageError,
-    pageType,
-    seoObj,
-}) {
-    const store = React.useContext(StoreContext);
+import "./index.less";
 
-    /*const allRefs = React.useRef([0, 1, 2].map(() => React.createRef()));
-    const activeBarRef = React.useRef(null);*/
-    const [searchQuery, setSearchQuery] = React.useState(
-        query.searchQuery
-            ? query.searchQuery[0]
-                  .replace(/-/g, " ")
-                  .replace(/[^0-9a-zA-Z ]+/, "")
-            : ""
-    );
-    const [currentSearchType, setCurrentSearchType] = React.useState(0);
-    //const { data, error, isValidating } = useSWR(searchQuery ? `${publicRuntimeConfig.BASE_URL}/api/dsp/search/${searchQuery.replace(/[^0-9a-zA-Z ]+/, '')}` : null, async (url) => await fetchData(url));
-    const { data, error, isValidating } = useSWR(
-        searchQuery
-            ? `/api/dsp/find/${searchQuery.replace(/[^0-9a-zA-Z ]+/, "")}`
-            : null,
-        async (url) => await fetchData(url)
-    );
+const { publicRuntimeConfig } = getConfig();
 
-    const {
+export default function Search({session, config, query, pageError, pageType, seoObj}) {
+    console.log(config);
+    let typingTimer;
+    const doneTypingInterval = 1000;
+    const { dspToken } = config;
+    const router = useRouter();
+    const searchInput = React.useRef(null);
+    const [searchQuery, setSearchQuery] = React.useState((query.searchQuery) ? query.searchQuery[0].replace(/-/g,' ').replace(/[^0-9a-zA-Z ]+/, '') : '');
+    const [inputValue, setInputValue] = React.useState((query.searchQuery) ? query.searchQuery[0].replace(/-/g,' ').replace(/[^0-9a-zA-Z ]+/, '') : '');
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [result, setResult] = React.useState(null);
+    //const [currentSearchType, setCurrentSearchType] = React.useState(0);
+
+    let apiUrl = `https://${publicRuntimeConfig.DSP_API_URL}/find/channels/${constants.DSP_PLATFORM}?q=`;
+
+    const { data, error, isValidating } = useSWR(searchQuery ? `${apiUrl}${searchQuery.replace(/[^0-9a-zA-Z ]+/, '')}&size=${constants.SEARCH_SIZE}` : null, async (url) => await fetchData(url, {authorization: dspToken}));
+
+    // Listen for route change to update search query (back/forward buttons)
+    React.useEffect(() => {
+        const handleRouteChange = (url) => {
+            const query = url.substring(url.lastIndexOf('/') + 1)
+                .toLowerCase()
+                .replace(/-/g,' ')
+                .replace(/[^0-9a-zA-Z ]+/, '');
+
+            setIsLoading(true);
+            setResult(null);
+            setInputValue(( query === 'search') ? '' : query);
+            setSearchQuery(( query === 'search') ? '' : query);
+
+            if (searchInput && searchInput.current) {
+                searchInput.current.blur();
+            }
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
+        router.events.on('routeChangeComplete', handleRouteChange);
+
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange);
+        }
+    }, []);
+
+    React.useEffect(() => {
+        setIsLoading(isValidating);
+    }, [isValidating]);
+
+    React.useEffect(() => {
+        if (data && data.data && data.data.channels) {
+            setResult(new SearchModel(data.data).toJSON());
+        }
+    }, [data]);
+
+
+    React.useEffect(() => {
+        if(searchQuery && slugify(searchQuery) !== '') {
+            router.push('/search/[[...searchQuery]]', `/search/${slugify(searchQuery)}`, { shallow: true });
+        } else {
+            router.push('/search/[[...searchQuery]]', '/search', { shallow: true });
+        }
+    }, [searchQuery]);
+
+    const doneTyping = () => {
+        setIsLoading(true);
+        setResult(null);
+        setSearchQuery(inputValue);
+    };
+
+    const onKeyUp = () => {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    };
+
+    const onKeyDown = (e) => {
+        clearTimeout(typingTimer);
+        if (e.keyCode === 13) {
+            doneTyping();
+        }
+    };
+
+    const onInputChange = (val) => {
+        setInputValue(val);
+    };
+
+    /*const {
         data: channelData,
         error: errorChannel,
         isValidating: isValidatingChannel,
@@ -59,8 +118,7 @@ export default function Search({
               )}`
             : null,
         async (url) => await fetchData(url)
-    );
-    const [result, setResult] = React.useState(null);
+    );*/
 
     const setBarLine = () => {
         /*const activeNavItem =
@@ -72,7 +130,7 @@ export default function Search({
         activeBarRef.current.style.width = `${offsetWidth}px`;*/
     };
 
-    React.useEffect(() => {
+    /*React.useEffect(() => {
         const res = {};
         let flag = false;
         let count = 0;
@@ -93,7 +151,7 @@ export default function Search({
             count += res.demand.cards.length;
         }
 
-        /*if (Array.isArray(channelData?.data?.data?.programs)) {
+        /!*if (Array.isArray(channelData?.data?.data?.programs)) {
             flag = true;
 
             res.channel = {
@@ -105,7 +163,7 @@ export default function Search({
                 return card;
             });
             count += res.channel.cards.length;
-        }*/
+        }*!/
 
         if (flag) {
             setBarLine();
@@ -113,39 +171,29 @@ export default function Search({
         }
 
         setResult(flag ? res : null);
-    }, [data, channelData]);
-
-    React.useEffect(() => {
-        if (searchQuery && slugify(searchQuery) !== "") {
-            history.replaceState({}, "", `/search/${slugify(searchQuery)}`);
-        } else {
-            history.replaceState({}, "", "/search");
-        }
-        setBarLine();
-    }, [searchQuery]);
-
-    React.useEffect(() => {
-        setBarLine();
-    }, [currentSearchType]);
+    }, [data, channelData]);*/
 
     //const showChannel = currentSearchType == 0 || currentSearchType == 1;
-    const showOnDemand = currentSearchType == 0 || currentSearchType == 2;
+    //const showOnDemand = currentSearchType == 0 || currentSearchType == 2;
     //let channelCards = [];
     /*if (showChannel) {
         channelCards = result?.channel?.cards?.map((card) => <div></div>);
     }*/
-    console.log("Search", result);
-    return useObserver(() =>
+
+    return (
         !pageError && !error ? (
             <>
                 <h1 className="noShow">Search</h1>
                 <div className="searchTop">
                     <span className="searchField">
                         <input
+                            ref={searchInput}
                             className="searchField-input"
                             placeholder={constants.SEARCH_DEFAULT}
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            value={inputValue}
+                            onKeyUp={onKeyUp}
+                            onKeyDown={onKeyDown}
+                            onChange={(e) => onInputChange(e.target.value)}
                         />
                         <InlineSVG type="search" />
                     </span>
@@ -222,32 +270,22 @@ export default function Search({
                             data={result.channel}
                         />
                     )}*/}
-                {showOnDemand && result && result.demand && !isEmpty(result.demand.cards) ? (
-                    <CardList
-                        key="searchOnDemandResults"
-                        //type={store.isBreakpoint ? "grid" : "title"}
-                        type="grid"
-                        showArrow={false}
-                        isOnDemand={true}
-                        data={result.demand}
-                        gridHeader={true}
-                    />
-                ) : searchQuery == "" ? null : isValidating ? (
-                    <span className="searchResults-loading">
-                        {constants.SEARCH_LOADING}
-                    </span>
-                ) : (result && result.demand && isEmpty(result.demand.cards)) || !result ? (
-                    <span className="searchResults-none">
-                        {constants.NO_RESULTS}
-                        <span className="searchQuery">"{searchQuery}"</span>
-                    </span>
-                ) : null}
+                { result && result.results && !isEmpty(result.results.cards) ? (
+                    <CardList key="searchResults" type="grid" data={result.results}/>
+                ) : searchQuery == '' ?
+                    null
+                    : isLoading ? (
+                        <span className="searchResults-loading">{constants.SEARCH_LOADING}</span>
+                    ) : result && result.results && isEmpty(result.results.cards) ? (
+                        <span className="searchResults-none">{constants.NO_RESULTS}</span>
+                    ) : null
+                }
                 {/*<pre>{JSON.stringify(result, null, 2)}</pre>*/}
             </>
         ) : (
             <Error404 />
         )
-    );
+    )
 }
 Search.getLayout = getLayout;
 

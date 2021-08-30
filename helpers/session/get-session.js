@@ -15,6 +15,8 @@ export default async function getSession(req, res) {
 
         const {protocol, host} = absoluteUrl(req);
 
+        const dspTokenObj = serverRuntimeConfig.DSP_TOKEN ? JSON.parse(serverRuntimeConfig.DSP_TOKEN) : null;
+
 
         // ============= GUID COOKIE ===========================
         const cookies = parseCookies({req, res});
@@ -29,29 +31,13 @@ export default async function getSession(req, res) {
             });
         }
         // ============= END GUID COOKIE =======================
-        // ============= LN CONFIG =====================
-        let config = null;
-        try {
-            const {data} = await axios({
-                method: 'GET',
-                url: `${protocol}//${host}/api/session/config`,
-            });
 
-            config = {
-                ...data.config,
-                xForwardedProto: xForwardedProto,
-            };
-        } catch(e) {
-            config = {}
-        }
-        // ============= LN CONFIG END =====================
-        // console.log('config', config);
         return {
             session: {
                 guid: guidCookie
             },
             config: {
-                ...config,
+                dspToken: dspTokenObj && dspTokenObj.token,
             }
         }
     }
