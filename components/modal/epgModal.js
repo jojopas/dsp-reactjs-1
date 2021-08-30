@@ -26,7 +26,7 @@ const EPGModal = ({ data, resetFn, onClick }) => {
     };
 
     const ModalButton = () => (
-        <div class="modal-footer">
+        <div className="modal-footer">
             <Button
                 className="watch"
                 svg="play"
@@ -72,7 +72,7 @@ const EPGModal = ({ data, resetFn, onClick }) => {
                         />
                     </div>
                     {store.isBreakpoint ? <ModalButton /> : null}
-                    <div class="modal-body">
+                    <div className="modal-body">
                         <h1>{`${data.nowprogram.title} Presented by ${data.name}`}</h1>
                         <span className="info">
                             Airdate:{getFormattedDate(data.nowprogram.starts)}{" "}
