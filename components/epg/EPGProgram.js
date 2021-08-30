@@ -76,7 +76,8 @@ export default function EPGProgram({
                         onClick={
                             store.isBreakpoint
                                 ? null
-                                : () => fullScreen(dateToSend)
+                                //: () => fullScreen(dateToSend)
+                                : () => iconClicked(dateToSend)
                         }
                     >
                         {program.title}
