@@ -30,7 +30,7 @@ export default class PDP {
                     const episodes = c.playlist;
                     return {
                         season: {
-                            number: episodes[0].season ? episodes[0].season : index+1,
+                            number: c.season ? c.season : index+1,
                             episodes: episodes.length.toString(),
                         },
                         cards: episodes.map((e) => {
