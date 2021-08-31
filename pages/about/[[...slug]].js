@@ -8,11 +8,11 @@ import { getLayout } from "../../components/Layout";
 import { StoreContext } from "../../store";
 import { pageBuilder } from "../../helpers/page/builder";
 import Error404 from "../../components/404";
+import ContactForm from "../../components/contact/ContactForm";
 
 import "./page.less";
 import "./index.less";
-import ContactForm from "../../components/contact/ContactForm";
-import Loream from "../../components/loream/loream";
+
 
 export default function About({ session, config, page, error, slug }) {
     const store = React.useContext(StoreContext);
@@ -22,29 +22,6 @@ export default function About({ session, config, page, error, slug }) {
         return <ContactForm />;
     };
 
-    const sanitize = (str) => str.toUpperCase().replace("-", " ");
-
-    return slug === "contact" ? (
-        <div className="placeholder">
-            <h1>{sanitize(slug)}</h1>
-            <p>
-                We love feedback and great Ideas! Tell us what you think. Email
-                us today at{" "}
-                <a href="mailTo:sportstvfeedback@sports.tv">
-                    sportstvfeedback@sports.tv
-                </a>
-            </p>
-            {renderContactForm()}
-        </div>
-    ) : (
-        <div className="placeholder">
-            <h1>{sanitize(slug) || "About"}</h1>
-            <Loream />
-            <h2>{sanitize(slug) || "About"}</h2>
-            <Loream />
-            {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
-        </div>
-    );
     return useObserver(() =>
         !error ? (
             <>
@@ -54,7 +31,7 @@ export default function About({ session, config, page, error, slug }) {
                     dangerouslySetInnerHTML={{ __html: page.html }}
                 />
                 {/*<pre>{JSON.stringify(page, null, 2)}</pre>*/}
-                {slug === "contact" ? renderContactForm() : null}
+                {/*{slug === "contact" ? renderContactForm() : null}*/}
             </>
         ) : (
             <Error404 />
