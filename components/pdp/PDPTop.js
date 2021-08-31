@@ -32,26 +32,22 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
         }px`;
     }, []);*/
 
-    const measureDescRef = React.useCallback(
-        (node) => {
-            resetState();
-            if (node !== null) {
-                const maxLines = 3;
-                const lineHeight = parseInt(
-                    getComputedStyle(node, null).getPropertyValue("line-height")
-                );
-                const cs = getComputedStyle(node);
-                const clamp =
-                    maxLines * lineHeight <
-                    node.scrollHeight - parseInt(cs.paddingTop);
-                setDescHasClamp(clamp);
-                if (clamp) {
-                    setDescIsClamped(true);
-                }
+    const measureDescRef = React.useCallback(node => {
+        resetState();
+        if (node !== null) {
+            const maxLines = 3;
+            const lineHeight = parseInt(
+                getComputedStyle(node, null).getPropertyValue("line-height")
+            );
+            const cs = getComputedStyle(node);
+            const clamp = (maxLines * lineHeight) < (node.scrollHeight - parseInt(cs.paddingTop));
+            setDescHasClamp(clamp);
+            if (clamp) {
+                setDescIsClamped(true);
             }
-        },
-        [pdp]
-    );
+            console.log('clamp', clamp);
+        }
+    }, [pdp]);
 
     const toggleDesc = () => {
         setDescIsClamped(!descIsClamped);
