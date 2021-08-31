@@ -8,7 +8,7 @@ export default function PDPBg({pdp}) {
         <span className="pdp-bg">
             <img
                 src={constants.NOT_FOUND_SRC}
-                data-src={pdp.wallpaper ? `${pdp.wallpaper}/500/300` : ""}
+                data-src={pdp.wallpaper ? `${pdp.wallpaper}/500` : ""}
                 alt={pdp.title}
                 className="lazyload"
             />

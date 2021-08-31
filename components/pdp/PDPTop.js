@@ -23,14 +23,14 @@ export default function PDPTop({ type, pdp, currVideo = null }) {
         setDescIsClamped(false);
     };
 
-    React.useEffect(() => {
+    /*React.useEffect(() => {
         const pdpHeight = document.querySelector(".pdp-top").clientHeight;
         const pdpBg = document.querySelector(".pdp-bg")
         // console.log('pdp height', pdpHeight);
         pdpBg.style.cssText = `padding-Top: ${
             pdpHeight + 100
         }px`;
-    }, []);
+    }, []);*/
 
     const measureDescRef = React.useCallback(
         (node) => {
