@@ -49,8 +49,8 @@ export default function Search({session, config, query, pageError, pageType, seo
             setInputValue(( query === 'search') ? '' : query);
             setSearchQuery(( query === 'search') ? '' : query);
 
-            if (searchInput && searchInput.current) {
-                searchInput.current.blur();
+            if (searchInput?.current) {
+                //searchInput.current.blur();
             }
             window.scrollTo({
                 top: 0,
