@@ -1,19 +1,26 @@
 @import "../../styles/config.less";
 
 .clickedTitle {
+    position:relative;
     display: flex;
     display: -webkit-flex;
     height: 40px;
     margin-top: 30px;
+    padding:0 70px;
+
+    @media (max-width: @mobileLargeBP) {
+        padding:0 45px;
+    }
 
     .backButton {
-        display: flex;
-        display: -webkit-flex;
+        position:absolute;
         align-self: center;
         cursor: pointer;
         width: 24px;
         height: 24px;
-        margin-left: 30px;
+        left: 45px;
+        top:50%;
+        .bsTransform(translateY(-50%));
 
         svg {
             fill: @colorNavGray;
@@ -24,11 +31,18 @@
                 fill: #ebebeb;
             }
         }
+
+        @media (max-width: @mobileLargeBP) {
+            left:20px;
+        }
     }
 
     .clickedHeader {
         font: 24px Roboto;
         margin: auto;
         text-align: center;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
     }
 }
