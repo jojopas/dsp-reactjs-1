@@ -160,7 +160,8 @@ export default function Channels({
         clearTimeout(inactiveTimer);
         setCurrentSlug(s);
         setEpgListCurrentSlug(s);
-        history.replaceState({}, "", `/channels/${s}`);
+        // history.replaceState({}, "", `/channels/${s}`);
+        router.replace('/channels/[[...slug]]', `/channels/${s}`, { shallow: true });
         window.gtag("config", publicRuntimeConfig.GA_ID, {
             page_path: `/channels/${s}`,
         });
@@ -200,8 +201,8 @@ export default function Channels({
             setCurrentSEO(getSEOFromSlug(currentChannelSlug));
             setEpgListCurrentSlug(currentChannelSlug);
             if (currentChannelSlug) {
-                history.replaceState({}, "", `/channels/${currentChannelSlug}`);
-                //router.replace(`/channels/[[...slug]]`, `/channels/${currentChannelSlug}`, { shallow: true });
+                // history.replaceState({}, "", `/channels/${currentChannelSlug}`);
+                router.replace('/channels/[[...slug]]', `/channels/${currentChannelSlug}`, { shallow: true });
             }
         } else {
             setCurrentSEO(getSEOFromSlug(currentSlug));
