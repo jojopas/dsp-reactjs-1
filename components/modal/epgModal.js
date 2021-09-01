@@ -31,7 +31,7 @@ const EPGModal = ({ data, resetFn, onClick }) => {
                 className="watch"
                 svg="play"
                 inner={isBroadcasting ? "Watch Now" : `Watch Channel`}
-                onClick={isBroadcasting ? clicked : null}
+                onClick={clicked}
             />
         </div>
     );
