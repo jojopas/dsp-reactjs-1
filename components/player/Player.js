@@ -168,6 +168,7 @@ export default function Player({
         ) {
             store.playerInstance.vjs.play();
             setTimeout(store.playerInstance.vjs.play(), 2000);
+            console.log('fs play');
         }
     };
 
