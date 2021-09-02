@@ -168,7 +168,7 @@ export default function Player({
             !store.isAdRunning
         ) {
             store.playerInstance.vjs.play();
-            setTimeout(store.playerInstance.vjs.play(), 2000);
+            setTimeout(()=>{store.playerInstance.vjs.play();console.log('fs play 2');}, 2000);
             console.log('fs play');
         }
     };
