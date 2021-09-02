@@ -160,8 +160,6 @@ export default function Player({
     };
 
     const fullscreenChange = () => {
-        store.playerInstance.vjs.debug(true);
-        console.log('fullscreenChange: is full', store.playerInstance.vjs.isFullscreen(), store.playerInstance.vjs.paused());
         if (
             !store.playerInstance.vjs.isFullscreen() &&
             store.playerInstance.vjs.paused() &&
