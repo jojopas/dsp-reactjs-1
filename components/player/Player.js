@@ -166,6 +166,7 @@ export default function Player({
             !store.isAdRunning
         ) {
             store.playerInstance.vjs.play();
+            console.log('fullscreen play');
         }
     };
 
