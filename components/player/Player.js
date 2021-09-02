@@ -171,7 +171,7 @@ export default function Player({
                 ) {
                     store.playerInstance.vjs.play();
                 }
-            }, 2000);
+            }, 1000);
         }
     };
 
