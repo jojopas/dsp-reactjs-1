@@ -6,7 +6,7 @@ export default class Page {
         if(data.page && !isEmpty(page)) {
             this.page = {
                 name: page.page_name,
-                html: page.html.replace(new RegExp('\r?\n','g'), '<br />'),
+                html: page.html.replace(/(?:\r\n|\r|\n)/g, '<br>'),
                 seo: page.seo,
             };
         } else {
