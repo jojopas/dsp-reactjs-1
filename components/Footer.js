@@ -36,24 +36,24 @@ export default function Footer() {
             url: "/account/[[...slug]]",
             as: "/account",
         },*/
-        {
+        /*{
             id: "support",
             inner: "Support",
             url: "/about/[[...slug]]",
             as: "/about/support",
-        },
+        },*/
         /*{
             id: "settings",
             inner: "Settings",
             url: "/settings",
             as: "/settings",
         },*/
-        {
+        /*{
             id: "advertiseWithUs",
             inner: "Advertise with Us",
             url: "/about/[[...slug]]",
             as: "/about/advertise-with-us",
-        },
+        },*/
         {
             id: "about",
             inner: "About",
