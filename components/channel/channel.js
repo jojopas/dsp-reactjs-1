@@ -15,6 +15,7 @@ import { visibilityCheck } from "../../helpers/utils/browser";
 import Player from "../player/Player";
 import getConfig from "next/config";
 import { sendToSegment } from "../../analytics";
+import Ad from "./Ad";
 // import "./index.less";
 import "./channel.less";
 
@@ -634,10 +635,7 @@ export default function Channels({
                         </div>
 
                         <div className="ads">
-                            <img
-                                src={publicRuntimeConfig.LIVE_AD_URL}
-                                alt="Advertisement"
-                            />
+                            <Ad />
                         </div>
                     </div>
                     <EPGList

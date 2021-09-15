@@ -96,6 +96,7 @@ const nextConfig = {
     },
     publicRuntimeConfig: {
         DSP_API_URL: process.env.DSP_API_URL || constants.ENV_DSP_API_URL,
+        DSP_TOKEN: process.env.DSP_TOKEN,
         DSP_PLAYER_KEY: process.env.DSP_PLAYER_KEY || constants.ENV_DSP_PLAYER_KEY,
         DSP_PLAYER_URL: process.env.DSP_PLAYER_URL || constants.ENV_DSP_PLAYER_URL,
         APP_VERSION: process.env.APP_VERSION || '0.0.0',

@@ -265,11 +265,11 @@ export default function EPGList({
                     row.style.cssText = `opacity: 1;transform:translateY(${scrollTop}px)`;
                 });
                 pagination.style.cssText = `opacity: 1;transform:translateY(${scrollTop}px)`;
-                console.log("Debounce", debounceRunning, {
+                /*console.log("Debounce", debounceRunning, {
                     scrollTop,
                     timeout,
                     timer,
-                });
+                });*/
                 debounceRunning = 0;
             }, timeout);
         };
